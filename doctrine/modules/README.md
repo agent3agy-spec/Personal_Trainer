@@ -6,11 +6,11 @@ _This folder owns: the pieces a program borrows. A secondary goal is served by a
 |:-|:-|:-|
 | `core` | finisher | 2 core moves, 2 to 3 rounds |
 | `conditioning` | finisher | 6 to 10 min of intervals on whatever cardio machine is there, or bodyweight |
-| `balance` | finisher, **mandatory from 60** | 3 balance moves, about 6 min (WHO 2020, Sherrington 2019) |
+| `balance` | finisher, mandatory from 60 (the age band is fixed at 18 to 39, so this never fires; kept for the record) | 3 balance moves, about 6 min (WHO 2020, Sherrington 2019) |
 | `mobility` | finisher | 5 to 8 min for the day's joints |
 | `locomotion` | finisher, or the first 2 to 4 weeks for a deconditioned person | GMB-style crawls |
 | `hyrox-stations` | finisher in a HYROX block | one station piece, scored |
-| `skill-blocks` | finisher in calisthenics | handstand, pull and pistol skill work |
+| `skill-blocks` | finisher for the `skills` goal (no longer offered: bodyweight skill training is out of scope; kept for old profiles) | handstand, pull and pistol skill work |
 | `easy-running` | extra days | an easy run by the talk test, volume rule `run_volume` |
 | `run-race` | extra days, for a 5 km to half marathon goal next to strength | easy run, long run, one quality run, Daniels caps |
 | `travel` | replaces the day | a bodyweight session when the main block cannot be filled; nothing progresses |

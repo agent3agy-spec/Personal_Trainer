@@ -26,16 +26,88 @@ def check_profile(p):
         errs.append("profile: age_band must be one of " + ", ".join(core.AGE_BANDS))
     if not isinstance(p.get("days"), int) or not 1 <= p.get("days", 0) <= 7:
         errs.append("profile: days must be a whole number from 1 to 7")
-    if not isinstance(p.get("minutes"), int) or not 10 <= p.get("minutes", 0) <= 180:
-        errs.append("profile: minutes must be a whole number from 10 to 180")
+    lo, hi = core.MINUTES_RANGE
+    if not isinstance(p.get("minutes"), int) or not lo <= p.get("minutes", 0) <= hi:
+        errs.append("profile: minutes must be a whole number from %d to %d" % (lo, hi))
     if p.get("units") not in ("kg", "lb"):
         errs.append("profile: units must be kg or lb")
     for name, pl in (p.get("places") or {}).items():
         for t in pl.get("equipment", []):
             if t not in core.PRESETS and t not in core.ALL_TAGS:
                 errs.append("profile: unknown equipment '%s' at %s" % (t, name))
+        if not core.place_in_scope(pl.get("equipment", [])):
+            errs.append("profile: %s is out of scope: a gym, a home gym with real kit (a barbell, dumbbells or a cardio "
+                        "machine), or outdoors for running and cardio" % name)
+    errs += check_interview(p)
     if "no_fat_loss_goal" in (p.get("screen") or {}).get("flags", []) and "fat_loss" in (p.get("goal"), p.get("goal2")):
         errs.append("profile: fat loss is not offered after an eating disorder answer, pick health or strength")
+    return errs
+
+
+def _one_of(errs, p, key, allowed):
+    if p.get(key) not in (None, "") and p.get(key) not in allowed:
+        errs.append("profile: %s must be one of %s" % (key, ", ".join(allowed)))
+
+
+def _all_in(errs, p, key, allowed):
+    v = p.get(key)
+    if v is None:
+        return
+    if not isinstance(v, list) or [x for x in v if x not in allowed]:
+        errs.append("profile: %s must be a list from %s" % (key, ", ".join(allowed)))
+
+
+def check_interview(p):
+    """The fields of the 13 nov interview (doctrine/02_INTERVIEW.md). All optional, all checked when present."""
+    errs = []
+    _one_of(errs, p, "mode", core.MODES)
+    _one_of(errs, p, "outcome", list(core.OUTCOMES))
+    if p.get("outcome") in core.OUTCOMES and p.get("outcome_detail") not in (None, ""):
+        _one_of(errs, p, "outcome_detail", list(core.OUTCOMES[p["outcome"]]))
+    bl = p.get("outcomes")
+    if bl is not None:
+        if not isinstance(bl, list) or not 1 <= len(bl) <= 3 or len({o.get("id") for o in bl if isinstance(o, dict)}) != len(bl) \
+                or any(not isinstance(o, dict) or o.get("id") not in core.OUTCOMES or not isinstance(o.get("share"), (int, float))
+                       or not 0 < o["share"] <= 1 for o in bl):
+            errs.append("profile: outcomes is one to three different outcomes, each with a share above 0")
+        elif abs(sum(o["share"] for o in bl) - 1) > 0.02:
+            errs.append("profile: the shares of outcomes add up to 1")
+    _all_in(errs, p, "done_before", core.ACTIVITIES)
+    for k, v in (p.get("experience_by") or {}).items():
+        if k not in core.ACTIVITIES or v not in core.EXPERIENCE:
+            errs.append("profile: experience_by maps an activity (%s) to a level (%s)" % (", ".join(core.ACTIVITIES), ", ".join(core.EXPERIENCE)))
+            break
+    _all_in(errs, p, "enjoys", core.ENJOY)
+    _all_in(errs, p, "avoids", core.ENJOY)
+    _one_of(errs, p, "kit_pref", core.KIT_PREF)
+    _one_of(errs, p, "style_pref", core.STYLES)
+    _all_in(errs, p, "strengths", core.STRENGTHS)
+    _all_in(errs, p, "barriers", core.BARRIERS)
+    _one_of(errs, p, "sleep", core.SLEEP)
+    _one_of(errs, p, "stress", core.STRESS)
+    if p.get("units_confirmed") is not None and not isinstance(p["units_confirmed"], bool):
+        errs.append("profile: units_confirmed is true or false")
+    for lim in p.get("limits", []):
+        if lim.get("region") not in core.REGIONS:
+            errs.append("profile: a limit's region must be one of " + ", ".join(core.REGIONS))
+        if lim.get("status") not in (None, "") and lim["status"] not in core.LIMIT_STATUS:
+            errs.append("profile: a limit's status must be one of " + ", ".join(core.LIMIT_STATUS))
+        if [t for t in lim.get("triggers") or [] if t not in core.TRIGGERS]:
+            errs.append("profile: a limit's triggers come from " + ", ".join(core.TRIGGERS))
+    for r in p.get("rejected", []):
+        if not isinstance(r, dict) or r.get("reason") not in core.REJECT_REASONS:
+            errs.append("profile: a 'not for me' needs a reason from " + ", ".join(core.REJECT_REASONS))
+    rt = p.get("current_routine")
+    if p.get("mode") == "improve":
+        if not isinstance(rt, dict):
+            errs.append("profile: improve mode needs current_routine")
+        else:
+            _one_of(errs, rt, "split", core.SPLITS)
+            if not isinstance(rt.get("days"), int) or not 1 <= rt["days"] <= 7:
+                errs.append("profile: current_routine.days must be a whole number from 1 to 7")
+            _one_of(errs, rt, "age", core.ROUTINE_AGE)
+            _all_in(errs, rt, "stalls", core.ROUTINE_STALLS)
+            _all_in(errs, rt, "keep", core.ROUTINE_KEEP)
     return errs
 
 
@@ -125,6 +197,11 @@ def check_template():
         for sid, s in (m.get("sessions") or {}).items():
             walk_session("module " + m["id"], sid, s)
     for r in bank.values():
+        bad = [g for g in r["regions"] if g not in core.REGIONS]
+        if bad:
+            errs.append("bank %s: unknown region %s" % (r["id"], ", ".join(bad)))
+        if not r["regions"] and "region_free" not in r["tags"]:
+            errs.append("bank %s: no regions; tag the joints it loads, or tag it region_free on purpose" % r["id"])
         for k in ("easier", "harder"):
             if r[k] and (r[k] not in bank or bank[r[k]]["pattern"] != r["pattern"]):
                 errs.append("bank %s: %s '%s' missing or another pattern" % (r["id"], k, r[k]))

@@ -2,6 +2,8 @@
 
 **A coach that learns what you want, picks a proven program with you, makes every session a one-page sheet, and remembers every rep.** It runs inside Claude Code and lives in your own private copy of this repository. No app, no account, no server.
 
+**Who it is for:** adults 18 to 40 who train in a gym, a home gym with real kit, or run and do other cardio. Strength, muscle, powerlifting, Olympic lifting, CrossFit-style and HYROX-style training, hybrid, running. Not bodyweight-only, kettlebell-only, over-60, combat or climbing plans.
+
 <p align="center"><img src="examples/sample-sheet.png" alt="A sample session sheet" width="520"></p>
 
 ## Get yours in three steps
@@ -46,7 +48,7 @@ flowchart LR
 
 **The engine decides, Claude explains.** Picking the program, choosing exercises for your equipment, setting weights, progressing them, fitting the session into your minutes with every rest counted: all of that is code in `engine/`, reading the rules in `doctrine/`. Claude talks to you in your language, turns what you say into the engine's inputs, and puts the sheet in your words. That is why it does not make programs up.
 
-**It picks objectively.** 24 programs built from the established schools of training (StrongLifts, Starting Strength, 5/3/1, GZCL, Reactive Training Systems, Renaissance Periodization, Nippard, PHUL, PHAT, CrossFit's methodology, HYROX plans, Viada, Couch to 5K, 80/20, Daniels, the r/bodyweightfitness routine, Overcoming Gravity, StrongFirst, the WHO and ACSM guidelines, and more). Every program is scored against your goal, experience, days, minutes, equipment, likes and limits by the same written rule, and you see why. The map of what each school prescribes and how strong its evidence is: [`doctrine/schools/INDEX.md`](doctrine/schools/INDEX.md).
+**It picks objectively.** 19 programs built from the established schools of training (StrongLifts, Starting Strength, 5/3/1, GZCL, Reactive Training Systems, Renaissance Periodization, Nippard, PHUL, PHAT, CrossFit's methodology, HYROX plans, Viada, Couch to 5K, 80/20, Daniels, the WHO and ACSM guidelines, and more). Every program is scored against your goal, experience, days, minutes, equipment, likes and limits by the same written rule, and you see why. The map of what each school prescribes and how strong its evidence is: [`doctrine/schools/INDEX.md`](doctrine/schools/INDEX.md).
 
 **It remembers.** After every session it writes what you did into `me/` and saves it to your copy on GitHub, so it never forgets, on any computer or in the browser:
 
@@ -85,7 +87,7 @@ More pictures and every step in plain words: [`docs/HOW_IT_WORKS.md`](docs/HOW_I
 | folder | what it is |
 |:-|:-|
 | `.claude/` | the `/train` skill, the six auditors, the permissions |
-| `doctrine/` | the rules: safety, interview, matrix, intensity, loads, build, cycle, workflow, the 24 programs, the 10 add-ons, the 225 exercises, the schools |
+| `doctrine/` | the rules: safety, interview, matrix, intensity, loads, build, cycle, workflow, the 19 programs, the 10 add-ons, the 225 exercises, the schools |
 | `engine/` | the code (Python, nothing to install): `plan.py` is the one entry point |
 | `me/` | your memory (empty in the template) |
 | `sessions/` | your sheets (empty in the template) |

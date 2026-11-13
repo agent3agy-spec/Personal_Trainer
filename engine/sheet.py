@@ -143,71 +143,172 @@ def esc(x):
     return html.escape(str(x if x is not None else ""))
 
 
-def render_html(s):
+FORM_LABELS = {
+    "en": {"warmup": "Warm-up", "cooldown": "Cool-down", "hard": "How hard", "hard_scale": "1 easy · 5 max",
+           "reps": "reps", "set": "set", "time": "time or rounds", "minutes_done": "minutes done", "notes": "Notes",
+           "notes_hint": "How did it feel? Any pain (where, 0 to 10)?", "tell": "Tell the trainer",
+           "cool_walk": "Easy walk or slow cycling, then breathe slowly", "cool_walk_reps": "2 to 3 min", "date": "Date"},
+    "fr": {"warmup": "Échauffement", "cooldown": "Retour au calme", "hard": "Difficulté", "hard_scale": "1 facile · 5 max",
+           "reps": "reps", "set": "série", "time": "temps ou tours", "minutes_done": "minutes faites", "notes": "Notes",
+           "notes_hint": "Comment c'était ? Une douleur (où, de 0 à 10) ?", "tell": "À dire au coach",
+           "cool_walk": "Marche ou vélo tranquille, puis respire lentement", "cool_walk_reps": "2 à 3 min", "date": "Date"},
+    "es": {"warmup": "Calentamiento", "cooldown": "Vuelta a la calma", "hard": "Dureza", "hard_scale": "1 fácil · 5 máx",
+           "reps": "reps", "set": "serie", "time": "tiempo o rondas", "minutes_done": "minutos hechos", "notes": "Notas",
+           "notes_hint": "¿Cómo fue? ¿Algún dolor (dónde, de 0 a 10)?", "tell": "Cuéntale al entrenador",
+           "cool_walk": "Camina o pedalea suave, luego respira despacio", "cool_walk_reps": "2 a 3 min", "date": "Fecha"},
+    "de": {"warmup": "Aufwärmen", "cooldown": "Cool-down", "hard": "Wie hart", "hard_scale": "1 leicht · 5 max",
+           "reps": "Wdh", "set": "Satz", "time": "Zeit oder Runden", "minutes_done": "Minuten", "notes": "Notizen",
+           "notes_hint": "Wie war es? Schmerzen (wo, 0 bis 10)?", "tell": "Für den Trainer",
+           "cool_walk": "Locker gehen oder radeln, dann ruhig atmen", "cool_walk_reps": "2 bis 3 Min", "date": "Datum"},
+    "it": {"warmup": "Riscaldamento", "cooldown": "Defaticamento", "hard": "Fatica", "hard_scale": "1 facile · 5 max",
+           "reps": "rip", "set": "serie", "time": "tempo o giri", "minutes_done": "minuti fatti", "notes": "Note",
+           "notes_hint": "Com'è andata? Dolore (dove, da 0 a 10)?", "tell": "Da dire al coach",
+           "cool_walk": "Cammina o pedala piano, poi respira lentamente", "cool_walk_reps": "2 o 3 min", "date": "Data"},
+    "pt": {"warmup": "Aquecimento", "cooldown": "Retorno à calma", "hard": "Esforço", "hard_scale": "1 fácil · 5 máx",
+           "reps": "reps", "set": "série", "time": "tempo ou voltas", "minutes_done": "minutos feitos", "notes": "Notas",
+           "notes_hint": "Como correu? Alguma dor (onde, de 0 a 10)?", "tell": "Diz ao treinador",
+           "cool_walk": "Caminha ou pedala devagar, depois respira com calma", "cool_walk_reps": "2 a 3 min", "date": "Data"},
+}
+for _k, _v in FORM_LABELS.items():
+    LABELS.setdefault(_k, {}).update(_v)
+
+NOT_LOADABLE = {"bodyweight", "band", "time", "distance", "calories"}
+TIMED_FORMATS = {"fortime", "amrap", "emom", "intervals", "run"}
+
+
+def labels_for(s):
     lang = s.get("language", "en")
     L = dict(LABELS["en"])
     L.update(LABELS.get(lang, {}))
     L.update(s.get("labels") or {})
-    css = CSS_FILE.read_text(encoding="utf-8") if CSS_FILE.exists() else ""
-    paper = "letter" if s.get("paper", "A4").lower().startswith("letter") else "A4"
-    out = ['<!doctype html><html lang="%s"><head><meta charset="utf-8"><title>%s</title>' % (esc(lang), esc(s.get("title"))),
-           '<style>@page{size:%s;margin:11mm}%s</style></head><body><main class="sheet">' % (paper, css)]
-    meta = " · ".join(x for x in [s.get("date"), s.get("program_name"),
-                                  ("%s %s · %s %s" % (L["block"], s.get("block"), L["week"], s.get("week"))) if s.get("block") else "",
-                                  s.get("level_text")] if x)
-    out.append('<header><div class="brand"><span class="mark"></span>Personal trainer</div>'
-               '<h1>%s</h1><p class="meta">%s</p></header>' % (esc(s.get("title")), esc(meta)))
-    top = []
-    if s.get("score_to_beat"):
-        top.append('<div class="beat"><b>%s</b><span>%s</span></div>' % (esc(L["score"]), esc(s["score_to_beat"])))
-    if s.get("why"):
-        top.append('<div class="why"><b>%s</b><span>%s</span></div>' % (esc(L["why"]), esc(s["why"])))
-    out.append('<section class="top">%s</section>' % "".join(top))
-    legend_at = len(out)
-    total = 0
-    firsts = []
+    return L
+
+
+def _role(b):
+    name = str(b.get("name", "")).lower()
+    if b.get("kind") == "warmup":
+        return "warmup"
+    if b.get("_module") == "mobility" or "mobility" in name or "cool" in name or "stretch" in name:
+        return "cooldown"
+    return "work"
+
+
+def form(s):
+    """The workout form, one model for the HTML sheet and the stdlib PDF, so both are the same design.
+
+    Sections in order: the warm-up, the work, the cool-down. A row is a checklist line (warm-up and
+    cool-down), a set row (one cell per set: the weight used when the move is loaded, the reps done, a
+    tick) or a score row (one cell: time or rounds for a timed piece, minutes for a run).
+    The sheet never invents work: when the engine built no cool-down, the cool-down is one easy line
+    (walk it off), outside the clock."""
+    L = labels_for(s)
+    unit = s.get("units", "kg")
+    firsts, total, secs_by = [], 0, []
     for i, b in enumerate(s.get("blocks", [])):
         sec = block_seconds(b) + (secs(b["lead_rest"]) if b.get("lead_rest") else (CHANGEOVER if i > 0 else 0))
         total += sec
-        head = '<div class="bh"><h2>%s</h2><span class="bm">%d %s%s</span></div>' % (
-            esc(b.get("name")), round(sec / 60), esc(L["min"]), (" · " + esc(b["rest_note"])) if b.get("rest_note") else "")
+        secs_by.append(sec)
+    warm, work, cool = [], [], []
+    for i, b in enumerate(s.get("blocks", [])):
+        role = _role(b)
+        timed = b.get("format") in ("superset", "circuit")
         rows = []
         for it in b.get("items", []):
-            n = int(it.get("sets") or 1)
-            boxes = "".join('<i></i>' for _ in range(min(n, 10)))
-            demo = it.get("demo")
-            name = esc(it.get("name") or it.get("ex"))
-            if demo:
-                name = '<a href="%s">%s</a>' % (esc(demo), name)
-            star = ""
-            if it.get("first_outing"):
-                fo = it["first_outing"]
-                if fo not in firsts:
-                    firsts.append(fo)
-                star = ' <span class="star">%s</span>' % ("&#9733;" * (firsts.index(fo) + 1))
+            sl = it.get("_slot") or {}
+            fo = it.get("first_outing")
+            if fo and fo not in firsts:
+                firsts.append(fo)
             sets = it.get("sets")
-            sr = ("%s x %s" % (sets, it.get("reps"))) if sets and it.get("reps") else (it.get("reps") or (str(sets) if sets else ""))
-            rest = esc(fmt_rest(it.get("rest"), L["rest_none"])) if b.get("format") not in ("superset", "circuit") and it.get("sets") else ""
-            rows.append('<tr><td class="ex"><div class="n">%s%s</div><div class="cue">%s</div></td>'
-                        '<td class="sr">%s</td><td class="ld">%s</td><td class="ef">%s</td><td class="rs">%s</td><td class="bx">%s</td></tr>'
-                        % (name, star, esc(it.get("cue")), esc(sr), esc(it.get("load", "")), esc(it.get("effort", "")), rest, boxes))
-        cols = '<colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"><col class="c6"></colgroup>'
-        thead = '<tr><th></th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>' % (
-            esc(L["sets"]), esc(L["load"]), esc(L["effort"]), esc(L["rest"]), esc(L["done"]))
-        out.append('<section class="block %s">%s<table>%s%s%s</table></section>' % (esc(b.get("kind", "")), head, cols, thead, "".join(rows)))
-    if firsts:
-        legend = "".join('<div><span class="star">%s</span> %s</div>' % ("&#9733;" * (i + 1), esc(f)) for i, f in enumerate(firsts))
-        out.insert(legend_at, '<section class="firsts"><b>%s</b>%s</section>' % (esc(L["first"]), legend))
-    foot = []
-    if s.get("low_energy"):
-        foot.append('<div class="low"><b>%s</b> %s</div>' % (esc(L["low"]), esc(s["low_energy"])))
-    if s.get("log"):
-        lines = "".join('<div class="ll"><span>%s</span><em></em></div>' % esc(x) for x in s["log"])
-        foot.append('<div class="log"><b>%s</b>%s</div>' % (esc(L["log"]), lines))
-    out.append('<section class="foot">%s<div class="total">%s <b>%d %s</b></div></section>' % (
-        "".join(foot), esc(L["total"]), round(total / 60), esc(L["min"])))
-    note = esc(L["footer"]) + ((" · " + esc(s["notes"])) if s.get("notes") else "")
-    out.append('<footer>%s</footer></main></body></html>' % note)
+            reps = it.get("reps")
+            many = sets and reps and role == "work" and int(sets or 1) > 1
+            target = ("%s × %s" % (sets, reps)) if many else str(reps or (sets or ""))
+            row = {"name": it.get("name") or it.get("ex"), "cue": it.get("cue", ""), "target": target,
+                   "load": it.get("load", ""), "effort": it.get("effort", ""), "demo": it.get("demo"),
+                   "rest": fmt_rest(it.get("rest")) if not timed and many and secs(it.get("rest")) else "",
+                   "star": (firsts.index(fo) + 1) if fo else 0}
+            lt = sl.get("load_type")
+            if role != "work":
+                row["kind"] = "check"
+            elif sl.get("rule") in ("run_volume", "c25k_week"):
+                row.update(kind="score", cell=L["minutes_done"])
+            elif it.get("work") or sl.get("rule") == "benchmark" or b.get("format") in TIMED_FORMATS:
+                row.update(kind="score", cell=L["time"])
+            else:
+                loaded = (lt not in NOT_LOADABLE) if lt else bool(re.search(r"\d\s*(kg|lb)", str(it.get("load", ""))))
+                row.update(kind="sets", n=max(1, min(int(sets or 1), 10)), weight=unit if loaded else None)
+            rows.append(row)
+        sec = {"title": b.get("name", ""), "minutes": round(secs_by[i] / 60), "note": b.get("rest_note", ""),
+               "role": role, "main": b.get("kind") == "main", "rows": rows}
+        {"warmup": warm, "work": work, "cooldown": cool}[role].append(sec)
+    if not cool:
+        cool = [{"title": L["cooldown"], "minutes": None, "note": "", "role": "cooldown", "main": False, "added": True,
+                 "rows": [{"name": L["cool_walk"], "cue": "", "target": L["cool_walk_reps"], "kind": "check", "star": 0}]}]
+    for sec_ in warm:
+        sec_["title"] = L["warmup"] if str(sec_["title"]).lower() in ("warm-up", "warm up") else sec_["title"]
+    meta = " · ".join(x for x in [s.get("program_name"),
+                                  ("%s %s · %s %s" % (L["block"], s.get("block"), L["week"], s.get("week"))) if s.get("block") else "",
+                                  s.get("level_text")] if x)
+    return {"L": L, "title": s.get("title", ""), "date": s.get("date", ""), "meta": meta, "minutes": round(total / 60),
+            "beat": s.get("score_to_beat", ""), "why": s.get("why", ""), "firsts": firsts, "unit": unit,
+            "sections": warm + work + cool, "low": s.get("low_energy", ""), "log": s.get("log") or [],
+            "footer": L["footer"] + ((" · " + s["notes"]) if s.get("notes") else "")}
+
+
+def render_html(s):
+    f = form(s)
+    L = f["L"]
+    css = CSS_FILE.read_text(encoding="utf-8") if CSS_FILE.exists() else ""
+    paper = "letter" if s.get("paper", "A4").lower().startswith("letter") else "A4"
+    lang = s.get("language", "en")
+    out = ['<!doctype html><html lang="%s"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+           '<title>%s</title>' % (esc(lang), esc(f["title"])),
+           '<style>@page{size:%s;margin:11mm}%s</style></head><body><main class="sheet">' % (paper, css)]
+    out.append('<header><div class="hl"><div class="brand"><span class="mark"></span>Personal trainer</div><h1>%s</h1>'
+               '<p class="meta">%s</p></div><div class="hr"><div class="when">%s</div><div class="mins"><b>%d</b> %s</div></div></header>'
+               % (esc(f["title"]), esc(f["meta"]), esc(f["date"]), f["minutes"], esc(L["min"])))
+    top = []
+    if f["beat"]:
+        top.append('<div class="beat"><b>%s</b><span>%s</span></div>' % (esc(L["score"]), esc(f["beat"])))
+    if f["why"]:
+        top.append('<div class="why"><b>%s</b><span>%s</span></div>' % (esc(L["why"]), esc(f["why"])))
+    out.append('<section class="top">%s</section>' % "".join(top))
+    if f["firsts"]:
+        legend = "".join('<div><span class="star">%s</span> %s</div>' % ("&#9733;" * (i + 1), esc(x)) for i, x in enumerate(f["firsts"]))
+        out.append('<section class="firsts"><b>%s</b>%s</section>' % (esc(L["first"]), legend))
+    for sec in f["sections"]:
+        mins = ('%d %s' % (sec["minutes"], esc(L["min"]))) if sec.get("minutes") is not None else ""
+        head = '<div class="sh"><h2>%s</h2><span class="sm">%s%s</span></div>' % (
+            esc(sec["title"]), (esc(sec["note"]) + " · ") if sec.get("note") and mins else esc(sec.get("note") or ""), mins)
+        rows = []
+        for r in sec["rows"]:
+            name = esc(r["name"])
+            if r.get("demo"):
+                name = '<a href="%s">%s</a>' % (esc(r["demo"]), name)
+            star = (' <span class="star">%s</span>' % ("&#9733;" * r["star"])) if r.get("star") else ""
+            if r["kind"] == "check":
+                rows.append('<div class="chk"><i class="tick"></i><span class="n">%s%s</span><span class="num">%s</span>'
+                            '<span class="cue">%s</span></div>' % (name, star, esc(r["target"]), esc(r.get("cue"))))
+                continue
+            tgt = " · ".join(x for x in [esc(r["target"]), esc(r.get("load")), (esc(L["rest"]).lower() + " " + esc(r["rest"])) if r.get("rest") else ""] if x)
+            left = ('<div class="ex"><div class="n">%s%s</div><div class="num tgt">%s</div><div class="ef">%s</div><div class="cue">%s</div></div>'
+                    % (name, star, tgt, esc(r.get("effort")), esc(r.get("cue"))))
+            if r["kind"] == "score":
+                cells = '<div class="cell wide"><span class="lab">%s</span><i class="tick"></i></div>' % esc(r["cell"])
+            else:
+                cells = "".join('<div class="cell%s"><span class="lab"><em>%d</em>%s%s</span><i class="tick"></i></div>' % (
+                    " two" if r.get("weight") else "", k + 1, ('<span>%s</span>' % esc(r["weight"])) if r.get("weight") else "",
+                    '<span>%s</span>' % esc(L["reps"]))
+                    for k in range(r["n"]))
+            hard = '<div class="hard"><span class="lab">%s</span><div class="dots">%s</div></div>' % (
+                esc(L["hard"]), "".join('<i>%d</i>' % k for k in range(1, 6)))
+            rows.append('<div class="row">%s<div class="cells">%s</div>%s</div>' % (left, cells, hard))
+        out.append('<section class="sec %s%s">%s%s</section>' % (sec["role"], " main" if sec.get("main") else "", head, "".join(rows)))
+    tell = " · ".join(esc(x) for x in f["log"])
+    out.append('<section class="notes"><div class="nh"><h2>%s</h2><span>%s</span></div><div class="lines"><em></em><em></em><em></em></div>'
+               '<p class="tell"><b>%s</b> %s</p>%s</section>' % (
+                   esc(L["notes"]), esc(L["notes_hint"]), esc(L["tell"]), tell,
+                   ('<p class="low"><b>%s</b> %s</p>' % (esc(L["low"]), esc(f["low"]))) if f["low"] else ""))
+    out.append('<footer>%s</footer></main></body></html>' % esc(f["footer"]))
     return "\n".join(out)
 
 
@@ -293,7 +394,7 @@ def pdf_pages(p):
 def make_pdf(s, h, p):
     if render_pdf(h, p):
         base = render_html(s).replace('<main class="sheet">', '<main class="sheet tight">')
-        for zoom in (None, 0.92, 0.85, 0.78, 0.72):      # shrink the type in steps, never cut content
+        for zoom in (None, 0.92, 0.85, 0.78, 0.72, 0.66, 0.6, 0.55):      # shrink the type in steps, never cut content
             if pdf_pages(p) <= 1:
                 break
             html_ = base if zoom is None else base.replace("</style>", ".sheet{zoom:%s}</style>" % zoom, 1)
@@ -301,7 +402,7 @@ def make_pdf(s, h, p):
             render_pdf(h, p)
         return "browser"
     import minipdf
-    minipdf.write(s, p, LABELS.get(s.get("language", "en"), LABELS["en"]))
+    minipdf.write(s, p, labels_for(s))
     return "minipdf"
 
 

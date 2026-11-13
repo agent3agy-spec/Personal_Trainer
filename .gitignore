@@ -4,3 +4,5 @@ __pycache__/
 me/answers.json
 me/today.json
 me/report.json
+site/pyodide/
+site/bundle.json

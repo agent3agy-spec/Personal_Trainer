@@ -13,9 +13,13 @@ To give anyone a good coach for the price of a conversation: a program chosen **
 
 ## Who it serves
 
-Adults (18 and over) with a clear safety screen, or a professional's clearance. Any goal in `02_INTERVIEW.md`: muscle, strength, powerlifting, Olympic lifting, all-round fitness, HYROX, running up to a half marathon, bodyweight skills, fat loss, health, staying strong with age. Any week from 2 to 6 days, 15 to 120 minutes. Gym, home, park, seated.
+**The audience: adults 18 to 40** who train in a gym or do cardio, with a clear safety screen or a professional's clearance. Age is never asked: the engine fixes the age band at 18 to 39 (`engine/core.py` `AGE_BAND`), so nothing in the programs is tuned for older bodies. The health items of the safety screen are asked of everyone, unchanged.
 
-**Not served in v1, said plainly:** under 18 · marathon and longer · sport-specific preparation · physique competition · anyone the screen stops until they are cleared.
+**In scope:** anything done in a gym or a cardio session. Strength, muscle building, powerbuilding, Olympic lifting, CrossFit-style and HYROX-style training, hybrid strength plus endurance, running up to a half marathon and other cardio (bike, row, ski erg, cardio machines), and fat loss or health pursued that way. Any week from 2 to 6 days, 15 to 120 minutes.
+
+**Places:** a gym · a home gym with real kit (a rack and barbell, dumbbells, or a cardio machine: it counts as a gym) · outdoors, for running and other cardio only. Training seated is served inside those places.
+
+**Out of scope, said plainly:** bodyweight-only skill training · home plans on bodyweight alone · kettlebell-only plans · plans aimed at people over 60 · combat sports, climbing and other sport styles · marathon and longer · physique competition · under 18 · anyone the screen stops until they are cleared. The programs that served some of these are kept, unserved, in `programs/_out_of_scope/` with the reason.
 
 ## The voice
 

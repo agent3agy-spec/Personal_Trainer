@@ -35,7 +35,7 @@ sequenceDiagram
 
 ```mermaid
 flowchart LR
-    A["24 programs"] ==> B["Hard filters<br/>experience · days · minutes ·<br/>equipment · skills · safety ·<br/>can every main lift be filled for you"]
+    A["19 programs"] ==> B["Hard filters<br/>experience · days · minutes ·<br/>equipment · skills · safety ·<br/>can every main lift be filled for you"]
     B ==> C["Score<br/>3 x main goal + second goal +<br/>evidence + styles you like or hate +<br/>days in its sweet spot"]
     C ==> D["Tie-breaks<br/>simpler for beginners ·<br/>stronger evidence · shorter"]
     D ==> E["Top 3<br/>you choose"]
@@ -72,7 +72,7 @@ flowchart LR
     E ==> F["'Logged. Squat stays at 60 next time,<br/>bench goes to 42.5.'"]
 ```
 
-**The progression rules are code** (`engine/progress.py`), one per kind: linear (StrongLifts), double progression, 5/3/1 training-max waves, GZCLP stages, RPE top sets, bodyweight ladders, kettlebell timed standards, benchmark pieces, running volume, Couch to 5K weeks. The trainer never invents one.
+**The progression rules are code** (`engine/progress.py`), one per kind: linear (StrongLifts), double progression, 5/3/1 training-max waves, GZCLP stages, RPE top sets, benchmark pieces, running volume, Couch to 5K weeks. The trainer never invents one.
 
 **Weeks and blocks** close by themselves. A deload comes on schedule, or early if two warning signs show up (low energy three sessions out of four, a score dropping twice, sore or flat three times running).
 

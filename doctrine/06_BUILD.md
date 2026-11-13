@@ -10,7 +10,7 @@ _This file owns: the shape of a session, the time math, the cut order, and what 
 | 2 | main block | the program's main work, with the score to beat. **Never cut** |
 | 3 | second lift | the program's secondary work, if any |
 | 4 | accessories | the program's slots, filled from the bank, supersets where the program says |
-| 5 | finisher | add-ons from `PLAN.md` (core, conditioning, balance, mobility...). Balance is mandatory from 60 |
+| 5 | finisher | add-ons from `PLAN.md` (core, conditioning, balance, mobility...). (Balance from 60 never fires: the age band is fixed at 18 to 39) |
 
 ## The clock (every rest counted)
 

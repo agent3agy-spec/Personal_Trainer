@@ -4,7 +4,7 @@ _This file owns: the safety screen, the stop rules, pain, special populations, a
 
 ## The screen (before any program, then once a year)
 
-Twelve items, shown numbered, answered in one reply ("none" or the numbers), plus the age band. Items 1 to 7 are the seven general questions of the **PAR-Q+** [structure checked; wording of 2 to 7 believe, copied from the official form at milestone 2, eparmedx.com].
+Twelve items, shown numbered, answered in one reply ("none" or the numbers). Age is not asked: the audience is 18 to 40 and the engine fixes the band (`00_MISSION.md`). Items 1 to 7 are the seven general questions of the **PAR-Q+** [structure checked; wording of 2 to 7 believe, copied from the official form at milestone 2, eparmedx.com].
 
 | answer | what happens | source |
 |:-|:-|:-|
@@ -15,7 +15,7 @@ Twelve items, shown numbered, answered in one reply ("none" or the numbers), plu
 | 10 diabetes with low-sugar risk | agree the plan with their doctor first | [believe, standard practice] |
 | 11 eating disorder | no fat-loss goal; health or strength instead; a doctor or registered dietitian for food | [believe, standard practice] |
 | 12 low bone density | no heavy or impact loading unsupervised; LIFTMOR-style heavy work only with a physio | Watson 2018 LIFTMOR [checked] |
-| under 18 | not served in v1 | |
+| says they are under 18 (never asked) | not served: the coach writes `age_band: under_18` in the answers and the screen stops with the under-18 message | |
 
 ## Hard stops, at any time
 
@@ -37,7 +37,7 @@ The trainer never names a cause. It describes back what was said and acts:
 
 | who | rule | source |
 |:-|:-|:-|
-| 60 and over | the balance add-on is mandatory; power at light to moderate loads ("lift fast, lower slow"); anyone who has fallen or fears falling is pointed to a falls programme led by a health professional | WHO 2020 [checked] · Sherrington 2019 Cochrane: falls rate 23% lower [checked] |
+| over 40 | out of scope (`00_MISSION.md`): age is not asked and the age band is fixed at 18 to 39. If someone says they are 60 or over, the coach says plainly that this trainer is not built for them and points to a coach or a falls-prevention programme led by a health professional. The balance rules for 60 and over stay in the engine and `modules/balance.md` but never fire | WHO 2020 [checked] · Sherrington 2019 Cochrane [checked] |
 | women | the same principles as men; no planning by menstrual cycle phase; readiness adjusts the day | Roberts 2020 [checked] · McNulty 2020 [checked conclusion] · Colenso-Semple 2023 [checked] |
 | seated or wheelchair users | only exercises tagged seated or wheelchair_ok; if a goal needs more than that, the trainer says so and suggests an adaptive fitness professional | v1 scope |
 | beginners | the first-outing protocol (`05_LOADS.md`), never a max test | Halperin 2022 [checked] |

@@ -36,7 +36,7 @@ Marks corrected against the research: concurrent training is [snippet] (research
 
 | school | what it prescribes | for whom | evidence | served by |
 |:-|:-|:-|:-|:-|
-| Schoenfeld, the evidence school (Schoenfeld volume and frequency · Schoenfeld 2017 load meta-analysis) | 10+ hard sets per muscle a week, 2x a week, 6 to 30 reps near failure, compounds plus isolation | everyone, the fallback | A | the principles layer above · `muscle-fullbody-3`, `muscle-upperlower-4`, `muscle-ppl-6`, `home-fullbody-2to4` |
+| Schoenfeld, the evidence school (Schoenfeld volume and frequency · Schoenfeld 2017 load meta-analysis) | 10+ hard sets per muscle a week, 2x a week, 6 to 30 reps near failure, compounds plus isolation | everyone, the fallback | A | the principles layer above · `muscle-fullbody-3`, `muscle-upperlower-4`, `muscle-ppl-6`, an out-of-scope program (`../programs/_out_of_scope/`) |
 | Pelland 2025 frequency finding (study) | equal weekly volume, frequency barely changes growth; fractional set counting | the case for a 1x split for muscle only | A | `muscle-bodypart-5` |
 | Robinson 2024 (study) | growth improves as sets end closer to failure | every hypertrophy program | A | `powerbuild-phul-4` |
 | Renaissance Periodization (Israetel), the RP mesocycle model | volume landmarks MEV, MAV, MRV; a 4 to 6 week mesocycle from near MEV, adding sets; RIR from about 3 to 4 down to 0 to 1; a deload at about half the sets [believe, RP site unreachable] | intermediate+, 4 to 6 days | B | the accessory ramp of `muscle-fullbody-3`, `muscle-upperlower-4`, `muscle-ppl-6`, `muscle-bodypart-5`, `powerbuild-phul-4` |
@@ -104,31 +104,31 @@ Marks corrected against the research: concurrent training is [snippet] (research
 
 | school | what it prescribes | for whom | evidence | served by |
 |:-|:-|:-|:-|:-|
-| r/bodyweightfitness Recommended Routine | 3 days; supersets pull-up + squat, dip + hinge, row + push-up; a core triplet; 3 x 5 to 8, move up a step at 3 x 8 [seen, ladders believe] | beginners with a bar | B | `calisthenics-rr-3` |
-| Overcoming Gravity (Steven Low) | levels 1 to 5 for beginners, full body 3 days, progressions by level; tendons adapt slower, deload every 4 to 8 weeks [seen, numbers believe] | self coached intermediates | B | credited source of the levels in `calisthenics-rr-3` and `../modules/skill-blocks.md` |
-| GMB Fitness | Elements locomotion (bear, monkey, frogger, crab), then Integral Strength [seen] | deconditioned, returning | B | `../modules/locomotion.md`, the on-ramp of `calisthenics-rr-3` |
+| r/bodyweightfitness Recommended Routine | 3 days; supersets pull-up + squat, dip + hinge, row + push-up; a core triplet; 3 x 5 to 8, move up a step at 3 x 8 [seen, ladders believe] | beginners with a bar | B | an out-of-scope program (`../programs/_out_of_scope/`) |
+| Overcoming Gravity (Steven Low) | levels 1 to 5 for beginners, full body 3 days, progressions by level; tendons adapt slower, deload every 4 to 8 weeks [seen, numbers believe] | self coached intermediates | B | credited source of the levels in an out-of-scope program (`../programs/_out_of_scope/`) and `../modules/skill-blocks.md` |
+| GMB Fitness | Elements locomotion (bear, monkey, frogger, crab), then Integral Strength [seen] | deconditioned, returning | B | `../modules/locomotion.md`, the on-ramp of an out-of-scope program (`../programs/_out_of_scope/`) |
 | Convict Conditioning (Paul Wade) | six moves, ten steps each [seen] | hobbyists | C | **index only**: per step standards not confirmed, and the Recommended Routine covers the same ladders with better sources |
-| Does bodyweight build muscle | yes, near failure: push-ups match bench at 40% 1RM, band push-ups match a 6RM bench [seen] | | A | why `calisthenics-rr-3` and `home-fullbody-2to4` are real programs |
+| Does bodyweight build muscle | yes, near failure: push-ups match bench at 40% 1RM, band push-ups match a 6RM bench [seen] | | A | why the bodyweight and home programs (now in `../programs/_out_of_scope/`) were real programs |
 
 ## Home and minimal equipment
 
 | school | what it prescribes | for whom | evidence | served by |
 |:-|:-|:-|:-|:-|
-| StrongFirst Simple and Sinister (Pavel Tsatsouline) | 100 one arm swings and 10 get-ups; timed standards 5 min and 10 min; bell standards by sex [seen] | one or two kettlebells | C | `kettlebell-ss-5` (days 3 to 6, near daily as published) |
-| Enter the Kettlebell, Rite of Passage (Pavel Tsatsouline, 2006) | clean and press ladders, pull-ups, swings, 3 days [seen] | pressing strength with one bell | C | `kettlebell-rop-3` |
-| Dan John minimalism, Easy Strength | five lifts, never miss a rep, about 10 reps a lift, 5 days [seen] | busy adults, athletes | B | `home-fullbody-2to4`; its rules inform every express session |
-| Kikuchi 2017 push-ups (study) | push-ups to failure match bench press at 40% 1RM for growth [seen] | home trainees | A | `home-fullbody-2to4` |
-| Lopes 2019 bands (study) | elastic bands match free weights for strength; log colour, anchor distance and reps [seen] | home, older adults | A | `home-fullbody-2to4`, and a load type in the bank |
-| Fixed light weights | progress by reps, then tempo and pauses, then single limb, then range and leverage, then mechanical drop sets, then density, then sets; past about 30 reps, a heavier bell [believe ordering, A evidence below it] | dumbbell or band users | B | the `fixed_load` rule in `home-fullbody-2to4` |
+| StrongFirst Simple and Sinister (Pavel Tsatsouline) | 100 one arm swings and 10 get-ups; timed standards 5 min and 10 min; bell standards by sex [seen] | one or two kettlebells | C | an out-of-scope program (`../programs/_out_of_scope/`) |
+| Enter the Kettlebell, Rite of Passage (Pavel Tsatsouline, 2006) | clean and press ladders, pull-ups, swings, 3 days [seen] | pressing strength with one bell | C | an out-of-scope program (`../programs/_out_of_scope/`) |
+| Dan John minimalism, Easy Strength | five lifts, never miss a rep, about 10 reps a lift, 5 days [seen] | busy adults, athletes | B | an out-of-scope program (`../programs/_out_of_scope/`); its rules inform every express session |
+| Kikuchi 2017 push-ups (study) | push-ups to failure match bench press at 40% 1RM for growth [seen] | home trainees | A | an out-of-scope program (`../programs/_out_of_scope/`) |
+| Lopes 2019 bands (study) | elastic bands match free weights for strength; log colour, anchor distance and reps [seen] | home, older adults | A | an out-of-scope program (`../programs/_out_of_scope/`), and a load type in the bank |
+| Fixed light weights | progress by reps, then tempo and pauses, then single limb, then range and leverage, then mechanical drop sets, then density, then sets; past about 30 reps, a heavier bell [believe ordering, A evidence below it] | dumbbell or band users | B | the `fixed_load` rule in an out-of-scope program (`../programs/_out_of_scope/`) |
 
 ## General health, fat loss and populations
 
 | school | what it prescribes | for whom | evidence | served by |
 |:-|:-|:-|:-|:-|
-| WHO 2020 · UK CMO 2019 | 150 to 300 min moderate or 75 to 150 vigorous aerobic a week, strength 2+ days, less sitting; 65+ add balance and strength 3+ days [checked] | everyone | G | `health-baseline-2to3`, `older-strong-3`, and the floor every program is checked against |
-| ACSM 2009 resistance training stand | novice 8 to 12 RM, 2 to 3 days full body, +2 to 10% when the target is beaten by 1 to 2 reps, 2 to 3 min rest on heavy lifts [checked] | novices | G | `health-baseline-2to3`, `older-strong-3`, `strength-lp-3`, `functional-gpp-3to5`; the 2026 update replaces it at milestone 2 |
+| WHO 2020 · UK CMO 2019 | 150 to 300 min moderate or 75 to 150 vigorous aerobic a week, strength 2+ days, less sitting; 65+ add balance and strength 3+ days [checked] | everyone | G | `health-baseline-2to3`, an out-of-scope program (`../programs/_out_of_scope/`), and the floor every program is checked against |
+| ACSM 2009 resistance training stand | novice 8 to 12 RM, 2 to 3 days full body, +2 to 10% when the target is beaten by 1 to 2 reps, 2 to 3 min rest on heavy lifts [checked] | novices | G | `health-baseline-2to3`, an out-of-scope program (`../programs/_out_of_scope/`), `strength-lp-3`, `functional-gpp-3to5`; the 2026 update replaces it at milestone 2 |
 | NSCA Essentials | %1RM to reps table, rest and load ranges per goal [checked via study guides] | | G | the first outing loads in `engine/`, no program of its own |
-| Older adults: Sherrington 2019 Cochrane · ICFSR 2021 | multicomponent, balance challenging work, power at light to moderate load moved fast; heavy loading for low bone density only supervised (LIFTMOR) [checked] | 65+ | A and G | `older-strong-3`, plus `../modules/balance.md`, mandatory from 60 |
+| Older adults: Sherrington 2019 Cochrane · ICFSR 2021 | multicomponent, balance challenging work, power at light to moderate load moved fast; heavy loading for low bone density only supervised (LIFTMOR) [checked] | 65+ | A and G | an out-of-scope program (`../programs/_out_of_scope/`), plus `../modules/balance.md`, mandatory from 60 |
 | Pregnancy and postpartum, ACOG 804 | activity is safe without complications; 150 min plus strength; continue rather than start vigorous work; stop signs [checked in part] | pregnant, postpartum | G | `health-baseline-2to3` with the pregnancy overrides, only after the person confirms their provider has no objection |
 | Fat loss | the deficit is diet; strength training keeps muscle; more than 250 min a week of activity for real exercise driven loss [checked] | | A | **not a program**: the goal picks a muscle or health program, adds activity minutes and states the principle. No calorie targets, no meal plans |
 
@@ -146,7 +146,7 @@ Every number below is [believe] and is used by a file. Each one is checked again
 - RPE back off drop of 10% (RTS fatigue percents of 3 to 9% not found) · `strength-rpe-4.md`
 - RP volume landmarks MEV, MAV, MRV per muscle, and the accessory mesocycle ramp (RIR 3, 2, 2, 1, an extra set in weeks 3 and 4) · `muscle-fullbody-3.md`, `muscle-upperlower-4.md`, `muscle-ppl-6.md`, `muscle-bodypart-5.md`, `powerbuild-phul-4.md`
 - The deload week shape (half the sets, about 10% lighter, 3 to 4 RIR, or 90% load and 4 RIR) · `muscle-fullbody-3.md`, `muscle-upperlower-4.md`, `muscle-ppl-6.md`, `muscle-bodypart-5.md`, `powerbuild-phul-4.md`, `powerbuild-phat-5.md`, `functional-gpp-3to5.md`, `weightlifting-novice-3.md` (Catalyst 4 week blocks), `hyrox-prep-4.md` (60% of the sets)
-- The weekly set ceiling near 20 and the start at 8 to 12 · `muscle-ppl-6.md`, `home-fullbody-2to4.md`
+- The weekly set ceiling near 20 and the start at 8 to 12 · `muscle-ppl-6.md`, an out-of-scope program (`../programs/_out_of_scope/`)
 - Schoenfeld 2019 volume equated frequency analysis (seen only in secondary sources) · `muscle-bodypart-5.md`
 - PHAT speed work at 65 to 70% for 6 x 3, and the power day 3 to 5 reps · `powerbuild-phat-5.md`
 - PHUL rep ranges and the "add load at the top of the range" rule · `powerbuild-phul-4.md`
@@ -154,13 +154,13 @@ Every number below is [believe] and is used by a file. Each one is checked again
 - Daniels pace caps (T about 10%, I 8% or 10 km, R 5%, long run 25 to 30% or 150 min) and % VO2max per pace, seen only in secondary sources that conflict · `run-base-3to5.md`, `../modules/run-race.md`
 - HYROX station weights per division, the Women Pro wall ball (6 kg at 2.70 m), the doubles and relay weights · `../modules/hyrox-stations.md`, `hyrox-prep-4.md`
 - HYROX beginner plan length of 4 to 20 weeks, and the absence of any trial · `hyrox-prep-4.md`
-- Recommended Routine ladders and warm-up · `calisthenics-rr-3.md`, `../modules/skill-blocks.md`
-- Overcoming Gravity deload every 4 to 8 weeks · `calisthenics-rr-3.md`
-- The fixed weight ladder ordering, and buying the next bell past about 30 reps · `home-fullbody-2to4.md`
-- Simple and Sinister frequency and effort, and the mixed bell advice · `kettlebell-ss-5.md`
+- Recommended Routine ladders and warm-up · an out-of-scope program (`../programs/_out_of_scope/`), `../modules/skill-blocks.md`
+- Overcoming Gravity deload every 4 to 8 weeks · an out-of-scope program (`../programs/_out_of_scope/`)
+- The fixed weight ladder ordering, and buying the next bell past about 30 reps · an out-of-scope program (`../programs/_out_of_scope/`)
+- Simple and Sinister frequency and effort, and the mixed bell advice · an out-of-scope program (`../programs/_out_of_scope/`)
 - CrossFit benchmark retest every 8 to 12 weeks; benchmark WOD loads (from memory, research/02) · `functional-gpp-3to5.md`, `../modules/conditioning.md`
 - UK CMO "any bout counts" toward the 150 minutes · `health-baseline-2to3.md`
-- The content of the 2026 ACSM resistance training update · `health-baseline-2to3.md`, `older-strong-3.md`, the novice progression principle
+- The content of the 2026 ACSM resistance training update · `health-baseline-2to3.md`, an out-of-scope program (`../programs/_out_of_scope/`), the novice progression principle
 
 ## Paid programs
 

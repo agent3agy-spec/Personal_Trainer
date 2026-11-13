@@ -29,11 +29,10 @@ def profile_for(p):
     if exp not in p["experience"]:
         exp = p["experience"][0]
     goal = max(p["goals"], key=lambda g: p["goals"][g])
-    age = "60_74" if "under_60" in p.get("excluded_for", []) else "18_39"
     return {"goal": goal, "experience": exp, "days": (p.get("sweet_days") or p["days"])[0],
             "minutes": max(p["minutes"][0], min(60, p["minutes"][1])),
             "places": {"main": {"type": "gym", "equipment": EVERYTHING}}, "units": "kg",
-            "skills": ["olympic_coached", "run_30min", "pullup"], "age_band": age}
+            "skills": ["olympic_coached", "run_30min", "pullup"]}
 
 
 def one(pid):
@@ -45,7 +44,7 @@ def one(pid):
         (cwd / "me").mkdir()
         (cwd / "sessions").mkdir()
         prof = profile_for(prog)
-        (cwd / "me" / "a.json").write_text(json.dumps({"items": [], "age_band": prof["age_band"], "language": "en"}))
+        (cwd / "me" / "a.json").write_text(json.dumps({"items": [], "language": "en"}))
         assert run(cwd, "screen", "me/a.json")["result"] == "clear"
         (cwd / "me" / "a.json").write_text(json.dumps(prof))
         r = run(cwd, "profile", "me/a.json")

@@ -22,7 +22,7 @@ A number given at the interview ("squat 80 kg for 5", recent) becomes an estimat
 
 ## Rounding
 
-Always down. Barbell: to the plate step (2.5 kg by default, never under the 20 kg bar). Dumbbells and kettlebells: to the nearest weight they actually have (the list in the profile, or a standard gym rack). Machines and cables: 2.5 kg. Pounds are shown rounded to 5 lb; the engine stores kilograms.
+Always down. Barbell: to the plate step (2.5 kg by default, never under the 20 kg bar). Dumbbells and kettlebells: to the nearest weight they actually have (the list in the profile, or a standard gym rack). Machines and cables: 2.5 kg. Pounds: a pound user trains on a pound grid (5 lb plates, a 45 lb bar, 5 lb steps on machines, a US dumbbell and kettlebell rack, or the weights they own, said in pounds and kept as said in `dumbbells_lb`). Every number printed back to them (the sheet, the score line, next time's load) is in pounds, whole pounds or the half pound they typed; the engine stores kilograms.
 
 ## When a fixed weight is too light
 

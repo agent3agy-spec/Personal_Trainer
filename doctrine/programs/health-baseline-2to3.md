@@ -1,8 +1,8 @@
 # Health baseline · health-baseline-2to3
 
-**What it is.** The public health dose, made into sessions. Two or three full body strength sessions a week with a few big movements, plus a brisk walk or easy cardio that grows towards 150 minutes a week. Nothing fancy, and that is the point: this is what the World Health Organization and the American College of Sports Medicine say an adult needs.
+**What it is.** The start-here plan: the public health dose, made into gentle gym sessions. Two or three full body strength sessions a week with a few big movements, plus a brisk walk or easy cardio that grows towards 150 minutes a week. Nothing fancy, and that is the point: this is what the World Health Organization and the American College of Sports Medicine say an adult needs.
 
-**Who it is for.** Everyone. Never trained, coming back, short on time, training at home, training seated: it works with dumbbells, machines, bands or just your body, and every slot has a seated version. 2 or 3 days a week, 20 to 60 minutes.
+**Who it is for.** A first-timer in a gym, or someone coming back after a long break or short on time. It runs on machines, dumbbells or a home gym, and every slot has a seated version, so it is also the plan for training seated and, once their provider says yes, during pregnancy. It is not a bodyweight-only home plan. 2 or 3 days a week, 20 to 60 minutes.
 
 **The numbers it is built on.**
 
@@ -25,7 +25,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
 
 **Pregnancy.** This is also the program used in pregnancy, once the person's obstetric provider has said yes [checked: ACOG Committee Opinion 804, 2020]. The aim is the same 150 minutes of moderate activity plus strength work [checked: WHO 2020]. The engine enforces the pregnancy overrides on top of this file: no lying on the back after the first trimester, no impact, no maximal efforts, and it stops the session on any ACOG warning sign (bleeding, fluid leak, regular painful contractions, chest pain, dizziness, headache, unusual breathlessness) [checked partially, research/04].
 
-**Graduates to.** `strength-lp-3` for strength, `functional-gpp-3to5` for broad fitness, `older-strong-3` from 60.
+**Graduates to.** `strength-lp-3` for strength, `muscle-fullbody-3` for muscle, `functional-gpp-3to5` for broad fitness.
 
 **Evidence: A.** International guidelines and a position stand, built on large bodies of trials [checked].
 
@@ -83,8 +83,8 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
   "simplicity": 2,
   "graduates_to": [
     "strength-lp-3",
-    "functional-gpp-3to5",
-    "older-strong-3"
+    "muscle-fullbody-3",
+    "functional-gpp-3to5"
   ],
   "block_weeks": 8,
   "deload": null,

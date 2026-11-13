@@ -12,6 +12,8 @@ LOWER = {"squat", "hinge", "lunge", "calves", "hamstrings_iso", "quads_iso", "gl
 NOT_LOADABLE = {"bodyweight", "band", "time", "distance", "calories"}
 GYM_DB = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22.5, 25, 27.5, 30, 32.5, 35, 37.5, 40, 42.5, 45, 50]
 GYM_KB = [8, 12, 16, 20, 24, 28, 32, 40, 48]
+GYM_DB_LB = [5, 8, 10, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 100]   # a US dumbbell rack
+GYM_KB_LB = [10, 15, 20, 25, 30, 35, 40, 45, 50, 53, 62, 70, 80, 88, 97, 106]
 PRIORITY = {"glutes": ["glutes"], "arms": ["biceps", "triceps"], "biceps": ["biceps"], "triceps": ["triceps"],
             "back": ["lats", "upper_back"], "chest": ["chest"], "shoulders": ["side_delts", "rear_delts", "front_delts"],
             "legs": ["quads", "hamstrings", "glutes"], "quads": ["quads"], "hamstrings": ["hamstrings"], "core": ["core", "obliques"],
@@ -123,13 +125,18 @@ def _select(slot, prof, tags, avoid, bank, offset, bad):
 def load_ctx(row, prof):
     lt = row["load_type"]
     units = prof.get("units", "kg")
+    lb = units == "lb"                             # pound users train on a pound grid: 5 lb plates, a 45 lb bar, a pound rack
+    rack_db = [core.lb_to_kg(x) for x in GYM_DB_LB] if lb else GYM_DB
+    rack_kb = [core.lb_to_kg(x) for x in GYM_KB_LB] if lb else GYM_KB
     if lt == "dumbbell":
-        steps = sorted(prof.get("dumbbells") or GYM_DB)
+        steps = sorted(prof.get("dumbbells") or rack_db)
     elif lt == "kettlebell":
-        steps = sorted(prof.get("kettlebells") or GYM_KB)
+        steps = sorted(prof.get("kettlebells") or rack_kb)
     else:
         steps = None
-    step = prof.get("plate_step", 2.5) if lt == "barbell" else 2.5
+    step = prof.get("plate_step", 5 if lb else 2.5) if lt == "barbell" else (5 if lb else 2.5)
+    step = core.lb_to_kg(step) if lb else step       # plate_step is said in the person's unit
+    bar = core.lb_to_kg(45) if lb else 20.0
 
     def rnd(kg):
         if kg is None:
@@ -138,7 +145,7 @@ def load_ctx(row, prof):
             below = [s for s in steps if s <= kg + 1e-9]
             return below[-1] if below else steps[0]
         v = core.kg_round_down(kg, step)
-        return max(v, 20.0) if lt == "barbell" else v
+        return max(v, bar) if lt == "barbell" else v
 
     def nxt(kg):
         if kg is None:

@@ -1,8 +1,8 @@
 # Functional fitness, general physical preparedness · functional-gpp-3to5
 
-**What it is.** CrossFit-style general fitness, run on a normal week. Every session is two parts: one lift or one skill done fresh, then a short timed workout (a metcon) that mixes the three modalities CrossFit names: M for cardio machines and running, G for bodyweight and gymnastics, W for weights. Some days are one modality, some two, some three. You get fit across short, middle and long efforts instead of one thing.
+**What it is.** CrossFit-style general fitness, trained in a gym and run on a normal week. Every session is two parts: one lift or one skill done fresh, then a short timed workout (a metcon) that mixes the three modalities CrossFit names: M for cardio machines and running, G for bodyweight and gymnastics, W for weights. Some days are one modality, some two, some three. You get fit across short, middle and long efforts instead of one thing.
 
-**Who it is for.** Novice to advanced. Wants to be good at a bit of everything, likes a clock and a score. Has at least kettlebells, dumbbells or a barbell. 3 to 5 days a week, 45 to 60 minutes.
+**Who it is for.** Novice to advanced. Wants to be good at a bit of everything, likes a clock and a score. Trains in a gym, a CrossFit box, or a home gym with a barbell or dumbbells **and** a cardio machine (rower, bike, ski erg or treadmill): the machine is the cardio part of the timed workouts. It is not a bodyweight-only or outdoor plan, and not a kettlebell-only plan. 3 to 5 days a week, 45 to 60 minutes.
 
 **The week.** Five sessions, A to E, done in order whatever your days a week: on 3 days you go round the five in under two weeks, on 5 days you do the full lap every week. CrossFit's own 2003 template runs 3 days on and 1 off, and the article itself admits that does not fit a gym's 5 on 2 off week [snippet: CrossFit Journal, Theoretical Template, Feb 2003], so here the single, double and triple modality days rotate inside a normal week instead.
 
@@ -16,7 +16,7 @@
 
 Each metcon has four versions that rotate one per outing, so you meet the same piece again about every four weeks and can beat it.
 
-**Scaling.** Every metcon is written to be scaled, never skipped. The order is load first, then reps, then the movement, so the piece still feels the way it is meant to (fast stays fast, long stays long) [snippet: Rx, Scaled and Foundations explainers, research/02]. The sheet prints this on every piece.
+**Scaling.** Every metcon is written to be scaled, never skipped. Easier versions of a move (an incline push-up, an air squat, a band pulldown) are scaling options inside a gym session, not a plan of their own. The order is load first, then reps, then the movement, so the piece still feels the way it is meant to (fast stays fast, long stays long) [snippet: Rx, Scaled and Foundations explainers, research/02]. The sheet prints this on every piece.
 
 **How it climbs.** The lift: double progression. Hit the top of the rep range on every set and the weight goes up next time, otherwise add a rep. The metcon: a benchmark. Your best on each version is stored and the sheet asks you to beat it. Benchmarks only count if the movement standards stay the same between attempts [snippet: RitFit, research/02].
 
@@ -76,9 +76,14 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
   "equipment_all": [],
   "equipment_any": [
     [
-      "kettlebell",
-      "dumbbell",
-      "barbell"
+      "barbell",
+      "dumbbell"
+    ],
+    [
+      "rower",
+      "bike",
+      "skierg",
+      "treadmill"
     ]
   ],
   "skills_required": [],

@@ -24,7 +24,7 @@ def to_kg(v, units):
     if v is None or v == "":
         return None
     v = float(v)
-    return round(v / 2.20462, 2) if units == "lb" else v
+    return round(v / core.LB_PER_KG, 3) if units == "lb" else v
 
 
 def needs(session, report):
@@ -52,7 +52,7 @@ def optional_asks(session, report):
 
 
 def apply(session, report, prof, st, bank):
-    units = prof.get("units", "kg")
+    units = "kg" if report.get("loads_in_kg") else prof.get("units", "kg")   # a rebuild replays stored kilograms
     res_all = report.get("results", {})
     skipped = set(report.get("skipped", []))
     as_written = report.get("as_written", True)
@@ -117,7 +117,8 @@ def apply(session, report, prof, st, bank):
     return done, hard
 
 
-def score_text(session, done):
+def score_text(session, done, units="kg"):
+    """The log's score line, in the person's unit (it is read back to them)."""
     for d in done:
         for b in session["blocks"]:
             for it in b["items"]:
@@ -128,8 +129,8 @@ def score_text(session, done):
                         return str(r["score"])
                     if r.get("load") and r.get("reps"):
                         if d.get("rule") == "rpe_top_set":
-                            return "top set %s x %s" % (core.fmt_load(r["load"]), r["reps"][0])
-                        return "%s x %s" % (core.fmt_load(r["load"]), "/".join(str(x) for x in r["reps"]))
+                            return "top set %s x %s" % (core.fmt_load(r["load"], units), r["reps"][0])
+                        return "%s x %s" % (core.fmt_load(r["load"], units), "/".join(str(x) for x in r["reps"]))
                     if r.get("reps"):
                         return "/".join(str(x) for x in r["reps"]) + " reps"
                     if r.get("completed"):

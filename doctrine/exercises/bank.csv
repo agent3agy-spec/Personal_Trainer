@@ -1,6 +1,6 @@
 id,name,pattern,muscles_primary,muscles_secondary,equipment,load_type,level,needs_coaching,regions,impact,position,easier,harder,tags,cue
-back_squat,Back squat,squat,quads;glutes,adductors;lower_back;core,barbell+rack+plates,barbell,3,no,knee;hip;low_back,no,standing,goblet_squat,front_squat,heavy_legs,Brace hard then sit down between your hips and drive the floor away
-front_squat,Front squat,squat,quads;glutes,upper_back;core,barbell+rack+plates,barbell,4,no,knee;hip;wrist,no,standing,back_squat,,heavy_legs;lengthened,Elbows high and chest proud all the way down
+back_squat,Back squat,squat,quads;glutes,adductors;lower_back;core,barbell+rack+plates,barbell,3,no,knee;hip;low_back;shoulder,no,standing,goblet_squat,front_squat,heavy_legs,Brace hard then sit down between your hips and drive the floor away
+front_squat,Front squat,squat,quads;glutes,upper_back;core,barbell+rack+plates,barbell,4,no,knee;hip;shoulder;wrist,no,standing,back_squat,,heavy_legs;lengthened,Elbows high and chest proud all the way down
 goblet_squat,Goblet squat,squat,quads;glutes,adductors;core,dumbbell|kettlebell,dumbbell,2,no,knee;hip,no,standing,bodyweight_squat,back_squat,lengthened,Elbows inside the knees and sit between your heels
 bodyweight_squat,Bodyweight squat,squat,quads;glutes,adductors,bodyweight,bodyweight,1,no,knee;hip,no,standing,assisted_squat,split_squat,metcon_ok,Arms forward and sit as deep as you can keep your heels down
 sit_to_stand,Sit to stand,squat,quads;glutes,core,bodyweight,bodyweight,1,no,knee,no,standing,,assisted_squat,,Nose over toes then stand up without using your hands
@@ -21,22 +21,22 @@ trap_bar_deadlift,Trap bar deadlift,hinge,glutes;quads;hamstrings,lower_back;for
 romanian_deadlift,Romanian deadlift,hinge,hamstrings;glutes,lower_back;forearms,barbell+plates,barbell,3,no,low_back;hip,no,standing,db_romanian_deadlift,deadlift,hinge_heavy;lengthened,Push your hips back and keep the bar on your legs until the hamstrings stop you
 db_romanian_deadlift,Dumbbell Romanian deadlift,hinge,hamstrings;glutes,lower_back;forearms,dumbbell|kettlebell,dumbbell,2,no,low_back;hip,no,standing,kb_deadlift,romanian_deadlift,lengthened,Soft knees and hips back · dumbbells slide down your thighs
 kb_deadlift,Kettlebell deadlift,hinge,glutes;hamstrings,quads;lower_back,kettlebell|dumbbell,kettlebell,1,no,hip;low_back,no,standing,band_good_morning,db_romanian_deadlift,,Bell between your feet · hips back and stand up tall
-single_leg_rdl,Single leg Romanian deadlift,hinge,hamstrings;glutes,core,bodyweight,bodyweight,3,no,hip,no,standing,db_romanian_deadlift,,unilateral;balance;lengthened,Hips square to the floor and reach the back heel to the wall · add a dumbbell later
-good_morning,Good morning,hinge,hamstrings;glutes,lower_back,barbell+rack+plates,barbell,3,no,low_back;hip,no,standing,band_good_morning,romanian_deadlift,hinge_heavy;lengthened,Bar on your back and push the hips back with a flat spine
+single_leg_rdl,Single leg Romanian deadlift,hinge,hamstrings;glutes,core,bodyweight,bodyweight,3,no,hip;low_back,no,standing,db_romanian_deadlift,,unilateral;balance;lengthened,Hips square to the floor and reach the back heel to the wall · add a dumbbell later
+good_morning,Good morning,hinge,hamstrings;glutes,lower_back,barbell+rack+plates,barbell,3,no,hip;low_back;shoulder,no,standing,band_good_morning,romanian_deadlift,hinge_heavy;lengthened,Bar on your back and push the hips back with a flat spine
 hip_thrust,Hip thrust,hinge,glutes,hamstrings,barbell+plates+bench|dumbbell+bench,barbell,2,no,hip,no,floor,single_leg_glute_bridge,,,Chin tucked and ribs down · squeeze to full lockout
 glute_bridge,Glute bridge,hinge,glutes,hamstrings,bodyweight,bodyweight,1,no,hip,no,floor,,single_leg_glute_bridge,,Heels close and drive your hips up until your body is straight
 single_leg_glute_bridge,Single leg glute bridge,hinge,glutes,hamstrings,bodyweight,bodyweight,2,no,hip,no,floor,glute_bridge,hip_thrust,unilateral,Keep the hips level as you drive up through one heel
 kb_swing,Kettlebell swing,hinge,glutes;hamstrings,lower_back;core;forearms,kettlebell|dumbbell,kettlebell,2,no,low_back;hip,no,standing,kb_deadlift,,power;hinge_heavy;metcon_ok,Hike it back and snap the hips · the arms are just ropes
-back_extension,Back extension,hinge,lower_back;glutes,hamstrings,bench,bodyweight,2,no,low_back,no,floor,hip_hinge_drill,good_morning,,Hips on the pad and rise until your body is straight · no higher
-cable_pull_through,Cable pull through,hinge,glutes;hamstrings,,cable,cable,2,no,hip,no,standing,hip_hinge_drill,kb_swing,,Face away from the stack and push your hips back then squeeze forward
-band_good_morning,Band good morning,hinge,hamstrings;glutes,lower_back,band,band,1,no,hip,no,standing,hip_hinge_drill,kb_deadlift,,Band under your feet and over your neck · hips back with a flat spine
-hip_hinge_drill,Hip hinge drill,hinge,hamstrings;glutes,,bodyweight,bodyweight,1,no,,no,standing,,band_good_morning,mobility,Hold a stick on your spine and push your hips back without it leaving your head
+back_extension,Back extension,hinge,lower_back;glutes,hamstrings,bench,bodyweight,2,no,hip;low_back,no,floor,hip_hinge_drill,good_morning,,Hips on the pad and rise until your body is straight · no higher
+cable_pull_through,Cable pull through,hinge,glutes;hamstrings,,cable,cable,2,no,hip;low_back,no,standing,hip_hinge_drill,kb_swing,,Face away from the stack and push your hips back then squeeze forward
+band_good_morning,Band good morning,hinge,hamstrings;glutes,lower_back,band,band,1,no,hip;low_back,no,standing,hip_hinge_drill,kb_deadlift,,Band under your feet and over your neck · hips back with a flat spine
+hip_hinge_drill,Hip hinge drill,hinge,hamstrings;glutes,,bodyweight,bodyweight,1,no,hip;low_back,no,standing,,band_good_morning,mobility,Hold a stick on your spine and push your hips back without it leaving your head
 seated_trunk_extension,Seated band trunk extension,hinge,lower_back,upper_back,band,band,1,no,low_back,no,seated,,,wheelchair_ok,Band anchored in front · sit tall then lean back slowly from the hips
 bulgarian_split_squat,Bulgarian split squat,lunge,quads;glutes,adductors,bench|box,bodyweight,3,no,knee;hip,no,standing,db_reverse_lunge,,unilateral;lengthened,Back foot on the bench and lower the back knee straight down
 walking_lunge,Walking lunge,lunge,quads;glutes,adductors,bodyweight,bodyweight,2,no,knee;hip,no,standing,reverse_lunge,db_reverse_lunge,unilateral;metcon_ok,Long step and drop the back knee softly · stay tall
 reverse_lunge,Reverse lunge,lunge,quads;glutes,adductors,bodyweight,bodyweight,1,no,knee;hip,no,standing,,walking_lunge,unilateral;metcon_ok,Step back and lower the knee · push through the front heel
 db_reverse_lunge,Dumbbell reverse lunge,lunge,quads;glutes,adductors;forearms,dumbbell|kettlebell,dumbbell,2,no,knee;hip,no,standing,walking_lunge,bulgarian_split_squat,unilateral;metcon_ok,Bells by your sides · step back and stay tall
-step_up,Step up,lunge,quads;glutes,,box|bench,bodyweight,1,no,knee,no,standing,,reverse_lunge,unilateral,Whole foot on the box and drive up without pushing off the back leg
+step_up,Step up,lunge,quads;glutes,,box|bench,bodyweight,1,no,knee;hip,no,standing,,reverse_lunge,unilateral,Whole foot on the box and drive up without pushing off the back leg
 lateral_lunge,Lateral lunge,lunge,adductors;glutes;quads,,bodyweight,bodyweight,2,no,knee;hip,no,standing,reverse_lunge,,unilateral,Step wide and sit into one hip while the other leg stays straight
 sandbag_lunge,Sandbag lunge,lunge,quads;glutes,core;upper_back,sandbag,bodyweight,3,no,knee;hip,no,standing,walking_lunge,,unilateral;metcon_ok,Bag on your shoulder and switch sides every few reps
 bench_press,Bench press,h_push,chest;triceps,front_delts,barbell+bench+plates+rack,barbell,3,no,shoulder;elbow;wrist,no,floor,db_bench_press,,,Shoulder blades pinned · touch low chest and press back over your shoulders
@@ -99,27 +99,27 @@ band_lat_pulldown,Band lat pulldown,v_pull,lats,biceps;upper_back,band,band,1,no
 seated_band_lat_pulldown,Seated band lat pulldown,v_pull,lats,biceps;upper_back,band,band,1,no,shoulder;elbow,no,seated,,band_lat_pulldown,wheelchair_ok,Band anchored above you · pull your elbows down to your sides
 single_arm_cable_pulldown,Single arm cable pulldown,v_pull,lats,biceps,cable,cable,2,no,shoulder;elbow,no,standing,band_lat_pulldown,,unilateral;wheelchair_ok,Pull the handle to your hip and feel the lat stretch at the top
 straight_arm_pulldown,Straight arm pulldown,v_pull,lats,triceps;core,cable|band,cable,2,no,shoulder;elbow,no,standing,,,wheelchair_ok,Arms long and sweep the bar to your thighs
-farmer_carry,Farmer carry,carry,forearms;upper_back,core;glutes,dumbbell|kettlebell|trap_bar+plates,distance,1,no,shoulder,no,standing,,,metcon_ok,Stand tall with heavy bells and walk with short quick steps
+farmer_carry,Farmer carry,carry,forearms;upper_back,core;glutes,dumbbell|kettlebell|trap_bar+plates,distance,1,no,low_back;shoulder,no,standing,,,metcon_ok,Stand tall with heavy bells and walk with short quick steps
 suitcase_carry,Suitcase carry,carry,obliques;forearms,core,dumbbell|kettlebell,distance,2,no,shoulder,no,standing,,,unilateral,One bell in one hand and do not lean toward it
 front_rack_carry,Front rack carry,carry,core;upper_back,forearms,kettlebell|dumbbell,distance,2,no,shoulder,no,standing,,,,Bells high on your chest and breathe behind the brace
 overhead_carry,Overhead carry,carry,core;front_delts,upper_back,kettlebell|dumbbell,distance,3,no,shoulder,no,standing,,,,Arm locked over your ear and ribs down as you walk
 sandbag_carry,Sandbag carry,carry,core;upper_back,forearms;glutes,sandbag,distance,2,no,low_back;shoulder,no,standing,,,metcon_ok,Hug the bag high on your chest and walk tall
 plank,Plank,anti_ext,core,front_delts,bodyweight,time,1,no,shoulder,no,floor,dead_bug,hollow_hold,,Squeeze your glutes and ribs down · straight line head to heels
-dead_bug,Dead bug,anti_ext,core,,bodyweight,bodyweight,1,no,,no,floor,bird_dog,plank,,Low back pressed down as you lower the opposite arm and leg
+dead_bug,Dead bug,anti_ext,core,,bodyweight,bodyweight,1,no,,no,floor,bird_dog,plank,region_free,Low back pressed down as you lower the opposite arm and leg
 ab_wheel,Ab wheel rollout,anti_ext,core,lats,barbell+plates|suspension,bodyweight,4,no,shoulder;low_back,no,floor,body_saw,,,Roll out only as far as your low back stays flat
-hollow_hold,Hollow hold,anti_ext,core,,bodyweight,time,2,no,,no,floor,plank,long_lever_plank,,Low back on the floor and arms and legs long
-bird_dog,Bird dog,anti_ext,core;lower_back,glutes,bodyweight,bodyweight,1,no,,no,floor,,dead_bug,,Reach the opposite arm and leg long without the hips rocking
-long_lever_plank,Long lever plank,anti_ext,core,front_delts,bodyweight,time,3,no,shoulder,no,floor,hollow_hold,body_saw,,Elbows in front of your eyes and squeeze everything
-body_saw,Body saw,anti_ext,core,front_delts,bodyweight,bodyweight,3,no,shoulder,no,floor,long_lever_plank,ab_wheel,,Feet on a towel and rock forward and back from the elbows
-pallof_press,Pallof press,anti_rot,obliques;core,,cable|band,cable,1,no,,no,standing,band_pallof_press,,wheelchair_ok,Press the handle out and do not let it pull you round
-band_pallof_press,Band Pallof press,anti_rot,obliques;core,,band,band,1,no,,no,standing,seated_band_rotation,pallof_press,wheelchair_ok,Band at chest height · press out and hold for two breaths
+hollow_hold,Hollow hold,anti_ext,core,,bodyweight,time,2,no,low_back,no,floor,plank,long_lever_plank,,Low back on the floor and arms and legs long
+bird_dog,Bird dog,anti_ext,core;lower_back,glutes,bodyweight,bodyweight,1,no,low_back;wrist,no,floor,,dead_bug,,Reach the opposite arm and leg long without the hips rocking
+long_lever_plank,Long lever plank,anti_ext,core,front_delts,bodyweight,time,3,no,low_back;shoulder,no,floor,hollow_hold,body_saw,,Elbows in front of your eyes and squeeze everything
+body_saw,Body saw,anti_ext,core,front_delts,bodyweight,bodyweight,3,no,low_back;shoulder,no,floor,long_lever_plank,ab_wheel,,Feet on a towel and rock forward and back from the elbows
+pallof_press,Pallof press,anti_rot,obliques;core,,cable|band,cable,1,no,,no,standing,band_pallof_press,,wheelchair_ok;region_free,Press the handle out and do not let it pull you round
+band_pallof_press,Band Pallof press,anti_rot,obliques;core,,band,band,1,no,,no,standing,seated_band_rotation,pallof_press,wheelchair_ok;region_free,Band at chest height · press out and hold for two breaths
 side_plank,Side plank,anti_rot,obliques;core,glutes,bodyweight,time,2,no,shoulder,no,floor,,,,Elbow under shoulder and push your hips up high
-seated_band_rotation,Seated band rotation,anti_rot,obliques,core,band,band,1,no,,no,seated,,band_pallof_press,wheelchair_ok,Arms long and turn from your ribs not your arms
+seated_band_rotation,Seated band rotation,anti_rot,obliques,core,band,band,1,no,low_back,no,seated,,band_pallof_press,wheelchair_ok,Arms long and turn from your ribs not your arms
 hanging_knee_raise,Hanging knee raise,flexion,core,forearms,pullup_bar|rings,bodyweight,3,no,shoulder,no,hanging,reverse_crunch,,,No swing · curl your pelvis up as the knees rise
-cable_crunch,Cable crunch,flexion,core,,cable,cable,2,no,,no,floor,,,,Kneel and curl your ribs to your hips · the hips stay still
-reverse_crunch,Reverse crunch,flexion,core,,bodyweight,bodyweight,2,no,,no,floor,seated_band_crunch,hanging_knee_raise,,Roll your hips off the floor and lower slowly
-sit_up,Sit-up,flexion,core,,bodyweight,bodyweight,2,no,,no,floor,seated_band_crunch,hanging_knee_raise,metcon_ok,Arms overhead and touch your toes at the top
-seated_band_crunch,Seated band crunch,flexion,core,,band,band,1,no,,no,seated,,reverse_crunch,wheelchair_ok,Band anchored high behind you · curl your ribs down toward your hips
+cable_crunch,Cable crunch,flexion,core,,cable,cable,2,no,low_back,no,floor,,,,Kneel and curl your ribs to your hips · the hips stay still
+reverse_crunch,Reverse crunch,flexion,core,,bodyweight,bodyweight,2,no,low_back,no,floor,seated_band_crunch,hanging_knee_raise,,Roll your hips off the floor and lower slowly
+sit_up,Sit-up,flexion,core,,bodyweight,bodyweight,2,no,hip;low_back,no,floor,seated_band_crunch,hanging_knee_raise,metcon_ok,Arms overhead and touch your toes at the top
+seated_band_crunch,Seated band crunch,flexion,core,,band,band,1,no,low_back,no,seated,,reverse_crunch,wheelchair_ok,Band anchored high behind you · curl your ribs down toward your hips
 db_curl,Dumbbell curl,biceps,biceps,forearms,dumbbell,dumbbell,1,no,elbow,no,standing,seated_db_curl,incline_db_curl,,Elbows pinned to your sides and lower slowly
 incline_db_curl,Incline dumbbell curl,biceps,biceps,,dumbbell+bench,dumbbell,2,no,elbow,no,seated,db_curl,,lengthened,Arms hang behind you and curl without the elbows moving forward
 hammer_curl,Hammer curl,biceps,biceps;forearms,,dumbbell|kettlebell,dumbbell,1,no,elbow,no,standing,band_curl,,,Thumbs up and curl without swinging
@@ -183,43 +183,43 @@ run,Run,cyclic,heart,quads;calves;hamstrings,outdoors|treadmill,distance,2,no,kn
 easy_run,Easy run,cyclic,heart,quads;calves,outdoors|treadmill,time,2,no,knee;ankle;hip,yes,standing,run_walk,run,cardio,Slow enough to talk in full sentences
 interval_run,Interval run,cyclic,heart,quads;calves;hamstrings,outdoors|treadmill,time,3,no,knee;ankle;hip,yes,standing,run,,cardio,Hard on the work and walk or jog the rest
 run_walk,Run walk,cyclic,heart,quads;calves,outdoors|treadmill,time,1,no,knee;ankle;hip,yes,standing,walk,easy_run,cardio,Run one minute and walk one · walk before you are tired
-walk,Brisk walk,cyclic,heart,calves,outdoors|treadmill,time,1,no,,no,standing,,run_walk,cardio,Walk fast enough to breathe harder but still talk
+walk,Brisk walk,cyclic,heart,calves,outdoors|treadmill,time,1,no,,no,standing,,run_walk,cardio;region_free,Walk fast enough to breathe harder but still talk
 incline_walk,Incline walk,cyclic,heart,glutes;calves,treadmill|outdoors,time,1,no,ankle,no,standing,walk,,cardio,Steep incline and let go of the rails
-row_erg,Rowing machine,cyclic,heart,lats;quads;glutes,rower,calories,2,no,low_back;shoulder,no,seated,,,cardio;metcon_ok,Legs then body then arms · reverse it on the way back
-bike_erg,Bike,cyclic,heart,quads,bike,calories,1,no,,no,seated,,,cardio;metcon_ok,Seat at hip height and keep a smooth cadence
+row_erg,Rowing machine,cyclic,heart,lats;quads;glutes,rower,calories,2,no,knee;low_back;shoulder,no,seated,,,cardio;metcon_ok,Legs then body then arms · reverse it on the way back
+bike_erg,Bike,cyclic,heart,quads,bike,calories,1,no,knee,no,seated,,,cardio;metcon_ok,Seat at hip height and keep a smooth cadence
 ski_erg,SkiErg,cyclic,heart,lats;triceps;core,skierg,calories,2,no,shoulder;low_back,no,standing,,,cardio;metcon_ok,Pull with your lats and hinge at the hips
-jump_rope,Jump rope,cyclic,heart,calves,jump_rope,time,2,no,ankle,yes,standing,,,cardio;metcon_ok,Small hops off the balls of your feet and wrists do the turning
+jump_rope,Jump rope,cyclic,heart,calves,jump_rope,time,2,no,knee;ankle,yes,standing,,,cardio;metcon_ok,Small hops off the balls of your feet and wrists do the turning
 arm_ergometer,Arm ergometer,cyclic,heart,front_delts;upper_back,bike,time,1,no,shoulder,no,seated,,,cardio;wheelchair_ok,Sit tall and keep a steady rhythm with both arms
 sled_push,Sled push,cyclic,quads;glutes,heart;calves,sled,distance,2,no,knee,no,standing,,,cardio;metcon_ok,Arms long and low and drive with short powerful steps
-sled_pull,Sled pull,cyclic,upper_back;glutes,heart;forearms,sled,distance,2,no,shoulder,no,standing,,,cardio;metcon_ok,Sit back and pull hand over hand
-burpee,Burpee,cyclic,heart,chest;quads,bodyweight,bodyweight,2,no,shoulder;wrist;knee,yes,standing,,burpee_broad_jump,cardio;metcon_ok,Chest to the floor then jump up with a clap overhead
-burpee_broad_jump,Burpee broad jump,cyclic,heart,quads;glutes;chest,bodyweight,bodyweight,3,no,shoulder;wrist;knee,yes,standing,burpee,,cardio;metcon_ok,Burpee then jump forward and land soft
-thruster,Thruster,cyclic,quads;front_delts,glutes;triceps;heart,barbell+plates,barbell,3,no,knee;shoulder,no,standing,db_thruster,,cardio;metcon_ok,Front squat and drive straight into the press in one move
-db_thruster,Dumbbell thruster,cyclic,quads;front_delts,glutes;triceps;heart,dumbbell,dumbbell,2,no,knee;shoulder,no,standing,,thruster,cardio;metcon_ok,Bells on your shoulders and let the squat throw them up
-kb_clean_and_press,Kettlebell clean and press,cyclic,glutes;front_delts,triceps;heart,kettlebell,kettlebell,3,no,shoulder,no,standing,,,cardio;metcon_ok;unilateral,Clean it to the rack and press · the bell rolls round the wrist
-devil_press,Devil press,cyclic,heart;glutes;front_delts,chest;hamstrings,dumbbell,dumbbell,4,no,shoulder;low_back;wrist,no,standing,,,cardio;metcon_ok,Burpee on the bells then swing them overhead in one move
-seated_march,Seated march,cyclic,heart,quads,bodyweight,time,1,no,,no,seated,,,cardio,Sit tall and march your knees up with your arms swinging
+sled_pull,Sled pull,cyclic,upper_back;glutes,heart;forearms,sled,distance,2,no,low_back;shoulder,no,standing,,,cardio;metcon_ok,Sit back and pull hand over hand
+burpee,Burpee,cyclic,heart,chest;quads,bodyweight,bodyweight,2,no,knee;shoulder;wrist;ankle,yes,standing,,burpee_broad_jump,cardio;metcon_ok,Chest to the floor then jump up with a clap overhead
+burpee_broad_jump,Burpee broad jump,cyclic,heart,quads;glutes;chest,bodyweight,bodyweight,3,no,knee;hip;shoulder;wrist;ankle,yes,standing,burpee,,cardio;metcon_ok,Burpee then jump forward and land soft
+thruster,Thruster,cyclic,quads;front_delts,glutes;triceps;heart,barbell+plates,barbell,3,no,knee;hip;shoulder;wrist,no,standing,db_thruster,,cardio;metcon_ok,Front squat and drive straight into the press in one move
+db_thruster,Dumbbell thruster,cyclic,quads;front_delts,glutes;triceps;heart,dumbbell,dumbbell,2,no,knee;hip;shoulder,no,standing,,thruster,cardio;metcon_ok,Bells on your shoulders and let the squat throw them up
+kb_clean_and_press,Kettlebell clean and press,cyclic,glutes;front_delts,triceps;heart,kettlebell,kettlebell,3,no,hip;low_back;shoulder,no,standing,,,cardio;metcon_ok;unilateral,Clean it to the rack and press · the bell rolls round the wrist
+devil_press,Devil press,cyclic,heart;glutes;front_delts,chest;hamstrings,dumbbell,dumbbell,4,no,hip;low_back;shoulder;wrist,no,standing,,,cardio;metcon_ok,Burpee on the bells then swing them overhead in one move
+seated_march,Seated march,cyclic,heart,quads,bodyweight,time,1,no,,no,seated,,,cardio;region_free,Sit tall and march your knees up with your arms swinging
 seated_shadow_boxing,Seated shadow boxing,cyclic,heart,front_delts;core,bodyweight,time,1,no,shoulder,no,seated,,,cardio;wheelchair_ok,Sit tall and throw fast punches without locking the elbows
 wheelchair_push,Wheelchair push,cyclic,heart,front_delts;triceps;chest,outdoors,distance,1,no,shoulder,no,seated,,,cardio;wheelchair_ok,Long smooth strokes from the top of the rim
 single_leg_stand,Single leg stand,balance,calves,glutes;core,bodyweight,time,1,no,ankle,no,standing,tandem_stance,clock_reach,balance,Near a wall and stand on one foot with a soft knee
-tandem_stance,Tandem stance,balance,calves,core,bodyweight,time,1,no,,no,standing,,single_leg_stand,balance,One foot in front of the other and look at a fixed point
-heel_to_toe_walk,Heel to toe walk,balance,calves,core,bodyweight,time,1,no,,no,standing,tandem_stance,step_over,balance,Heel touches toe each step · walk along a wall
+tandem_stance,Tandem stance,balance,calves,core,bodyweight,time,1,no,ankle,no,standing,,single_leg_stand,balance,One foot in front of the other and look at a fixed point
+heel_to_toe_walk,Heel to toe walk,balance,calves,core,bodyweight,time,1,no,ankle,no,standing,tandem_stance,step_over,balance,Heel touches toe each step · walk along a wall
 clock_reach,Clock reach,balance,glutes,core;calves,bodyweight,bodyweight,2,no,ankle,no,standing,single_leg_stand,,balance,Stand on one leg and reach the other foot to the hours of a clock
-step_over,Step over,balance,glutes;quads,core,bodyweight,bodyweight,1,no,,no,standing,heel_to_toe_walk,clock_reach,balance,Lift your knee high and step over a low object slowly
+step_over,Step over,balance,glutes;quads,core,bodyweight,bodyweight,1,no,hip,no,standing,heel_to_toe_walk,clock_reach,balance,Lift your knee high and step over a low object slowly
 floor_get_up,Floor get up,balance,quads;glutes,core,bodyweight,bodyweight,1,no,knee;hip,no,floor,,turkish_get_up,balance,Get down and up again with as little hand help as you can
 turkish_get_up,Turkish get up,balance,core;front_delts,glutes;obliques,kettlebell|dumbbell,kettlebell,3,no,shoulder;hip,no,floor,floor_get_up,,balance;skill,Eyes on the bell and arm locked the whole way
 bear_crawl,Bear crawl,locomotion,core;front_delts,quads,bodyweight,time,2,no,shoulder;wrist,no,floor,crab_walk,frogger,,Knees an inch off the floor and move opposite hand and foot
 monkey_walk,Monkey walk,locomotion,quads;front_delts,core,bodyweight,time,3,no,wrist;knee,no,floor,frogger,,,Squat low and move sideways with hands then feet
 frogger,Frogger,locomotion,quads;glutes,core,bodyweight,bodyweight,2,no,knee;wrist,no,floor,bear_crawl,monkey_walk,,Hands down then hop your feet outside them
 crab_walk,Crab walk,locomotion,triceps;glutes,rear_delts,bodyweight,time,1,no,shoulder;wrist,no,floor,,bear_crawl,,Hips up and walk on hands and feet
-cat_cow,Cat cow,mobility,lower_back,core,bodyweight,time,1,no,,no,floor,,,mobility,Move one segment at a time with your breath
-worlds_greatest_stretch,World's greatest stretch,mobility,glutes;adductors,upper_back,bodyweight,time,1,no,,no,floor,,,mobility,Deep lunge then elbow to instep and rotate to the ceiling
-hip_90_90,90 90 hip switch,mobility,glutes,adductors,bodyweight,time,1,no,,no,floor,,,mobility,Sit tall and swing your knees from side to side slowly
-thoracic_rotation,Thoracic rotation,mobility,upper_back,obliques,bodyweight,time,1,no,,no,floor,seated_thoracic_rotation,,mobility,Lie on your side and open your top arm while the knees stay down
-ankle_rocks,Ankle rocks,mobility,calves,,bodyweight,time,1,no,,no,floor,,,mobility,Half kneel and drive the knee past the toes with the heel down
-band_shoulder_dislocate,Band shoulder dislocate,mobility,upper_back;front_delts,,band,time,1,no,,no,standing,,,mobility;wheelchair_ok,Wide grip and take the band over and behind with straight arms
-couch_stretch,Couch stretch,mobility,quads,,bodyweight,time,1,no,,no,floor,,,mobility,Back knee by the wall and squeeze the glute of that leg
-seated_thoracic_rotation,Seated thoracic rotation,mobility,upper_back,obliques,bodyweight,time,1,no,,no,seated,,thoracic_rotation,mobility;wheelchair_ok,Arms crossed and turn your ribs each way slowly
+cat_cow,Cat cow,mobility,lower_back,core,bodyweight,time,1,no,low_back;wrist,no,floor,,,mobility,Move one segment at a time with your breath
+worlds_greatest_stretch,World's greatest stretch,mobility,glutes;adductors,upper_back,bodyweight,time,1,no,knee;hip,no,floor,,,mobility,Deep lunge then elbow to instep and rotate to the ceiling
+hip_90_90,90 90 hip switch,mobility,glutes,adductors,bodyweight,time,1,no,knee;hip,no,floor,,,mobility,Sit tall and swing your knees from side to side slowly
+thoracic_rotation,Thoracic rotation,mobility,upper_back,obliques,bodyweight,time,1,no,shoulder,no,floor,seated_thoracic_rotation,,mobility,Lie on your side and open your top arm while the knees stay down
+ankle_rocks,Ankle rocks,mobility,calves,,bodyweight,time,1,no,knee;ankle,no,floor,,,mobility,Half kneel and drive the knee past the toes with the heel down
+band_shoulder_dislocate,Band shoulder dislocate,mobility,upper_back;front_delts,,band,time,1,no,shoulder,no,standing,,,mobility;wheelchair_ok,Wide grip and take the band over and behind with straight arms
+couch_stretch,Couch stretch,mobility,quads,,bodyweight,time,1,no,knee;hip,no,floor,,,mobility,Back knee by the wall and squeeze the glute of that leg
+seated_thoracic_rotation,Seated thoracic rotation,mobility,upper_back,obliques,bodyweight,time,1,no,low_back,no,seated,,thoracic_rotation,mobility;wheelchair_ok,Arms crossed and turn your ribs each way slowly
 chest_to_bar_pull_up,Chest to bar pull-up,v_pull,lats;upper_back,biceps;core,pullup_bar|rings,bodyweight,4,no,shoulder;elbow,no,hanging,pull_up,negative_muscle_up,skill,Pull until your chest touches the bar · elbows drive down and back
 negative_muscle_up,Negative muscle-up,v_pull,lats;chest;triceps,core,pullup_bar|rings,bodyweight,5,no,shoulder;elbow;wrist,no,hanging,chest_to_bar_pull_up,muscle_up,skill,Jump to the top support · lower slowly through the transition for 5 s
 muscle_up,Muscle-up,v_pull,lats;chest;triceps,core,pullup_bar|rings,bodyweight,5,no,shoulder;elbow;wrist,no,hanging,negative_muscle_up,,skill,Explosive high pull · lean the chest over the bar · press out to support

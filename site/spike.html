@@ -1,0 +1,71 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trainer spike</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mut:#6b6a65}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161615;--fg:#ecebe6;--mut:#9c9a92}}
+:root[data-theme="dark"]{--bg:#161615;--fg:#ecebe6;--mut:#9c9a92}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif;margin:0;padding:16px}
+pre{white-space:pre-wrap;font-size:12px;color:var(--mut)}
+</style></head>
+<body>
+<h1 style="font-size:18px">Engine spike</h1>
+<p id="state">loading Python…</p>
+<pre id="log"></pre>
+<script src="pyodide/pyodide.js"></script>
+<script>
+const log = (m) => { document.getElementById('log').textContent += m + '\n'; };
+const state = (m) => { document.getElementById('state').textContent = m; };
+window.addEventListener('error', e => log('window error: ' + e.message));
+window.addEventListener('unhandledrejection', e => log('unhandled: ' + (e.reason && e.reason.message || e.reason)));
+(async () => {
+  const t0 = performance.now();
+  log('loadPyodide defined: ' + (typeof loadPyodide));
+  try { new Function('return 1')(); log('eval: allowed'); } catch (e) { log('eval: BLOCKED ' + e.message); }
+  try { await WebAssembly.compile(new Uint8Array([0,97,115,109,1,0,0,0])); log('wasm compile: allowed'); } catch (e) { log('wasm compile: BLOCKED ' + e.message); }
+  try { const r = await fetch('pyodide/pyodide.asm.wasm', { method: 'HEAD' }); log('wasm fetch: ' + r.status); } catch (e) { log('wasm fetch: BLOCKED ' + e.message); }
+  try { const r = await fetch('pyodide/python_stdlib.zip.wasm', { method: 'HEAD' }); log('stdlib fetch: ' + r.status); } catch (e) { log('stdlib fetch: BLOCKED ' + e.message); }
+  try { const r = await fetch('bundle.json', { method: 'HEAD' }); log('bundle fetch: ' + r.status); } catch (e) { log('bundle fetch: BLOCKED ' + e.message); }
+  setTimeout(() => log('still waiting on loadPyodide after 40 s'), 40000);
+  try {
+    const py = await loadPyodide({ indexURL: new URL('pyodide/', location.href).href, stdLibURL: new URL('pyodide/python_stdlib.zip.wasm', location.href).href });
+    log('python ready in ' + Math.round(performance.now() - t0) + ' ms');
+    const bundle = await (await fetch('bundle.json')).json();
+    for (const [path, text] of Object.entries(bundle.files)) {
+      const full = '/trainer/' + path;
+      py.FS.mkdirTree(full.slice(0, full.lastIndexOf('/')));
+      py.FS.writeFile(full, text);
+    }
+    py.FS.mkdirTree('/trainer/me'); py.FS.mkdirTree('/trainer/sessions');
+    log(Object.keys(bundle.files).length + ' files written, version ' + bundle.version);
+    py.globals.set('ANSWERS', JSON.stringify({ items: [], age_band: '18_39', language: 'en' }));
+    const out = py.runPython(`
+import sys, io, json, runpy, contextlib, os
+os.chdir('/trainer')
+def run(*argv):
+    buf = io.StringIO()
+    sys.argv = ['plan.py', *argv]
+    code = 0
+    try:
+        with contextlib.redirect_stdout(buf):
+            runpy.run_path('/trainer/engine/plan.py', run_name='__main__')
+    except SystemExit as e:
+        code = e.code or 0
+    return {'cmd': argv[0], 'code': code, 'out': buf.getvalue()}
+open('/trainer/me/answers.json', 'w').write(ANSWERS)
+json.dumps([run('status'), run('screen', 'me/answers.json'), run('status')])
+`);
+    for (const r of JSON.parse(out)) log('\n$ plan.py ' + r.cmd + '  (exit ' + r.code + ')\n' + r.out);
+    state('engine ran in the browser · ' + Math.round(performance.now() - t0) + ' ms total');
+    if (window.claude && claude.use) {
+      for (const n of ['sample', 'downloads']) {
+        const ns = await claude.use(n);
+        log('capability ' + n + ': ' + (ns ? 'available' : 'null'));
+      }
+    } else log('no window.claude (not inside a Claude viewer)');
+  } catch (e) {
+    state('FAILED'); log(String(e && e.stack || e));
+  }
+})();
+</script>
+</body></html>

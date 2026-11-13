@@ -1,6 +1,6 @@
 # programs · one file per runnable program
 
-_This folder owns: every program the trainer can run. **A program with no file here cannot be served.** The schools behind them, and the ones studied but not runnable, are in `../schools/INDEX.md`._
+_This folder owns: every program the trainer can run. **A program with no file here cannot be served.** Only the files directly in this folder count: `_out_of_scope/` holds programs kept but never served (its README says why and when). The schools behind them, and the ones studied but not runnable, are in `../schools/INDEX.md`._
 
 Each file has two parts:
 
@@ -14,7 +14,8 @@ Each file has two parts:
   "id": "strength-lp-3",                 same as the file name
   "name": "Novice linear progression",
   "family": "strength",                  strength · muscle · powerbuild · weightlifting · functional ·
-                                         hyrox · hybrid · run · calisthenics · kettlebell · home · health · older
+                                         hyrox · hybrid · run · health
+                                         (calisthenics · kettlebell · home · older: only in _out_of_scope/)
   "draws_from": ["StrongLifts 5x5", "Starting Strength", "ACSM 2009"],
   "goals": {"muscle": 2, "strength": 3, "powerlifting": 2, "weightlifting": 0, "functional": 1,
             "hyrox": 0, "run": 0, "skills": 0, "fat_loss": 1, "health": 2, "independent": 1},

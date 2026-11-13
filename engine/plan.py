@@ -50,6 +50,8 @@ def write_profile(prof):
              "_The trainer wrote this from your answers. You can change it any time: say `/train goals`, or edit the values in the block below on GitHub._",
              "", "| | |", "|:-|:-|",
              "| goal | %s%s |" % (goal, (" · then " + prof["goal2"]) if prof.get("goal2") else ""),
+             "| what you want | %s |" % (" · ".join(x.replace("_", " ") for x in (prof.get("outcome"), prof.get("outcome_detail")) if x) or goal),
+             "| how you start | %s |" % ("improving what you already do" if prof.get("mode") == "improve" else "a new plan"),
              "| experience | %s |" % prof.get("experience"),
              "| week | %s sessions of %s min |" % (prof.get("days"), prof.get("minutes")),
              "| where | %s |" % ", ".join("%s: %s" % (k, ", ".join(v.get("equipment", []))) for k, v in (prof.get("places") or {}).items()),
@@ -116,7 +118,7 @@ def cmd_screen(args):
                     "say": "A stop is lifted only when they say a professional cleared them (cleared: true), or when they say they "
                            "ticked a box by mistake and confirm it when you read the item back (correction: true)."})
     prof.setdefault("language", ans.get("language", "en"))
-    prof["age_band"] = ans.get("age_band", prof.get("age_band"))
+    prof["age_band"] = core.AGE_BAND                    # never asked: the audience is 18 to 40 (00_MISSION.md)
     prof["screen"] = {"result": r["result"], "reasons": r["reasons"], "flags": r["flags"], "date": core.today(),
                       "items": ans.get("items", [])}
     write_profile(prof)
@@ -124,10 +126,120 @@ def cmd_screen(args):
     return out(dict(r, saved=c["status"]))
 
 
+LEVELS = core.EXPERIENCE
+LEGACY_LIKES = {"barbell": "heavy", "machines": "pump", "dumbbells": "pump", "circuits": "circuits", "classes": "circuits",
+                "running": "running"}                 # old profiles said equipment words; they become activity words
+ROUTINE_ACTIVITY = {"run_plan": ["running"], "classes": ["classes"], "strength_cardio": ["lifting", "running"]}
+ROUTINE_ENJOY = {"ppl": ["pump"], "body_part": ["pump"], "run_plan": ["running"], "classes": ["circuits"],
+                 "strength_cardio": ["heavy", "running"]}
+ROUTINE_LEVEL = {"under_1m": "none", "1_3m": "novice", "3_12m": "novice", "over_1y": "intermediate"}
+
+
+def _step_down(level):
+    return LEVELS[max(0, LEVELS.index(level) - 1)]
+
+
+def lifting_experience(p):
+    """The single experience the session builder reads: lifting, the domain of nearly every bank row."""
+    by = p.get("experience_by") or {}
+    lift = by.get("lifting", "none")
+    cf = by.get("crossfit", "none")
+    if LEVELS.index(cf) > LEVELS.index(lift):        # CrossFit or HYROX lifts too, one step behind a lifter
+        lift = max(lift, _step_down(cf), key=LEVELS.index)
+    return lift
+
+
+def bank_match(name, bank):
+    """A typed exercise name to a bank id, by id or by name. None when it is their own exercise."""
+    n = re.sub(r"[^a-z0-9]+", " ", str(name).lower()).strip()
+    for i, r in bank.items():
+        if n in (i.replace("_", " "), re.sub(r"[^a-z0-9]+", " ", r["name"].lower()).strip()):
+            return i
+    return None
+
+
+def interview_fields(p, ans):
+    """The outcome, the routine, experience by activity, enjoy, pain status and recovery, turned into the fields
+    the engine already reads (goal, goal2, experience, days, dislikes, limits[].exclude, no_impact). 02_INTERVIEW.md."""
+    blend = ans.get("outcomes")
+    if isinstance(blend, list) and blend and all(isinstance(o, dict) and o.get("id") in core.OUTCOMES for o in blend):
+        tot = sum(float(o.get("share") or 0) for o in blend) or float(len(blend))
+        for o in blend:
+            o["share"] = round(float(o.get("share") or (tot / len(blend))) / tot, 2)
+            if o.get("detail") not in core.OUTCOMES[o["id"]]:
+                o["detail"] = core.OUTCOME_DEFAULT[o["id"]]
+        blend.sort(key=lambda o: -o["share"])          # stable: on a tie the first tap stays the main outcome
+        p["outcomes"] = blend
+        p["outcome"], p["outcome_detail"] = blend[0]["id"], blend[0]["detail"]
+        ans = dict(ans, outcome=p["outcome"], outcome_detail=p["outcome_detail"])
+    oc = p.get("outcome")
+    if oc in core.OUTCOMES and "goal" not in ans and ("outcome" in ans or "outcome_detail" in ans):
+        det = p.get("outcome_detail") if p.get("outcome_detail") in core.OUTCOMES[oc] else core.OUTCOME_DEFAULT[oc]
+        p["outcome_detail"] = det
+        g1, g2 = core.OUTCOMES[oc][det]
+        if "no_fat_loss_goal" in ((p.get("screen") or {}).get("flags") or []):
+            g1, g2 = ("muscle", "health") if g1 == "fat_loss" else (g1, None if g2 == "fat_loss" else g2)
+        for o in (p.get("outcomes") or [])[1:]:        # the blend: the next outcome's goal is the second goal (an add-on)
+            og = core.OUTCOMES[o["id"]][o["detail"]][0]
+            if og != g1:
+                g2 = og
+                break
+        p["goal"] = g1
+        if g2:
+            p["goal2"] = g2
+        else:
+            p.pop("goal2", None)
+    rt = p.get("current_routine")
+    if p.get("mode") == "improve" and isinstance(rt, dict):
+        if isinstance(rt.get("days"), int) and "days" not in ans:
+            p["days"] = rt["days"]
+        bank = core.load_bank()
+        for label, exs in (rt.get("exercises") or {}).items():
+            out = []
+            for e in exs:
+                if isinstance(e, dict):
+                    out.append(e)
+                    continue
+                bid = e if e in bank else bank_match(e, bank)
+                out.append({"id": bid} if bid else {"own": str(e)})
+            rt["exercises"][label] = out
+        by = dict(p.get("experience_by") or {})
+        lvl = ROUTINE_LEVEL.get(rt.get("age"))
+        for act in ROUTINE_ACTIVITY.get(rt.get("split"), ["lifting"]):
+            if lvl and act not in by:
+                by[act] = lvl
+        if by:
+            p["experience_by"] = by
+        if not p.get("enjoys"):
+            p["enjoys"] = list(ROUTINE_ENJOY.get(rt.get("split"), []))
+    if p.get("experience_by"):
+        by = {k: v for k, v in p["experience_by"].items() if v in LEVELS}
+        if p.get("returning"):                          # coming back after a break: one step below, the logs correct it
+            p["experience_was"] = dict(by)
+            by = {k: _step_down(v) for k, v in by.items()}
+        p["experience_by"] = by
+        p["experience"] = lifting_experience(p)
+    p.setdefault("experience", "none")
+    if not p.get("enjoys") and p.get("likes"):
+        p["enjoys"] = sorted({LEGACY_LIKES[x] for x in p["likes"] if x in LEGACY_LIKES})
+    if p.get("kit_pref") == "free_weights" and "machines" not in p.get("dislikes", []):
+        p["dislikes"] = list(p.get("dislikes", [])) + ["machines"]   # the session builder avoids machines when it can
+    for lim in p.get("limits", []):
+        st = lim.get("status")
+        if st in core.LIMIT_STATUS:
+            lim["exclude"] = st in ("now", "unchecked")  # mild and cleared: trained with care (01_SAFETY.md)
+        if "impact" in (lim.get("triggers") or []):
+            p["no_impact"] = True
+    low = (p.get("sleep") == "under_6") + (p.get("stress") == "high")
+    p["start_volume"] = "low" if low else "normal"
+    return p
+
+
 def normalise(ans, old):
     p = dict(old or {})
     for k, v in ans.items():
         p[k] = v
+    p["age_band"] = core.AGE_BAND                       # fixed, whatever an old profile or an answer says
     p.setdefault("units", "kg")
     p.setdefault("paper", "A4")
     p.setdefault("audits", "full")
@@ -144,12 +256,17 @@ def normalise(ans, old):
         p["minutes"] = int(p["minutes"])
     if p.get("units") == "lb":
         for k, n in p.get("numbers", {}).items():
-            if n.get("lb") and not n.get("kg"):
-                n["kg"] = round(n["lb"] / 2.20462, 1)
+            if isinstance(n, dict) and n.get("lb") and not n.get("kg"):
+                n["kg"] = round(n["lb"] / core.LB_PER_KG, 1)
+        for k in ("dumbbells", "kettlebells"):          # the weights they own, said in pounds: kept as said, stored in kg
+            if k in ans and isinstance(ans[k], list):
+                p[k + "_lb"] = list(ans[k])
+                p[k] = [core.lb_to_kg(x) for x in ans[k]]
     if not p.get("places"):
         p["places"] = {"main": {"type": "gym", "equipment": ["full_gym"]}}
     p.setdefault("default_place", list(p["places"])[0])
-    return p
+    p.setdefault("mode", "new")
+    return interview_fields(p, ans)
 
 
 def cmd_profile(args):
@@ -176,8 +293,10 @@ def cmd_match(args):
         return out({"ok": False, "error": "no clear screen and profile yet: run the screen and the interview first"})
     bank = core.load_bank()
     r = match_mod.match(prof, bank, build_mod.select)
-    r["say"] = ("Offer the top three in plain words, recommendation first, each with one line of why "
-                "(goal fit, evidence letter, the schools it draws from). Never offer a program from 'failed'. "
+    r["say"] = ("Tell them their plan: ONE plan, 'plan', in plain words from plan.plain (the headline, the week) and why it "
+                "fits their answers. Never a method or school name, never a list of three: the runner-up stays with you. "
+                "Say outcome_note, style_note, improve_note and dose_note if present. Then offer: start it, or 'not for me' "
+                "with a reason (too long, too much running, I don't enjoy it, I can't do these days). "
                 "If 'fallback' is present, say what single change would open a better fit.")
     return out(r)
 
@@ -217,6 +336,8 @@ def cmd_choose(args):
                            "physiotherapist is the best thing you can add.")
     if "postpartum" in flags:
         extra_lines.append("No jumping or running until you tell me it feels fine. Leaking, heaviness or pelvic pain: see a pelvic health physio.")
+    if prof.get("mode") == "improve":
+        extra_lines.append("Once coaching inside your own routine lands, this plan keeps your split and your exercises.")
     seated_note = ("Everything stays seated. Some goals need standing moves; for those, an adaptive fitness professional is the right person."
                    if prof.get("position") == "seated" else None)
     if g2 and MODULE_FOR_GOAL2.get(g2) and MODULE_FOR_GOAL2[g2] not in ("run-race",) and MODULE_FOR_GOAL2[g2] not in mods:
@@ -343,7 +464,7 @@ def cmd_log(args):
     keys = {it["_slot"]["key"] for b in session["blocks"] for it in b["items"] if it.get("_slot")}
     unknown = [k for k in (report.get("results") or {}) if k not in keys]
     date = report.get("date") or session.get("date") or core.today()
-    sc = logbook.score_text(session, done)
+    sc = logbook.score_text(session, done, prof.get("units", "kg"))
     line = {"date": date, "session": st["pending"], "title": session.get("title"), "session_id": session.get("session_id"),
             "program": session.get("program"), "mode": session.get("mode"), "level": session.get("level"),
             "energy": (session.get("readiness") or {}).get("energy"), "felt": report.get("felt"),
@@ -429,7 +550,7 @@ def cmd_rebuild(args):
         if not l.get("unreported"):
             results = {d["key"]: d["result"] for d in l.get("done", []) if d.get("result")}
             skipped = [d["key"] for d in l.get("done", []) if d.get("skipped")]
-            logbook.apply(session, {"as_written": False, "results": results, "skipped": skipped}, prof, st, bank)
+            logbook.apply(session, {"as_written": False, "results": results, "skipped": skipped, "loads_in_kg": True}, prof, st, bank)
         if session.get("session_id") in st["queue"]:
             session["_queue_index"] = st["queue"].index(session["session_id"])
         logbook.advance(st, pl, prog, session, l["date"])

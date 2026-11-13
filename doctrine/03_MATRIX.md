@@ -2,47 +2,71 @@
 
 _This file owns: the rule that picks a program. Code: `engine/match.py`. The coach explains the result; it never computes it._
 
+The candidates are the files directly in `programs/`. The ones in `programs/_out_of_scope/` are never read (`00_MISSION.md` says why).
+
 ## Step 1 · Hard filters
 
 A program is out if any of these fails, and the person is told which:
 
-1. **Experience** outside the program's `experience` list.
+1. **Experience** outside the program's `experience` list. The experience that counts is the program's own domain (`match.domain_experience`): running programs read `experience_by.running`; HYROX, hybrid and CrossFit-style programs take the higher of lifting and conditioning (running, cycling or rowing, classes, CrossFit or HYROX), capped one step above the lower; every other family reads the lifting experience (`experience`). A profile without `experience_by` uses its one `experience` everywhere.
 2. **Days:** fewer than the program's minimum. More days are fine: the program runs at its own maximum and the extra days take a running add-on or rest.
 3. **Minutes:** fewer than its `express_minutes` (its shortest legal version).
 4. **Equipment:** a tag in `equipment_all` missing at their main place, or none of an `equipment_any` group present.
 5. **Skills:** a `skills_required` they have not reported (coached Olympic lifts, running 30 minutes, a pull-up).
-6. **Population:** pregnancy (only `health-baseline-2to3` and `home-fullbody-2to4`) · low bone density on a program excluded for it · seated on a program whose main lifts need standing · `under_60` or `over_60` programs.
+6. **Population:** pregnancy (only `health-baseline-2to3`) · low bone density on a program excluded for it · seated on a program whose main lifts need standing · `under_60` or `over_60` programs (the schema keeps them; the age band is fixed at 18 to 39, so no program in scope uses them).
 7. **Fillable:** every main-block slot of every session can be filled from the bank for their equipment, limits and position. If not, the program is out with the slot named.
+8. **Not for me:** a program they turned down with a reason other than "I can't do these days" (`rejected`) is out, and says so.
 
 ## Step 2 · The score
 
-`3 x goal fit (main goal) + 1.5 x goal fit (second goal) + evidence (A 2, G 2, B 1, C 0) + 2 if a style they like + minus 3 if a style they dislike + 1 if their days are in the program's sweet spot + 1 if the program is built for their age group (60 and over) minus 2 if it would leave two or more of their days empty`
+`3 x goal fit (main goal) + 1.5 x goal fit (second goal) + evidence (A 2, G 2, B 1, C 0) + 2 if it asks for something they enjoy, minus 3 if it asks for something they can't stand + 2 if its family is the one their outcome points at + 1 if their days are in the program's sweet spot, minus 2 if it would leave two or more of their days empty`, then the improve and "not for me" terms below.
 
-Goal fit is the 0 to 3 each program declares for all 11 goals. Styles per family: strength and Olympic lifting barbell · powerbuilding barbell, machines · muscle machines, dumbbells · functional circuits, classes · HYROX running, circuits · hybrid running, barbell · running running · calisthenics bodyweight · kettlebell kettlebells · home dumbbells, bodyweight · health and older dumbbells, machines.
+Goal fit is the 0 to 3 each program declares for all 11 goals. The goal comes from the outcome and its follow-up (`02_INTERVIEW.md`, `core.OUTCOMES`).
+
+**Enjoy and can't stand are activity words, an adherence input, never a menu** (`match.ENJOY_OF`): strength and Olympic lifting ask for heavy lifting · powerbuilding heavy lifting and muscle work · muscle building muscle work · CrossFit-style fast circuits · HYROX fast circuits and running · hybrid heavy lifting, running and long cardio · running running and long cardio · health nothing in particular. Older profiles that said equipment words (barbell, machines, circuits) are read through `match.LEGACY_LIKES`; equipment words never score a family.
+
+**The outcome family** (`match.OUTCOME_FAMILY`): the follow-up names the families that serve it (more size: muscle, powerbuilding · strong and able to run far: hybrid · fit for anything: CrossFit-style · a running event: running ...). It settles what a goal key alone cannot say, like strength and running in one week.
+
+**The improve path** (`mode: improve`): plus 2 when the program's week has the same shape as their routine (`match.SPLIT_OF`: push pull legs, upper and lower, full body, body part, strength plus cardio days, a running plan, classes), plus 1 when their routine's day count is inside the program's days. The why line says "the same shape as your week". Coaching inside their own routine is a later engine mode.
+
+**Not for me** (`rejected`, `02_INTERVIEW.md`): too long, minus 2 for every program whose shortest session is as long or longer than the one turned down · too much running, running counts as something they can't stand · I wouldn't enjoy it, minus 3 for the family turned down · I can't do these days, the days are asked again and written.
+
+**A preferred style, experienced people only** (`style_pref`, `match.style_pref`): read only when the profile is on the improve path or holds an intermediate or advanced experience; a beginner's is ignored even if sent, and `trainer` means the trainer decides. When a passing program of that style serves the goal (goal fit 2 or more) or the outcome's family, the passing programs of that style go first: a filter where the style fits the outcome. When none does, the ranking is untouched and `match` returns `style_note`, one honest line: "You prefer running, but running is not built for building muscle, so the trainer picked what serves your goal better."
+
+**Sleep and stress** never change the choice for now: `start_volume: low` (under 6 hours or high stress) returns a `dose_note` the coach says.
 
 ## Step 3 · Tie-breaks
 
-In order: the simpler program for `none` and `novice` (`simplicity` 1 linear, 2 double progression, 3 waves, 4 RPE) · the higher evidence · the fewer minutes · the id.
+In order: the higher goal fit for the main goal (a program built for what they asked beats a generic default that ties it on points, 13 nov 2026) · the simpler program for `none` and `novice` (`simplicity` 1 linear, 2 double progression, 3 waves, 4 RPE) · the higher evidence · the fewer minutes · the id.
 
-## Step 4 · The offer
+## Step 4 · The offer · one plan
 
-The top three, recommendation first, each with one line: what it is, its days, the schools it draws from, its evidence letter. The person may choose any program that passed Step 1, never one that failed it.
+**The trainer decides one plan and says it.** `match` returns `plan` (the first of the ranking) and keeps `runner_up` and `top` for the coach only: the person is never shown three programs to choose from. The plan is told in plain words, built by `match` in `plain` (`headline`: what comes first, e.g. "Strength first: heavy main lifts, then muscle work"; `week`: days, minutes and the shape of the week) and `why` (goal fit in words, the days, what they enjoy, the same shape as their week, how a blend was honoured, the evidence letter). The page and the coach translate those words and never assemble or recompute them.
+
+**Method and school names stay behind "How it works"** (5/3/1, PHUL, GZCLP, the Texas method and the rest): the card's title is the plain family name, and the method is one tap away for anyone who wants it, an experienced person especially.
+
+Then two answers: **start this plan** (`plan.py choose <plan.id>`), or **not for me** with a reason, which writes `rejected` and re-runs the match (Step 2). A blend of outcomes is honoured by the main outcome's program plus the add-on module for the second goal, and said in `why`.
+
+Notes that travel with the plan, said in one line each when present: `outcome_note` (an outcome no program is built for, `core.OUTCOME_GAP`), `style_note`, `improve_note`, `dose_note`.
 
 ## Step 5 · Never an empty answer
 
-When nothing fits the goal well, `match` returns `fallback`: programs that are one change away (the single filter that blocked them), a note if the goal itself is not served, and the two programs that fit almost anyone (`health-baseline-2to3`, `home-fullbody-2to4`).
+When nothing fits the goal well (the first pick's goal fit is under 2), `match` returns `fallback`: programs that are one change away (the single filter that blocked them, only one the person can change: kit, days, minutes, a skill, never age, experience, pregnancy, bone density or position), a note if the goal itself is not served, and the start-here program that fits almost anyone in a gym (`health-baseline-2to3`). It also returns `goal_gap`, one line naming why nothing built for the goal passed ("nothing built for getting stronger fits your kit: PHUL needs a barbell, rack, bench and plates; Functional fitness, general preparedness needs a rower, bike, ski erg or treadmill"), and each offered program's `why` says it only partly serves the goal. Example: strength in a home gym with dumbbells up to 12 kg and bands, a few months in. Every strength program needs a barbell and rack, and the CrossFit-style plan needs a cardio machine, so Health baseline (strength fit 1) is honestly the best on offer, and the coach says so with the one purchase that opens a real strength program.
 
 ## Second goals
 
-Never a second program. `plan.py choose` adds a module (`modules/README.md`): running goals get `run-race` on extra days, all-round fitness and health get `conditioning`, HYROX gets `hyrox-stations`, skills get `skill-blocks`, staying independent gets `balance`. Everyone 60 and over gets `balance`.
+Never a second program. `plan.py choose` adds a module (`modules/README.md`): running goals get `run-race` on extra days, all-round fitness and health get `conditioning`, HYROX gets `hyrox-stations`. (The `skills` and `independent` goals, and the balance add-on from 60, stay in the code for old profiles but are never offered.)
 
-## Worked examples (checked by `tests/test_engine.py`)
+## Worked examples (checked by `tests/test_engine.py`, the `Interview` class covers every outcome, both fork paths, the style gate, the blend and "not for me")
 
 | person | likely top pick |
 |:-|:-|
 | never trained, 3 x 60 min, full gym, wants strength, likes barbells | `strength-lp-3` |
 | 2 years in, 4 x 75 min, full gym, wants muscle | `muscle-upperlower-4` or `powerbuild-phul-4` |
-| 69, 3 x 45 min, basic gym, wants to stay independent | `older-strong-3` |
-| home, bands and a pair of 8 kg dumbbells, 3 x 30 min, wants fat loss | `home-fullbody-2to4` |
-| park bars only, wants skills | `calisthenics-rr-3` |
+| first time in a gym, 3 x 45 min, basic gym, wants to feel healthier | `health-baseline-2to3` |
+| home gym with dumbbells and a rower, 3 x 45 min, novice, wants all-round fitness | `functional-gpp-3to5` |
+| outdoors only, 3 x 30 min, never ran, wants running | `run-c25k-3` |
 | CrossFit 3 years, 5 days, HYROX race, runs 30 min | `hyrox-prep-4` |
+| a year on an upper and lower routine, 4 days, wants more size, improve path | `muscle-upperlower-4` |
+| strong and able to run far, intermediate at both, 4 days, full gym | `hybrid-strength-endurance-4to6` |
+| never lifted, runs 5 years, a 10K, outdoors | `run-base-3to5`, lifting experience none |

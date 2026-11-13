@@ -9,6 +9,8 @@ _This folder owns: the evidence the doctrine was built from, as it was found on 
 | `03_endurance_calisthenics_home.md` | running (Couch to 5K, 80/20 and polarized, Daniels, novice injury risk), calisthenics (Recommended Routine, Overcoming Gravity, GMB, Convict Conditioning), kettlebells and home training |
 | `04_health_populations_safety.md` | public health guidelines (WHO, UK CMO, ACSM, NSCA), fat loss, older adults, women, pregnancy, the safety screen and how to find a first load with no numbers |
 | `05_claude_code_github_mechanics.md` | how the template works as a Claude Code project and a GitHub template repo |
+| `06_interview_audit.md` | the onboarding interview audited against fourteen kinds of people: coaching intake (NSCA), how eleven apps onboard, which inputs change the plan, a branching interview with a new-plan and an improve-my-routine fork, the engine fields it needs, the ten changes ranked |
+| `09_improve_mode_design.md` | design, not built: the "improve what I already do" mode. The routine in seven screens, stored as `me/PROGRAM.md` in the program schema, what the coach never changes, ten gap rules offered as yes or no proposals, the engine changes file by file, the tests and the risks |
 
 ## The marks
 

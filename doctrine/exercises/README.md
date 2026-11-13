@@ -15,12 +15,12 @@ _This folder owns: every exercise the trainer can prescribe (`bank.csv`), and ho
 | `load_type` | barbell · dumbbell · kettlebell · machine · cable · band · bodyweight · time · distance · calories | dumbbell |
 | `level` | 1 easiest to 5 hardest | 1 |
 | `needs_coaching` | yes for the classic Olympic lifts from the floor and high-skill gymnastics | no |
-| `regions` | joints it loads hard, `;` between: knee · hip · low_back · shoulder · elbow · wrist · ankle · neck | knee;hip |
+| `regions` | joints it loads, under load or at end range, `;` between: knee · hip · low_back · shoulder · elbow · wrist · ankle · neck. **Never empty** unless the row is tagged `region_free` on purpose (`engine/checks.py template` refuses it): an empty field passes every exclusion | knee;hip |
 | `impact` | yes for jumps, running, landings | no |
 | `position` | standing · seated · floor · hanging | standing |
 | `easier` | the id one step easier in the same pattern, or empty | bodyweight_squat |
 | `harder` | the id one step harder, or empty | front_squat |
-| `tags` | any of: lengthened · unilateral · power · heavy_legs · hinge_heavy · skill · cardio · balance · metcon_ok · mobility · wheelchair_ok | lengthened |
+| `tags` | any of: lengthened · unilateral · power · heavy_legs · hinge_heavy · skill · cardio · balance · metcon_ok · mobility · wheelchair_ok · region_free (loads no joint enough to matter: dead bug, Pallof press, walking, seated march) | lengthened |
 | `cue` | one short line in English, second person, the one thing to get right | Elbows inside the knees, sit between your heels |
 
 ## Patterns
@@ -37,7 +37,9 @@ For counting hard sets the engine groups them: **chest** · **back** (lats, uppe
 
 bodyweight · pullup_bar · dip_bars · rings · bench · box · band · mini_band · suspension · dumbbell · kettlebell · barbell · rack · plates · ez_bar · trap_bar · med_ball · sandbag · jump_rope · cable · lat_pulldown · leg_press · leg_curl · leg_extension · chest_press_machine · row_machine · pec_deck · smith · rower · bike · skierg · treadmill · sled · outdoors
 
-The presets a person ticks (full gym, basic gym, home with dumbbells, bodyweight only, park, CrossFit box) are expanded to these tags in `engine/core.py`.
+The presets a person can choose (full gym, basic gym, CrossFit box) are expanded to these tags in `engine/core.py`; a home gym is ticked tag by tag, and outdoors is the `outdoors` tag alone. `home_dumbbells`, `home_bodyweight` and `park` stay as presets for old profiles and the travel day, never offered as a place.
+
+**How regions are tagged (audit of 13 nov 2026).** A joint goes in `regions` when the move loads it under weight, holds it at end range, or repeats it under effort: the bar on the back puts the shoulder in `back_squat`, `front_squat` and `good_morning`; every loaded hinge and every loaded trunk flexion or rotation carries `low_back`; rowing and cycling carry `knee`; hands-on-the-floor positions carry `wrist`; stretches carry the joint they take to end range (`band_shoulder_dislocate` shoulder, `couch_stretch` knee and hip). The warm-up picks its mobility moves by overlap with the day's regions, so a correct tag also gives a relevant warm-up.
 
 ## How an exercise is chosen for a slot (`engine/build.py`)
 

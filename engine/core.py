@@ -26,6 +26,49 @@ EXPERIENCE = ["none", "novice", "intermediate", "advanced"]
 LEVEL_TARGET = {"none": 1, "novice": 2, "intermediate": 3, "advanced": 4}
 LEVEL_CAP = {"none": 2, "novice": 3, "intermediate": 4, "advanced": 5}
 AGE_BANDS = ["under_18", "18_39", "40_59", "60_74", "75_plus"]
+AGE_BAND = "18_39"            # the audience is adults 18 to 40: age is never asked, the engine fixes the band (00_MISSION.md)
+REGIONS = ["knee", "hip", "low_back", "shoulder", "elbow", "wrist", "ankle", "neck"]
+
+# The interview of 13 nov 2026 (doctrine/02_INTERVIEW.md). The person never picks a method or a style: they say what they
+# want, what they have done, what they enjoy, and the engine decides the plan (doctrine/03_MATRIX.md).
+MODES = ["new", "improve"]
+# outcome -> follow-up -> (goal, goal2). OUTCOME_DEFAULT is the follow-up when they skip it.
+OUTCOMES = {
+    "look": {"size": ("muscle", None), "lean": ("fat_loss", "muscle")},
+    "strong": {"general": ("strength", None), "powerlifting": ("powerlifting", None), "olympic": ("weightlifting", None)},
+    "athletic": {"crossfit": ("functional", None), "hybrid": ("functional", "run")},
+    "event": {"run_5k_10k": ("run", None), "run_half": ("run", None), "run_marathon": ("run", None),
+              "hyrox": ("hyrox", None), "meet": ("powerlifting", None)},
+    "keep_going": {"lifting": ("muscle", "strength"), "fitness": ("functional", "health"), "mix": ("health", "muscle")},
+}
+OUTCOME_DEFAULT = {"look": "size", "strong": "general", "athletic": "crossfit", "event": "run_5k_10k", "keep_going": "mix"}
+# Outcomes no program is built for: routed to the closest, with this honest line (03_MATRIX.md Step 5).
+OUTCOME_GAP = {
+    "run_marathon": "No plan here is built for a marathon yet. You get the running base plan: it builds the easy running a "
+                    "marathon stands on, up to half marathon distance.",
+    "keep_going": "No plan here is built around monthly challenges yet. You get the closest steady plan, and every sheet has a "
+                  "number to beat: that is your challenge each session.",
+}
+# What they have done regularly, as activities, never as a method. Also the keys of experience_by.
+ACTIVITIES = ["lifting", "running", "cardio", "classes", "crossfit"]
+# What they enjoy or can't stand doing, in plain activity words. An adherence input only.
+ENJOY = ["heavy", "pump", "circuits", "long_cardio", "running"]
+KIT_PREF = ["free_weights", "machines", "either"]
+SPLITS = ["ppl", "upper_lower", "full_body", "body_part", "strength_cardio", "run_plan", "classes", "custom"]
+ROUTINE_AGE = ["under_1m", "1_3m", "3_12m", "over_1y"]
+ROUTINE_STALLS = ["lift_stuck", "not_growing", "tired", "bored", "skipping", "pain", "fine"]
+ROUTINE_KEEP = ["split", "exercises", "days", "pump", "short", "everything"]
+STRENGTHS = ["strong", "engine", "flexible", "technique", "consistent"]
+BARRIERS = ["time", "motivation", "energy", "stress", "pain", "know_how", "bored"]
+LIMIT_STATUS = ["now", "mild", "cleared", "unchecked"]           # mild: only on some moves, trained with care
+TRIGGERS = ["bending", "overhead", "impact", "kneeling", "gripping", "twisting"]
+SLEEP = ["under_6", "6_7", "7_plus"]
+STRESS = ["low", "medium", "high"]
+# A preferred training style: asked only of experienced people (intermediate or advanced, or the improve path).
+# "trainer" means let the trainer decide, the default. Beginners are never asked (02_INTERVIEW.md).
+STYLES = ["trainer", "strength", "bodybuilding", "powerbuilding", "crossfit", "hyrox", "running", "hybrid"]
+REJECT_REASONS = ["too_long", "too_much_running", "not_enjoy", "days"]
+MINUTES_RANGE = (15, 120)
 
 # Equipment presets a person ticks at onboarding, expanded to tags the bank uses.
 MACHINES = ["cable", "lat_pulldown", "leg_press", "leg_curl", "leg_extension",
@@ -46,6 +89,22 @@ PRESETS = {
 }
 ALL_TAGS = sorted(set(sum(PRESETS.values(), [])) | {"rings", "skierg", "sled", "sandbag",
                                                    "jump_rope", "mini_band", "suspension"})
+
+# The scope (doctrine/00_MISSION.md): a gym, a home gym with real kit, or outdoors for running and cardio.
+# `home_bodyweight` and `park` stay above for old profiles and the travel day; nobody can choose them as a place.
+OFFERED_PRESETS = ["full_gym", "basic_gym", "crossfit_box"]
+NOT_OFFERED = {"home_bodyweight", "park"}
+REAL_KIT = {"barbell", "dumbbell", "rower", "bike", "skierg", "treadmill", "sled", "cable", "lat_pulldown",
+            "leg_press", "smith", "chest_press_machine", "row_machine"}      # a kettlebell or bands alone are not a home gym
+CARDIO_ONLY = {"bodyweight", "outdoors", "jump_rope"}
+
+
+def place_in_scope(equipment):
+    """A place someone may train at: real kit (a gym or a home gym), or outdoors for running and cardio only."""
+    if set(equipment or []) & NOT_OFFERED:
+        return False
+    tags = set(expand_equipment(equipment))
+    return bool(tags & REAL_KIT) or ("outdoors" in tags and tags <= CARDIO_ONLY)
 
 
 def today():
@@ -180,10 +239,20 @@ def kg_round_down(kg, step):
     return round((int(kg / step + 1e-9)) * step, 2)
 
 
+LB_PER_KG = 2.20462
+
+
+def lb_to_kg(lb):
+    return None if lb is None else round(float(lb) / LB_PER_KG, 3)
+
+
 def fmt_load(kg, units="kg"):
+    """A stored load (always kilograms) in the person's own unit. Pound users train on a pound grid
+    (build.load_ctx), so whole pounds are exact; a half pound they typed themselves survives."""
     if kg is None:
         return ""
     if units == "lb":
-        lb = kg * 2.20462
-        return "%g lb" % (round(lb / 5) * 5)
+        lb = kg * LB_PER_KG
+        half = round(lb * 2) / 2
+        return "%g lb" % (half if abs(lb - half) < 0.05 else round(lb))
     return ("%g kg" % round(kg, 2))
