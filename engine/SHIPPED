@@ -1,0 +1,17 @@
+# Every path the template owns. /train update replaces these, and never touches me/ or sessions/.
+CLAUDE.md
+TRAINER.md
+README.md
+VERSION
+CHANGELOG.md
+LICENSE
+.claude
+.github
+.gitignore
+doctrine
+engine
+docs
+site
+research
+examples
+tests

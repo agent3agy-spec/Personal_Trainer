@@ -1,0 +1,52 @@
+/* sheet.css (palette: ink #1d1d1f · soft #6e6e73 · rule #e3e1dc · card #faf9f6 · accent #2f5d50 · accent soft #e6efe9)
+    · the one-page workout sheet. Neutral, premium, readable on a phone and on paper.
+   One accent colour, #2f5d50, set in every rule that uses it. The brand lives in the wordmark, not in the layout. */
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:#1d1d1f;font:9.6pt/1.28 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{max-width:190mm;margin:0 auto}
+.sheet.tight{font-size:8.4pt}
+.sheet.tight td{padding:2px 4px}
+.sheet.tight .block{margin-bottom:4px}
+header{display:flex;flex-direction:column;gap:2px;border-bottom:2px solid #1d1d1f;padding-bottom:6px;margin-bottom:8px}
+.brand{font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:#6e6e73;display:flex;align-items:center;gap:6px}
+.mark{width:9px;height:9px;border-radius:50%;background:#2f5d50;display:inline-block}
+h1{font-size:17pt;line-height:1.1;margin:2px 0 0;font-weight:700}
+.meta{margin:0;color:#6e6e73;font-size:8.6pt}
+.top{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-bottom:8px}
+.beat,.why{border-radius:6px;padding:7px 9px}
+.beat{background:#e6efe9;border:1.5px solid #2f5d50}
+.why{background:#faf9f6;border:1px solid #e3e1dc}
+.beat b,.why b{display:block;font-size:7.6pt;letter-spacing:.08em;text-transform:uppercase;color:#2f5d50;margin-bottom:2px}
+.why b{color:#6e6e73}
+.beat span{font-weight:600}
+.block{margin-bottom:7px;break-inside:avoid}
+.bh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #e3e1dc;margin-bottom:2px}
+h2{font-size:10.5pt;margin:0;text-transform:uppercase;letter-spacing:.06em}
+.block.main h2{color:#2f5d50}
+.bm{font-size:8pt;color:#6e6e73}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+col.c1{width:40%}col.c2{width:13%}col.c3{width:13%}col.c4{width:17%}col.c5{width:7%}col.c6{width:10%}
+th{font-size:7pt;font-weight:600;color:#6e6e73;text-align:left;text-transform:uppercase;letter-spacing:.05em;padding:2px 4px}
+td{padding:3px 4px;vertical-align:top;border-bottom:1px solid #f0eee9}
+.n{font-weight:600}
+.n a{color:inherit;text-decoration:none;border-bottom:1px dotted #6e6e73}
+.cue{color:#6e6e73;font-size:8.4pt}
+.first{font-size:8.2pt;color:#2f5d50;margin-top:2px}
+td.sr,td.ld{font-weight:600}
+td.sr{white-space:normal}
+td.ef{font-size:8.6pt}
+td.rs{white-space:nowrap;font-size:8.6pt}
+td.bx{white-space:nowrap}
+td.bx i{display:inline-block;width:10px;height:10px;border:1.3px solid #1d1d1f;border-radius:2px;margin-right:2px}
+.foot{display:grid;grid-template-columns:1fr 1.3fr;gap:8px;align-items:end;margin-top:6px}
+.low{font-size:8.6pt;margin-bottom:5px}
+.low b{color:#2f5d50}
+.log b{font-size:7.6pt;letter-spacing:.08em;text-transform:uppercase;color:#6e6e73}
+.ll{display:flex;gap:6px;align-items:flex-end;font-size:8.6pt;margin-top:3px}
+.ll em{flex:1;border-bottom:1px solid #1d1d1f;height:12px}
+.total{font-size:9pt;text-align:right}
+.total b{font-size:14pt}
+footer{margin-top:8px;padding-top:4px;border-top:1px solid #e3e1dc;font-size:7.2pt;color:#6e6e73}
+.star{color:#2f5d50;font-size:8pt}
+.firsts{border:1px dashed #2f5d50;border-radius:6px;padding:5px 8px;font-size:8.2pt;margin:4px 0 6px}
+.firsts b{display:block;font-size:7.6pt;letter-spacing:.08em;text-transform:uppercase;color:#2f5d50}

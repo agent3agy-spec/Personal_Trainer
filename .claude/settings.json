@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 engine/plan.py *)",
+      "Bash(python3 engine/sheet.py *)",
+      "Bash(python3 engine/checks.py *)",
+      "Bash(python3 tests/smoke_programs.py *)",
+      "Edit(me/**)",
+      "Write(me/**)",
+      "Edit(sessions/**)",
+      "Write(sessions/**)",
+      "Bash(python engine/plan.py *)",
+      "Bash(python engine/sheet.py *)",
+      "Bash(python engine/checks.py *)"
+    ],
+    "deny": [
+      "Edit(doctrine/**)",
+      "Write(doctrine/**)",
+      "Edit(engine/**)",
+      "Write(engine/**)",
+      "Edit(.claude/**)",
+      "Write(.claude/**)",
+      "Edit(CLAUDE.md)",
+      "Write(CLAUDE.md)",
+      "Edit(TRAINER.md)",
+      "Write(TRAINER.md)",
+      "Read(./.env)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 engine/plan.py status || python engine/plan.py status"
+          }
+        ]
+      }
+    ]
+  }
+}

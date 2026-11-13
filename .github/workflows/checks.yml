@@ -1,0 +1,21 @@
+name: template checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  checks:
+    # Only in the template itself. Copies of the template inherit this file; this guard keeps it silent there.
+    if: github.repository == 'agent3agy-spec/Personal_Trainer'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: house style, schemas, programs, bank, no personal data
+        run: python3 engine/checks.py template
+      - name: the rules that are code
+        run: python3 tests/test_engine.py
+      - name: every program for ten sessions
+        run: python3 tests/smoke_programs.py
