@@ -7,11 +7,11 @@ Two trunk moves, 2 to 3 rounds, about 6 minutes at the end of a session: one tha
 ```json
 {
   "id": "core",
-  "name": "Core finisher",
+  "name": "Core, to finish",
   "when": "finisher",
   "minutes": 6,
   "session": {
-    "title": "Core finisher",
+    "title": "Core, to finish",
     "tags": [],
     "blocks": [
       {
@@ -33,7 +33,7 @@ Two trunk moves, 2 to 3 rounds, about 6 minutes at the end of a session: one tha
             "sets": 3,
             "reps": "8-12",
             "rest": 30,
-            "effort": "slow, low back still, 2 left",
+            "effort": "slow, low back still, 2 reps spare",
             "rule": "double_progression"
           },
           {
@@ -48,7 +48,7 @@ Two trunk moves, 2 to 3 rounds, about 6 minutes at the end of a session: one tha
             "sets": 3,
             "reps": "8-12",
             "rest": 30,
-            "effort": "each side, no twist, 2 left",
+            "effort": "each side, no twist, 2 reps spare",
             "rule": "double_progression"
           }
         ]

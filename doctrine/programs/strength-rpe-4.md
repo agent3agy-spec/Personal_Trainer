@@ -2,9 +2,9 @@
 
 **What it is.** Strength training run by effort instead of by a fixed percentage. Each main lift works up to one top set at RPE 8 (two reps left), the engine turns it into an estimated max, then three back off sets about 10% lighter. Four sessions, upper, lower, upper, lower.
 
-**Who it is for.** Intermediate and advanced lifters who can tell honestly how many reps they had left. Novices misjudge that near a max (Zourdos 2016) [checked], so they are not offered this one. 3 or 4 days a week, 60 to 90 minutes, a barbell, a rack, a bench and plates.
+**Who it is for.** Intermediate and advanced lifters who can tell honestly how many reps they had left. Novices misjudge that near a max (Zourdos 2016) [checked], so they are not offered this one. 4 days a week, 60 to 90 minutes, a barbell, a rack, a bench and plates.
 
-**The week.** Upper A, Lower A, Upper B, Lower B, in order. On 3 days the rotation simply keeps going.
+**The week.** Upper A, Lower A, Upper B, Lower B, in order. On 3 days the trainer picks a 3 day plan instead: four sessions are never squeezed into three days.
 
 | session | main block | second lift | accessories |
 |:-|:-|:-|:-|
@@ -54,7 +54,7 @@
     "advanced"
   ],
   "days": [
-    3,
+    4,
     4
   ],
   "sweet_days": [
@@ -90,12 +90,6 @@
   },
   "meso": null,
   "layouts": {
-    "3": [
-      "UpperA",
-      "LowerA",
-      "UpperB",
-      "LowerB"
-    ],
     "4": [
       "UpperA",
       "LowerA",
@@ -106,11 +100,11 @@
   "modules": [],
   "sessions": {
     "UpperA": {
-      "title": "Upper A · Bench top set · Press",
+      "title": "Upper A · Heavy bench · Press",
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -123,7 +117,7 @@
               "sets": 4,
               "reps": "3",
               "rest": 210,
-              "effort": "top set of 3 with 2 left in the tank, then 3 x 3 about 10% lighter",
+              "effort": "one heavy set of 3 with 2 reps spare, then 3 x 3 about 10% lighter",
               "rule": "rpe_top_set",
               "top_reps": 3,
               "rpe": 8,
@@ -134,7 +128,7 @@
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -148,13 +142,13 @@
               "sets": 3,
               "reps": "6-8",
               "rest": 150,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -169,7 +163,7 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -183,7 +177,7 @@
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -191,13 +185,13 @@
       ]
     },
     "LowerA": {
-      "title": "Lower A · Squat top set · RDL",
+      "title": "Lower A · Heavy squat · Romanian deadlift",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -210,7 +204,7 @@
               "sets": 4,
               "reps": "3",
               "rest": 210,
-              "effort": "top set of 3 with 2 left in the tank, then 3 x 3 about 10% lighter",
+              "effort": "one heavy set of 3 with 2 reps spare, then 3 x 3 about 10% lighter",
               "rule": "rpe_top_set",
               "top_reps": 3,
               "rpe": 8,
@@ -221,7 +215,7 @@
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -235,13 +229,13 @@
               "sets": 3,
               "reps": "6-8",
               "rest": 150,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -255,7 +249,7 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 left, each leg",
+              "effort": "2 reps spare, each leg",
               "rule": "double_progression"
             },
             {
@@ -277,11 +271,11 @@
       ]
     },
     "UpperB": {
-      "title": "Upper B · Bench top set of 5 · Close grip",
+      "title": "Upper B · Heavy bench, sets of 5 · Close grip bench",
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -294,7 +288,7 @@
               "sets": 4,
               "reps": "5",
               "rest": 210,
-              "effort": "top set of 5 with 2 left in the tank, then 3 x 5 about 10% lighter",
+              "effort": "one heavy set of 5 with 2 reps spare, then 3 x 5 about 10% lighter",
               "rule": "rpe_top_set",
               "top_reps": 5,
               "rpe": 8,
@@ -305,7 +299,7 @@
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -319,13 +313,13 @@
               "sets": 3,
               "reps": "6-8",
               "rest": 150,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -340,7 +334,7 @@
               "sets": 3,
               "reps": "6-10",
               "rest": 90,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -353,7 +347,7 @@
               "sets": 3,
               "reps": "12-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -361,14 +355,14 @@
       ]
     },
     "LowerB": {
-      "title": "Lower B · Deadlift top set · Front squat",
+      "title": "Lower B · Heavy deadlift · Front squat",
       "tags": [
         "hinge_heavy",
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -382,7 +376,7 @@
               "sets": 4,
               "reps": "3",
               "rest": 210,
-              "effort": "top set of 3 with 2 left in the tank, then 3 x 3 about 10% lighter",
+              "effort": "one heavy set of 3 with 2 reps spare, then 3 x 3 about 10% lighter",
               "rule": "rpe_top_set",
               "top_reps": 3,
               "rpe": 8,
@@ -393,7 +387,7 @@
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -408,13 +402,13 @@
               "sets": 3,
               "reps": "5-8",
               "rest": 150,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -429,7 +423,7 @@
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -442,7 +436,7 @@
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -451,13 +445,13 @@
     }
   },
   "express": {
-    "title": "Express · Squat and bench top sets",
+    "title": "Short version · Heavy squat and bench",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -470,7 +464,7 @@
             "sets": 3,
             "reps": "3",
             "rest": 180,
-            "effort": "top set of 3 at 2 left, then 2 x 3 about 10% lighter",
+            "effort": "one heavy set of 3 with 2 reps spare, then 2 x 3 about 10% lighter",
             "rule": "rpe_top_set",
             "top_reps": 3,
             "rpe": 8,
@@ -487,7 +481,7 @@
             "sets": 3,
             "reps": "3",
             "rest": 180,
-            "effort": "top set of 3 at 2 left, then 2 x 3 about 10% lighter",
+            "effort": "one heavy set of 3 with 2 reps spare, then 2 x 3 about 10% lighter",
             "rule": "rpe_top_set",
             "top_reps": 3,
             "rpe": 8,

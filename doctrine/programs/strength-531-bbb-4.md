@@ -2,7 +2,7 @@
 
 **What it is.** The best known 5/3/1 template. One main lift a day on the 5/3/1 waves of a training max, then the big part: 5 sets of 10 of the same lift at a light weight. Then one pull. Strength from the waves, size from the 50 reps.
 
-**Who it is for.** A novice who has finished a linear progression, up to an advanced lifter who wants a simple block of size and strength. 2 to 4 days a week, 50 to 75 minutes, a barbell, a rack, a bench and plates.
+**Who it is for.** A novice who has finished a linear progression, up to an advanced lifter who wants a simple block of size and strength. 2 or 4 days a week, 50 to 75 minutes, a barbell, a rack, a bench and plates.
 
 **The week.** Four sessions, one per main lift, done in order.
 
@@ -13,7 +13,7 @@
 | Deadlift | deadlift | deadlift 5 x 10 | chin-ups 4 x 8 to 12 |
 | Press | overhead press | press 5 x 10 | rows 4 x 8 to 12 |
 
-On 3 days a week the four sessions keep rotating, so each lift comes every week and a third. On 2 days a week two sessions carry two main lifts each, squat with bench and deadlift with press, and the 5 x 10 goes to the upper lift so the lower back is not buried.
+There is no 3 day week: four sessions are never squeezed into three days, so a 3 day week gets a 3 day plan. On 2 days a week two sessions carry two main lifts each, squat with bench and deadlift with press, and the 5 x 10 goes to the upper lift so the lower back is not buried.
 
 **How it climbs.** Training max at 90% of the estimated max from your first set of 5 [checked: research/01]. Waves: 65, 75, 85% for 5, 5, 5+ · 70, 80, 90% for 3, 3, 3+ · 75, 85, 95% for 5, 3, 1+ · then a deload wave at 40, 50, 60% for 5 [believe, standard across sources]. After each four week cycle the TM goes up +2.5 kg upper and +5 kg lower; a missed minimum on a last set drops the TM 10% [checked]. BBB is 5 x 10 at 50 to 60% of the TM of the same lift; Wendler says from the third cycle you can stay at 60% [checked: jimwendler.com excerpt]. The engine does not compute it from the TM, so the sheet tells you the percentage and you load it. The pull climbs by double progression.
 
@@ -92,12 +92,6 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
       "Squat_Bench",
       "Deadlift_Press"
     ],
-    "3": [
-      "Squat",
-      "Bench",
-      "Deadlift",
-      "Press"
-    ],
     "4": [
       "Squat",
       "Bench",
@@ -110,13 +104,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
   ],
   "sessions": {
     "Squat": {
-      "title": "Squat · BBB",
+      "title": "Squat · extra squat sets",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -129,7 +123,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 3,
               "reps": "5/3/1",
               "rest": 210,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": true,
@@ -139,7 +133,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
           ]
         },
         {
-          "name": "Boring But Big",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -152,13 +146,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 5,
               "reps": "10",
               "rest": 90,
-              "effort": "50 to 60% of your training max, same lift. Load it yourself",
+              "effort": "50 to 60% of your working weight, same lift. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -174,7 +168,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 4,
               "reps": "8-12",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -182,11 +176,11 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
       ]
     },
     "Bench": {
-      "title": "Bench · BBB",
+      "title": "Bench · extra bench sets",
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -199,7 +193,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 3,
               "reps": "5/3/1",
               "rest": 210,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": true,
@@ -209,7 +203,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
           ]
         },
         {
-          "name": "Boring But Big",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -222,13 +216,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 5,
               "reps": "10",
               "rest": 90,
-              "effort": "50 to 60% of your training max, same lift. Load it yourself",
+              "effort": "50 to 60% of your working weight, same lift. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -243,7 +237,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 4,
               "reps": "8-12",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -251,13 +245,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
       ]
     },
     "Deadlift": {
-      "title": "Deadlift · BBB",
+      "title": "Deadlift · extra deadlift sets",
       "tags": [
         "hinge_heavy"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -271,7 +265,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 3,
               "reps": "5/3/1",
               "rest": 210,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": true,
@@ -281,7 +275,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
           ]
         },
         {
-          "name": "Boring But Big",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -295,13 +289,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 5,
               "reps": "10",
               "rest": 90,
-              "effort": "50 to 60% of your training max, same lift. Load it yourself",
+              "effort": "50 to 60% of your working weight, same lift. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -317,7 +311,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 4,
               "reps": "8-12",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -325,11 +319,11 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
       ]
     },
     "Press": {
-      "title": "Press · BBB",
+      "title": "Press · extra press sets",
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -342,7 +336,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 3,
               "reps": "5/3/1",
               "rest": 210,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": true,
@@ -352,7 +346,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
           ]
         },
         {
-          "name": "Boring But Big",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -365,13 +359,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 5,
               "reps": "10",
               "rest": 90,
-              "effort": "50 to 60% of your training max, same lift. Load it yourself",
+              "effort": "50 to 60% of your working weight, same lift. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -386,7 +380,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 4,
               "reps": "8-12",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -394,13 +388,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
       ]
     },
     "Squat_Bench": {
-      "title": "Squat · Bench · BBB bench",
+      "title": "Squat · Bench · extra bench sets",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -413,7 +407,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 3,
               "reps": "5/3/1",
               "rest": 210,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": true,
@@ -429,7 +423,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 3,
               "reps": "5/3/1",
               "rest": 210,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": true,
@@ -438,7 +432,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
           ]
         },
         {
-          "name": "Boring But Big",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -451,13 +445,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 5,
               "reps": "10",
               "rest": 90,
-              "effort": "50 to 60% of your training max, same lift. Load it yourself",
+              "effort": "50 to 60% of your working weight, same lift. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -473,7 +467,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 4,
               "reps": "8-12",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -481,13 +475,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
       ]
     },
     "Deadlift_Press": {
-      "title": "Deadlift · Press · BBB press",
+      "title": "Deadlift · Press · extra press sets",
       "tags": [
         "hinge_heavy"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -501,7 +495,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 3,
               "reps": "5/3/1",
               "rest": 210,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": true,
@@ -517,7 +511,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 3,
               "reps": "5/3/1",
               "rest": 210,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": true,
@@ -526,7 +520,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
           ]
         },
         {
-          "name": "Boring But Big",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -539,13 +533,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 5,
               "reps": "10",
               "rest": 90,
-              "effort": "50 to 60% of your training max, same lift. Load it yourself",
+              "effort": "50 to 60% of your working weight, same lift. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -560,7 +554,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
               "sets": 4,
               "reps": "8-12",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -569,13 +563,13 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
     }
   },
   "express": {
-    "title": "Express · Squat · Bench",
+    "title": "Short version · Squat · Bench",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -588,7 +582,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
             "sets": 3,
             "reps": "5/3/1",
             "rest": 210,
-            "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+            "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
             "rule": "tm_wave",
             "tm_pct": 0.9,
             "deload_wave": true,
@@ -604,7 +598,7 @@ On 3 days a week the four sessions keep rotating, so each lift comes every week 
             "sets": 3,
             "reps": "5/3/1",
             "rest": 210,
-            "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+            "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
             "rule": "tm_wave",
             "tm_pct": 0.9,
             "deload_wave": true,

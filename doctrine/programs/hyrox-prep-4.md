@@ -4,7 +4,7 @@
 
 **Who it is for.** Novice or intermediate, already able to run 30 minutes without stopping, which is the entry bar third party plans set [snippet: Men's Fitness AU 8 week plan, Centr beginner plan]. Can run outside or on a treadmill and has something to carry (dumbbells, kettlebells or a sandbag). 3 to 5 days a week, 45 to 75 minutes. Can't run 30 minutes yet: start with `run-c25k-3`.
 
-**The week.** Strength, easy run, intervals, compromised run, in that order and round again. The order keeps the heavy leg day and the interval day apart, so your legs get about 48 hours between them as in the template [snippet: research/02 rule 8; Schumann 2022]. On 5 days a second, shorter easy run goes in after the intervals.
+**The week.** Strength, easy run, intervals, compromised run, in that order and round again. The order keeps the heavy leg day and the interval day apart, so your legs get about 48 hours between them as in the template [snippet: research/02 rule 8; Schumann 2022]. On 5 days a second, shorter easy run goes in after the intervals. On 3 days the easy run is left out (strength, intervals, compromised run) and the plan says so.
 
 | session | what | tag |
 |:-|:-|:-|
@@ -107,7 +107,6 @@
   "layouts": {
     "3": [
       "S",
-      "E",
       "I",
       "C"
     ],
@@ -126,18 +125,17 @@
     ]
   },
   "modules": [
-    "mobility",
-    "hyrox-stations"
+    "mobility"
   ],
   "sessions": {
     "S": {
-      "title": "Lower strength · Station practice",
+      "title": "Legs, heavy · race stations",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -152,14 +150,14 @@
               "sets": 4,
               "reps": "5-8",
               "rest": 150,
-              "effort": "2 left, every rep clean",
+              "effort": "2 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -174,13 +172,13 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 left, each leg",
+              "effort": "2 reps spare, each leg",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Station practice",
+          "name": "Race stations",
           "kind": "finisher",
           "format": "circuit",
           "minutes": 10,
@@ -192,7 +190,7 @@
               "minutes": 10,
               "reps": "2 rounds",
               "rule": "benchmark",
-              "effort": "technique, not a race: light to race weight, see the hyrox-stations module for your division",
+              "effort": "technique, not a race: light first, working up to your race weight",
               "pieces": [
                 [
                   {
@@ -376,11 +374,11 @@
       ]
     },
     "C": {
-      "title": "Compromised running",
+      "title": "Running straight off a station",
       "tags": [],
       "blocks": [
         {
-          "name": "Run off the station",
+          "name": "Run straight off a station",
           "kind": "main",
           "format": "fortime",
           "minutes": 40,
@@ -393,7 +391,7 @@
               "reps": "4 rounds",
               "rule": "benchmark",
               "score": true,
-              "effort": "4 rounds to start, up to 8 by race week. Station weights from the hyrox-stations module. Before week 5 keep it controlled",
+              "effort": "4 rounds to start, up to 8 by race week. Stations light first, up to race weight. Before week 5 keep it controlled",
               "pieces": [
                 [
                   {
@@ -544,11 +542,11 @@
     }
   },
   "express": {
-    "title": "Express · Mini compromised run",
+    "title": "Short version · a short run off a station",
     "tags": [],
     "blocks": [
       {
-        "name": "Run off the station",
+        "name": "Run straight off a station",
         "kind": "main",
         "format": "fortime",
         "minutes": 25,
@@ -561,7 +559,7 @@
             "reps": "3 rounds",
             "rule": "benchmark",
             "score": true,
-            "effort": "5 min easy jog first. Station weights from the hyrox-stations module",
+            "effort": "5 min easy jog first. Stations light first, up to race weight",
             "pieces": [
               [
                 {
@@ -641,6 +639,9 @@
         ]
       }
     ]
+  },
+  "layout_notes": {
+    "3": "On 3 days the easy run is the session left out. One easy 30 minutes on a free day is the best thing to add."
   }
 }
 ```

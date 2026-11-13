@@ -114,7 +114,7 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
       ],
       "blocks": [
         {
-          "name": "Classic lift",
+          "name": "Today's Olympic lift",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -171,7 +171,7 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
               "sets": 4,
               "reps": "3-5",
               "rest": 180,
-              "effort": "2 left, elbows high",
+              "effort": "2 reps spare, elbows high",
               "rule": "double_progression"
             }
           ]
@@ -186,7 +186,7 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
       ],
       "blocks": [
         {
-          "name": "Classic lift",
+          "name": "Today's Olympic lift",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -255,7 +255,7 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
               "sets": 4,
               "reps": "5",
               "rest": 180,
-              "effort": "2 left, upright",
+              "effort": "2 reps spare, upright",
               "rule": "double_progression"
             }
           ]
@@ -270,7 +270,7 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
       ],
       "blocks": [
         {
-          "name": "Classic lift",
+          "name": "Today's Olympic lift",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -343,7 +343,7 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
               "sets": 4,
               "reps": "3-5",
               "rest": 180,
-              "effort": "2 left, elbows high",
+              "effort": "2 reps spare, elbows high",
               "rule": "double_progression"
             }
           ]
@@ -357,7 +357,7 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
       ],
       "blocks": [
         {
-          "name": "Classic lift",
+          "name": "Today's Olympic lift",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -411,13 +411,13 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
               "sets": 4,
               "reps": "5",
               "rest": 180,
-              "effort": "2 left, upright",
+              "effort": "2 reps spare, upright",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -440,14 +440,14 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
     }
   },
   "express": {
-    "title": "Express · Snatch · Front squat",
+    "title": "Short version · Snatch · Front squat",
     "tags": [
       "power",
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Classic lift",
+        "name": "Today's Olympic lift",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -485,7 +485,7 @@ When the full lift is not available (no coaching yet on it, or no room to drop),
             "sets": 3,
             "reps": "3-5",
             "rest": 150,
-            "effort": "2 left, elbows high",
+            "effort": "2 reps spare, elbows high",
             "rule": "double_progression"
           }
         ]

@@ -26,17 +26,17 @@ Doubles: men's and mixed doubles use Men Open weights, women's doubles Women Ope
 ```json
 {
   "id": "hyrox-stations",
-  "name": "HYROX station piece",
+  "name": "Race stations practice",
   "when": "finisher",
   "minutes": 10,
   "session": {
-    "title": "HYROX station piece",
+    "title": "Race stations practice",
     "tags": [
       "hard_cardio"
     ],
     "blocks": [
       {
-        "name": "Station piece",
+        "name": "Race stations",
         "kind": "finisher",
         "format": "fortime",
         "minutes": 10,
@@ -49,7 +49,7 @@ Doubles: men's and mixed doubles use Men Open weights, women's doubles Women Ope
             "reps": "2 rounds",
             "rule": "benchmark",
             "score": true,
-            "effort": "race weight from the table in this module, or lighter while you learn the station",
+            "effort": "your race weight, or lighter while you learn the station",
             "pieces": [
               [
                 {

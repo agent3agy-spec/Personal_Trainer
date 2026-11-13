@@ -7,7 +7,7 @@ An easy run on the days a person trains beyond what their program uses. Easy by 
 ```json
 {
   "id": "easy-running",
-  "name": "Easy running",
+  "name": "Easy run",
   "when": "extra_day",
   "minutes": 30,
   "sessions": {

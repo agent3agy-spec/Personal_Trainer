@@ -42,12 +42,15 @@ OUTCOMES = {
     "keep_going": {"lifting": ("muscle", "strength"), "fitness": ("functional", "health"), "mix": ("health", "muscle")},
 }
 OUTCOME_DEFAULT = {"look": "size", "strong": "general", "athletic": "crossfit", "event": "run_5k_10k", "keep_going": "mix"}
-# Outcomes no program is built for: routed to the closest, with this honest line (03_MATRIX.md Step 5).
-OUTCOME_GAP = {
-    "run_marathon": "No plan here is built for a marathon yet. You get the running base plan: it builds the easy running a "
-                    "marathon stands on, up to half marathon distance.",
-    "keep_going": "No plan here is built around monthly challenges yet. You get the closest steady plan, and every sheet has a "
-                  "number to beat: that is your challenge each session.",
+# Outcomes no program is built for: routed to the closest, with this honest line (03_MATRIX.md Step 5). Empty since
+# the composer (engine/compose.py, phase D): the marathon and "keep it going" get a real plan, said in OUTCOME_PLAN.
+OUTCOME_GAP = {}
+OUTCOME_PLAN = {
+    "run_marathon": "Your marathon plan: mostly easy running, one quality run, a strength day from 4 days a week, and a "
+                    "protected long run that grows every two weeks up to about 3 hours. Give it at least 16 weeks, and run "
+                    "less in the last two weeks before race day.",
+    "keep_going": "Steady training with a new challenge every block of about a month, written on every sheet. Your number to "
+                  "beat is there every session too.",
 }
 # What they have done regularly, as activities, never as a method. Also the keys of experience_by.
 ACTIVITIES = ["lifting", "running", "cardio", "classes", "crossfit"]
@@ -185,8 +188,11 @@ def expand_equipment(items):
 
 # · programs and modules
 
+MINE = ME / "PROGRAM.md"       # their own routine, coached (mode improve, engine/improve.py): the program id "mine"
+
+
 def load_program(pid):
-    p = PROGRAMS / (pid + ".md")
+    p = MINE if pid == "mine" else PROGRAMS / (pid + ".md")
     data = read_json_block(p)
     if data is None:
         raise SystemExit("No program file for '%s' (looked for %s)." % (pid, p.relative_to(ROOT)))

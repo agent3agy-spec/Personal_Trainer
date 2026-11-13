@@ -47,14 +47,14 @@ def first_outing_text(load_type, reps):
     if load_type == "barbell":
         n = lo or 5
         return ("empty bar first, sets of %d adding a little each set. "
-                "Stop at the first set of %d that feels like 3 left in the tank. Write that weight down" % (n, n))
+                "Stop at the first set of %d that leaves about 3 reps spare. Write that weight down" % (n, n))
     if target <= 3:
         return "learn the move with no weight first (a shoe balanced on your fist works), then a light weight. Smooth beats heavy"
     if load_type in ("dumbbell", "kettlebell", "machine", "cable"):
         return ("start with a weight you could lift 15 times. Do %d. Go a little heavier "
-                "each set until %d reps leave 3 or 4 in the tank. Write that weight down" % (target, target))
+                "each set until %d reps leave 3 or 4 reps spare. Write that weight down" % (target, target))
     if load_type == "band":
-        return "the band that makes %d reps hard but clean, 3 left in the tank. Write its colour" % target
+        return "the band that makes %d reps hard but clean, 3 reps spare. Write its colour" % target
     return ""
 
 
@@ -90,7 +90,7 @@ def linear_update(slot, st, res, ctx):
         if st["fails"] >= slot.get("fails_to_reset", 3):     # StrongLifts: 3 misses, minus 10% [checked]
             st["load"] = ctx["round"](load * 0.9)
             st["fails"] = 0
-            st["note"] = "reset 10 percent after 3 misses"
+            st["note"] = "missed 3 times: this lift drops 10 percent and climbs back"
 
 
 # · double progression (accessories everywhere)
@@ -140,12 +140,12 @@ def tm_prescribe(slot, st, ctx):
     wave = st.get("wave", 1)
     if tm is None:
         return {"sets": 1, "reps": "5", "load": None, "first_outing": True,
-                "text": "find your 5: empty bar first, sets of 5 climbing until one feels like 2 left. "
-                        "That set sets your training max", "beat": None}
+                "text": "find your 5: empty bar first, sets of 5 climbing until one leaves about 2 reps spare. "
+                        "That set sets your working weight", "beat": None}
     rows = WAVES[wave if slot.get("deload_wave", True) else min(wave, 3)]
     sets = [{"load": ctx["round"](tm * p), "reps": r} for p, r in rows]
     if ctx.get("cap_amrap"):
-        sets[-1]["reps"] = str(sets[-1]["reps"]).replace("+", "") + " (stop with 1 left)"
+        sets[-1]["reps"] = str(sets[-1]["reps"]).replace("+", "") + " (stop with 1 rep spare)"
     return {"sets": len(sets), "reps": "/".join(str(s["reps"]) for s in sets), "load": sets[-1]["load"],
             "set_list": sets, "wave": wave,
             "beat": ("last set: more than %s at %s" % (str(rows[-1][1]).replace("+", ""), ctx["fmt"](sets[-1]["load"])))}
@@ -168,7 +168,7 @@ def tm_update(slot, st, res, ctx):
     if wave >= last_wave:
         if st.get("misses", 0):
             st["tm"] = ctx["round"](st["tm"] * 0.9)          # a missed minimum: TM minus 10% [checked]
-            st["note"] = "training max down 10 percent after a missed minimum"
+            st["note"] = "missed the last set: your working weight drops 10 percent and climbs back"
         else:
             st["tm"] = st["tm"] + default_inc(slot, ctx)      # +2.5 upper, +5 lower per cycle [checked]
         st["wave"] = 1
@@ -211,7 +211,7 @@ def tier_update(slot, st, res, ctx):
     else:
         st["stage"] = 0
         st["load"] = ctx["round"](load * 0.85)
-        st["note"] = "back to the first stage at 85 percent"
+        st["note"] = "missed again: back to the first sets and reps, 15 percent lighter"
 
 
 # · RPE top set (RTS / SBS)
@@ -227,14 +227,14 @@ def rpe_prescribe(slot, st, ctx):
     if e is None:
         return {"sets": 1 + backoff, "reps": "1 x %d, then %d x %d" % (reps, backoff, reps),
                 "load": None, "first_outing": True,
-                "text": "work up in small jumps to a set of %d that feels like %d left. That is your top set. "
+                "text": "work up in small jumps to a set of %d that leaves about %d reps spare. That is your heaviest set. "
                         "Then %d more sets of %d at about 90 percent of it" % (reps, 10 - rpe, backoff, reps),
                 "beat": None}
     pct = RPE_PCT.get((reps, rpe), from_e1rm(1, reps))
     top = ctx["round"](e * pct)
     return {"sets": 1 + backoff, "reps": "1 x %d, then %d x %d" % (reps, backoff, reps),
             "load": top, "backoff_load": ctx["round"](top * (1 - slot.get("fatigue_drop", 0.1))),
-            "beat": "top set %s for %d with %d left or more" % (ctx["fmt"](top), reps, 10 - rpe)}
+            "beat": "heaviest set %s for %d with %d reps spare or more" % (ctx["fmt"](top), reps, 10 - rpe)}
 
 
 def rpe_update(slot, st, res, ctx):
@@ -357,7 +357,7 @@ def run_update(slot, st, res, ctx):
     st["minutes"] = mins
     if res.get("completed") or res.get("time"):
         st["weeks_held"] = st.get("weeks_held", 0) + (1.0 / max(1, slot.get("per_week", 1)))
-    if st.get("weeks_held", 0) >= 3:                    # hold about 3 weeks, then about +10% [B]
+    if st.get("weeks_held", 0) >= slot.get("hold_weeks", 3):   # hold about 3 weeks (2 for a marathon long run), then about +10% [B]
         st["minutes"] = min(slot.get("max_minutes", 150), int(round(mins * 1.1)))
         st["weeks_held"] = 0
 

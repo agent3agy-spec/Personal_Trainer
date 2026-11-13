@@ -92,13 +92,13 @@
   "modules": [],
   "sessions": {
     "Volume": {
-      "title": "Volume day · Squat · Bench",
+      "title": "Hard day · Squat · Bench",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -111,7 +111,7 @@
               "sets": 5,
               "reps": "5",
               "rest": 240,
-              "effort": "about 90% of your Friday 5RM, all 25 reps clean",
+              "effort": "about 90% of your Friday best for 5, all 25 reps clean",
               "rule": "linear_session",
               "inc": 2.5,
               "score": true
@@ -125,14 +125,14 @@
               "sets": 5,
               "reps": "5",
               "rest": 180,
-              "effort": "every rep clean, 1 left",
+              "effort": "every rep clean, 1 rep spare",
               "rule": "linear_session",
               "inc": 2.5
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -147,7 +147,7 @@
               "sets": 3,
               "reps": "5-8",
               "rest": 90,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -155,11 +155,11 @@
       ]
     },
     "Recovery": {
-      "title": "Recovery day · Light squat · Press",
+      "title": "Easy day · Light squat · Press",
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -185,7 +185,7 @@
               "sets": 3,
               "reps": "5",
               "rest": 180,
-              "effort": "every rep clean, 1 or 2 left",
+              "effort": "every rep clean, 1 or 2 reps spare",
               "rule": "linear_session",
               "inc": 2.5,
               "score": true
@@ -193,7 +193,7 @@
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -208,7 +208,7 @@
               "sets": 2,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 or 3 left",
+              "effort": "2 or 3 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -216,14 +216,14 @@
       ]
     },
     "Intensity": {
-      "title": "Intensity day · Squat 5RM · Bench · Deadlift",
+      "title": "Test day · Squat, a new best for 5 · Bench · Deadlift",
       "tags": [
         "heavy_legs",
         "hinge_heavy"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -236,7 +236,7 @@
               "sets": 1,
               "reps": "5",
               "rest": 240,
-              "effort": "work up to one set of 5, a new 5RM, every rep clean",
+              "effort": "work up to one set of 5, a new best for 5, every rep clean",
               "rule": "linear_session",
               "inc": 2.5,
               "score": true
@@ -250,14 +250,14 @@
               "sets": 1,
               "reps": "5",
               "rest": 240,
-              "effort": "one set of 5, a new 5RM",
+              "effort": "one set of 5, a new best for 5",
               "rule": "linear_session",
               "inc": 2.5
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -278,7 +278,7 @@
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -293,7 +293,7 @@
               "sets": 3,
               "reps": "5-8",
               "rest": 90,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -302,13 +302,13 @@
     }
   },
   "express": {
-    "title": "Express · Squat 5RM · Bench",
+    "title": "Short version · Squat, a new best for 5 · Bench",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -321,7 +321,7 @@
             "sets": 1,
             "reps": "5",
             "rest": 210,
-            "effort": "one set of 5, a new 5RM",
+            "effort": "one set of 5, a new best for 5",
             "rule": "linear_session",
             "inc": 2.5,
             "score": true

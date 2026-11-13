@@ -7,11 +7,11 @@
 ```json
 {
   "id": "mobility",
-  "name": "Mobility finisher",
+  "name": "Loosen up, to finish",
   "when": "finisher",
   "minutes": 6,
   "session": {
-    "title": "Mobility finisher",
+    "title": "Loosen up, to finish",
     "tags": [],
     "blocks": [
       {

@@ -132,7 +132,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
   ],
   "sessions": {
     "A": {
-      "title": "Squat · Couplet AMRAP",
+      "title": "Squat · 2 moves, as many rounds as you can",
       "tags": [
         "heavy_legs",
         "hard_cardio"
@@ -154,14 +154,14 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "sets": 5,
               "reps": "3-5",
               "rest": 150,
-              "effort": "2 left, every rep clean",
+              "effort": "2 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Metcon",
+          "name": "Timed workout",
           "kind": "finisher",
           "format": "amrap",
           "minutes": 12,
@@ -173,7 +173,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "minutes": 12,
               "rule": "benchmark",
               "score": true,
-              "effort": "hard but steady. Scale load first, then reps, then the movement. Novices: no high-skill move once you are tired",
+              "effort": "hard but steady. Too hard? Go lighter first, then fewer reps, then an easier move. New to this? No tricky moves once you are tired",
               "pieces": [
                 [
                   {
@@ -255,7 +255,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
       ]
     },
     "B": {
-      "title": "Press · Triplet for time",
+      "title": "Press · 3 moves, as fast as you can",
       "tags": [
         "hard_cardio"
       ],
@@ -277,14 +277,14 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "sets": 5,
               "reps": "3-5",
               "rest": 150,
-              "effort": "2 left, ribs down",
+              "effort": "2 reps spare, ribs down",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Metcon",
+          "name": "Timed workout",
           "kind": "finisher",
           "format": "fortime",
           "minutes": 12,
@@ -297,7 +297,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "reps": "3 rounds",
               "rule": "benchmark",
               "score": true,
-              "effort": "3 rounds, 12 min cap. Scale load first, then reps, then the movement. Novices: no high-skill move once you are tired",
+              "effort": "3 rounds, stop at 12 min. Too hard? Go lighter first, then fewer reps, then an easier move. New to this? No tricky moves once you are tired",
               "pieces": [
                 [
                   {
@@ -414,7 +414,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
       ]
     },
     "C": {
-      "title": "Deadlift · Single modality EMOM",
+      "title": "Deadlift · one move, a set every minute",
       "tags": [
         "hinge_heavy",
         "hard_cardio"
@@ -437,14 +437,14 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "sets": 3,
               "reps": "3-5",
               "rest": 180,
-              "effort": "2 left, flat back",
+              "effort": "2 reps spare, flat back",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Metcon",
+          "name": "Timed workout",
           "kind": "finisher",
           "format": "emom",
           "minutes": 12,
@@ -456,7 +456,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "minutes": 12,
               "rule": "benchmark",
               "score": true,
-              "effort": "every minute on the minute, 15 to 20 s of rest left each minute. Scale reps before you drop the movement",
+              "effort": "a set at the start of every minute, with 15 to 20 s of rest left each minute. Too hard? Fewer reps before an easier move",
               "pieces": [
                 [
                   {
@@ -522,7 +522,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
       ]
     },
     "D": {
-      "title": "Bench · Triplet AMRAP",
+      "title": "Bench · 3 moves, as many rounds as you can",
       "tags": [
         "hard_cardio"
       ],
@@ -544,14 +544,14 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "sets": 5,
               "reps": "3-5",
               "rest": 150,
-              "effort": "2 left, feet planted",
+              "effort": "2 reps spare, feet planted",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Metcon",
+          "name": "Timed workout",
           "kind": "finisher",
           "format": "amrap",
           "minutes": 16,
@@ -563,7 +563,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "minutes": 16,
               "rule": "benchmark",
               "score": true,
-              "effort": "a pace you can hold for 16 min. Scale load first, then reps, then the movement. Novices: no high-skill move once you are tired",
+              "effort": "a pace you can hold for 16 min. Too hard? Go lighter first, then fewer reps, then an easier move. New to this? No tricky moves once you are tired",
               "pieces": [
                 [
                   {
@@ -680,7 +680,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
       ]
     },
     "E": {
-      "title": "Power clean · Chipper",
+      "title": "Power clean · one long list, top to bottom",
       "tags": [
         "power",
         "hard_cardio"
@@ -709,7 +709,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
           ]
         },
         {
-          "name": "Metcon",
+          "name": "Timed workout",
           "kind": "finisher",
           "format": "fortime",
           "minutes": 14,
@@ -722,7 +722,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
               "reps": "1 round",
               "rule": "benchmark",
               "score": true,
-              "effort": "one pass, top to bottom, 14 min cap. Break the sets early. Scale load first, then reps, then the movement",
+              "effort": "one pass, top to bottom, stop at 14 min. Break the sets early. Too hard? Go lighter first, then fewer reps, then an easier move",
               "pieces": [
                 [
                   {
@@ -855,7 +855,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
     }
   },
   "express": {
-    "title": "Express · Squat · 8 min AMRAP",
+    "title": "Short version · Squat · 8 min, as many rounds as you can",
     "tags": [
       "heavy_legs",
       "hard_cardio"
@@ -877,14 +877,14 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
             "sets": 3,
             "reps": "3-5",
             "rest": 120,
-            "effort": "2 left, every rep clean",
+            "effort": "2 reps spare, every rep clean",
             "rule": "double_progression",
             "score": true
           }
         ]
       },
       {
-        "name": "Metcon",
+        "name": "Timed workout",
         "kind": "finisher",
         "format": "amrap",
         "minutes": 8,
@@ -896,7 +896,7 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
             "minutes": 8,
             "rule": "benchmark",
             "score": true,
-            "effort": "hard but steady. Scale load first, then reps, then the movement",
+            "effort": "hard but steady. Too hard? Go lighter first, then fewer reps, then an easier move",
             "pieces": [
               [
                 {
@@ -984,6 +984,8 @@ Each metcon has four versions that rotate one per outing, so you meet the same p
         ]
       }
     ]
-  }
+  },
+  "rotates": true,
+  "rotation_note": "Its five sessions take turns: every one is a main lift plus new conditioning, so each main lift comes round every one to two weeks."
 }
 ```

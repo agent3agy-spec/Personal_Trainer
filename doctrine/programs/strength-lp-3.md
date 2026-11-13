@@ -104,7 +104,7 @@
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -117,7 +117,7 @@
               "sets": 5,
               "reps": "5",
               "rest": 180,
-              "effort": "every rep clean, 1 or 2 left",
+              "effort": "every rep clean, 1 or 2 reps spare",
               "rule": "linear_session",
               "inc": 5,
               "score": true
@@ -131,14 +131,14 @@
               "sets": 5,
               "reps": "5",
               "rest": 180,
-              "effort": "every rep clean, 1 or 2 left",
+              "effort": "every rep clean, 1 or 2 reps spare",
               "rule": "linear_session",
               "inc": 2.5
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -152,7 +152,7 @@
               "sets": 5,
               "reps": "5",
               "rest": 120,
-              "effort": "1 or 2 left",
+              "effort": "1 or 2 reps spare",
               "rule": "linear_session",
               "inc": 2.5
             }
@@ -168,7 +168,7 @@
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -181,7 +181,7 @@
               "sets": 5,
               "reps": "5",
               "rest": 180,
-              "effort": "every rep clean, 1 or 2 left",
+              "effort": "every rep clean, 1 or 2 reps spare",
               "rule": "linear_session",
               "inc": 5,
               "score": true
@@ -195,14 +195,14 @@
               "sets": 5,
               "reps": "5",
               "rest": 180,
-              "effort": "every rep clean, 1 or 2 left",
+              "effort": "every rep clean, 1 or 2 reps spare",
               "rule": "linear_session",
               "inc": 2.5
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -216,7 +216,7 @@
               "sets": 1,
               "reps": "5",
               "rest": 180,
-              "effort": "1 or 2 left, flat back",
+              "effort": "1 or 2 reps spare, flat back",
               "rule": "linear_session",
               "inc": 5,
               "inc_after_100": 2.5
@@ -224,7 +224,7 @@
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -239,7 +239,7 @@
               "sets": 3,
               "reps": "6-10",
               "rest": 90,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -248,13 +248,13 @@
     }
   },
   "express": {
-    "title": "Express · Squat · Press or Bench",
+    "title": "Short version · Squat · Press or Bench",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -267,7 +267,7 @@
             "sets": 3,
             "reps": "5",
             "rest": 150,
-            "effort": "every rep clean, 1 or 2 left",
+            "effort": "every rep clean, 1 or 2 reps spare",
             "rule": "linear_session",
             "inc": 5,
             "score": true
@@ -281,7 +281,7 @@
             "sets": 3,
             "reps": "5",
             "rest": 150,
-            "effort": "1 or 2 left",
+            "effort": "1 or 2 reps spare",
             "rule": "linear_session",
             "inc": 2.5
           }

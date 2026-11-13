@@ -119,7 +119,13 @@ def check_data():
             errs += check_profile(prof)
     pl = core.read_json_block(core.PLAN) if core.PLAN.exists() else None
     if pl:
-        if not (core.PROGRAMS / (pl.get("program", "") + ".md")).exists():
+        if pl.get("program") == "mine":
+            mine = core.read_json_block(core.MINE)
+            if not mine:
+                errs.append("plan: their routine (me/PROGRAM.md) has no data block")
+            elif str(mine["days"][0]) not in mine.get("layouts", {}) or [s for s in mine["layouts"][str(mine["days"][0])] if s not in mine.get("sessions", {})]:
+                errs.append("plan: their routine's week names a session it does not hold")
+        elif not (core.PROGRAMS / (pl.get("program", "") + ".md")).exists():
             errs.append("plan: program '%s' has no file" % pl.get("program"))
     st = core.load_json(core.STATE)
     if st is not None:
@@ -133,6 +139,21 @@ def check_data():
             except Exception:
                 errs.append("log: line %d is not valid json" % (i + 1))
     return errs
+
+
+CSS_VAR = re.compile(r"(?<![\w-])-{2}[A-Za-z][\w-]*")
+
+
+def prose_of(line, suffix):
+    """The line without the code that legitimately spells two hyphens: HTML comment markers, and CSS custom
+    properties (every one in a .css file; elsewhere inside var(), a declaration after { or ;, or a code span).
+    What is left is held to the house style: never a double dash."""
+    s = line.replace("<!" + "-" * 2, "").replace("-" * 2 + ">", "")
+    if suffix == ".css":
+        return CSS_VAR.sub("", s)
+    s = re.sub(r"var\(\s*-{2}[\w-]+", "", s)
+    s = re.sub(r"(?<=[{;])\s*-{2}[\w-]+\s*:", "", s)
+    return re.sub(r"`-{2}[\w-]+`", "", s)
 
 
 def check_template():
@@ -172,11 +193,16 @@ def check_template():
                 errs.append("%s: missing '%s'" % (pid, k))
         if set(p.get("goals", {})) != set(core.GOALS):
             errs.append("%s: goals must have exactly the 11 keys" % pid)
-        for d in range(p["days"][0], p["days"][1] + 1):
-            lay = p["layouts"].get(str(d))
-            if lay is None:
+        for d in (p["days"][0], p["days"][1]):
+            if str(d) not in p["layouts"]:
                 errs.append("%s: no layout for %d days" % (pid, d))
-            for sid in lay or []:
+        for k, lay in p["layouts"].items():
+            if not p["days"][0] <= int(k) <= p["days"][1]:
+                errs.append("%s: a %s day layout outside its days" % (pid, k))
+            if len(lay) > int(k) and not p.get("rotates"):
+                errs.append("%s: its %s day layout squeezes %d sessions into %s days (mark rotates only for whole body sessions)"
+                            % (pid, k, len(lay), k))      # never squeeze silently (research/07 change 1)
+            for sid in lay:
                 if sid not in p["sessions"]:
                     errs.append("%s: layout names a missing session '%s'" % (pid, sid))
         for sid, s in p["sessions"].items():
@@ -205,15 +231,20 @@ def check_template():
         for k in ("easier", "harder"):
             if r[k] and (r[k] not in bank or bank[r[k]]["pattern"] != r["pattern"]):
                 errs.append("bank %s: %s '%s' missing or another pattern" % (r["id"], k, r[k]))
+    import words                                        # French: every exercise and every program line has its French
+    cov = words.coverage()
+    errs += ["french: bank id '%s' has no row in doctrine/exercises/fr.csv" % i for i in cov["bank_missing"]]
+    errs += ["french: doctrine/exercises/fr.csv names '%s', not in the bank" % i for i in cov["bank_unknown"]]
+    errs += ["french: no line in doctrine/words/fr.csv for %s" % x for x in cov["lines_missing"]]
     for f in core.ROOT.rglob("*"):
         if f.is_file() and f.suffix in (".md", ".py", ".csv", ".json", ".css", ".html", ".yml") and ".git" not in f.parts:
             t = f.read_text(encoding="utf-8", errors="ignore")
             if "\u2014" in t or "\u2013" in t:
                 errs.append("style: em or en dash in %s" % f.relative_to(core.ROOT))
             for ln, line in enumerate(t.splitlines(), 1):
-                if re.search(r"(?<!-)-{2}(?!-)", line) and not re.match(r"^\|?[:\- |]+\|?$", line.strip()):
+                if re.search(r"(?<!-)-{2}(?!-)", prose_of(line, f.suffix)) and not re.match(r"^\|?[:\- |]+\|?$", line.strip()):
                     errs.append("style: double dash in %s line %d" % (f.relative_to(core.ROOT), ln))
-    for f in ("PROFILE.md", "PLAN.md"):
+    for f in ("PROFILE.md", "PLAN.md", "PROGRAM.md"):
         if core.read_json_block(core.ME / f):
             errs.append("template: me/%s holds data, the template must ship it empty" % f)
     if core.LOG.exists() and core.LOG.read_text().strip():

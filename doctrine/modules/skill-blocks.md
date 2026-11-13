@@ -7,11 +7,11 @@ About 10 minutes of skill work for calisthenics: a handstand line, a pull line a
 ```json
 {
   "id": "skill-blocks",
-  "name": "Skill blocks",
+  "name": "Bodyweight skills",
   "when": "finisher",
   "minutes": 10,
   "session": {
-    "title": "Skill blocks",
+    "title": "Bodyweight skills",
     "tags": [],
     "blocks": [
       {

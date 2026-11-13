@@ -1,6 +1,6 @@
 # programs · one file per runnable program
 
-_This folder owns: every program the trainer can run. **A program with no file here cannot be served.** Only the files directly in this folder count: `_out_of_scope/` holds programs kept but never served (its README says why and when). The schools behind them, and the ones studied but not runnable, are in `../schools/INDEX.md`._
+_This folder owns: every program the trainer can run (plus one that lives outside it: `me/PROGRAM.md`, their own routine on the improve path, id `mine`, family `own`, in this same schema with `theirs` slots and a proposal ledger; `../06_BUILD.md`, Their own routine), and the library the composer draws on (`../06_BUILD.md`, The composer): the lead program of a week is one of these, and the days of a second component can be another one's sessions. **A program with no file here cannot be served.** Only the files directly in this folder count: `_out_of_scope/` holds programs kept but never served (its README says why and when). The schools behind them, and the ones studied but not runnable, are in `../schools/INDEX.md`._
 
 Each file has two parts:
 
@@ -37,7 +37,14 @@ Each file has two parts:
   "meso": null,                          or {"rir_by_week": ["3","2","1 to 2","0 to 1"],
                                              "extra_sets_by_week": [0,1,1,2], "applies_to": ["accessory"]}
   "layouts": {"2": ["A","B"], "3": ["A","B"]},   the rotation of sessions for a given days a week;
-                                         sessions are done IN ORDER, never tied to a weekday
+                                         sessions are done IN ORDER, never tied to a weekday.
+                                         Required for days[0] and days[1]; a count in between may be
+                                         left out when no honest week exists (strength-531-bbb-4 has 2
+                                         and 4, never 3). NEVER more sessions than days, unless:
+  "rotates": true,                       optional, whole body programs only: every session trains the
+  "rotation_note": "...",                whole body, so the sessions may take turns over fewer days;
+                                         the plan says the note
+  "layout_notes": {"3": "..."},          optional: what a shorter week leaves out, said in the plan
   "modules": ["core"],                   default finisher modules (see ../modules/)
   "sessions": {"A": SESSION, "B": SESSION},
   "express": SESSION                     the short version, used when the minutes are under "minutes"[0]
@@ -75,9 +82,18 @@ Rule parameters: `tm_wave` takes `"tm_pct": 0.9`, `"deload_wave": true`. `tier_s
 
 **SLOT, a timed piece** (metcons, HYROX work): `{"key": "metcon", "kind": "piece", "format": "amrap", "minutes": 12, "rule": "benchmark", "score": true, "pieces": [[MOVE, MOVE, MOVE], [MOVE, MOVE]]}` where MOVE is `{"pattern": "cyclic", "prefer": ["row_erg", "bike_erg", "run"], "reps": "12 cal"}`. The engine rotates through `pieces` one per outing and fills each move from the bank for today's equipment.
 
+## The composer reads this folder as a library
+
+- The **lead** is the program `match` picks for the biggest share of the blend, for the days the composer gives it (`compose.lead_days`).
+- **Lifting days next to another lead** come from a whole body program in the folder (`compose._lift_source`), the best fit for the goal and kit.
+- **HYROX days** next to another lead are `hyrox-prep-4` sessions (`C`, then `I`, then `E`), **mixed conditioning days** are `functional-gpp-3to5` sessions in turn, **running days** for someone who cannot run 30 minutes yet are the `run-c25k-3` session.
+- Those sessions keep their own progress: their slot keys carry a prefix in the state (`l_`, `h_`, `f_`, `r_`).
+
 ## The rules of this folder
 
 - Only bank ids from `../exercises/bank.csv` in `prefer`. A slot whose pattern has no exercise for the person's equipment is dropped (accessory) or turns the day into the travel module (main).
 - Every number in a block has its source in the prose with a mark. A [believe] number is allowed, and listed in `../schools/INDEX.md` under "to verify".
 - Paid programs are credited and linked, never copied.
+- No layout squeezes more sessions than days (`checks.py template` refuses it), except a whole body rotation marked `rotates`.
+- Session titles, block names and effort lines are what the person reads: no method or school name in them (no 5/3/1, BBB, T1, training max).
 - English, no em dash, no double dash.

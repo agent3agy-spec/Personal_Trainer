@@ -106,7 +106,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -119,7 +119,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "5/3/1",
               "rest": 180,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": false,
@@ -135,7 +135,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "5/3/1",
               "rest": 180,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": false,
@@ -144,7 +144,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
           ]
         },
         {
-          "name": "First set last",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -157,7 +157,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 5,
               "reps": "5",
               "rest": 120,
-              "effort": "5 x 5 at the first set's weight of today's squat (65, 70, 75% of the TM by week). Load it yourself",
+              "effort": "5 x 5 at the weight of today's first squat set. Load it yourself",
               "rule": "fixed"
             },
             {
@@ -169,13 +169,13 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 5,
               "reps": "5",
               "rest": 120,
-              "effort": "5 x 5 at the first set's weight of today's bench (65, 70, 75% of the TM by week). Load it yourself",
+              "effort": "5 x 5 at the weight of today's first bench set. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -190,7 +190,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -204,7 +204,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 left, any mix of sets that reaches the reps",
+              "effort": "2 reps spare, any mix of sets that reaches the reps",
               "rule": "double_progression"
             },
             {
@@ -218,7 +218,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 left, each leg",
+              "effort": "2 reps spare, each leg",
               "rule": "double_progression"
             }
           ]
@@ -232,7 +232,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -246,7 +246,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "5/3/1",
               "rest": 180,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": false,
@@ -262,7 +262,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "5/3/1",
               "rest": 180,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": false,
@@ -271,7 +271,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
           ]
         },
         {
-          "name": "First set last",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -285,7 +285,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 5,
               "reps": "5",
               "rest": 120,
-              "effort": "5 x 5 at the first set's weight of today's deadlift (65, 70, 75% of the TM by week). Load it yourself",
+              "effort": "5 x 5 at the weight of today's first deadlift set. Load it yourself",
               "rule": "fixed"
             },
             {
@@ -297,13 +297,13 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 5,
               "reps": "5",
               "rest": 120,
-              "effort": "5 x 5 at the first set's weight of today's press (65, 70, 75% of the TM by week). Load it yourself",
+              "effort": "5 x 5 at the weight of today's first press set. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -318,7 +318,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -332,7 +332,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -360,7 +360,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -373,7 +373,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "5/3/1",
               "rest": 180,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": false,
@@ -389,7 +389,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "5/3/1",
               "rest": 180,
-              "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+              "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
               "rule": "tm_wave",
               "tm_pct": 0.9,
               "deload_wave": false,
@@ -398,7 +398,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
           ]
         },
         {
-          "name": "First set last",
+          "name": "Extra sets, lighter",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -411,7 +411,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 5,
               "reps": "5",
               "rest": 120,
-              "effort": "5 x 5 at the first set's weight of today's bench (65, 70, 75% of the TM by week). Load it yourself",
+              "effort": "5 x 5 at the weight of today's first bench set. Load it yourself",
               "rule": "fixed"
             },
             {
@@ -423,13 +423,13 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 5,
               "reps": "5",
               "rest": 120,
-              "effort": "5 x 5 at the first set's weight of today's squat (65, 70, 75% of the TM by week). Load it yourself",
+              "effort": "5 x 5 at the weight of today's first squat set. Load it yourself",
               "rule": "fixed"
             }
           ]
         },
         {
-          "name": "Assistance",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -444,7 +444,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -458,7 +458,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 left, any mix of sets that reaches the reps",
+              "effort": "2 reps spare, any mix of sets that reaches the reps",
               "rule": "double_progression"
             },
             {
@@ -472,7 +472,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "2 left, each leg",
+              "effort": "2 reps spare, each leg",
               "rule": "double_progression"
             }
           ]
@@ -481,13 +481,13 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
     }
   },
   "express": {
-    "title": "Express · Squat · Bench",
+    "title": "Short version · Squat · Bench",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -500,7 +500,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
             "sets": 3,
             "reps": "5/3/1",
             "rest": 180,
-            "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+            "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
             "rule": "tm_wave",
             "tm_pct": 0.9,
             "deload_wave": false,
@@ -516,7 +516,7 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
             "sets": 3,
             "reps": "5/3/1",
             "rest": 180,
-            "effort": "the 5/3/1 waves of your training max; last set as many clean reps as you have",
+            "effort": "3 sets, each heavier; on the last, as many clean reps as you can",
             "rule": "tm_wave",
             "tm_pct": 0.9,
             "deload_wave": false,
@@ -525,6 +525,8 @@ Squat and bench appear twice a week, so the A and C versions are tracked as sepa
         ]
       }
     ]
-  }
+  },
+  "rotates": true,
+  "rotation_note": "Its three sessions take turns over your 2 days. Every one trains the whole body, so nothing is lost: each lift just comes round a little less often."
 }
 ```

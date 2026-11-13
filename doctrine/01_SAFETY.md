@@ -30,6 +30,7 @@ The trainer never names a cause. It describes back what was said and acts:
 | mild (about 3 out of 10 or less), settles within 24 h | trains with care: no impact and nothing advanced on that region today |
 | an old injury a professional has cleared (a replaced knee, a healed shoulder) | trained with care, always: no impact and nothing advanced on it (`exclude: false`) |
 | sharper, worsening, after a fall or a knock, or lasting 1 to 2 weeks | the region is left out until they say a professional cleared it; the sheet carries "see a physiotherapist or doctor" |
+| a limit from the interview (hurts now, only on some moves, never checked) with what sets it off | the moves that set it off are swapped for the nearest move that leaves it alone (an overhead press for an incline press, a pull-down for a row), and the rest of the region is trained with care. It never bans the region and never knocks anyone off strength training. With no trigger given, the region's usual one is used and the sheet asks for theirs (`build.lim_triggers`). Pain over 3 logged after a session puts the whole region out again until cleared |
 
 [believe, physiotherapy practice consensus]
 

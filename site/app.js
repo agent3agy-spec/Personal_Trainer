@@ -7,7 +7,7 @@
  * Swap points, each in ONE place:
  *   strings and tone   STR below (en, fr)
  *   icons              the sprite in index.html (#i-*, #t-*), written by site/build_icons.py
- *   the agent's mark   site/mark.svg, drawn by #agent-mark in the sprite, used through mark()
+ *   the agent's mark   site/mark.png (rendered from mark.svg), drawn by #agent-mark in the sprite, used through mark()
  *   faces and paint    :root tokens in app.css
  */
 'use strict';
@@ -23,14 +23,23 @@ const STR = {
     bootLead: 'The first time takes a few seconds while I set up on this device. After that it opens fast.',
     bootSlow: 'Still working. A slow connection can take up to a minute. If nothing moves, reload the page.',
     stepOf: (i, n, name) => 'Step ' + i + ' of ' + n + ' · ' + name,
-    phases: ['Safety', 'You', 'Program', 'Today', 'Sheet'],
+    phases: ['Safety', 'You', 'Your plan', 'Today', 'Sheet'],
     welcomeTitle: 'Your <em>Personal</em> trainer',
-    welcomeLead: 'A few taps and I build you a proven program, then a one-page sheet for every session, each built on how the last one went. Tap Start and we go.',
+    welcomeLead: 'A few taps and I build you a plan that works, then a one-page sheet for every session, each built on how the last one went. Tap Start and we go.',
     welcomeNote: 'Everything stays on this device.',
+    introKicker: 'How it works',
+    pickFirst: 'Pick an answer, or write it in the box.',
+    wordsBoxQ: 'Or say it in your own words', wordsBoxPh: 'Type your answer…', wordsSend: 'Send', wordsThinking: 'Reading your answer…',
+    wordsPicked: 'Got it. I picked the closest answer for you.', wordsKept: 'Got it, I keep your words in mind. Tap the closest card so we can go on.',
+    intro: [['Tell me about you', 'Your goal, your week, your body. About 3 minutes.'],
+      ['Get your plan', 'I pick the training that fits you, and tell you why.'],
+      ['Train with your sheet', 'One page per session, built on how the last one went.']],
     start: 'Start',
     safetyTitle: 'A quick safety check',
-    safetyLead: 'Quick one before we start. Tap any that apply to you. None? Tap “None of these” at the bottom.',
-    safetyHint: 'Tap “None of these” or the ones that apply.',
+    safetyLead: 'Quick one before we start. All good on the health side? One tap and we go.',
+    safetyHint: 'Tap the ones that apply, or write it below.',
+    noIssues: 'No health problems', noIssuesSub: 'Let’s go', flagSome: 'I have something to flag', flagSub: 'Shows a short list',
+    flagLead: 'Tap any that apply. Not on the list? Write it below.', noteQ: 'Anything else I should know? (optional)', notePh: 'e.g. an old knee injury, asthma',
     safety: [
       'A doctor said you have a heart condition or high blood pressure',
       'Chest pain at rest, in daily life, or when you are active',
@@ -84,7 +93,7 @@ const STR = {
       run: 'Running', fat_loss: 'Lose fat', health: 'Feel healthier',
     },
     goalSub: {
-      functional: 'CrossFit style, in a gym', run: '5 km up to a half marathon', powerlifting: 'Squat, bench press and deadlift', weightlifting: 'Snatch, clean and jerk',
+      functional: 'Mixed workouts: weights, bodyweight, cardio', run: '5 km up to a half marathon', powerlifting: 'Squat, bench press and deadlift', weightlifting: 'Snatch, clean and jerk',
       hyrox: 'A race of running and gym stations', muscle: 'Bigger, firmer muscles', strength: 'Lift heavier things',
     },
     youDecide: 'You decide', youDecideSub: 'I’ll pick the safe choice',
@@ -206,7 +215,7 @@ const STR = {
     home: 'Done',
     nextTime: 'Next time',
     weekClosed: 'That closes your week. Nice work.',
-    blockClosed: 'That closes a block. The next one starts from your new numbers.',
+    blockClosed: 'That closes these weeks. The next stretch starts from your new numbers.',
     deload: 'Your body is asking for an easier week, so the next sessions run lighter. Keep showing up.',
     noProblem: 'No problem, it happens. The next one is ready when you are.',
     notInSession: 'Noted in your log. It doesn’t change the plan.',
@@ -230,7 +239,7 @@ const STR = {
     recordTitle: (n) => n === 1 ? 'New record' : n + ' new records',
     recordLine: 'You beat your best. Keep the form clean and go again next time.',
     hardSets: 'Work per muscle this week',
-    usualBand: 'Each bar counts the hard sets for that muscle. The shaded band is the usual range.',
+    usualBand: 'Each bar counts the sets that ended near your limit, for that muscle. The shaded band is the usual range.',
     muscles: { chest: 'Chest', back: 'Back', shoulders: 'Shoulders', quads: 'Quads', glutes: 'Glutes', hamstrings: 'Hamstrings', biceps: 'Biceps', triceps: 'Triceps', calves: 'Calves', core: 'Core' },
     setTitle: 'Settings',
     backup: 'Save my trainer', backupSub: 'A file with everything, to keep or move to another device',
@@ -243,7 +252,43 @@ const STR = {
     theme: 'Look', themes: { auto: 'Auto', light: 'Light', dark: 'Dark' },
     noStorage: 'This device is not keeping notes for this page, so your trainer lasts until you close it. Save your trainer to keep it.',
     close: 'Close',
-    sayAlso: {},
+    // the everyday dashboard, once a plan exists
+    d: {
+      go: 'Get today’s workout', goSub: (n) => 'Next up: ' + n,
+      week: 'This week', weekLine: (d, p) => d + ' of ' + p + ' sessions done',
+      best: 'Latest new best', bestOn: (d) => 'on ' + niceDate(d),
+      due: 'Waiting for you',
+      ask: 'Ask your trainer', askLead: 'A question, or a change for today.',
+      askPh: 'I only have 20 minutes · my knee hurts · swap squats', askSend: 'Ask',
+      askThinking: 'Thinking…', askFail: 'I couldn’t answer that just now. Try again, or tap Get today’s workout.',
+      goMinutes: (m) => 'Get a ' + m + '-minute workout', goPain: (r) => 'Get today’s workout, easy on your ' + r,
+      goSwap: (w) => 'Get today’s workout without ' + w, goEdit: 'Change it in What I know about you',
+      swapped: (w) => 'Swapped out today, as you asked: ' + w + '.', painSaid: (r) => 'You told me: ' + r + '.',
+    },
+    // what I know about you: every answer, in plain words, each one changeable
+    k: {
+      title: 'What I know about you', lead: 'Everything you told me, in one place. Tap Edit to change an answer. If a change needs a new plan, I update it for you.',
+      tileSub: 'Your goal, your week, your body. Change any answer',
+      goal: 'Your goal', week: 'Your week', where: 'Where you train', body: 'Your body', numbers: 'Your numbers', words: 'Your words',
+      edit: 'Edit', save: 'Save', notSaid: 'Not said yet', none: 'Nothing',
+      want: 'What you want', mix: 'Your mix', event: 'Your event', start: 'How you started', newPlan: 'A new plan', ownRoutine: 'Your own routine, coached',
+      routine: 'Your routine', days: 'Days a week', minutes: 'Minutes a session', before: 'What you have done', style: 'Style you prefer',
+      enjoy: 'You enjoy', avoid: 'You can’t stand', kitPref: 'Free weights or machines',
+      place: 'Place', kit: 'What’s there', dumbbells: 'Your dumbbells',
+      pain: 'Pain or injuries', recent: 'Told me after a session', area: 'Area to bring up', good: 'Good at', hold: 'Holds you back',
+      sleep: 'Sleep', stress: 'Stress', health: 'Safety check', healthOn: (d) => 'All clear on ' + niceDate(d), healthNote: 'Your health note',
+      lifts: 'Lifts you know', units: 'Kilos or pounds', unitNames: { kg: 'Kilos', lb: 'Pounds' }, lang: 'Language',
+      langNames: { en: 'English', fr: 'Français' },
+      said: 'Things you told me', fromSessions: 'Your notes after sessions', addNote: 'Add something I should know',
+      notePh: 'e.g. I train before work, I hate burpees', noteSave: 'Keep it', remove: 'Remove',
+      redo: 'Go through all my answers again', redoSub: 'The same questions, with your answers filled in',
+      willUpdate: 'Your plan will be updated to match.', nextCounts: 'This counts from your next session.',
+      saved: 'Saved.', planUpdated: 'Saved. Your plan is updated to match.', savedNext: 'Saved. It counts from your next session.',
+      switchTitle: 'A different plan fits you better now', switchLead: (n) => 'With that change, ' + n + ' fits you best. Want to see it?',
+      seeNew: 'See the new plan', keepMine: 'Keep my plan', mustSwitch: 'Your plan no longer fits that answer, so here is the one that does.',
+      noFit: 'Saved. Nothing I have fits that answer safely, so your plan stays as it is.',
+      improveDays: 'Your routine sets your days.',
+    },
     iv: {
       forkTitle: 'Do you already train?',
       forkLead: 'All good on the safety side. Now, where do you start? Tap one.',
@@ -296,7 +341,7 @@ const STR = {
         intervals: 'Intervals', long: 'Long run', class: 'Class', d1: 'Day 1', d2: 'Day 2', d3: 'Day 3', d4: 'Day 4', d5: 'Day 5', d6: 'Day 6' },
       ageTitle: 'How long have you run this routine?',
       age: { under_1m: 'Under a month', '1_3m': '1 to 3 months', '3_12m': '3 to 12 months', over_1y: 'Over a year' },
-      goingTitle: 'How is it going?', goingLead: 'Tap what fits. Both are optional.',
+      goingTitle: 'How is it going?', goingLead: 'Tap what fits. All optional.',
       stallQ: 'What’s stuck?', stall: { lift_stuck: 'A lift won’t go up', not_growing: 'Not growing', tired: 'Always tired or sore', bored: 'Bored', skipping: 'I skip sessions', pain: 'Something hurts', fine: 'It’s fine' },
       keepQ: 'What must stay?', keep: { split: 'The split', exercises: 'The exercises', days: 'The days', pump: 'The pump', short: 'Short sessions', everything: 'Everything' },
       minLead: 'Type it, or use + and −. Anything from 15 to 120.',
@@ -336,7 +381,98 @@ const STR = {
       whyNot: { too_long: 'Sessions are too long', too_much_running: 'Too much running', not_enjoy: 'I wouldn’t enjoy it', days: 'I can’t do these days' },
       oneChange: (why) => 'One change would open a better fit: ' + why + '.',
       expect: 'What to expect: the first 2 to 4 weeks are for learning the moves and finding your weights. Strength shows up before the mirror does. A missed week is normal: you just pick up the next session.',
+      rt: {
+        setsTitle: 'Sets and reps', setsLead: 'What you usually do on each one. Not sure? Leave it: I’ll take a usual number, said as my guess.',
+        notSure: 'Not sure', stuckQ: 'Which lift won’t go up?',
+        title: 'Your routine', lead: 'I keep your split, your days in your order and your exercises. I run the weights, the progress and the lighter days on it.',
+        days: (n) => n + (n === 1 ? ' session a week, in your order' : ' sessions a week, in your order'),
+        times: (n) => n > 1 ? 'x' + n + ' a week' : '', guess: 'my guess', own: (n) => 'yours, tracked like ' + n,
+        classes: (list) => 'Plus your classes (' + list + '): they stay yours as they are.', run: 'run',
+        ideas: 'The coach’s ideas', ideasLead: 'Nothing in your routine changes unless you say yes.',
+        why: 'Why', change: 'What changes', yes: 'Yes, do it', keep: 'Keep mine',
+        lock: { split: 'You said the split stays: only if you want.', exercises: 'You said your exercises stay: only if you want.',
+          days: 'You said your days stay: only if you want.', pump: 'You said the pump stays: only if you want.',
+          short: 'You said short sessions stay: only if you want.', everything: 'You said everything stays: only if you want.' },
+        safety: 'About your body or your kit',
+        later: (n) => n === 1 ? 'One more idea comes at the end of these weeks.' : n + ' more ideas come at the end of these weeks.',
+        none: 'Nothing to change for now: your routine is in good shape.', enough: 'That’s enough change for now.',
+        done: 'Done. It’s in your routine now.', kept: 'Kept as you had it. I won’t ask again for a while.',
+        changed: 'What changed, with your yes', homeCard: 'Your routine', homeSub: (n) => n ? (n === 1 ? 'One idea from the coach' : n + ' ideas from the coach') : 'Your sessions, as you run them',
+        start: 'Make my first session',
+        kind: {},
+      },
       notes: {},
+    },
+    c: {
+      soreTitle: 'Sore muscles from training?',
+      soreLead: 'Soreness is normal after training and is not an injury. It never takes a body part out of your session.',
+      sore: { none: 'Not really', some: 'A bit', very: 'Very sore' },
+      soreSub: { some: 'Stiff, fine once warm', very: 'It hurts to move those muscles' },
+      soreWhere: 'Which muscles?',
+      soreAreas: { legs: 'Legs', upper: 'Upper body', core: 'Middle', all: 'All over' },
+      painTitle: 'Any pain in a joint, or pain that is not normal soreness?',
+      testsTitle: 'Your starting numbers',
+      testsLead: 'A few minutes of simple tests. Not a max, nothing risky: they show how far you come. We redo them every few weeks.',
+      testsLifts: 'Your lifts: nothing extra to do. The weights you log this week are the starting point.',
+      testsWhen: (w) => 'When: ' + w,
+      testsSave: 'Save my numbers', testsSkip: 'Not this time',
+      testsDone: 'Saved. These are your starting numbers.',
+      testsBetter: (name, pct) => name + ': ' + pct + '% better than your first time.',
+      testsFirst: (name, v) => name + ': ' + v + '. Your starting point.',
+      unit: { reps: 'reps', seconds: 'seconds', metres: 'metres', time: 'min:sec' },
+      testsCard: 'This week: your starting numbers', testsCardSub: 'A few minutes, any session',
+      milestoneTitle: 'Your first milestone', nextMilestoneTitle: 'Your next milestone',
+      milestone: (m) => 'By ' + niceDate(m.by) + ': ' + m.sessions + ' sessions done' + (m.lift ? ', and ' + m.lift.name.toLowerCase() + ' about ' + m.lift.pct + '% above your first week' : m.test ? ', and your ' + m.test.name.toLowerCase() + ' test about ' + m.test.pct + '% better' : '') + '.',
+      msStatus: { hit: 'Reached. Well done.', on_track: 'On track.', behind: 'One session this week puts you back on pace.', missed: 'Not this one, and that is fine. The next one starts from where you are.' },
+      msSessions: (d, t) => d + ' of ' + t + ' sessions',
+      msHit: 'Milestone reached.',
+      checkinCard: 'Your weekly check-in', checkinCardSub: 'Three taps, and next week fits your life',
+      checkinTitle: 'How was your week?',
+      checkinDone: (d, p) => d + ' of ' + p + ' sessions done last week.',
+      checkinWay: 'What got in the way?',
+      barriers: { nothing: 'Nothing', time: 'Time', energy: 'Energy or sleep', stress: 'Stress', motivation: 'Motivation', pain: 'Pain or stiffness', know_how: 'Not sure how', bored: 'Bored' },
+      checkinEnergy: 'Your energy this week?',
+      energyW: { low: 'Low', ok: 'OK', good: 'Good' },
+      checkinDays: 'Which days this week?',
+      dayNames: { mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat', sun: 'Sun' },
+      checkinSave: 'Set my week',
+      easier: 'This week runs a little easier: no all-out sets, one set fewer on the extra moves.',
+      shorter: (m) => 'Sessions this week aim at ' + m + ' minutes. Short and done beats long and skipped.',
+      yourDays: (d) => 'Your days this week: ' + d + '. If one goes, the session waits for the next free day.',
+      fewerDays: (n) => 'Two weeks short on time: ' + n + ' days a week might fit better. Change it at your next check-up.',
+      allDone: 'Every session done. That habit is what builds everything else.',
+      reviewCard: 'Your check-up', reviewCardSub: 'What went well, and what changes next',
+      eventCard: (e) => 'How did ' + e + ' go?', eventCardSub: 'Tell me, and we pick what is next',
+      reviewTitle: 'These weeks, in numbers',
+      reviewSessions: (d, p) => d + ' of ' + p + ' sessions',
+      reviewLift: (n, pct) => n + ': ' + (pct > 0 ? '+' : '') + pct + '% since week 1',
+      reviewTest: (n, a, b, pct) => n + ': ' + a + ' to ' + b + (pct != null ? ' (' + (pct > 0 ? '+' : '') + pct + '%)' : ''),
+      reviewWell: 'What went well?',
+      well: { showed_up: 'I showed up', got_stronger: 'I got stronger', fitter: 'I got fitter', enjoyed: 'I enjoyed it', felt_good: 'I feel better', nothing: 'Not much' },
+      reviewNext: 'And for the next weeks?',
+      change: { keep: ['Keep going', 'Same plan, new numbers'], easier: ['A bit easier', 'One set fewer on the extra moves'], harder: ['A bit harder', 'One set more on the extra moves'],
+        shorter: ['Shorter sessions', '15 minutes less'], longer: ['Longer sessions', '15 minutes more'], fewer_days: ['Fewer days', 'One day less a week'],
+        more_days: ['More days', 'One day more a week'], new_focus: ['A new focus', 'A body part to bring up'], move_on: ['Move on', 'The next step up'] },
+      focusQ: 'Which part to bring up?',
+      focus: { arms: 'Arms', chest: 'Chest', back: 'Back', shoulders: 'Shoulders', glutes: 'Glutes', legs: 'Legs', core: 'Core' },
+      reviewSave: 'Start the next weeks',
+      reviewSaved: 'Done. The next weeks start from your new numbers.',
+      backTitle: 'Welcome back',
+      back: { week: 'Welcome back. Today is a lighter session to get going again; the plan carries on where you left it.',
+        two_weeks: 'Welcome back. Loads start about 15% lighter today, and the next session is easy too.',
+        long: 'Welcome back. Loads start lighter, the next session is easy too, and this week we redo your starting numbers.' },
+      taper: (d, e) => d + (d === 1 ? ' day' : ' days') + ' to ' + e + '. Taper time: less work, the same weights, so you arrive fresh.',
+      eventName: 'your event',
+      streakRest: (n) => n === 1 ? 'one rest week, still on' : n + ' rest weeks, still on',
+      streakPaused: 'Last week was a rest week. One session this week keeps your streak.',
+      records: (n) => n === 1 ? 'New best' : n + ' new bests',
+      repsWord: 'reps',
+      later: 'Later',
+      testInfo: { push_ups: ['Push-ups', 'As many as you can with a straight body. Stop when the form breaks. Knees down or hands on a bench is fine: the same way every time.', 'at the end of any session'],
+        plank: ['Plank hold', 'On forearms and toes, a straight line from head to heels. Stop when the hips sag.', 'at the end of any session'],
+        run_2k: ['2 km run', '2 km at the fastest pace you can hold evenly from start to finish. Not a sprint start.', 'after the warm-up of a run day, or on a fresh day'],
+        walk_run_12: ['12 minutes, walk and run', '12 minutes, running when you can and walking when you need to. How far did you get?', 'after the warm-up of a run day, or on a fresh day'],
+        row_1k: ['1000 m row', '1000 m on the rower at the fastest pace you can hold evenly.', 'after the warm-up of any session'] },
     },
     engineFail: 'Something went wrong on my side. Tap Try again.',
   },
@@ -349,14 +485,23 @@ const STR = {
     bootLead: 'La première fois prend quelques secondes, le temps de m’installer sur cet appareil. Ensuite, ça s’ouvre vite.',
     bootSlow: 'Je travaille encore. Une connexion lente peut prendre une minute. Si rien ne bouge, recharge la page.',
     stepOf: (i, n, name) => 'Étape ' + i + ' sur ' + n + ' · ' + name,
-    phases: ['Sécurité', 'Toi', 'Programme', 'Aujourd’hui', 'Fiche'],
+    phases: ['Sécurité', 'Toi', 'Ton plan', 'Aujourd’hui', 'Fiche'],
     welcomeTitle: 'Ton <em>coach</em> perso',
-    welcomeLead: 'Quelques touches et je te construis un programme éprouvé, puis une fiche d’une page pour chaque séance, construite sur la précédente. Touche Commencer et on y va.',
+    welcomeLead: 'Quelques touches et je te construis un plan qui marche, puis une fiche d’une page pour chaque séance, construite sur la précédente. Touche Commencer et on y va.',
     welcomeNote: 'Tout reste sur cet appareil.',
+    introKicker: 'Comment ça marche',
+    pickFirst: 'Choisis une réponse, ou écris-la dans la case.',
+    wordsBoxQ: 'Ou dis-le avec tes mots', wordsBoxPh: 'Écris ta réponse…', wordsSend: 'Envoyer', wordsThinking: 'Je lis ta réponse…',
+    wordsPicked: 'Compris. J’ai choisi la réponse la plus proche.', wordsKept: 'Compris, je garde tes mots en tête. Touche la carte la plus proche pour continuer.',
+    intro: [['Parle-moi de toi', 'Ton objectif, ta semaine, ton corps. Environ 3 minutes.'],
+      ['Reçois ton plan', 'Je choisis l’entraînement qui te va, et je te dis pourquoi.'],
+      ['Entraîne-toi avec ta fiche', 'Une page par séance, construite sur la précédente.']],
     start: 'Commencer',
     safetyTitle: 'Un petit point sécurité',
-    safetyLead: 'Un point rapide avant de commencer. Touche ce qui te concerne. Rien ? Touche « Rien de tout ça » en bas.',
-    safetyHint: 'Touche « Rien de tout ça » ou ce qui te concerne.',
+    safetyLead: 'Un point rapide avant de commencer. Côté santé, tout va bien ? Une touche et on y va.',
+    safetyHint: 'Touche ce qui te concerne, ou écris-le en dessous.',
+    noIssues: 'Aucun problème de santé', noIssuesSub: 'On y va', flagSome: 'J’ai quelque chose à signaler', flagSub: 'Affiche une courte liste',
+    flagLead: 'Touche ce qui te concerne. Pas dans la liste ? Écris-le en dessous.', noteQ: 'Autre chose à savoir ? (facultatif)', notePh: 'ex. une vieille blessure au genou, de l’asthme',
     safety: [
       'Un médecin t’a dit que tu as un problème cardiaque ou de la tension',
       'Une douleur à la poitrine au repos, au quotidien ou à l’effort',
@@ -410,7 +555,7 @@ const STR = {
       run: 'La course à pied', fat_loss: 'Perdre du gras', health: 'Être en meilleure santé',
     },
     goalSub: {
-      functional: 'Style CrossFit, en salle', run: 'Du 5 km au semi',
+      functional: 'Séances mixtes : charges, poids du corps, cardio', run: 'Du 5 km au semi',
       powerlifting: 'Squat, développé couché, soulevé de terre', weightlifting: 'Arraché, épaulé-jeté',
       hyrox: 'Une course avec des ateliers de salle', muscle: 'Des muscles plus fermes et plus gros', strength: 'Soulever plus lourd',
     },
@@ -533,7 +678,7 @@ const STR = {
     home: 'Terminé',
     nextTime: 'La prochaine fois',
     weekClosed: 'Ta semaine est bouclée. Beau travail.',
-    blockClosed: 'Un bloc se termine. Le suivant part de tes nouveaux chiffres.',
+    blockClosed: 'Ces semaines sont bouclées. La suite part de tes nouveaux chiffres.',
     deload: 'Ton corps demande une semaine plus facile, donc les prochaines séances seront plus légères. Continue de venir.',
     noProblem: 'Pas de souci, ça arrive. La prochaine est prête quand tu veux.',
     notInSession: 'Noté dans ton carnet. Ça ne change pas le plan.',
@@ -557,7 +702,7 @@ const STR = {
     recordTitle: (n) => n === 1 ? 'Nouveau record' : n + ' nouveaux records',
     recordLine: 'Tu as battu ton record. Garde une technique propre et on remet ça la prochaine fois.',
     hardSets: 'Travail par muscle cette semaine',
-    usualBand: 'Chaque barre compte les séries dures pour ce muscle. La bande grisée est la fourchette habituelle.',
+    usualBand: 'Chaque barre compte les séries finies près de ta limite, pour ce muscle. La bande grisée est la fourchette habituelle.',
     muscles: { chest: 'Pectoraux', back: 'Dos', shoulders: 'Épaules', quads: 'Quadriceps', glutes: 'Fessiers', hamstrings: 'Ischios', biceps: 'Biceps', triceps: 'Triceps', calves: 'Mollets', core: 'Gainage' },
     setTitle: 'Réglages',
     backup: 'Sauvegarder mon coach', backupSub: 'Un fichier avec tout, à garder ou à passer sur un autre appareil',
@@ -570,10 +715,40 @@ const STR = {
     theme: 'Apparence', themes: { auto: 'Auto', light: 'Clair', dark: 'Sombre' },
     noStorage: 'Cet appareil ne garde pas de notes pour cette page : ton coach dure jusqu’à la fermeture. Sauvegarde ton coach pour le garder.',
     close: 'Fermer',
-    sayAlso: {
-      'Balance work is in every session.': 'Il y a de l’équilibre dans chaque séance. Si tu es déjà tombé ou que tu as peur de tomber, un programme anti-chutes avec un kiné est le meilleur ajout.',
-      'No jumping or running until you tell me it feels fine.': 'Pas de sauts ni de course tant que tu ne me dis pas que ça va. Fuites, lourdeur ou douleur pelvienne : vois un kiné spécialisé en périnée.',
-      'Everything stays seated.': 'Tout reste assis. Certains objectifs demandent d’être debout ; pour ceux-là, un professionnel du sport adapté est la bonne personne.',
+    d: {
+      go: 'Ma séance du jour', goSub: (n) => 'À suivre : ' + n,
+      week: 'Cette semaine', weekLine: (d, p) => d + ' séance' + (d > 1 ? 's' : '') + ' sur ' + p,
+      best: 'Dernier record', bestOn: (d) => 'le ' + niceDate(d),
+      due: 'Ça t’attend',
+      ask: 'Demande à ton coach', askLead: 'Une question, ou un changement pour aujourd’hui.',
+      askPh: 'je n’ai que 20 minutes · j’ai mal au genou · remplace les squats', askSend: 'Demander',
+      askThinking: 'Je réfléchis…', askFail: 'Je n’ai pas pu répondre. Réessaie, ou touche Ma séance du jour.',
+      goMinutes: (m) => 'Une séance de ' + m + ' minutes', goPain: (r) => 'Ma séance du jour, en ménageant : ' + r,
+      goSwap: (w) => 'Ma séance du jour sans ' + w, goEdit: 'Le changer dans Ce que je sais de toi',
+      swapped: (w) => 'Retiré aujourd’hui, comme tu l’as demandé : ' + w + '.', painSaid: (r) => 'Tu m’as dit : ' + r + '.',
+    },
+    k: {
+      title: 'Ce que je sais de toi', lead: 'Tout ce que tu m’as dit, au même endroit. Touche Modifier pour changer une réponse. Si un changement demande un nouveau plan, je le mets à jour pour toi.',
+      tileSub: 'Ton objectif, ta semaine, ton corps. Change n’importe quelle réponse',
+      goal: 'Ton objectif', week: 'Ta semaine', where: 'Où tu t’entraînes', body: 'Ton corps', numbers: 'Tes chiffres', words: 'Tes mots',
+      edit: 'Modifier', save: 'Enregistrer', notSaid: 'Pas encore dit', none: 'Rien',
+      want: 'Ce que tu veux', mix: 'Ton mélange', event: 'Ton événement', start: 'Ton départ', newPlan: 'Un nouveau plan', ownRoutine: 'Ta routine, coachée',
+      routine: 'Ta routine', days: 'Jours par semaine', minutes: 'Minutes par séance', before: 'Ce que tu as déjà fait', style: 'Style préféré',
+      enjoy: 'Tu aimes', avoid: 'Tu ne supportes pas', kitPref: 'Poids libres ou machines',
+      place: 'Lieu', kit: 'Le matériel', dumbbells: 'Tes haltères',
+      pain: 'Douleurs ou blessures', recent: 'Dit après une séance', area: 'Zone à développer', good: 'Ton point fort', hold: 'Ce qui te freine',
+      sleep: 'Sommeil', stress: 'Stress', health: 'Contrôle sécurité', healthOn: (d) => 'Tout est bon depuis le ' + niceDate(d), healthNote: 'Ta note santé',
+      lifts: 'Tes charges connues', units: 'Kilos ou livres', unitNames: { kg: 'Kilos', lb: 'Livres' }, lang: 'Langue',
+      langNames: { en: 'English', fr: 'Français' },
+      said: 'Ce que tu m’as dit', fromSessions: 'Tes notes après les séances', addNote: 'Ajoute quelque chose que je dois savoir',
+      notePh: 'ex. je m’entraîne avant le travail, je déteste les burpees', noteSave: 'Garder', remove: 'Retirer',
+      redo: 'Reprendre toutes mes réponses', redoSub: 'Les mêmes questions, avec tes réponses déjà remplies',
+      willUpdate: 'Ton plan sera mis à jour.', nextCounts: 'Ça compte dès ta prochaine séance.',
+      saved: 'Enregistré.', planUpdated: 'Enregistré. Ton plan est mis à jour.', savedNext: 'Enregistré. Ça compte dès ta prochaine séance.',
+      switchTitle: 'Un autre plan te va mieux maintenant', switchLead: (n) => 'Avec ce changement, ' + n + ' te va le mieux. Tu veux le voir ?',
+      seeNew: 'Voir le nouveau plan', keepMine: 'Garder mon plan', mustSwitch: 'Ton plan ne va plus avec cette réponse, voici celui qui va.',
+      noFit: 'Enregistré. Rien de ce que j’ai ne va sans risque avec cette réponse, ton plan reste tel quel.',
+      improveDays: 'Ta routine fixe tes jours.',
     },
     iv: {
       forkTitle: 'Tu t’entraînes déjà ?',
@@ -627,7 +802,7 @@ const STR = {
         intervals: 'Fractionné', long: 'Sortie longue', class: 'Cours', d1: 'Jour 1', d2: 'Jour 2', d3: 'Jour 3', d4: 'Jour 4', d5: 'Jour 5', d6: 'Jour 6' },
       ageTitle: 'Depuis quand tu suis cette routine ?',
       age: { under_1m: 'Moins d’un mois', '1_3m': '1 à 3 mois', '3_12m': '3 à 12 mois', over_1y: 'Plus d’un an' },
-      goingTitle: 'Comment ça se passe ?', goingLead: 'Touche ce qui va. Les deux sont facultatifs.',
+      goingTitle: 'Comment ça se passe ?', goingLead: 'Touche ce qui va. Tout est facultatif.',
       stallQ: 'Qu’est-ce qui bloque ?', stall: { lift_stuck: 'Une charge ne monte plus', not_growing: 'Je ne grossis plus', tired: 'Toujours fatigué ou courbaturé', bored: 'Je m’ennuie', skipping: 'Je saute des séances', pain: 'J’ai mal quelque part', fine: 'Tout va bien' },
       keepQ: 'Qu’est-ce qui doit rester ?', keep: { split: 'La répartition', exercises: 'Les exercices', days: 'Les jours', pump: 'La congestion', short: 'Les séances courtes', everything: 'Tout' },
       minLead: 'Tape-le, ou utilise + et −. De 15 à 120.',
@@ -667,18 +842,125 @@ const STR = {
       whyNot: { too_long: 'Séances trop longues', too_much_running: 'Trop de course', not_enjoy: 'Ça ne me plairait pas', days: 'Je ne peux pas ces jours-là' },
       oneChange: (why) => 'Un seul changement ouvrirait un meilleur plan : ' + why + '.',
       expect: 'À quoi t’attendre : les 2 à 4 premières semaines servent à apprendre les gestes et trouver tes charges. La force arrive avant le miroir. Une semaine ratée, c’est normal : tu reprends à la séance suivante.',
+      rt: {
+        setsTitle: 'Séries et répétitions', setsLead: 'Ce que tu fais d’habitude sur chacun. Pas sûr ? Laisse : je prends un nombre courant, signalé comme une estimation.',
+        notSure: 'Pas sûr', stuckQ: 'Quel exercice ne progresse plus ?',
+        title: 'Ta routine', lead: 'Je garde ta répartition, tes jours dans ton ordre et tes exercices. Je gère les charges, la progression et les jours plus légers.',
+        days: (n) => n + (n === 1 ? ' séance par semaine, dans ton ordre' : ' séances par semaine, dans ton ordre'),
+        times: (n) => n > 1 ? 'x' + n + ' par semaine' : '', guess: 'estimation', own: (n) => 'le tien, suivi comme ' + n,
+        classes: (list) => 'Plus tes cours (' + list + ') : ils restent à toi, tels quels.', run: 'course',
+        ideas: 'Les idées du coach', ideasLead: 'Rien ne change dans ta routine sans ton accord.',
+        why: 'Pourquoi', change: 'Ce qui change', yes: 'Oui, vas-y', keep: 'Je garde le mien',
+        lock: { split: 'Tu as dit que la répartition reste : seulement si tu veux.', exercises: 'Tu as dit que tes exercices restent : seulement si tu veux.',
+          days: 'Tu as dit que tes jours restent : seulement si tu veux.', pump: 'Tu as dit que la congestion reste : seulement si tu veux.',
+          short: 'Tu as dit que les séances courtes restent : seulement si tu veux.', everything: 'Tu as dit que tout reste : seulement si tu veux.' },
+        safety: 'Pour ton corps ou ton matériel',
+        later: (n) => n === 1 ? 'Une autre idée arrive à la fin de ces semaines.' : n + ' autres idées arrivent à la fin de ces semaines.',
+        none: 'Rien à changer pour l’instant : ta routine tient la route.', enough: 'Assez de changements pour l’instant.',
+        done: 'C’est fait. C’est dans ta routine maintenant.', kept: 'Gardé tel quel. Je ne te le redemande pas de sitôt.',
+        changed: 'Ce qui a changé, avec ton accord', homeCard: 'Ta routine', homeSub: (n) => n ? (n === 1 ? 'Une idée du coach' : n + ' idées du coach') : 'Tes séances, comme tu les fais',
+        start: 'Ma première séance',
+        kind: {
+          limit: (a) => { const r = (a.regions || []).map(k => (STR.fr.regions || {})[k] || k).join(' et ').toLowerCase() || 'ta douleur';
+            return [a.from + ' : plus doux pour : ' + r, a.from + ' peut réveiller ta douleur (' + r + ') ; ' + a.to + ' travaille la même chose et la laisse tranquille.']; },
+          kit: (a) => [a.from + ' : une version pour ton matériel', a.from + ' demande du matériel que tu n’as pas ; ' + a.to + ' travaille la même chose.'],
+          time_fit: (a) => [a.day + ' : tenir tes ' + a.minutes + ' minutes', a.day + ' prend environ ' + a.took + ' minutes avec tes repos ; tu as dit ' + a.minutes + '.'],
+          recovery: () => ['Une série de moins sur les exercices en plus', 'Tu as dit être toujours fatigué ou courbaturé : une série de moins sur les exercices en plus t’aide à récupérer, et tes exercices principaux continuent d’avancer.'],
+          conditioning: (a) => [a.name + ' pour finir', 'Ton objectif demande du cardio, et rien dans ta semaine ne le travaille encore.'],
+          priority: (a) => ['Plus de travail direct pour : ' + ((STR.fr.areas || {})[a.area] || a.area).toLowerCase(), 'Tu veux développer cette zone, et ' +
+            (a.muscles || []).map(m => ({ biceps: 'tes biceps', triceps: 'tes triceps', side_delts: 'le côté des épaules', rear_delts: 'l’arrière des épaules', lats: 'tes dorsaux', upper_back: 'le haut du dos', chest: 'tes pectoraux', glutes: 'tes fessiers', quads: 'tes quadriceps', hamstrings: 'tes ischios', calves: 'tes mollets', core: 'tes abdos' }[m] || m)).join(' et ') +
+            ' reçoivent environ ' + a.sets + ' séries directes par semaine ; 6 ou plus font une vraie différence.'],
+          pull_volume: (a) => ['Plus de tirage pour équilibrer les poussées', a.push + ' séries de poussée par semaine pour ' + a.pull + ' de tirage : les épaules vont mieux quand les deux sont proches.'],
+          group_low: (a) => ['Plus de séries pour : ' + ({ chest: 'pectoraux', back: 'dos', quads: 'quadriceps', 'hamstrings and glutes': 'ischios et fessiers', shoulders: 'épaules' }[a.group] || a.group), 'Environ ' + a.sets + ' séries près de ta limite par semaine pour ce groupe ; 8 à 10 ou plus font clairement mieux grossir.'],
+          stall: (a) => [a.name + ' : relancer la progression', a.name + ' ne bouge plus ; une nouvelle plage de répétitions ou un peu moins de volume relance souvent.'],
+          harder: (a) => [a.from + ' : l’étape suivante', 'Tu es en haut de ta plage sur ' + a.from + ' : ' + a.to + ' est l’étape suivante.'],
+          deload: (a) => ['Une semaine plus facile toutes les ' + a.weeks + ' semaines', 'Une semaine plus légère toutes les quelques semaines laisse le travail s’installer et ménage tes articulations.'],
+        },
+      },
       notes: {
         outcome_note: 'Je n’ai pas encore de plan taillé pour cet objectif, alors je prends le plus proche, et je te le dis franchement.',
         style_note: 'Le style que tu préfères ne sert pas aussi bien ton objectif avec ta semaine, alors j’ai choisi ce qui le sert mieux.',
-        improve_note: 'Pour l’instant, c’est le plan le plus proche de ta semaine actuelle. Le coaching à l’intérieur de ta propre routine arrive dans une prochaine mise à jour.',
+        improve_note: 'Tes cours restent à toi, tels quels : le coach ne peut pas écrire un cours. Voici le plan le plus proche du reste de ta semaine.',
         dose_note: 'Sommeil court ou stress élevé : les premières semaines démarrent au bas des séries, avec une répétition de plus en réserve.',
       },
+    },
+    c: {
+      soreTitle: 'Des courbatures ?',
+      soreLead: 'Les courbatures sont normales après l’entraînement, ce n’est pas une blessure. Elles ne retirent jamais une partie du corps de ta séance.',
+      sore: { none: 'Pas vraiment', some: 'Un peu', very: 'Beaucoup' },
+      soreSub: { some: 'Raide, ça passe une fois chaud', very: 'Bouger ces muscles fait mal' },
+      soreWhere: 'Quels muscles ?',
+      soreAreas: { legs: 'Jambes', upper: 'Haut du corps', core: 'Tronc', all: 'Partout' },
+      painTitle: 'Une douleur dans une articulation, ou qui n’est pas une courbature ?',
+      testsTitle: 'Tes chiffres de départ',
+      testsLead: 'Quelques minutes de tests simples. Pas de max, rien de risqué : ils montrent le chemin parcouru. On les refait toutes les quelques semaines.',
+      testsLifts: 'Tes mouvements : rien de plus à faire. Les charges notées cette semaine sont ton point de départ.',
+      testsWhen: (w) => 'Quand : ' + w,
+      testsSave: 'Enregistrer mes chiffres', testsSkip: 'Pas cette fois',
+      testsDone: 'Enregistré. Voici tes chiffres de départ.',
+      testsBetter: (name, pct) => name + ' : ' + pct + ' % mieux que la première fois.',
+      testsFirst: (name, v) => name + ' : ' + v + '. Ton point de départ.',
+      unit: { reps: 'répétitions', seconds: 'secondes', metres: 'mètres', time: 'min:s' },
+      testsCard: 'Cette semaine : tes chiffres de départ', testsCardSub: 'Quelques minutes, pendant une séance',
+      milestoneTitle: 'Ta première étape', nextMilestoneTitle: 'Ta prochaine étape',
+      milestone: (m) => 'D’ici le ' + niceDate(m.by) + ' : ' + m.sessions + ' séances faites' + (m.lift ? ', et ' + bankName(m.lift.ex, m.lift.name).toLowerCase() + ' environ ' + m.lift.pct + ' % au-dessus de ta première semaine' : m.test ? ', et ton test ' + ((STR.fr.c.testInfo || {})[m.test.id] || [m.test.name])[0].toLowerCase() + ' environ ' + m.test.pct + ' % mieux' : '') + '.',
+      msStatus: { hit: 'Atteinte. Bravo.', on_track: 'Dans les temps.', behind: 'Une séance cette semaine et tu es de nouveau dans le rythme.', missed: 'Pas celle-ci, et ce n’est pas grave. La suivante part de là où tu en es.' },
+      msSessions: (d, t) => d + ' séances sur ' + t,
+      msHit: 'Étape atteinte.',
+      checkinCard: 'Ton point de la semaine', checkinCardSub: 'Trois touches, et la semaine suivante colle à ta vie',
+      checkinTitle: 'Ta semaine, ça a donné quoi ?',
+      checkinDone: (d, p) => d + ' séances sur ' + p + ' la semaine dernière.',
+      checkinWay: 'Qu’est-ce qui a gêné ?',
+      barriers: { nothing: 'Rien', time: 'Le temps', energy: 'Énergie ou sommeil', stress: 'Le stress', motivation: 'La motivation', pain: 'Douleurs ou raideurs', know_how: 'Pas sûr du geste', bored: 'L’ennui' },
+      checkinEnergy: 'Ton énergie cette semaine ?',
+      energyW: { low: 'Basse', ok: 'Correcte', good: 'Bonne' },
+      checkinDays: 'Quels jours cette semaine ?',
+      dayNames: { mon: 'Lun', tue: 'Mar', wed: 'Mer', thu: 'Jeu', fri: 'Ven', sat: 'Sam', sun: 'Dim' },
+      checkinSave: 'Caler ma semaine',
+      easier: 'Cette semaine est un peu plus facile : pas de série à fond, une série de moins sur les exercices en plus.',
+      shorter: (m) => 'Cette semaine, des séances d’environ ' + m + ' minutes. Courte et faite vaut mieux que longue et ratée.',
+      yourDays: (d) => 'Tes jours cette semaine : ' + d + '. Si un saute, la séance attend le jour libre suivant.',
+      fewerDays: (n) => 'Deux semaines à court de temps : ' + n + ' jours par semaine iraient peut-être mieux. Tu peux changer au prochain bilan.',
+      allDone: 'Toutes les séances faites. C’est cette habitude qui construit tout le reste.',
+      reviewCard: 'Ton bilan', reviewCardSub: 'Ce qui a marché, et ce qui change ensuite',
+      eventCard: (e) => 'Alors, ' + e + ' ?', eventCardSub: 'Raconte, et on choisit la suite',
+      reviewTitle: 'Ces semaines, en chiffres',
+      reviewSessions: (d, p) => d + ' séances sur ' + p,
+      reviewLift: (n, pct) => n + ' : ' + (pct > 0 ? '+' : '') + pct + ' % depuis la semaine 1',
+      reviewTest: (n, a, b, pct) => n + ' : ' + a + ' à ' + b + (pct != null ? ' (' + (pct > 0 ? '+' : '') + pct + ' %)' : ''),
+      reviewWell: 'Qu’est-ce qui a bien marché ?',
+      well: { showed_up: 'J’ai été régulier', got_stronger: 'Je suis plus fort', fitter: 'Je suis plus en forme', enjoyed: 'J’ai aimé', felt_good: 'Je me sens mieux', nothing: 'Pas grand-chose' },
+      reviewNext: 'Et pour les semaines suivantes ?',
+      change: { keep: ['On continue', 'Même plan, nouveaux chiffres'], easier: ['Un peu plus facile', 'Une série de moins sur les exercices en plus'], harder: ['Un peu plus dur', 'Une série de plus sur les exercices en plus'],
+        shorter: ['Séances plus courtes', '15 minutes de moins'], longer: ['Séances plus longues', '15 minutes de plus'], fewer_days: ['Moins de jours', 'Un jour de moins par semaine'],
+        more_days: ['Plus de jours', 'Un jour de plus par semaine'], new_focus: ['Une nouvelle priorité', 'Une partie du corps à développer'], move_on: ['Passer à la suite', 'L’étape au-dessus'] },
+      focusQ: 'Quelle partie développer ?',
+      focus: { arms: 'Bras', chest: 'Pectoraux', back: 'Dos', shoulders: 'Épaules', glutes: 'Fessiers', legs: 'Jambes', core: 'Gainage' },
+      reviewSave: 'Lancer la suite',
+      reviewSaved: 'C’est fait. La suite part de tes nouveaux chiffres.',
+      backTitle: 'Content de te revoir',
+      back: { week: 'Content de te revoir. Séance plus légère aujourd’hui pour repartir ; le plan reprend là où tu l’as laissé.',
+        two_weeks: 'Content de te revoir. Les charges démarrent environ 15 % plus légères aujourd’hui, et la séance suivante est facile aussi.',
+        long: 'Content de te revoir. Charges plus légères, séance suivante facile aussi, et cette semaine on refait tes chiffres de départ.' },
+      taper: (d, e) => d + (d === 1 ? ' jour' : ' jours') + ' avant ' + e + '. Affûtage : moins de travail, les mêmes charges, pour arriver frais.',
+      eventName: 'ton événement',
+      streakRest: (n) => n === 1 ? 'une semaine de repos, la série tient' : n + ' semaines de repos, la série tient',
+      streakPaused: 'La semaine dernière était une semaine de repos. Une séance cette semaine garde ta série.',
+      records: (n) => n === 1 ? 'Nouveau record' : n + ' nouveaux records',
+      repsWord: 'rép.',
+      later: 'Plus tard',
+      testInfo: { push_ups: ['Pompes', 'Le plus possible, le corps bien droit. Stop quand la forme casse. Sur les genoux ou mains sur un banc, ça va : toujours de la même façon.', 'à la fin de n’importe quelle séance'],
+        plank: ['Planche', 'Sur les avant-bras et les pointes de pieds, une ligne droite de la tête aux talons. Stop quand les hanches tombent.', 'à la fin de n’importe quelle séance'],
+        run_2k: ['2 km de course', '2 km au rythme le plus rapide que tu tiens régulièrement du début à la fin. Pas de départ sprint.', 'après l’échauffement d’un jour de course, ou un jour frais'],
+        walk_run_12: ['12 minutes marche et course', '12 minutes, en courant quand tu peux et en marchant quand il faut. Quelle distance ?', 'après l’échauffement d’un jour de course, ou un jour frais'],
+        row_1k: ['1000 m de rameur', '1000 m au rameur au rythme le plus rapide que tu tiens régulièrement.', 'après l’échauffement de n’importe quelle séance'] },
     },
     engineFail: 'Un souci de mon côté. Touche Réessayer.',
   },
 };
 const QLANG = (() => { try { return new URLSearchParams(location.search).get('lang'); } catch (e) { return null; } })();
-const LANG = (QLANG || navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+const SAVED_LANG = (() => { try { return localStorage.getItem('pt.lang'); } catch (e) { return null; } })();   // picked in What I know about you
+const LANG = (QLANG || SAVED_LANG || navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
 const T = STR[LANG];
 let UNITS = (!QLANG && (navigator.language || '') === 'en-US') ? 'lb' : 'kg';
 // the engine's score line always prints kilos; a pounds user sees pounds
@@ -734,15 +1016,79 @@ function dots(phase) {
 let TAPS = 0;
 document.addEventListener('click', (e) => { if (e.target.closest('button,a,label')) TAPS++; }, true);
 
+let EDITING = null;                   // one answer being changed from What I know about you: { note }
 function show(phase, ...kids) {
-  dots(phase);
+  dots(EDITING ? -1 : phase);
   const app = $app();
   app.innerHTML = '';
   const s = h('section', { class: 'screen' }, ...kids);
   app.append(s);
+  const t = EDITING && EDITING.note && s.querySelector('.title');
+  if (t) t.after(h('p', { class: 'hint editnote' }, icon('i-info'), ' ', EDITING.note));
+  if (phase >= 0 && phase <= 3 && s.querySelector('.tiles .tile')) { s.classList.add('q'); wordsBox(s); }
+  if (phase >= 0 && phase <= 3) gate(s);
   window.scrollTo(0, 0);
   return s;
 }
+// every question screen: a box to answer in your own words. Claude maps the words onto the cards when it can;
+// otherwise the words are kept for the coach and the person taps the closest card.
+function wordsBox(s) {
+  if (s.querySelector('textarea, input[type="text"]')) return;
+  const tiles = [...s.querySelectorAll('.tiles .tile')];
+  const title = (s.querySelector('.title') || {}).textContent || '';
+  const input = h('textarea', { rows: 2, placeholder: T.wordsBoxPh, 'aria-label': T.wordsBoxQ });
+  const said = h('p', { class: 'hint', role: 'status', hidden: true });
+  const send = btn(T.wordsSend, go, '', 'i-arrow-right');
+  const box = h('div', { class: 'words' }, h('label', { class: 'kicker' }, T.wordsBoxQ), input, send, said);
+  const last = [...s.querySelectorAll('.tiles')].pop();
+  last.after(box);
+  async function go() {
+    const text = input.value.trim();
+    if (!text) return input.focus();
+    keepWords(title, text);
+    let picks = [];
+    if (CAP.sample) {
+      said.hidden = false; said.textContent = T.wordsThinking; send.disabled = true;
+      const opts = tiles.map((t, i) => i + ': ' + t.textContent.trim()).join('\n');
+      const multi = tiles.some(t => t.querySelector('.tick'));
+      try {
+        const r = await CAP.sample.json('A person is answering one question of a fitness onboarding app.\nQuestion: ' + title +
+          '\nAnswer cards (index: text):\n' + opts + '\nTheir own words: "' + text.slice(0, 600) + '"\n' +
+          'Return JSON {"pick": [indices of the cards their words clearly mean' + (multi ? ', several allowed' : ', at most one') +
+          '; empty if none clearly fits]}. Only JSON.', { modelTier: 'quick' });
+        picks = ((r && r.pick) || []).filter(i => Number.isInteger(i) && tiles[i]);
+      } catch (e) { picks = []; }
+      send.disabled = false;
+    }
+    if (picks.length) {
+      said.hidden = false; said.textContent = T.wordsPicked;
+      for (const i of picks) if (tiles[i].getAttribute('aria-pressed') !== 'true') tiles[i].click();
+    } else { said.hidden = false; said.textContent = T.wordsKept; }
+  }
+}
+// no step is passed without an answer: the main Continue waits for a pick, a value typed, or words in the box
+function gate(s) {
+  if (EDITING) return;                 // changing one answer: taking every pick away is an answer too
+  const go = [...s.querySelectorAll('.actions .btn.primary')].find(b => [T.cont, T.next].includes(b.textContent.trim()));
+  if (!go || go.disabled || s.querySelector('input[type="number"]')) return;   // screens that gate themselves keep their own rule
+  const hint = h('p', { class: 'hint', role: 'status' }, T.pickFirst);
+  go.before(hint);
+  const answered = () => !!s.querySelector('[aria-pressed="true"]') ||
+    [...s.querySelectorAll('input, textarea, select')].some(f => f.type === 'checkbox' ? f.checked : (f.value || '').trim() !== '');
+  const check = () => { const ok = answered(); go.disabled = !ok; hint.hidden = ok; };
+  s.addEventListener('click', () => setTimeout(check, 0));
+  s.addEventListener('input', check);
+  check();
+}
+function keepWords(q, text) {
+  try {
+    const old = JSON.parse(fsRead('me/words.json', true) || '[]');
+    old.push({ q, text, at: new Date().toISOString().slice(0, 10) });
+    fsWrite('me/words.json', JSON.stringify(old.slice(-50), null, 1));
+    persist();                           // kept at once: a reload before the next step must not lose them
+  } catch (e) { }
+}
+function readWords() { try { return JSON.parse(fsRead('me/words.json', true) || '[]'); } catch (e) { return []; } }
 function busy(text) {
   return show(PHASE, h('div', { class: 'coach' }, mark(), h('div', { style: 'display:flex;gap:10px;align-items:center' }, h('span', { class: 'spinner' }), h('p', {}, text))));
 }
@@ -896,16 +1242,18 @@ function readLog() {
   return out;
 }
 let BANK_NAMES = null;
-function bankName(id) {
+function bankName(id, fallback) {
+  // the exercise's name in the page's language: doctrine/exercises/fr.csv for French, bank.csv otherwise
   if (!BANK_NAMES) {
     BANK_NAMES = {};
-    const csv = (BUNDLE && BUNDLE.files['doctrine/exercises/bank.csv']) || '';
+    const file = LANG === 'fr' ? 'doctrine/exercises/fr.csv' : 'doctrine/exercises/bank.csv';
+    const csv = (BUNDLE && BUNDLE.files[file]) || '';
     for (const line of csv.split('\n').slice(1)) {
-      const m = /^([^,]+),("([^"]*)"|[^,]*)/.exec(line);
+      const m = /^([^,]+),("([^"]*)"|[^,]*)/.exec(line.replace(/\r$/, ''));
       if (m) BANK_NAMES[m[1]] = m[3] != null ? m[3] : m[2];
     }
   }
-  return BANK_NAMES[id] || String(id || '').replace(/_/g, ' ');
+  return BANK_NAMES[id] || fallback || String(id || '').replace(/_/g, ' ');
 }
 const isoDay = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
 function streakData(weeks) {
@@ -929,53 +1277,44 @@ function streakData(weeks) {
   while (w >= 0 && perWeek[w]) { streak++; w--; }
   return { days, total, streak, weeks };
 }
-function records(log) {
-  const best = {};
-  for (const l of log || readLog()) {
-    if (l.unreported) continue;
-    const info = {};
-    try {
-      const s = JSON.parse(fsRead(l.session, true));
-      for (const b of s.blocks || []) for (const it of b.items || []) if (it._slot) info[it._slot.key] = { name: it.name, main: b.kind === 'main' || b.kind === 'secondary' };
-    } catch (e) { }
-    for (const d of l.done || []) {
-      const r = d.result || {}, load = Number(r.load), reps = (r.reps || []).map(Number).filter(n => n > 0);
-      if (d.skipped || !load || !reps.length) continue;
-      const top = Math.max(...reps), e1rm = load * (1 + top / 30), meta = info[d.key] || {};
-      const cur = best[d.ex];
-      if (!cur || e1rm > cur.e1rm + 1e-6) best[d.ex] = { ex: d.ex, load, reps: top, e1rm, date: l.date, name: meta.name || bankName(d.ex), main: meta.main !== false };
-    }
-  }
-  const all = Object.values(best);
-  const mains = all.filter(r => r.main);
-  return (mains.length ? mains : all).sort((a, b) => b.e1rm - a.e1rm);
-}
-const prText = (r) => kgToUnits(r.load) + ' ' + UNITS + ' × ' + r.reps;
-function streakCard() {
+// The records, the streak and the milestone are the engine's (engine/logbook.py records, engine/coach.py streak).
+const prText = (r) => r.load ? kgToUnits(r.load) + ' ' + UNITS + ' × ' + r.reps : r.reps + ' ' + T.c.repsWord;
+const niceDate = (iso) => { try { return new Date(iso + 'T12:00:00').toLocaleDateString(LANG === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long' }); } catch (e) { return iso; } };
+function streakCard(eng) {
   const S = streakData(6);
+  if (eng) S.streak = eng.weeks;
   const grid = h('div', { class: 'cal', role: 'img', 'aria-label': T.streakCount(S.total, S.weeks) },
     T.dow.map(x => h('span', { class: 'dow', 'aria-hidden': 'true' }, x)),
     S.days.map(d => h('span', { class: 'd' + (d.n ? ' on' : '') + (d.today ? ' today' : '') + (d.future ? ' future' : ''), title: d.iso + (d.n ? ' · ' + d.n : '') },
       d.n > 1 ? '×' + d.n : d.n || d.today ? String(d.day) : '')));
   return h('div', { class: 'card streak' },
     h('p', { class: 'kicker' }, icon('t-flame'), T.streakTitle),
-    S.total ? h('p', { class: 'small' }, h('b', {}, T.streakWeeks(S.streak)), h('span', { class: 'muted' }, ' · ' + T.streakCount(S.total, S.weeks))) : h('p', { class: 'muted small' }, T.streakNone),
+    S.total ? h('p', { class: 'small' }, h('b', {}, T.streakWeeks(S.streak)),
+      eng && eng.rest_weeks ? h('span', {}, ' · ' + T.c.streakRest(eng.rest_weeks)) : null,
+      h('span', { class: 'muted' }, ' · ' + T.streakCount(S.total, S.weeks))) : h('p', { class: 'muted small' }, T.streakNone),
+    eng && eng.paused ? h('p', { class: 'muted small' }, T.c.streakPaused) : null,
     grid);
 }
 function recordsCard(list, fresh) {
   const isNew = new Set((fresh || []).map(r => r.ex));
   return h('div', { class: 'card prs' + (fresh ? ' record' : '') },
-    h('p', { class: 'kicker' }, icon('t-trophy'), fresh ? T.recordTitle(fresh.length) : T.prTitle),
+    h('p', { class: 'kicker' }, icon('t-trophy'), fresh ? T.c.records(fresh.length) : T.prTitle),
     fresh ? h('p', { class: 'small', style: 'margin:6px 0 0' }, T.recordLine) : null,
     list.length ? h('div', { class: 'list' }, list.slice(0, 6).map(r => h('div', { class: 'row' + (isNew.has(r.ex) ? ' new' : '') },
       h('span', { class: 'lift' }, h('b', {}, r.name), isNew.has(r.ex) && !fresh ? h('span', { class: 'new-tag' }, T.prNew) : null),
       h('span', { class: 'best' }, prText(r)))))
       : h('p', { class: 'muted small', style: 'margin:8px 0 0' }, T.prNone));
 }
-function freshRecords(before, after) {
-  const was = {}; for (const r of before) was[r.ex] = r.e1rm;
-  // a record falls when a lift beats its own best; a lift's first outing is a baseline, not a record
-  return after.filter(r => was[r.ex] != null && r.e1rm > was[r.ex] + 1e-6);
+function msCard(ms, plain) {
+  // ms: the milestone itself (at choose), or its check (status, sessions done of sessions_target)
+  if (!ms) return null;
+  const m = { by: ms.by, sessions: ms.sessions_target || ms.sessions, lift: ms.lift, test: ms.test };
+  const done = ms.sessions_target ? ms.sessions : null;
+  return h('div', { class: 'card' },
+    h('p', { class: 'kicker' }, icon('i-target'), (ms.block || 1) > 1 ? T.c.nextMilestoneTitle : T.c.milestoneTitle),
+    h('p', { class: 'small', style: 'margin:6px 0 0' }, T.c.milestone(m)),
+    done != null ? h('div', { class: 'bar', style: 'margin-top:10px' }, h('span', { style: 'width:' + Math.min(100, 100 * done / Math.max(1, m.sessions)) + '%' })) : null,
+    done != null ? h('p', { class: 'muted small', style: 'margin:6px 0 0' }, T.c.msSessions(done, m.sessions) + ' · ' + (T.c.msStatus[ms.status] || '')) : null);
 }
 
 // ─────────────────────────────────────────────────────────────── capabilities (claude.ai runtime)
@@ -1047,6 +1386,7 @@ async function boot() {
 
 // ─────────────────────────────────────────────────────────────── routing, always from status
 async function route() {
+  EDITING = null;
   let st;
   try { st = await run('status'); } catch (e) { return fail(); }
   const u = readProfile().units;
@@ -1057,7 +1397,7 @@ async function route() {
     case 'screen_stopped':
     case 'screen_needs_ok': return paused(st);
     case 'interview': return interview();
-    case 'needs_program': return programs();
+    case 'needs_program': return st.mode === 'improve' ? yourRoutine() : programs();
     case 'pending_log': return howItWent(st.pending);
     case 'ready': return readyHome(st);
     default: return welcome();
@@ -1073,48 +1413,58 @@ function welcome() {
     mark('hero'),
     h('h1', { class: 'title', html: T.welcomeTitle }),
     coach(T.welcomeLead),
+    h('p', { class: 'kicker' }, T.introKicker),
+    h('ol', { class: 'howto' }, T.intro.map(([b, sm], i) =>
+      h('li', {}, h('span', { class: 'n num' }, String(i + 1)), h('span', {}, h('b', {}, b), h('small', {}, sm))))),
     h('p', { class: 'muted small' }, icon('i-lock'), ' ', T.welcomeNote),
     actions(btn(T.start, () => safety(false), 'primary', 'i-arrow-right')));
 }
 
 function safety(yearly, preset) {
   const picked = new Set(preset ? preset.items : []);
-  let none = false;
-  const go = btn(T.cont, submit, 'primary', 'i-arrow-right');
-  const hint = h('p', { class: 'hint', role: 'status' });
-  const refresh = () => {
-    const ready = !!(none || picked.size);
-    go.disabled = !ready;
-    hint.textContent = ready ? '' : T.safetyHint;
-    hint.hidden = ready;
-  };
-  const cards = T.safety.map((label, i) => {
-    const n = i + 1;
-    const el = tile({ label, tick: true, pressed: picked.has(n), onclick: () => {
-      if (picked.has(n)) picked.delete(n); else picked.add(n);
-      el.setAttribute('aria-pressed', String(picked.has(n)));
-      none = false; noneEl.setAttribute('aria-pressed', 'false'); refresh();
-    } });
-    return el;
-  });
-  const noneEl = tile({ ic: 'i-shield', label: T.noneOfThese, sub: T.noneSub, tick: true, pressed: false, cls: 'big', onclick: () => {
-    none = !none; if (none) { picked.clear(); cards.forEach(c => c.setAttribute('aria-pressed', 'false')); }
-    noneEl.setAttribute('aria-pressed', String(none)); refresh();
-  } });
-  async function submit() {
+  const note = h('textarea', { placeholder: T.notePh, 'aria-label': T.noteQ, rows: 2 });
+  const back = yearly ? null : h('button', { class: 'back', type: 'button', onclick: welcome }, icon('t-back'), T.back);
+  async function submit(items) {
     busy(T.saving);
     let r;
-    try { r = await run('screen', ['me/answers.json'], { 'answers.json': { items: [...picked].sort((a, b) => a - b), language: LANG } }); }
+    const text = (note.value || '').trim();
+    try { r = await run('screen', ['me/answers.json'], { 'answers.json': Object.assign({ items, language: LANG }, text ? { note: text } : {}) }); }
     catch (e) { return fail(); }
-    afterScreen(r, [...picked]);
+    afterScreen(r, items);
   }
-  refresh();
-  show(0,
-    yearly ? null : h('button', { class: 'back', type: 'button', onclick: welcome }, icon('t-back'), T.back),
+  // first view: one tap for the many with nothing to flag, the list only for those who need it
+  const first = () => show(0, back,
     h('h1', { class: 'title' }, T.safetyTitle),
     coach(T.safetyLead),
-    h('div', { class: 'tiles one' }, cards, noneEl),
-    actions(hint, go));
+    h('div', { class: 'tiles one' },
+      tile({ ic: 'i-shield', label: T.noIssues, sub: T.noIssuesSub, cls: 'big', onclick: () => submit([]) }),
+      tile({ ic: 't-bandage', label: T.flagSome, sub: T.flagSub, onclick: list })));
+  function list() {
+    const go = btn(T.cont, () => submit([...picked].sort((a, b) => a - b)), 'primary', 'i-arrow-right');
+    const hint = h('p', { class: 'hint', role: 'status' });
+    const refresh = () => {
+      const ready = !!(picked.size || note.value.trim());
+      go.disabled = !ready; hint.textContent = ready ? '' : T.safetyHint; hint.hidden = ready;
+    };
+    note.oninput = refresh;
+    const cards = T.safety.map((label, i) => {
+      const n = i + 1;
+      const el = tile({ label, tick: true, pressed: picked.has(n), onclick: () => {
+        if (picked.has(n)) picked.delete(n); else picked.add(n);
+        el.setAttribute('aria-pressed', String(picked.has(n))); refresh();
+      } });
+      return el;
+    });
+    refresh();
+    show(0, h('button', { class: 'back', type: 'button', onclick: first }, icon('t-back'), T.back),
+      h('h1', { class: 'title' }, T.safetyTitle),
+      coach(T.flagLead),
+      h('div', { class: 'tiles one' }, cards),
+      h('label', { class: 'hint' }, T.noteQ), note,
+      actions(hint, go));
+  }
+  if (preset && preset.items && preset.items.length) return list();
+  first();
 }
 
 function screenMessage(r) {
@@ -1266,16 +1616,89 @@ function numField({ value, min, max, step, unit, onchange }) {
   return el;
 }
 
-function interview(lines) {
+// Every answer the interview writes. A second run starts from them, and one of them can be changed alone (EDITS).
+const ANSWER_KEYS = ['mode', 'outcome', 'outcome_detail', 'outcomes', 'event', 'done_before', 'experience_by', 'returning', 'style_pref',
+  'enjoys', 'avoids', 'kit_pref', 'days', 'minutes', 'places', 'default_place', 'dumbbells', 'home_kit', 'strengths', 'barriers', 'priority',
+  'limits', 'sleep', 'stress', 'numbers', 'skills', 'units', 'paper', 'units_confirmed', 'language', 'current_routine'];
+// One answer changed from What I know about you: the screens it walks (by step name), the fields it saves,
+// and whether the plan is chosen again after it (plan.py match, then choose or adopt).
+const EDITS = {
+  goal: { first: 'outcomes', allow: ['outcomes', 'follow', 'eventDate', 'afterFollow'], keys: ['outcome', 'outcome_detail', 'outcomes', 'event'], replan: true },
+  event: { first: 'eventDate', allow: ['eventDate'], keys: ['event'] },
+  history: { first: 'history', allow: ['history', 'experience', 'style'], keys: ['done_before', 'experience_by', 'returning', 'style_pref'], replan: true },
+  style: { first: 'style', allow: ['style'], keys: ['style_pref'], replan: true },
+  enjoy: { first: 'enjoy', allow: ['enjoy'], keys: ['enjoys', 'avoids', 'kit_pref'], replan: true },
+  days: { first: 'days', allow: ['days'], keys: ['days'], replan: true },
+  minutes: { first: 'minutes', allow: ['minutes'], keys: ['minutes'] },
+  where: { first: 'where', allow: ['where', 'kit', 'homeKit', 'dumbbells', 'outdoors'], keys: ['places', 'default_place', 'dumbbells', 'home_kit', 'units', 'paper', 'units_confirmed'], replan: true },
+  routine: { first: 'split', allow: ['split', 'routineDays', 'exercises', 'setsReps', 'routineAge', 'going'], keys: ['current_routine', 'days'], replan: true },
+  good: { you: 'good', keys: ['strengths'] },
+  hold: { you: 'hold', keys: ['barriers'] },
+  area: { you: 'area', keys: ['priority'], replan: true },
+  pain: { you: 'pain', keys: ['limits'], replan: true },
+  sleep: { you: 'sleep', keys: ['sleep'] },
+  stress: { you: 'stress', keys: ['stress'] },
+  nums: { you: 'nums', keys: ['numbers', 'units', 'paper', 'units_confirmed'] },
+  skill: { skill: true, keys: ['skills'], replan: true },
+};
+function skillFor(p) {
+  const goals = [p.goal, p.goal2, ...(p.outcomes || []).map(o => (OUTCOME_GOAL[o.id] || {})[o.detail])];
+  if (goals.includes('run') || goals.includes('hyrox') || p.outcome_detail === 'hybrid') return 'run_30min';
+  return p.goal === 'weightlifting' ? 'olympic_coached' : null;
+}
+const clone = (x) => JSON.parse(JSON.stringify(x));
+const SR = { '3x5': [3, '5'], '4x6-8': [4, '6-8'], '3x8-12': [3, '8-12'], '3x12-15': [3, '12-15'] };
+function interview(lines, edit) {
   const prof = readProfile();
   const ed = ((prof.screen || {}).flags || []).includes('no_fat_loss_goal');
   const V = T.iv;
+  const E = edit ? EDITS[edit] : null;
   const A = { units: UNITS, paper: PAPER, units_confirmed: false, language: LANG, enjoys: [], avoids: [], likes: [], dislikes: [], limits: [],
     priority: [], skills: [], numbers: {}, strengths: [], barriers: [] };
   let picks = [];                          // the outcomes, in tap order; the first is the main one
+  if (prof.goal) seed();                   // a second run, or one answer changed: start from what they said
   const stack = [];
-  const step = (fn) => { stack.push(fn); fn(); };
-  const back = () => { if (stack.length <= 1) return safety(false); stack.pop(); stack[stack.length - 1](); };
+  const step = (fn) => {
+    if (E && stack.length && !(E.allow || []).includes(fn.name)) return save();   // one answer changed: the walk ends where it leaves it
+    stack.push(fn); fn();
+  };
+  const back = () => { if (stack.length <= 1) return E ? know() : safety(false); stack.pop(); stack[stack.length - 1](); };
+  function seed() {
+    for (const k of ANSWER_KEYS) if (prof[k] != null) A[k] = clone(prof[k]);
+    A.language = LANG;
+    if (prof.returning && prof.experience_was) A.experience_by = clone(prof.experience_was);   // the levels they said, before the step down
+    if (prof.dumbbells && prof.units === 'lb' && prof.dumbbells_lb) A.dumbbells = clone(prof.dumbbells_lb);   // said in pounds, kept in pounds
+    A.limits = (prof.limits || []).filter(l => T.regions[l.region])
+      .map(l => ({ region: l.region, status: l.status || (l.exclude === false ? 'mild' : 'now'), triggers: l.triggers || [], note: l.note }));
+    A._nums = {};
+    for (const [id, n] of Object.entries(prof.numbers || {})) {
+      const w = n[UNITS] != null ? n[UNITS] : UNITS === 'lb' ? Math.round((n.kg || 0) * 2.20462 / 5) * 5 : Math.round((n.lb || 0) / 2.20462 / 2.5) * 2.5;
+      A._nums[id] = { w, reps: n.reps || 5 };
+    }
+    const eq = ((prof.places || {}).main || {}).equipment || [];
+    if (!A.home_kit && ((prof.places || {}).main || {}).type === 'home_gym')
+      A.home_kit = Object.keys(HOME_KIT).filter(k => HOME_KIT[k].every(t => eq.includes(t)));
+    picks = (prof.outcomes || []).length ? prof.outcomes.map(o => o.id) : prof.outcome ? [prof.outcome] : [];
+    A._mainWas = picks[0];
+    if ((prof.outcomes || []).length > 1) {
+      A._weights = {};
+      for (const o of prof.outcomes) A._weights[o.id] = o.share >= 0.5 ? 'lots' : o.share >= 0.25 ? 'some' : 'little';
+    }
+    const rt = prof.current_routine;
+    if (rt && typeof rt === 'object') {
+      Object.assign(A, { _split: rt.split, _age: rt.age, _stalls: rt.stalls || [], _keep: rt.keep || [], _stuck: rt.stuck || [], _exSplit: rt.split, _ex: {}, _sr: {} });
+      (rt.day_kinds || []).forEach((kind, i) => {
+        if (A._ex[kind]) return;
+        const list = (rt.exercises || {})[(rt.day_labels || [])[i]] || [];
+        A._ex[kind] = list.map(e => typeof e === 'string' ? e : e.id || e.own || e.name).filter(Boolean);
+        for (const e of list) {
+          if (typeof e !== 'object' || e.assumed) continue;
+          const sr = Object.keys(SR).find(x => SR[x][0] === e.sets && String(SR[x][1]) === String(e.reps));
+          if (sr) A._sr[kind + '|' + (e.id || e.own || e.name)] = sr;
+        }
+      });
+    }
+  }
   const backBtn = () => h('button', { class: 'back', type: 'button', onclick: back }, icon('t-back'), T.back);
   const title = (t) => h('h1', { class: 'title' }, t);
   const levels = () => Object.values(A.experience_by || {});
@@ -1330,7 +1753,8 @@ function interview(lines) {
     const opts = Object.keys(V.follow[o].opts).filter(k => !(ed && k === 'lean'));
     const pick = (k) => { A.outcome_detail = k; step(o === 'event' ? eventDate : afterFollow); };
     show(1, backBtn(), title(V.follow[o].q),
-      h('div', { class: 'tiles one' }, opts.map(k => tile({ ic: OUTCOME_IC[o], label: V.follow[o].opts[k][0], sub: V.follow[o].opts[k][1], onclick: () => pick(k) })),
+      h('div', { class: 'tiles one' }, opts.map(k => tile({ ic: OUTCOME_IC[o], label: V.follow[o].opts[k][0], sub: V.follow[o].opts[k][1],
+        pressed: A._mainWas === o && A.outcome_detail === k ? true : null, onclick: () => pick(k) })),
         decideTile(() => pick(OUTCOME_DEFAULT[o]))));
   }
   function eventDate() {
@@ -1398,7 +1822,8 @@ function interview(lines) {
   function style() {
     const pick = (k) => { A.style_pref = k; step(A.mode === 'improve' ? minutes : enjoy); };
     show(1, backBtn(), title(V.styleTitle), coach(V.styleLead),
-      h('div', { class: 'tiles' }, Object.keys(V.style).map(k => tile({ ic: STYLE_IC[k], label: V.style[k], cls: k === 'trainer' ? 'decide' : '', onclick: () => pick(k) }))));
+      h('div', { class: 'tiles' }, Object.keys(V.style).map(k => tile({ ic: STYLE_IC[k], label: V.style[k], cls: k === 'trainer' ? 'decide' : '',
+        pressed: A.style_pref === k ? true : null, onclick: () => pick(k) }))));
   }
   function enjoy() {
     const like = new Set(A.enjoys), hate = new Set(A.avoids);
@@ -1417,11 +1842,13 @@ function interview(lines) {
   function split() {
     const pick = (k) => { A._split = k; step(routineDays); };
     show(1, backBtn(), title(V.splitTitle), coach(V.splitLead),
-      h('div', { class: 'tiles one' }, Object.keys(V.split).map(k => tile({ ic: SPLIT_IC[k], label: V.split[k][0], sub: V.split[k][1], onclick: () => pick(k) }))));
+      h('div', { class: 'tiles one' }, Object.keys(V.split).map(k => tile({ ic: SPLIT_IC[k], label: V.split[k][0], sub: V.split[k][1],
+        pressed: A._split === k ? true : null, onclick: () => pick(k) }))));
   }
   function routineDays() {
     show(1, backBtn(), title(V.rdaysTitle),
-      h('div', { class: 'tiles' }, [2, 3, 4, 5, 6].map(n => tile({ ic: 'i-calendar', label: n + ' ' + T.daysUnit(n), onclick: () => { A.days = n; step(exercises); } }))));
+      h('div', { class: 'tiles' }, [2, 3, 4, 5, 6].map(n => tile({ ic: 'i-calendar', label: n + ' ' + T.daysUnit(n), pressed: A.days === n ? true : null,
+        onclick: () => { A.days = n; step(exercises); } }))));
   }
   function dayLabels() {
     const base = SPLIT_DAYS[A._split];
@@ -1438,7 +1865,7 @@ function interview(lines) {
       own[l] = ex[l] ? ex[l].filter(x => !list.includes(x)) : [];
       ex[l] = set;
       const ownBox = h('div', { class: 'chips' });
-      const drawOwn = () => { ownBox.innerHTML = ''; own[l].forEach((n, i) => ownBox.append(pressChip(n, true, () => { own[l].splice(i, 1); drawOwn(); return false; }, 't-check'))); };
+      const drawOwn = () => { ownBox.innerHTML = ''; own[l].forEach((n, i) => ownBox.append(pressChip(/^[a-z0-9_]+$/.test(n) ? bankName(n) : n, true, () => { own[l].splice(i, 1); drawOwn(); return false; }, 't-check'))); };
       drawOwn();
       const input = h('input', { class: 'field', type: 'text', placeholder: V.typeEx, 'aria-label': V.typeEx });
       const add = () => { const n = input.value.trim(); if (n) { own[l].push(n); input.value = ''; drawOwn(); } };
@@ -1451,31 +1878,58 @@ function interview(lines) {
       actions(btn(T.cont, () => {
         A._exSplit = A._split;
         A._ex = Object.fromEntries(labels.map(l => [l, [...ex[l], ...own[l]]]));
-        step(routineAge);
+        step(setsReps);
       }, 'primary', 'i-arrow-right')));
+  }
+  // their sets and reps, one row per exercise; "not sure" takes a usual number, said as a guess (engine/improve.py, SR above)
+  function setsReps() {
+    const R = V.rt;
+    const sr = A._sr = A._sr || {};
+    const groups = Object.entries(A._ex || {}).filter(([, list]) => list.length).map(([l, list]) => h('div', { class: 'group' },
+      h('h2', {}, V.dayName[l] || l),
+      ...list.map(x => {
+        const k = l + '|' + x;
+        const seg = segOf([...Object.keys(SR).map(s => [s, s.replace('x', ' x ')]), ['', R.notSure]], sr[k] || '', (v) => { if (v) sr[k] = v; else delete sr[k]; });
+        seg.classList.add('wrap');
+        return h('div', { class: 'exrow card' }, h('b', {}, bankName(x)), seg);
+      })));
+    show(1, backBtn(), title(R.setsTitle), coach(R.setsLead), ...groups,
+      actions(btn(T.cont, () => step(routineAge), 'primary', 'i-arrow-right')));
   }
   function routineAge() {
     show(1, backBtn(), title(V.ageTitle),
-      h('div', { class: 'tiles one' }, Object.keys(V.age).map(k => tile({ ic: 'i-calendar', label: V.age[k], onclick: () => { A._age = k; step(going); } }))));
+      h('div', { class: 'tiles one' }, Object.keys(V.age).map(k => tile({ ic: 'i-calendar', label: V.age[k], pressed: A._age === k ? true : null,
+        onclick: () => { A._age = k; step(going); } }))));
   }
   function going() {
-    const stalls = new Set(A._stalls || []), keep = new Set(A._keep || []);
+    const stalls = new Set(A._stalls || []), keep = new Set(A._keep || []), stuck = new Set(A._stuck || []);
+    const lifts = [...new Set(Object.values(A._ex || {}).flat().filter(x => /^[a-z0-9_]+$/.test(x)))];
     show(1, backBtn(), title(V.goingTitle), coach(V.goingLead),
       h('div', { class: 'group' }, h('h2', {}, V.stallQ), setChips(stalls, Object.entries(V.stall))),
+      lifts.length ? h('div', { class: 'group' }, h('h2', {}, V.rt.stuckQ), setChips(stuck, lifts.map(x => [x, bankName(x)]), 2)) : null,
       h('div', { class: 'group' }, h('h2', {}, V.keepQ), setChips(keep, Object.entries(V.keep))),
       actions(btn(T.cont, () => {
+        A._stuck = [...stuck];
+        if (stuck.size) stalls.add('lift_stuck');
         A._stalls = [...stalls]; A._keep = [...keep];
         const labels = dayLabels();
-        A.current_routine = { split: A._split, days: A.days, day_labels: labels.map(l => V.dayName[l] || l), age: A._age,
-          stalls: A._stalls, keep: A._keep,
-          exercises: Object.fromEntries(Object.entries(A._ex || {}).map(([l, list]) => [V.dayName[l] || l, list])) };
-        step(style);
+        const sr = A._sr || {};
+        const entry = (l, x) => {
+          const v = SR[sr[l + '|' + x]];
+          const e = /^[a-z0-9_]+$/.test(x) ? { id: x } : { name: x };
+          return v ? Object.assign(e, { sets: v[0], reps: v[1] }) : e;
+        };
+        A.current_routine = { split: A._split, days: A.days, day_labels: labels.map(l => V.dayName[l] || l), day_kinds: labels, age: A._age,
+          stalls: A._stalls, keep: A._keep, stuck: A._stuck,
+          exercises: Object.fromEntries(Object.entries(A._ex || {}).map(([l, list]) => [V.dayName[l] || l, list.map(x => entry(l, x))])) };
+        step(minutes);
       }, 'primary', 'i-arrow-right')));
   }
   // the week
   function days() {
     show(1, backBtn(), title(T.daysTitle),
-      h('div', { class: 'tiles' }, [2, 3, 4, 5, 6].map(n => tile({ ic: 'i-calendar', label: n + ' ' + T.daysUnit(n), onclick: () => { A.days = n; step(minutes); } })),
+      h('div', { class: 'tiles' }, [2, 3, 4, 5, 6].map(n => tile({ ic: 'i-calendar', label: n + ' ' + T.daysUnit(n), pressed: A.days === n ? true : null,
+        onclick: () => { A.days = n; step(minutes); } })),
         decideTile(() => { A.days = 3; step(minutes); })));
   }
   function minutes() {
@@ -1495,21 +1949,23 @@ function interview(lines) {
     const keys = Object.keys(ic).filter(k => k !== 'outdoors' || runs());
     const next = { gym: kit, home_gym: homeKit, outdoors };
     show(1, backBtn(), title(T.whereTitle),
-      h('div', { class: 'tiles' }, keys.map(k => tile({ ic: ic[k], label: T.where[k], sub: T.whereSub[k], onclick: () => { A._where = k; step(next[k]); } })),
+      h('div', { class: 'tiles' }, keys.map(k => tile({ ic: ic[k], label: T.where[k], sub: T.whereSub[k], pressed: ((A.places || {}).main || {}).type === k ? true : null,
+        onclick: () => { A._where = k; step(next[k]); } })),
         decideTile(() => { A._where = 'gym'; step(kit); })));
   }
   function kit() {
     const opts = ['full_gym', 'basic_gym', 'crossfit_box'];
-    const pick = (k) => { A.places = { main: { type: 'gym', equipment: [k] } }; A.default_place = 'main'; delete A.dumbbells; step(you); };
+    const pick = (k) => { A.places = { main: { type: 'gym', equipment: [k] } }; A.default_place = 'main'; delete A.dumbbells; delete A.home_kit; step(you); };
     show(1, backBtn(), title(T.kitTitle),
-      h('div', { class: 'tiles one' }, opts.map(k => tile({ ic: KIT_IC[k], label: T.kit[k], sub: T.kitSub[k], onclick: () => pick(k) })),
+      h('div', { class: 'tiles one' }, opts.map(k => tile({ ic: KIT_IC[k], label: T.kit[k], sub: T.kitSub[k],
+        pressed: ((A.places || {}).main || {}).type === 'gym' && (A.places.main.equipment || [])[0] === k ? true : null, onclick: () => pick(k) })),
         decideTile(() => pick(opts[0]))));
   }
   function homeKit() {
-    const picked = new Set(A._homeKit || []);
+    const picked = new Set(A.home_kit || []);
     const hint = h('p', { class: 'hint', role: 'status' });
     const go = btn(T.cont, () => {
-      A._homeKit = [...picked];
+      A.home_kit = [...picked];
       A.places = { main: { type: 'home_gym', equipment: [...new Set([...picked].flatMap(k => HOME_KIT[k]))] } };
       A.default_place = 'main';
       if (!picked.has('dumbbell')) delete A.dumbbells;
@@ -1529,7 +1985,7 @@ function interview(lines) {
   function outdoors() {
     A.places = { main: { type: 'outdoors', equipment: ['outdoors'] } };
     A.default_place = 'main';
-    delete A.dumbbells;
+    delete A.dumbbells; delete A.home_kit;
     step(you);
   }
   // the first weight they give: kilos or pounds, the guess preselected, confirmed right here
@@ -1546,15 +2002,17 @@ function interview(lines) {
     draw();
     show(1, backBtn(), title(T.dbTitle), unitsRow(draw), box);
   }
-  // you: skippable, but asked
-  function you() {
+  // you: skippable, but asked. you('pain') shows that one question alone (an answer changed from the settings)
+  function you(only) {
+    const want = (g) => !only || only === g;
+    const grp = (g, q, ...kids) => want(g) ? h('div', { class: 'group' }, only ? null : h('h2', {}, q), ...kids) : null;
     const good = new Set(A.strengths), holds = new Set(A.barriers), area = new Set(A.priority);
     let sleep = A.sleep || null, stress = A.stress || null;
     const hurt = new Map((A.limits || []).map(l => [l.region, { status: l.status || 'now', triggers: new Set(l.triggers || []) }]));
     const hurtBox = h('div', { class: 'group' });
     const drawHurt = () => {
       hurtBox.innerHTML = '';
-      hurtBox.append(h('h2', {}, V.painQ), h('div', { class: 'chips' }, Object.entries(T.regions).map(([k, v]) => pressChip(v, hurt.has(k), () => {
+      hurtBox.append(only ? '' : h('h2', {}, V.painQ), h('div', { class: 'chips' }, Object.entries(T.regions).map(([k, v]) => pressChip(v, hurt.has(k), () => {
         if (hurt.has(k)) hurt.delete(k); else hurt.set(k, { status: 'now', triggers: new Set() });
         drawHurt(); return hurt.has(k);
       }))));
@@ -1569,7 +2027,7 @@ function interview(lines) {
     const numBox = h('div', { class: 'group' });
     const drawNums = () => {
       numBox.innerHTML = '';
-      numBox.append(h('h2', {}, V.numbersQ), h('p', { class: 'muted small' }, V.numbersLead),
+      numBox.append(only ? '' : h('h2', {}, V.numbersQ), h('p', { class: 'muted small' }, V.numbersLead),
         h('div', { class: 'chips' }, NUM_LIFTS.map(id => pressChip(bankName(id), id in nums, () => {
           if (id in nums) delete nums[id]; else nums[id] = { w: UNITS === 'lb' ? 135 : 60, reps: 5 };
           drawNums(); return id in nums;
@@ -1594,40 +2052,51 @@ function interview(lines) {
         nums[id] = { w: Number(st[0].querySelector('output').textContent.split(' ')[0]), reps: Number(st[1].querySelector('output').textContent) };
       });
     }
-    show(1, backBtn(), title(V.youTitle), coach(V.youLead),
-      h('div', { class: 'group' }, h('h2', {}, V.goodQ), setChips(good, Object.entries(V.good))),
-      h('div', { class: 'group' }, h('h2', {}, V.holdQ), setChips(holds, Object.entries(V.hold), 2)),
-      h('div', { class: 'group' }, h('h2', {}, T.areaQ), setChips(area, Object.entries(T.areas), 2)),
-      hurtBox,
-      h('div', { class: 'group' }, h('h2', {}, V.sleepQ), segOf(Object.entries(V.sleep), sleep, (x) => { sleep = x; })),
-      h('div', { class: 'group' }, h('h2', {}, V.stressQ), segOf(Object.entries(V.stress), stress, (x) => { stress = x; })),
-      numBox,
-      actions(btn(T.cont, () => {
-        readNums();
-        A.strengths = [...good]; A.barriers = [...holds]; A.priority = [...area];
-        A.limits = [...hurt].map(([region, v]) => ({ region, status: v.status, triggers: [...v.triggers], note: V.status[v.status] }));
-        if (sleep) A.sleep = sleep; if (stress) A.stress = stress;
-        A._nums = nums;
-        A.numbers = Object.fromEntries(Object.entries(nums).map(([id, n]) => [id, { [UNITS]: n.w, reps: n.reps }]));
-        if (Object.keys(nums).length) { A.units = UNITS; A.paper = PAPER; A.units_confirmed = true; }
+    const QS = { good: V.goodQ, hold: V.holdQ, area: T.areaQ, pain: V.painQ, sleep: V.sleepQ, stress: V.stressQ, nums: V.numbersQ };
+    show(1, backBtn(), title(only ? QS[only] : V.youTitle), only ? null : coach(V.youLead),
+      grp('good', V.goodQ, setChips(good, Object.entries(V.good))),
+      grp('hold', V.holdQ, setChips(holds, Object.entries(V.hold), 2)),
+      grp('area', T.areaQ, setChips(area, Object.entries(T.areas), 2)),
+      want('pain') ? hurtBox : null,
+      grp('sleep', V.sleepQ, segOf(Object.entries(V.sleep), sleep, (x) => { sleep = x; })),
+      grp('stress', V.stressQ, segOf(Object.entries(V.stress), stress, (x) => { stress = x; })),
+      want('nums') ? numBox : null,
+      actions(btn(only ? T.k.save : T.cont, () => {
+        if (want('nums')) readNums();
+        if (want('good')) A.strengths = [...good];
+        if (want('hold')) A.barriers = [...holds];
+        if (want('area')) A.priority = [...area];
+        if (want('pain')) A.limits = [...hurt].map(([region, v]) => ({ region, status: v.status, triggers: [...v.triggers], note: V.status[v.status] }));
+        if (want('sleep') && sleep) A.sleep = sleep;
+        if (want('stress') && stress) A.stress = stress;
+        if (want('nums')) {
+          A._nums = nums;
+          A.numbers = Object.fromEntries(Object.entries(nums).map(([id, n]) => [id, { [UNITS]: n.w, reps: n.reps }]));
+          if (Object.keys(nums).length) { A.units = UNITS; A.paper = PAPER; A.units_confirmed = true; }
+        }
+        if (only) return save();
         const goals = [mainGoal(), ...(A.outcomes || []).slice(1).map(o => OUTCOME_GOAL[o.id][o.detail])];
         const skill = goals.includes('run') || goals.includes('hyrox') || (A.outcome_detail === 'hybrid') ? 'run_30min'
           : goals[0] === 'weightlifting' ? 'olympic_coached' : null;
         if (skill) step(() => skillQ(skill)); else save();
-      }, 'primary', 'i-arrow-right')));
+      }, 'primary', only ? 't-check' : 'i-arrow-right')));
   }
   function skillQ(skill) {
-    const pick = (yes) => { A.skills = yes ? [skill] : []; save(); };
+    const pick = (yes) => { A.skills = (A.skills || []).filter(x => x !== skill).concat(yes ? [skill] : []); save(); };
+    const has = (A.skills || []).includes(skill);
     show(1, backBtn(), title(T.skillQ[skill]),
-      h('div', { class: 'tiles one' }, tile({ ic: 't-check', label: T.yes, onclick: () => pick(true) }), tile({ ic: 'i-close', label: T.no, onclick: () => pick(false) }),
+      h('div', { class: 'tiles one' }, tile({ ic: 't-check', label: T.yes, pressed: E ? has : null, onclick: () => pick(true) }),
+        tile({ ic: 'i-close', label: T.no, pressed: E ? !has : null, onclick: () => pick(false) }),
         tile({ ic: 'i-spark', label: T.notSure, cls: 'decide', onclick: () => pick(false) })));
   }
   async function save() {
+    if (E) return saveEdit();
     busy(T.saving);
     const ans = {};
     for (const [k, v] of Object.entries(A)) if (!k.startsWith('_')) ans[k] = v;
     if (ans.mode !== 'improve') delete ans.current_routine;
     if (!experienced()) delete ans.style_pref;
+    for (const k of ANSWER_KEYS) if (!(k in ans)) ans[k] = null;   // an answer not given this time leaves the profile
     ans.rejected = [];
     let r;
     try { r = await run('profile', ['me/answers.json'], { 'answers.json': ans }); } catch (e) { return fail(); }
@@ -1635,9 +2104,26 @@ function interview(lines) {
       return show(1, title(T.errorsTitle), coach(...(r.errors || [r.error || '']).map(String)),
         actions(btn(T.back, back, 'primary', 't-back')));
     }
-    yourPlan();
+    if (ans.mode === 'improve') yourRoutine(null, null, true); else yourPlan();
   }
-  step(fork);
+  // one answer changed from What I know about you: only its fields go to the engine (the same plan.py profile)
+  async function saveEdit() {
+    EDITING = null;
+    busy(T.saving);
+    const ans = {};
+    for (const k of E.keys) ans[k] = A[k] === undefined ? null : A[k];
+    if (E.keys.includes('style_pref') && !experienced()) ans.style_pref = null;
+    let r;
+    try { r = await run('profile', ['me/answers.json'], { 'answers.json': ans }); } catch (e) { return fail(); }
+    if (!r.ok) return show(-1, title(T.errorsTitle), coach(...(r.errors || [r.error || '']).map(String)), actions(btn(T.back, () => know(), 'primary', 't-back')));
+    afterEdit(E);
+  }
+  if (!E) return step(fork);
+  EDITING = { note: E.replan ? T.k.willUpdate : T.k.nextCounts };
+  const first = E.you ? () => you(E.you) : E.skill ? () => skillQ(skillFor(prof) || 'run_30min')
+    : { outcomes, eventDate, history, style, enjoy, days, minutes, where, split }[E.first];
+  stack.push(first);
+  first();
 }
 
 // ─────────────────────────────────────────────────────────────── your plan: one, decided by the trainer
@@ -1706,11 +2192,72 @@ function notForMe(pid) {
 }
 async function programs() { return yourPlan(); }
 
+// ─────────────────────────────────────────────────────────────── their routine, coached (the improve path)
+// engine/improve.py: their split, days, exercises, sets and reps stay theirs; every change is a card they answer.
+function ideaWords(x) {
+  const f = LANG === 'en' ? null : (T.iv.rt.kind || {})[x.kind];
+  const tw = f ? f(x.args || {}) : [x.title, x.why];
+  let change = x.change;
+  if (LANG === 'fr') change = change.replace(/\+1 set of /g, '+1 série de ').replace(/ sets of /g, ' séries de ').replace(/ sets instead of /g, ' séries au lieu de ')
+    .replace(/ instead of /g, ' au lieu de ').replace(/, adding reps before weight/g, ', des répétitions avant la charge').replace(/ for a few weeks, same weight/g, ' pendant quelques semaines, même charge')
+    .replace(/^Every week (\d+): half the sets, a little lighter$/, 'Chaque semaine $1 : moitié des séries, un peu plus léger')
+    .replace(/at the end of your lifting days, about 8 to 12 minutes/, 'à la fin de tes séances de musculation, environ 8 à 12 minutes')
+    .replace(/^One set less on (\d+) extra moves; the main lifts stay as they are$/, 'Une série de moins sur $1 exercices en plus ; les principaux restent tels quels');
+  return { title: tw[0], why: tw[1], change };
+}
+function routineCards(r) {
+  const R = T.iv.rt;
+  return (r.routine || []).map(d => h('div', { class: 'card' },
+    h('p', { class: 'kicker' }, icon(d.exercises.some(e => e.run) ? 't-runner' : 't-barbell'), d.label, d.times > 1 ? ' · ' + R.times(d.times) : ''),
+    h('ul', { class: 'why' }, d.exercises.map(e => h('li', {},
+      e.run ? (e.name === 'Intervals' ? T.iv.dayName.intervals : e.name) + (e.reps ? ' · ' + e.reps.replace(' min', ' ' + T.min) : '')
+        : e.name + ' · ' + e.sets + ' x ' + String(e.reps).replace('-', ' ' + (LANG === 'fr' ? 'à' : 'to') + ' '),
+      e.assumed ? h('span', { class: 'muted small' }, ' (' + R.guess + ')') : null,
+      e.own ? h('span', { class: 'muted small' }, ' (' + R.own(e.tracked_as) + ')') : null)))));
+}
+async function yourRoutine(after, line, fresh) {
+  busy(T.saving);
+  let r = after;
+  if (!r) {          // adopt after the interview (the same routine keeps every yes); after that, the routine as it stands
+    try { r = await run(!fresh && readState() && readState().program === 'mine' ? 'improve' : 'adopt'); } catch (e) { return fail(); }
+  }
+  if (!r.ok && r.fallback) return yourPlan();
+  if (!r.ok) return show(2, coach(r.error || T.engineFail), actions(btn(T.tryAgain, route, 'primary', 't-reset')));
+  const R = T.iv.rt;
+  const answer = async (id, yes) => {
+    busy(T.saving);
+    let x;
+    try { x = await run('improve', [yes ? 'accept' : 'decline', id]); } catch (e) { return fail(); }
+    if (!x.ok) return fail();
+    yourRoutine(x, yes ? R.done : R.kept);
+  };
+  const cards = (r.proposals || []).map(x => {
+    const w = ideaWords(x);
+    return h('div', { class: 'card idea' },
+      x.safety ? h('span', { class: 'badge quiet' }, icon('t-bandage'), R.safety) : null,
+      h('h3', {}, w.title),
+      h('p', { class: 'small' }, h('b', {}, R.why + ' · '), w.why),
+      h('p', { class: 'small' }, h('b', {}, R.change + ' · '), w.change),
+      x.touches_lock ? h('p', { class: 'muted small' }, R.lock[x.touches_lock] || '') : null,
+      flowActions(btn(R.yes, () => answer(x.id, true), 'primary', 't-check'), btn(R.keep, () => answer(x.id, false), '', 'i-close')));
+  });
+  const ready = !!readState() && readState().program === 'mine' && !readState().pending;
+  show(2, h('button', { class: 'back', type: 'button', onclick: route }, icon('t-back'), T.back),
+    h('h1', { class: 'title' }, R.title),
+    coach(...[line, R.lead, R.days(r.days), (r.classes || []).length ? R.classes(r.classes.join(', ')) : null].filter(Boolean)),
+    ...routineCards(r),
+    h('div', { class: 'group' }, h('h2', {}, icon('i-spark'), ' ', R.ideas),
+      h('p', { class: 'muted small' }, cards.length ? R.ideasLead : r.later ? R.enough : R.none),
+      ...cards,
+      r.later ? h('p', { class: 'muted small' }, R.later(r.later)) : null),
+    (r.changes || []).length ? h('div', { class: 'card' }, h('p', { class: 'kicker' }, icon('t-check'), R.changed),
+      h('ul', { class: 'why' }, r.changes.map(c => h('li', {}, LANG === 'en' ? c.what : ideaWords({ change: c.what }).change)))) : null,
+    r.milestone ? msCard(r.milestone) : null,
+    actions(ready ? btn(readLog().length ? T.todaySession : R.start, () => readiness(), 'primary', 't-sheet') : null, btn(T.later, () => route(), ready ? 'ghost' : 'primary')));
+}
+
 function sayAlso(text) {
-  if (!text || LANG === 'en') return text;
-  const out = [];
-  for (const [k, v] of Object.entries(T.sayAlso)) if (text.includes(k)) out.push(v);
-  return out.length ? out.join(' ') : text;
+  return text;            // the engine says it in the person's language (engine/words.py), or leaves it out
 }
 async function choose(id) {
   busy(T.saving);
@@ -1721,27 +2268,278 @@ async function choose(id) {
   const name = T.iv.family[info.data.family] || info.data.name || id;
   const extra = [T.iv.expect];
   if (r.say_also) extra.push(sayAlso(r.say_also));
+  const tests = (r.tests && r.tests.tests) || [];
   show(2, h('button', { class: 'back', type: 'button', onclick: programs }, icon('t-back'), T.back),
     h('h1', { class: 'title' }, T.weekTitle),
     coach(T.weekLine(r.days, name), ...extra),
+    msCard(r.milestone),
+    tests.length ? h('div', { class: 'card' }, h('p', { class: 'kicker' }, icon('t-flag'), T.c.testsTitle),
+      h('p', { class: 'small', style: 'margin:6px 0 0' }, tests.map(t => (T.c.testInfo[t.id] || [t.name])[0]).join(' · ')),
+      h('p', { class: 'muted small', style: 'margin:6px 0 0' }, T.c.testsLead)) : null,
     actions(btn(T.firstNow, () => readiness(), 'primary', 't-sheet'), btn(T.later, () => route(), 'ghost')));
 }
 
 // ─────────────────────────────────────────────────────────────── today
+let USUAL = null;                     // the minutes the last weekly check-in set, offered as "my usual"
+const evName = () => ((readProfile().event || {}).name) || T.c.eventName;
+const dayList = (days) => (days || []).map(d => T.c.dayNames[d] || d).join(', ');
+// The everyday dashboard: one big button for today's workout, then small cards (the week, what waits, the milestone,
+// the latest best) and the ask box. Same engine reads as before (status, week); nothing new is stored.
+function dashCard({ ic, kicker, main, sub, onclick, extra }) {
+  return h('button', { class: 'tile dash', type: 'button', onclick }, icon(ic, 'lg'),
+    h('span', {}, kicker ? h('span', { class: 'kicker' }, kicker) : null, h('b', {}, main), extra || null, sub ? h('small', {}, sub) : null));
+}
 async function readyHome(st) {
   let wk = null;
   try { wk = await run('week'); } catch (e) { }
-  const so = wk && wk.planned ? h('div', { class: 'card' },
-    h('p', { class: 'small' }, T.weekSoFar(wk.done_this_week || 0, wk.planned)),
-    h('div', { class: 'bar', style: 'margin-top:10px' }, h('span', { style: 'width:' + Math.min(100, 100 * (wk.done_this_week || 0) / wk.planned) + '%' }))) : null;
-  show(3, h('h1', { class: 'title' }, T.readyTitle), coach(T.readyLead(st.next_session || st.program_name)), so,
-    actions(btn(T.todaySession, () => readiness(), 'primary', 't-sheet'), btn(T.myWeek, weekView, '', 'i-calendar')));
+  const C = st.coach || {};
+  USUAL = C.usual_minutes || null;
+  // the coach's turns: never in the way of training, one card, the first that is due
+  let due = null;
+  if (C.review_due) due = tile({ ic: 't-trophy', label: T.c.reviewCard, sub: T.c.reviewCardSub, onclick: () => blockReview() });
+  else if (C.event_after) due = tile({ ic: 't-flag', label: T.c.eventCard(evName()), sub: T.c.eventCardSub, onclick: () => blockReview() });
+  else if (C.checkin_due) due = tile({ ic: 'i-chat', label: T.c.checkinCard, sub: T.c.checkinCardSub, onclick: () => checkin() });
+  else if (C.tests_due && C.tests) due = tile({ ic: 'i-target', label: T.c.testsCard, sub: T.c.testsCardSub, onclick: () => testsView(C.tests) });
+  const routine = st.program === 'mine' ? tile({ ic: 'i-spark', label: T.iv.rt.homeCard, sub: T.iv.rt.homeSub(C.proposals || 0), onclick: () => yourRoutine() }) : null;
+  const lines = [];
+  if (C.back) lines.push(T.c.back[C.back]);
+  if (C.taper && !C.taper.race_day) lines.push(T.c.taper(C.taper.days, evName()));
+  const nw = C.next_week || {};
+  if (nw.dose === 'easier') lines.push(T.c.easier);
+  if (nw.days && nw.days.length) lines.push(T.c.yourDays(dayList(nw.days)));
+  const done = (wk && wk.done_this_week) || 0, planned = (wk && wk.planned) || 0;
+  const streak = (wk && wk.streak) || C.streak || {};
+  const weekCard = dashCard({ ic: 'i-calendar', kicker: T.d.week, main: T.d.weekLine(done, planned || '?'), onclick: weekView,
+    extra: planned ? h('span', { class: 'bar' }, h('span', { style: 'width:' + Math.min(100, 100 * done / planned) + '%' })) : null,
+    sub: streak.weeks ? T.streakWeeks(streak.weeks) : null });
+  const recs = ((wk && wk.records) || []).slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+  const best = recs[0] ? h('div', { class: 'card dashinfo' }, h('p', { class: 'kicker' }, icon('t-trophy'), T.d.best),
+    h('p', { class: 'row2' }, h('b', {}, recs[0].name), h('span', { class: 'num best' }, prText(recs[0]))),
+    recs[0].date ? h('p', { class: 'muted small' }, T.d.bestOn(recs[0].date)) : null) : null;
+  const go = h('button', { class: 'go', type: 'button', onclick: () => readiness() }, icon('t-sheet', 'lg'),
+    h('span', {}, h('b', {}, T.d.go), h('small', {}, T.d.goSub(st.next_session || st.program_name))));
+  show(-1, h('h1', { class: 'title' }, C.back ? T.c.backTitle : T.readyTitle),
+    lines.length ? coach(...lines) : null,
+    go,
+    due ? h('div', { class: 'group' }, h('p', { class: 'kicker' }, T.d.due), due) : null,
+    weekCard, routine,
+    C.milestone ? msCard(C.milestone) : null,
+    best,
+    askBox(st));
 }
 
-function readiness() {
+// ─────────────────────────────────────────────────────────────── ask your trainer
+// A question or a request in their own words, answered by Claude (the sample capability) from what the trainer knows.
+// When it means a change for today it opens the flow that does it (minutes, pain, a swap) or the one answer to change.
+let BANK_EN = null;
+function bankIdsFor(words) {
+  if (!BANK_EN) {
+    BANK_EN = [];
+    for (const line of ((BUNDLE && BUNDLE.files['doctrine/exercises/bank.csv']) || '').split('\n').slice(1)) {
+      const m = /^([^,]+),("([^"]*)"|[^,]*)/.exec(line.replace(/\r$/, ''));
+      if (m) BANK_EN.push([m[1], String(m[3] != null ? m[3] : m[2]).toLowerCase()]);
+    }
+  }
+  const ids = new Set();
+  for (const w of words || []) {
+    const kw = String(w || '').toLowerCase().trim();
+    if (kw.length < 3) continue;
+    const forms = new Set([kw, kw.endsWith('s') && !kw.endsWith('ss') ? kw.slice(0, -1) : kw]);
+    for (const [id, name] of BANK_EN) for (const f of forms) if (id.includes(f.replace(/\s+/g, '_')) || name.includes(f)) ids.add(id);
+  }
+  return [...ids];
+}
+function trainerContext(st) {
+  const p = readProfile();
+  const keep = {};
+  for (const k of ['outcome', 'outcome_detail', 'outcomes', 'event', 'goal', 'goal2', 'experience', 'days', 'minutes', 'places', 'limits', 'enjoys', 'avoids',
+    'kit_pref', 'priority', 'strengths', 'barriers', 'sleep', 'stress', 'numbers', 'units']) if (p[k] != null) keep[k] = p[k];
+  return JSON.stringify({ profile: keep, plan: st.program_name, next_session: st.next_session,
+    last_sessions: readLog().slice(-4).map(l => ({ date: l.date, title: l.title, score: l.score, felt: l.felt, pain: l.pain, notes: l.notes })),
+    their_words: readWords().slice(-8).map(w => w.text) });
+}
+function askBox(st) {
+  if (!CAP.sample) return null;
+  const input = h('textarea', { rows: 2, placeholder: T.d.askPh, 'aria-label': T.d.ask });
+  const out = h('div', { class: 'askout', role: 'status' });
+  const send = btn(T.d.askSend, go, '', 'i-chat');
+  async function go() {
+    const text = input.value.trim();
+    if (!text) return input.focus();
+    keepWords(T.d.ask, text);
+    send.disabled = true;
+    out.innerHTML = ''; out.append(h('p', { class: 'muted small' }, T.d.askThinking));
+    let r = null;
+    try {
+      r = await CAP.sample.json('You are a friendly personal trainer inside a training app, talking to a member of the public. Reply in ' +
+        (LANG === 'fr' ? 'French, using "tu"' : 'English') + ', in one or two short sentences a child could follow. No jargon, no method or program names, never a dash between clauses.\n' +
+        'What you know about them (JSON): ' + trainerContext(st).slice(0, 6000) + '\nThey wrote: "' + text.slice(0, 600) + '"\n' +
+        'Return only JSON: {"reply": "...", "action": "workout|minutes|pain|swap|edit|none", "minutes": <15 to 120, for minutes>, ' +
+        '"regions": [<from knee, hip, low_back, shoulder, elbow, wrist, ankle, neck, for pain>], "sharp": <true if the pain is sharp, getting worse or not normal soreness>, ' +
+        '"swap": [<English exercise words to leave out today, like "squat", "deadlift", "bench press", "running", for swap>], ' +
+        '"edit": "<days|minutes|goal|where|pain|enjoy|area|sleep|stress|nums, for edit>"}.\n' +
+        'Rules: less time today is minutes; a pain today is pain; leaving an exercise out today is swap; wanting to train now is workout; ' +
+        'a lasting change to their answers (their days, their goal, where they train) is edit; a plain question is none. ' +
+        'Chest pain, fainting, dizziness or feeling ill: tell them to stop and get medical help, and the action is none.', { modelTier: 'quick' });
+    } catch (e) { r = null; }
+    send.disabled = false;
+    out.innerHTML = '';
+    if (!r || !r.reply) { out.append(h('p', { class: 'muted small' }, T.d.askFail)); return; }
+    out.append(coach(String(r.reply)));
+    const regions = (r.regions || []).filter(x => T.regions[x]);
+    let next = null;
+    if (r.action === 'minutes' && +r.minutes) {
+      const m = Math.max(MIN_RANGE[0], Math.min(MIN_RANGE[1], Math.round(+r.minutes / 5) * 5));
+      next = btn(T.d.goMinutes(m), () => readiness({ minutes: m }), 'primary', 't-timer');
+    } else if (r.action === 'pain' && regions.length) {
+      next = btn(T.d.goPain(regions.map(x => T.regions[x].toLowerCase()).join(', ')), () => readiness({ pain: regions, sharp: !!r.sharp }), 'primary', 't-bandage');
+    } else if (r.action === 'swap' && (r.swap || []).length) {
+      const ids = bankIdsFor(r.swap);
+      const said = r.swap.join(', ');
+      next = btn(T.d.goSwap(said), () => readiness(ids.length ? { swap: ids, swapWords: said } : {}), 'primary', 't-sheet');
+    } else if (r.action === 'edit' && EDITS[r.edit]) {
+      const key = r.edit === 'days' && readProfile().mode === 'improve' ? 'routine' : r.edit;
+      next = btn(T.d.goEdit, () => editAnswer(key), '', 'i-user');
+    } else if (r.action === 'workout') {
+      next = btn(T.d.go, () => readiness(), 'primary', 't-sheet');
+    }
+    if (next) out.append(flowActions(next));
+  }
+  return h('div', { class: 'card ask' }, h('p', { class: 'kicker' }, icon('i-chat'), T.d.ask), h('p', { class: 'muted small' }, T.d.askLead),
+    input, send, out);
+}
+
+// ─────────────────────────────────────────────────────────────── the coach's turns: tests, check-in, block review
+function testsView(bat) {
+  const vals = {};
+  const field = (t) => {
+    const info = T.c.testInfo[t.id] || [t.name, t.how, t.when];
+    let body;
+    if (t.unit === 'time') {
+      const mm = numField({ value: '', min: 0, max: 59, step: 1, unit: 'min', onchange: () => set() });
+      const ss = numField({ value: '', min: 0, max: 59, step: 5, unit: 's', onchange: () => set() });
+      const set = () => {
+        const m = Number(mm.querySelector('input').value), sec = Number(ss.querySelector('input').value || 0);
+        vals[t.id] = m > 0 ? m + ':' + String(sec).padStart(2, '0') : null;
+      };
+      body = h('div', { class: 'group' }, mm, ss);
+    } else {
+      const f = numField({ value: '', min: 0, max: t.unit === 'metres' ? 5000 : 600, step: t.unit === 'metres' ? 50 : t.unit === 'seconds' ? 5 : 1,
+        unit: T.c.unit[t.unit], onchange: (n) => { vals[t.id] = n; } });
+      body = f;
+    }
+    return h('div', { class: 'card exrow' }, h('b', {}, info[0]), h('p', { class: 'muted small' }, info[1]),
+      h('p', { class: 'muted small' }, T.c.testsWhen(info[2])), body);
+  };
+  const send = async (data) => {
+    busy(T.saving);
+    let r;
+    try { r = await run('tests', ['me/tests.json'], { 'tests.json': data }); } catch (e) { return fail(); }
+    if (!r.ok) return fail();
+    const out = (r.compare || []).map(c => {
+      const name = (T.c.testInfo[c.id] || [c.name])[0];
+      return (c.since_start != null && c.since_start > 0) ? T.c.testsBetter(name, c.since_start) : T.c.testsFirst(name, c.now);
+    });
+    show(3, h('h1', { class: 'title' }, T.c.testsTitle), coach(data.skip ? T.noProblem : T.c.testsDone, ...out),
+      actions(btn(T.todaySession, () => readiness(), 'primary', 't-sheet'), btn(T.home, route, 'ghost')));
+  };
+  show(3, h('button', { class: 'back', type: 'button', onclick: route }, icon('t-back'), T.back),
+    h('h1', { class: 'title' }, T.c.testsTitle), coach(T.c.testsLead),
+    ...(bat.tests || []).map(field),
+    bat.lifts ? h('p', { class: 'muted small' }, T.c.testsLifts) : null,
+    actions(btn(T.c.testsSave, () => {
+      const results = {}; for (const [k, v] of Object.entries(vals)) if (v != null && v !== '') results[k] = v;
+      send(Object.keys(results).length ? { results } : { skip: true });
+    }, 'primary', 't-check'), btn(T.c.testsSkip, () => send({ skip: true }), 'ghost')));
+}
+
+function checkin() {
+  const A = { barriers: new Set(), energy: 'ok', days: new Set() };
+  const barriers = h('div', { class: 'chips' });
+  const drawB = () => {
+    barriers.innerHTML = '';
+    for (const [k, v] of Object.entries(T.c.barriers)) barriers.append(pressChip(v, A.barriers.has(k), () => {
+      if (A.barriers.has(k)) A.barriers.delete(k);
+      else { if (k === 'nothing') A.barriers.clear(); else A.barriers.delete('nothing'); A.barriers.add(k); }
+      drawB();
+    }));
+  };
+  drawB();
+  const energy = segOf(Object.entries(T.c.energyW), A.energy, (v) => { A.energy = v; });
+  const days = setChips(A.days, Object.entries(T.c.dayNames), 7);
+  const save = btn(T.c.checkinSave, async () => {
+    busy(T.saving);
+    let r;
+    const data = { barriers: [...A.barriers], energy: A.energy, next_days: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].filter(d => A.days.has(d)) };
+    try { r = await run('checkin', ['me/checkin.json'], { 'checkin.json': data }); } catch (e) { return fail(); }
+    if (!r.ok) return fail();
+    const sv = r.checkin || {}, nw = r.next_week || {}, lines = [];
+    if (sv.done != null && sv.planned) lines.push(sv.done >= sv.planned ? T.c.allDone : T.c.checkinDone(sv.done, sv.planned));
+    if (nw.dose === 'easier') lines.push(T.c.easier);
+    if (nw.minutes) lines.push(T.c.shorter(nw.minutes));
+    if (nw.days && nw.days.length) lines.push(T.c.yourDays(dayList(nw.days)));
+    if (r.suggest === 'fewer_days' && sv.planned) lines.push(T.c.fewerDays(sv.planned - 1));
+    USUAL = nw.minutes || USUAL;
+    show(3, h('h1', { class: 'title' }, T.c.checkinCard), coach(...lines),
+      actions(btn(T.todaySession, () => readiness(), 'primary', 't-sheet'), btn(T.home, route, 'ghost')));
+  }, 'primary', 't-check');
+  show(3, h('button', { class: 'back', type: 'button', onclick: route }, icon('t-back'), T.back),
+    h('h1', { class: 'title' }, T.c.checkinTitle),
+    h('div', { class: 'group' }, h('h2', {}, T.c.checkinWay), barriers),
+    h('div', { class: 'group' }, h('h2', {}, T.c.checkinEnergy), energy),
+    h('div', { class: 'group' }, h('h2', {}, T.c.checkinDays), days),
+    actions(save));
+}
+
+async function blockReview() {
+  busy(T.saving);
+  let r;
+  try { r = await run('blockreview'); } catch (e) { return fail(); }
+  if (!r.ok) return fail();
+  const A = { well: null, change: 'keep', focus: new Set() };
+  const facts = [T.c.reviewSessions(r.sessions, r.planned)];
+  for (const x of (r.lifts || []).filter(x => x.pct > 0).sort((a, b) => b.pct - a.pct).slice(0, 3)) facts.push(T.c.reviewLift(x.name, x.pct));
+  for (const x of r.tests || []) facts.push(T.c.reviewTest((T.c.testInfo[x.id] || [x.name])[0], x.first, x.now, x.pct));
+  const wellRow = h('div', { class: 'chips' });
+  const drawW = () => { wellRow.innerHTML = ''; for (const [k, v] of Object.entries(T.c.well)) wellRow.append(pressChip(v, A.well === k, () => { A.well = k; drawW(); })); };
+  drawW();
+  const focusBox = h('div', { class: 'group', hidden: true }, h('h2', {}, T.c.focusQ), setChips(A.focus, Object.entries(T.c.focus), 2));
+  const opts = h('div', { class: 'tiles one' });
+  const drawO = () => {
+    opts.innerHTML = '';
+    for (const k of r.options || ['keep']) {
+      const [label, sub] = T.c.change[k] || [k, ''];
+      opts.append(tile({ ic: k === 'keep' ? 't-check' : k === 'move_on' ? 't-stairs' : k === 'new_focus' ? 'i-target' : 'i-tools', label, sub, pressed: A.change === k,
+        onclick: () => { A.change = k; focusBox.hidden = k !== 'new_focus'; drawO(); } }));
+    }
+  };
+  drawO();
+  const save = btn(T.c.reviewSave, async () => {
+    busy(T.saving);
+    let a;
+    const data = { went_well: A.well, change: A.change, priority: [...A.focus] };
+    try { a = await run('blockreview', ['me/review.json'], { 'review.json': data }); } catch (e) { return fail(); }
+    if (!a.ok) return show(3, coach(...(a.errors || [T.engineFail]).map(String)), actions(btn(T.home, route, 'primary')));
+    const nc = a.next_command || [];
+    if (nc[0] === 'match') return yourPlan(T.c.reviewSaved);
+    if (nc[0] === 'choose' && nc[1]) return choose(nc[1]);
+    show(3, h('h1', { class: 'title' }, T.c.reviewCard), coach(T.c.reviewSaved), msCard(a.milestone),
+      actions(btn(T.todaySession, () => readiness(), 'primary', 't-sheet'), btn(T.home, route, 'ghost')));
+  }, 'primary', 'i-arrow-right');
+  show(3, h('button', { class: 'back', type: 'button', onclick: route }, icon('t-back'), T.back),
+    h('h1', { class: 'title' }, r.event_after ? T.c.eventCard(evName()) : T.c.reviewTitle),
+    coach(...facts), r.milestone ? msCard(r.milestone) : null,
+    h('div', { class: 'group' }, h('h2', {}, T.c.reviewWell), wellRow),
+    h('div', { class: 'group' }, h('h2', {}, T.c.reviewNext), opts), focusBox,
+    actions(save));
+}
+
+function readiness(said) {
+  said = said || {};                     // from the ask box: { minutes } · { pain: [regions], sharp } · { swap: [ids], swapWords }
   const prof = readProfile();
-  const usual = prof.minutes || 45;
+  const usual = USUAL || prof.minutes || 45;
   const R = { pain: [] };
+  if ((said.swap || []).length) { R.swap = said.swap; R.swap_words = said.swapWords || ''; }
   const hist = [];
   const goBack = () => { hist.pop(); const f = hist.pop(); f ? f() : route(); };
   const backBtn = () => h('button', { class: 'back', type: 'button', onclick: goBack }, icon('t-back'), T.back);
@@ -1751,11 +2549,31 @@ function readiness() {
     { v: 9, ic: 't-bat-full', label: T.energy[9][0], sub: T.energy[9][1] },
     { v: 7, ic: 't-bat-mid', label: T.energy[7][0], sub: T.energy[7][1] },
     { v: 5, ic: 't-bat-low', label: T.energy[5][0], sub: T.energy[5][1] },
-    { v: 3, ic: 't-bat-empty', label: T.energy[3][0], sub: T.energy[3][1] }], (v) => { R.energy = v; pain(); }); };
-  const pain = () => { hist.push(pain); q(T.painTitle, [
+    { v: 3, ic: 't-bat-empty', label: T.energy[3][0], sub: T.energy[3][1] }], (v) => { R.energy = v; sore(); }); };
+  // soreness is asked apart from pain: it lowers the dose, it never takes a body part out (doctrine/04_INTENSITY.md)
+  const sore = () => { hist.push(sore); q(T.c.soreTitle, [
+    { v: 'none', ic: 't-check', label: T.c.sore.none },
+    { v: 'some', ic: 't-stretch', label: T.c.sore.some, sub: T.c.soreSub.some },
+    { v: 'very', ic: 't-stretch', label: T.c.sore.very, sub: T.c.soreSub.very }], (v) => {
+      delete R.sore; delete R.sore_areas;
+      if (v === 'none') return pain();
+      R.sore = v;
+      if (v === 'very') return soreWhere();
+      pain();
+    }, h('p', { class: 'muted small' }, T.c.soreLead)); };
+  const soreWhere = () => { hist.push(soreWhere); q(T.c.soreWhere, Object.entries(T.c.soreAreas).map(([k, v]) => ({ v: k, ic: 't-stretch', label: v })),
+    (v) => { R.sore_areas = [v]; pain(); }); };
+  const known = (said.pain || []).filter(r => T.regions[r]);
+  const pain = () => { hist.push(pain); q(T.c.painTitle, [
     { v: 'none', ic: 't-check', label: T.pain.none },
     { v: 'little', ic: 't-bandage', label: T.pain.little, sub: T.painSub.little },
-    { v: 'sharp', ic: 't-bandage', label: T.pain.sharp }], (v) => { R.pain = []; if (v === 'none') return time(); region(v === 'sharp' ? 6 : 2); }); };
+    { v: 'sharp', ic: 't-bandage', label: T.pain.sharp }], (v) => {
+      R.pain = [];
+      if (v === 'none') return time();
+      const score = v === 'sharp' ? 6 : 2;
+      if (known.length) { R.pain = known.map(r => Object.assign({ region: r, score }, score > 3 ? { sharp: true } : {})); return time(); }
+      region(score);
+    }, known.length ? h('p', { class: 'muted small' }, T.d.painSaid(known.map(r => T.regions[r]).join(', '))) : null); };
   const region = (score) => {
     hist.push(() => region(score));
     const sel = new Set();
@@ -1768,7 +2586,9 @@ function readiness() {
       return c;
     })), actions(go));
   };
-  const time = () => { hist.push(time); q(T.timeTitle, [
+  const time = () => {
+    if (said.minutes) { R.minutes = said.minutes; return unusual(); }
+    hist.push(time); q(T.timeTitle, [
     { v: usual, ic: 'i-clock', label: T.usual, sub: usual + ' ' + T.min },
     ...[30, 45, 60].filter(n => n !== usual).map(n => ({ v: n, ic: 't-timer', label: n + ' ' + T.min }))], (v) => { R.minutes = v; unusual(); }); };
   const unusual = () => { hist.push(unusual); q(T.unusualTitle, [
@@ -1872,6 +2692,7 @@ function sheet(session, pdf, rest) {
     coach(h('p', {}, h('b', {}, s.title || '')),
       s.score_to_beat ? h('p', { class: 'small' }, h('span', { class: 'hot' }, T.toBeat), s.score_to_beat) : null,
       first ? h('p', { class: 'muted small' }, T.firstTime) : null,
+      (s.readiness || {}).swap_words ? h('p', { class: 'muted small' }, T.d.swapped(s.readiness.swap_words)) : null,
       rest ? null : h('p', { class: 'small' }, T.sheetLead)),
     after,
     sheetFrame(session),
@@ -2041,13 +2862,11 @@ function changes(session, s, needs) {
 }
 
 function nextLoad(line) {
-  if (LANG !== 'fr') return line;
-  return line.replace(/: next time /, ' : la prochaine fois ').replace(/: training max /, ' : max d’entraînement ').replace(/, wave /, ', vague ');
+  return line;            // the engine writes it in the person's language (engine/words.py)
 }
 async function logIt(session, s, report) {
   busy(T.saving);
   let r;
-  const before = records();
   try { r = report ? await run('log', ['me/report.json'], { 'report.json': report }) : await run('log', ['unreported']); }
   catch (e) { return fail(); }
   if (!r.ok && r.needs) {
@@ -2064,13 +2883,16 @@ async function logIt(session, s, report) {
   if (ev.includes('block_closed')) lines.push(T.blockClosed);
   if (ev.includes('early_deload')) lines.push(T.deload);
   if (report && !ev.includes('early_deload')) lines.push(T.loggedNext);
-  const fresh = r.ok ? freshRecords(before, records()) : [];
+  const fresh = r.records_new || [];
+  if (r.milestone && r.milestone.status === 'hit' && r.milestone.sessions === r.milestone.sessions_target) lines.push(T.c.msHit);
+  const nextTurn = r.review_due ? btn(T.c.reviewCard, () => blockReview(), 'primary', 't-trophy')
+    : r.checkin_due ? btn(T.c.checkinCard, () => checkin(), 'primary', 'i-chat') : null;
   show(4, h('h1', { class: 'title' }, T.loggedTitle),
     fresh.length ? recordsCard(fresh, fresh) : null,
     coach(r.score ? h('p', {}, h('b', {}, s.title || ''), ' · ', h('span', { class: 'num' }, scoreText(r.score))) : h('p', {}, h('b', {}, s.title || '')), ...lines),
     (r.next_loads || []).length ? h('div', { class: 'card' }, h('p', { class: 'kicker' }, icon('i-trend-up'), ' ', T.nextTime),
       h('div', { class: 'list' }, r.next_loads.slice(0, 6).map(l => h('div', { class: 'row num' }, nextLoad(l))))) : null,
-    actions(btn(T.home, route, 'primary', 't-check'), btn(T.myWeek, weekView, '', 'i-calendar')));
+    actions(nextTurn, btn(nextTurn ? T.c.later : T.home, route, nextTurn ? 'ghost' : 'primary', 't-check'), nextTurn ? null : btn(T.myWeek, weekView, '', 'i-calendar')));
 }
 
 // ─────────────────────────────────────────────────────────────── the week
@@ -2087,8 +2909,9 @@ async function weekView() {
       h('div', { class: 'stat' }, h('span', { class: 'n' }, done), h('span', { class: 'muted' }, '/ ' + planned)),
       h('p', { class: 'muted small' }, T.doneOf(done, planned)),
       h('div', { class: 'bar', style: 'margin-top:10px' }, h('span', { style: 'width:' + (planned ? Math.min(100, 100 * done / planned) : 0) + '%' }))),
-    streakCard(),
-    recordsCard(records()),
+    streakCard(w.streak),
+    recordsCard(w.records || []),
+    w.milestone ? msCard(w.milestone) : null,
     h('div', { class: 'card' }, h('p', { class: 'kicker' }, T.last7),
       (w.last_7_days || []).length ? h('div', { class: 'list' }, w.last_7_days.map(l => h('div', { class: 'row' }, h('span', {}, h('b', {}, l.title || ''), h('br'), h('span', { class: 'muted small num' }, l.date)), h('span', { class: 'num small' }, scoreText(l.score)))))
         : h('p', { class: 'muted small', style: 'margin:8px 0 0' }, T.nothingYet)),
@@ -2102,6 +2925,174 @@ async function weekView() {
           h('span', { class: 'num', style: 'text-align:right' }, v.done));
       }), h('p', { class: 'muted small' }, T.usualBand)) : null,
     actions(btn(T.todaySession, () => readiness(), 'primary', 't-sheet')));
+}
+
+// ─────────────────────────────────────────────────────────────── what I know about you
+// Every answer from the interview, in plain words, grouped; each row's Edit reopens that one question (interview(null, key)),
+// saves through plan.py profile, and when the answer shapes the plan, chooses it again. Then back here.
+function editAnswer(key) {
+  if (key === 'units') return unitsEditor();
+  if (key === 'lang') return langEditor();
+  interview(null, key);
+}
+async function afterEdit(E) {
+  const K = T.k;
+  if (!E.replan) return know(K.savedNext);
+  const pl = jsonBlock(fsRead('me/PLAN.md', true)) || {};
+  if (!pl.program) return route();                    // no plan yet: the usual path picks one
+  busy(T.saving);
+  try {
+    if (pl.program === 'mine') {                      // their own routine: written again from what they said
+      const r = await run('adopt');
+      if (r.ok) return know(K.planUpdated);
+      if (r.fallback) return yourPlan(K.mustSwitch);
+      return fail();
+    }
+    const m = await run('match');
+    const top = m.plan && m.plan.id;
+    if (!top) return know(K.noFit);
+    const keepOk = !(m.failed || {})[pl.program];
+    if (top === pl.program) {
+      const c = await run('choose', [top, 'keep_dates']);
+      return c.ok ? know(K.planUpdated) : fail();
+    }
+    if (!keepOk) return yourPlan(K.mustSwitch);
+    const info = programInfo(top);
+    const name = T.iv.family[info.data.family] || info.data.name || top;
+    show(-1, h('h1', { class: 'title' }, K.switchTitle), coach(K.switchLead(name)),
+      actions(btn(K.seeNew, () => yourPlan(), 'primary', 'i-arrow-right'), btn(K.keepMine, async () => {
+        busy(T.saving);
+        let c;
+        try { c = await run('choose', [pl.program, 'keep_dates']); } catch (e) { return fail(); }
+        know(c.ok ? K.planUpdated : K.saved);
+      }, 'ghost')));
+  } catch (e) { return fail(); }
+}
+function smallEditor(title, opts, value, onpick) {
+  EDITING = null;
+  show(-1, h('button', { class: 'back', type: 'button', onclick: () => know() }, icon('t-back'), T.back), h('h1', { class: 'title' }, title),
+    h('div', { class: 'tiles one' }, opts.map(([k, label]) => tile({ ic: 't-check', label, pressed: k === value, onclick: () => onpick(k) }))));
+}
+function unitsEditor() {
+  const p = readProfile();
+  smallEditor(T.k.units, [['kg', T.k.unitNames.kg], ['lb', T.k.unitNames.lb]], p.units || UNITS, async (u) => {
+    busy(T.saving);
+    setUnits(u);
+    let r;
+    try { r = await run('profile', ['me/answers.json'], { 'answers.json': { units: u, paper: PAPER, units_confirmed: true } }); } catch (e) { return fail(); }
+    know(r.ok ? T.k.saved : T.engineFail);
+  });
+}
+function langEditor() {
+  smallEditor(T.k.lang, Object.entries(T.k.langNames), LANG, async (l) => {
+    busy(T.saving);
+    try { await run('profile', ['me/answers.json'], { 'answers.json': { language: l } }); } catch (e) { return fail(); }
+    try { localStorage.setItem('pt.lang', l); } catch (e) { }
+    const u = new URL(location.href);
+    if (u.searchParams.has('lang')) { u.searchParams.set('lang', l); location.replace(u.href); } else location.reload();
+  });
+}
+function know(flash) {
+  EDITING = null;
+  const p = readProfile();
+  if (!p.goal) return settings();
+  const K = T.k, V = T.iv;
+  const list = (xs, names) => (xs || []).map(x => (names && names[x]) || String(x).replace(/_/g, ' ')).join(', ');
+  const editBtn = (key) => h('button', { class: 'edit', type: 'button', onclick: () => editAnswer(key), 'aria-label': K.edit }, K.edit);
+  const row = (label, value, key) => {
+    if (Array.isArray(value)) value = value.length ? value.map(x => h('span', { class: 'kline' }, x)) : null;   // one line each
+    return h('div', { class: 'krow' },
+    h('span', { class: 'kt' }, h('span', { class: 'kl' }, label), h('span', { class: 'kv' + (value ? '' : ' muted') }, value || K.notSaid)),
+    key ? editBtn(key) : null);
+  };
+  const group = (ic, title, note, ...rows) => h('div', { class: 'group' }, h('h2', {}, icon(ic), ' ', title),
+    note ? h('p', { class: 'muted small' }, note) : null, h('div', { class: 'card know' }, rows.filter(Boolean)));
+  const improve = p.mode === 'improve';
+  // your goal
+  const oc = p.outcome, det = p.outcome_detail;
+  const want = oc && V.outcome[oc] ? V.outcome[oc][0] + ((V.follow[oc] || {}).opts && V.follow[oc].opts[det] ? ': ' + V.follow[oc].opts[det][0] : '') : (T.goals[p.goal] || p.goal);
+  const mix = (p.outcomes || []).length > 1 ? p.outcomes.map(o => (V.outcome[o.id] || [o.id])[0] + ' ' + Math.round(o.share * 100) + '%').join(' · ') : null;
+  const ev = p.event ? (p.event.name || T.c.eventName) + ' · ' + (p.event.date ? niceDate(p.event.date) : V.noDate) : null;
+  // your week
+  const levels = p.returning && p.experience_was ? p.experience_was : (p.experience_by || {});
+  const before = (p.done_before || []).length ? p.done_before.map(k => V.act[k] + (levels[k] && V.howLong[levels[k]] ? ' (' + V.howLong[levels[k]].toLowerCase() + ')' : '')).join(', ')
+    + (p.returning ? ' · ' + V.returning : '') : V.nothingYet;
+  const experienced = Object.values(levels).some(l => l === 'intermediate' || l === 'advanced');
+  const rt = p.current_routine || {};
+  // where
+  const main = (p.places || {}).main || {};
+  const eq = main.equipment || [];
+  const kit = main.type === 'gym' ? list(eq, T.kit) : main.type === 'home_gym' ? list(p.home_kit || Object.keys(HOME_KIT).filter(k => HOME_KIT[k].every(t => eq.includes(t))), T.homeKit)
+    : main.type === 'outdoors' ? T.kit.outdoors : list(eq);
+  const unit = p.units || UNITS;
+  const dbs = p.dumbbells ? (unit === 'lb' && p.dumbbells_lb ? p.dumbbells_lb : p.dumbbells).join(', ') + ' ' + unit : null;
+  // your body
+  const pains = (p.limits || []).map(l => (T.regions[l.region] || l.region) + ' · ' + (V.status[l.status] || (l.exclude ? V.status.now : V.status.mild))
+    + ((l.triggers || []).length ? ' (' + list(l.triggers, V.trigger).toLowerCase() + ')' : '')
+    + (l.flare ? ' · ' + niceDate(l.flare) : ''));
+  const since = isoDay(new Date(Date.now() - 42 * 864e5));
+  const recent = readLog().filter(l => (l.pain || []).length && l.date >= since).slice(-3).reverse()
+    .map(l => l.pain.map(x => (T.regions[x.region] || x.region) + ' ' + (x.score > 3 || x.sharp ? T.sharpW : T.mild).toLowerCase()).join(', ') + ' · ' + niceDate(l.date));
+  const scr = p.screen || {};
+  // your numbers
+  const nums = Object.entries(p.numbers || {}).map(([id, n]) => {
+    const w = n[unit] != null ? n[unit] : unit === 'lb' ? Math.round((n.kg || 0) * 2.20462 / 5) * 5 : Math.round((n.lb || 0) / 2.20462 / 2.5) * 2.5;
+    return bankName(id) + ' ' + w + ' ' + unit + ' × ' + (n.reps || '?');
+  }).join(', ');
+  const skill = skillFor(p);
+  // your words
+  const said = readWords();
+  const wordsList = h('div', { class: 'list' }, said.length ? said.slice().reverse().map((w, i) => h('div', { class: 'row' },
+    h('span', {}, h('span', { class: 'kv' }, w.text), h('span', { class: 'muted small' }, (w.q ? w.q + ' · ' : '') + (w.at ? niceDate(w.at) : ''))),
+    h('button', { class: 'edit quiet', type: 'button', onclick: () => {
+      const all = readWords(); all.splice(all.length - 1 - i, 1);
+      fsWrite('me/words.json', JSON.stringify(all, null, 1)); persist(); know();
+    } }, K.remove))) : h('p', { class: 'muted small' }, K.notSaid));
+  const notes = readLog().filter(l => l.notes).slice(-5).reverse();
+  const noteIn = h('textarea', { rows: 2, placeholder: K.notePh, 'aria-label': K.addNote });
+  const noteBtn = btn(K.noteSave, () => { const t = noteIn.value.trim(); if (!t) return noteIn.focus(); keepWords(K.addNote, t); know(K.saved); }, '', 'i-plus');
+  show(-1, h('button', { class: 'back', type: 'button', onclick: settings }, icon('t-back'), T.back),
+    h('h1', { class: 'title' }, K.title), coach(K.lead),
+    flash ? h('p', { class: 'card flash', role: 'status' }, icon('t-check'), ' ', flash) : null,
+    group('i-target', K.goal, null,
+      row(K.want, want, 'goal'),
+      mix ? row(K.mix, mix, 'goal') : null,
+      oc === 'event' ? row(K.event, ev, 'event') : null,
+      row(K.start, improve ? K.ownRoutine : K.newPlan),
+      improve && rt.split ? row(K.routine, (V.split[rt.split] || [rt.split])[0] + ' · ' + T.perWeek(rt.days || p.days), 'routine') : null),
+    group('i-calendar', K.week, null,
+      row(K.days, T.perWeek(p.days), improve ? 'routine' : 'days'),
+      row(K.minutes, p.minutes + ' ' + T.min, 'minutes'),
+      improve ? null : row(K.before, before, 'history'),
+      !improve && (experienced || p.style_pref) ? row(K.style, p.style_pref ? V.style[p.style_pref] : null, 'style') : null,
+      row(K.enjoy, list(p.enjoys, V.enjoy), 'enjoy'),
+      row(K.avoid, (p.avoids || []).length ? list(p.avoids, V.enjoy) : K.none, 'enjoy'),
+      row(K.kitPref, p.kit_pref ? V.kitPref[p.kit_pref] : null, 'enjoy')),
+    group('i-map-pin', K.where, null,
+      row(K.place, T.where[main.type] || null, 'where'),
+      row(K.kit, kit, 'where'),
+      dbs ? row(K.dumbbells, dbs, 'where') : null),
+    group('t-bandage', K.body, null,
+      row(K.pain, pains.length ? pains : K.none, 'pain'),
+      recent.length ? row(K.recent, recent) : null,
+      row(K.area, (p.priority || []).length ? list(p.priority, T.areas) : K.none, 'area'),
+      row(K.good, list(p.strengths, V.good), 'good'),
+      row(K.hold, list(p.barriers, V.hold), 'hold'),
+      row(K.sleep, p.sleep ? V.sleep[p.sleep] : null, 'sleep'),
+      row(K.stress, p.stress ? V.stress[p.stress] : null, 'stress'),
+      scr.date ? row(K.health, K.healthOn(scr.date)) : null,
+      scr.note ? row(K.healthNote, scr.note) : null),
+    group('t-barbell', K.numbers, null,
+      row(K.lifts, nums || K.none, 'nums'),
+      row(K.units, K.unitNames[unit], 'units'),
+      skill ? row(T.skillQ[skill], (p.skills || []).includes(skill) ? T.yes : T.no, 'skill') : null),
+    group('i-chat', K.words, null,
+      row(K.lang, K.langNames[LANG], 'lang'),
+      h('div', { class: 'krow col' }, h('span', { class: 'kl' }, K.said), wordsList),
+      notes.length ? h('div', { class: 'krow col' }, h('span', { class: 'kl' }, K.fromSessions),
+        h('div', { class: 'list' }, notes.map(l => h('div', { class: 'row' }, h('span', {}, h('span', { class: 'kv' }, l.notes), h('span', { class: 'muted small' }, (l.title || '') + ' · ' + niceDate(l.date))))))) : null,
+      h('div', { class: 'krow col' }, h('span', { class: 'kl' }, K.addNote), noteIn, noteBtn)),
+    h('div', { class: 'tiles one' }, tile({ ic: 't-reset', label: K.redo, sub: K.redoSub, onclick: () => interview() })));
 }
 
 // ─────────────────────────────────────────────────────────────── settings
@@ -2140,6 +3131,7 @@ function settings() {
   show(-1, h('button', { class: 'back', type: 'button', onclick: route }, icon('t-back'), T.close),
     h('h1', { class: 'title' }, T.setTitle),
     h('div', { class: 'tiles one' },
+      readProfile().goal ? tile({ ic: 'i-user', label: T.k.title, sub: T.k.tileSub, onclick: () => know() }) : null,
       tile({ ic: 'i-download', label: T.backup, sub: T.backupSub, onclick: async () => {
         const files = {}; for (const [k, v] of Object.entries(snapshot())) files[k] = b64(v);
         const r = await saveFile('personal-trainer-' + new Date().toISOString().slice(0, 10) + '.json',

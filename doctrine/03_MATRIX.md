@@ -9,12 +9,12 @@ The candidates are the files directly in `programs/`. The ones in `programs/_out
 A program is out if any of these fails, and the person is told which:
 
 1. **Experience** outside the program's `experience` list. The experience that counts is the program's own domain (`match.domain_experience`): running programs read `experience_by.running`; HYROX, hybrid and CrossFit-style programs take the higher of lifting and conditioning (running, cycling or rowing, classes, CrossFit or HYROX), capped one step above the lower; every other family reads the lifting experience (`experience`). A profile without `experience_by` uses its one `experience` everywhere.
-2. **Days:** fewer than the program's minimum. More days are fine: the program runs at its own maximum and the extra days take a running add-on or rest.
+2. **Days:** the days that count are the ones the composer gives this program's family (`compose.lead_days`: a 60/40 blend on 4 days leaves the lead 2 or 3). Fewer than the program's minimum is out; so is a day count the program has no honest week for, and a layout that would squeeze more sessions than days (only whole body programs marked `rotates` may take turns). More days are fine: the program runs at its own maximum and the composer gives the extra days to the other components, a running or cardio day, or rest, said.
 3. **Minutes:** fewer than its `express_minutes` (its shortest legal version).
 4. **Equipment:** a tag in `equipment_all` missing at their main place, or none of an `equipment_any` group present.
 5. **Skills:** a `skills_required` they have not reported (coached Olympic lifts, running 30 minutes, a pull-up).
 6. **Population:** pregnancy (only `health-baseline-2to3`) · low bone density on a program excluded for it · seated on a program whose main lifts need standing · `under_60` or `over_60` programs (the schema keeps them; the age band is fixed at 18 to 39, so no program in scope uses them).
-7. **Fillable:** every main-block slot of every session can be filled from the bank for their equipment, limits and position. If not, the program is out with the slot named.
+7. **Fillable:** every main-block slot of every session can be filled from the bank for their equipment and position. A slot that only a limit empties costs 1 point of score (Step 2) instead, unless the limit empties more than half the main slots of a session: a limit removes moves, never the goal. If not fillable, the program is out with the slot named.
 8. **Not for me:** a program they turned down with a reason other than "I can't do these days" (`rejected`) is out, and says so.
 
 ## Step 2 · The score
@@ -27,7 +27,7 @@ Goal fit is the 0 to 3 each program declares for all 11 goals. The goal comes fr
 
 **The outcome family** (`match.OUTCOME_FAMILY`): the follow-up names the families that serve it (more size: muscle, powerbuilding · strong and able to run far: hybrid · fit for anything: CrossFit-style · a running event: running ...). It settles what a goal key alone cannot say, like strength and running in one week.
 
-**The improve path** (`mode: improve`): plus 2 when the program's week has the same shape as their routine (`match.SPLIT_OF`: push pull legs, upper and lower, full body, body part, strength plus cardio days, a running plan, classes), plus 1 when their routine's day count is inside the program's days. The why line says "the same shape as your week". Coaching inside their own routine is a later engine mode.
+**The improve path** (`mode: improve`): plus 2 when the program's week has the same shape as their routine (`match.SPLIT_OF`: push pull legs, upper and lower, full body, body part, strength plus cardio days, a running plan, classes), plus 1 when their routine's day count is inside the program's days. The why line says "the same shape as your week". Since phase F the improve path does not reach the match: `plan.py adopt` keeps their own routine (`06_BUILD.md`, Their own routine). The match runs on that path only for a week of classes only, which the trainer cannot write.
 
 **Not for me** (`rejected`, `02_INTERVIEW.md`): too long, minus 2 for every program whose shortest session is as long or longer than the one turned down · too much running, running counts as something they can't stand · I wouldn't enjoy it, minus 3 for the family turned down · I can't do these days, the days are asked again and written.
 
@@ -45,9 +45,9 @@ In order: the higher goal fit for the main goal (a program built for what they a
 
 **Method and school names stay behind "How it works"** (5/3/1, PHUL, GZCLP, the Texas method and the rest): the card's title is the plain family name, and the method is one tap away for anyone who wants it, an experienced person especially.
 
-Then two answers: **start this plan** (`plan.py choose <plan.id>`), or **not for me** with a reason, which writes `rejected` and re-runs the match (Step 2). A blend of outcomes is honoured by the main outcome's program plus the add-on module for the second goal, and said in `why`.
+Then two answers: **start this plan** (`plan.py choose <plan.id>`), or **not for me** with a reason, which writes `rejected` and re-runs the match (Step 2). A blend of outcomes is honoured by the composer (`06_BUILD.md`): the lead program plus days or a protected finisher for every other outcome, by share, said in `why` and `plain.week`.
 
-Notes that travel with the plan, said in one line each when present: `outcome_note` (an outcome no program is built for, `core.OUTCOME_GAP`), `style_note`, `improve_note`, `dose_note`.
+Notes that travel with the plan, said in one line each when present: `outcome_note` (an outcome no program is built for, `core.OUTCOME_GAP`, empty since the composer), `plan_note` (how the marathon or "keep it going" is served, `core.OUTCOME_PLAN`), `style_note`, `improve_note`, `dose_note`.
 
 ## Step 5 · Never an empty answer
 
@@ -55,7 +55,7 @@ When nothing fits the goal well (the first pick's goal fit is under 2), `match` 
 
 ## Second goals
 
-Never a second program. `plan.py choose` adds a module (`modules/README.md`): running goals get `run-race` on extra days, all-round fitness and health get `conditioning`, HYROX gets `hyrox-stations`. (The `skills` and `independent` goals, and the balance add-on from 60, stay in the code for old profiles but are never offered.)
+Never a second program stacked in one session. The composer (`06_BUILD.md`) gives a second goal its own days by share (running days, HYROX days, mixed conditioning days, a whole body lifting plan), or a goal finisher the clock cuts last when its share is too small for a day (`conditioning`, `hyrox-stations`, a short easy run, `core`). (The `skills` and `independent` goals, and the balance add-on from 60, stay in the code for old profiles but are never offered.)
 
 ## Worked examples (checked by `tests/test_engine.py`, the `Interview` class covers every outcome, both fork paths, the style gate, the blend and "not for me")
 

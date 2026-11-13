@@ -2,12 +2,13 @@
 
 **What it is.** A running week built the way endurance athletes actually train: most of the time easy, one quality session, one long run. Easy means you can talk in full sentences. The quality session is the only one that is hard, and it is capped so it never takes over the week.
 
-**Who it is for.** Anyone who can already run 20 to 30 minutes without stopping and wants to run further or faster. Outside or on a treadmill. 3 to 5 days a week, 30 to 90 minutes. Can't run 20 minutes yet: `run-c25k-3` first.
+**Who it is for.** Anyone who can already run 20 to 30 minutes without stopping and wants to run further or faster. Outside or on a treadmill. 2 to 5 days a week, 30 to 90 minutes (2 days only inside a mixed week: an easy run and the long run). Can't run 20 minutes yet: `run-c25k-3` first.
 
 **The week.** In order, round and round:
 
 | days | rotation |
 |:-|:-|
+| 2 | easy · long (only inside a mixed week, next to other days) |
 | 3 | easy · quality · long |
 | 4 | easy · quality · easy · long |
 | 5 | easy · quality · easy · long · easy |
@@ -64,7 +65,7 @@
     "advanced"
   ],
   "days": [
-    3,
+    2,
     5
   ],
   "sweet_days": [
@@ -117,6 +118,10 @@
       "E",
       "L",
       "E"
+    ],
+    "2": [
+      "E",
+      "L"
     ]
   },
   "modules": [
@@ -160,7 +165,7 @@
       ],
       "blocks": [
         {
-          "name": "Quality",
+          "name": "Faster run",
           "kind": "main",
           "format": "intervals",
           "minutes": 45,
@@ -172,7 +177,7 @@
               "minutes": 45,
               "rule": "benchmark",
               "score": true,
-              "effort": "10 to 15 min easy first and 10 min easy after. Threshold about 10% of your week, intervals at most 8%",
+              "effort": "10 to 15 min easy first and 10 min easy after. Keep the fast running a small part of your week",
               "pieces": [
                 [
                   {
@@ -181,7 +186,7 @@
                       "run",
                       "easy_run"
                     ],
-                    "reps": "25 min easy plus 6 x 20 s strides, walk back"
+                    "reps": "25 min easy plus 6 x 20 s short fast bursts, walk back"
                   }
                 ],
                 [
@@ -191,7 +196,7 @@
                       "run",
                       "interval_run"
                     ],
-                    "reps": "20 min tempo, comfortably hard"
+                    "reps": "20 min steady, comfortably hard"
                   }
                 ],
                 [
@@ -201,7 +206,7 @@
                       "interval_run",
                       "run"
                     ],
-                    "reps": "4 x 1.6 km at threshold, 1 min jog between"
+                    "reps": "4 x 1.6 km at a hard pace you could hold for an hour, 1 min jog between"
                   }
                 ],
                 [
@@ -252,7 +257,7 @@
     }
   },
   "express": {
-    "title": "Express · 20 min easy run",
+    "title": "Short version · 20 min easy run",
     "tags": [],
     "blocks": [
       {

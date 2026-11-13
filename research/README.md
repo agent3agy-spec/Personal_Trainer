@@ -11,6 +11,7 @@ _This folder owns: the evidence the doctrine was built from, as it was found on 
 | `05_claude_code_github_mechanics.md` | how the template works as a Claude Code project and a GitHub template repo |
 | `06_interview_audit.md` | the onboarding interview audited against fourteen kinds of people: coaching intake (NSCA), how eleven apps onboard, which inputs change the plan, a branching interview with a new-plan and an improve-my-routine fork, the engine fields it needs, the ten changes ranked |
 | `09_improve_mode_design.md` | design, not built: the "improve what I already do" mode. The routine in seven screens, stored as `me/PROGRAM.md` in the program schema, what the coach never changes, ten gap rules offered as yes or no proposals, the engine changes file by file, the tests and the risks |
+| `11_phase_d_review.md` | the twelve people of file 08 run again after phase D (the composer, weekly targets, the trigger swap, the fill, the coach's eye): the plan each got, whether a coach signs it, what is still open |
 
 ## The marks
 

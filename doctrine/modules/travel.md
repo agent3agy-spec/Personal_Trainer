@@ -31,7 +31,7 @@ The day the main block cannot be filled: a hotel room, no kit, a broken machine.
             "sets": 3,
             "reps": "15",
             "rest": 30,
-            "effort": "2 or 3 left",
+            "effort": "2 or 3 reps spare",
             "rule": "fixed"
           },
           {
@@ -46,7 +46,7 @@ The day the main block cannot be filled: a hotel room, no kit, a broken machine.
             "sets": 3,
             "reps": "10",
             "rest": 30,
-            "effort": "2 or 3 left",
+            "effort": "2 or 3 reps spare",
             "rule": "fixed"
           },
           {
@@ -60,7 +60,7 @@ The day the main block cannot be filled: a hotel room, no kit, a broken machine.
             "sets": 3,
             "reps": "12",
             "rest": 30,
-            "effort": "2 or 3 left, pause at the top",
+            "effort": "2 or 3 reps spare, pause at the top",
             "rule": "fixed"
           },
           {
@@ -75,7 +75,7 @@ The day the main block cannot be filled: a hotel room, no kit, a broken machine.
             "sets": 3,
             "reps": "10",
             "rest": 30,
-            "effort": "2 or 3 left. A sturdy table edge works",
+            "effort": "2 or 3 reps spare. A sturdy table edge works",
             "rule": "fixed"
           },
           {
@@ -89,7 +89,7 @@ The day the main block cannot be filled: a hotel room, no kit, a broken machine.
             "sets": 3,
             "reps": "10",
             "rest": 30,
-            "effort": "each leg, 2 or 3 left",
+            "effort": "each leg, 2 or 3 reps spare",
             "rule": "fixed"
           },
           {

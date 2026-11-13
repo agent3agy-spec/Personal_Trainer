@@ -132,7 +132,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -148,7 +148,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 150,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             },
@@ -163,13 +163,13 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -185,13 +185,13 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -206,7 +206,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -220,7 +220,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -234,7 +234,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -248,7 +248,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -262,7 +262,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 150,
-              "effort": "1 to 3 left in the tank, every rep clean, flat back, deep stretch",
+              "effort": "1 to 3 reps spare, every rep clean, flat back, deep stretch",
               "rule": "double_progression",
               "score": true
             },
@@ -276,13 +276,13 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -298,13 +298,13 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -319,7 +319,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 2,
               "reps": "10-15",
               "rest": 90,
-              "effort": "0 to 2 left in the tank, last set close to failure, each leg",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, each leg",
               "rule": "double_progression"
             },
             {
@@ -333,7 +333,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -347,7 +347,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure, pause in the stretch",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, pause in the stretch",
               "rule": "double_progression"
             }
           ]
@@ -361,7 +361,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -377,7 +377,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             },
@@ -392,13 +392,13 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -414,13 +414,13 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -435,7 +435,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -448,7 +448,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure, deep stretch at the bottom",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, deep stretch at the bottom",
               "rule": "double_progression"
             },
             {
@@ -462,7 +462,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -475,7 +475,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -484,13 +484,13 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
     }
   },
   "express": {
-    "title": "Express · Squat · Bench · Row",
+    "title": "Short version · Squat · Bench · Row",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -506,7 +506,7 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
             "sets": 2,
             "reps": "6-10",
             "rest": 120,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression",
             "score": true
           },
@@ -521,13 +521,13 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
             "sets": 2,
             "reps": "6-10",
             "rest": 120,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression"
           }
         ]
       },
       {
-        "name": "Second lift",
+        "name": "Second exercise",
         "kind": "secondary",
         "format": "straight",
         "slots": [
@@ -543,12 +543,14 @@ Inside each 4 week block the accessories get harder on a schedule: reps in reser
             "sets": 2,
             "reps": "6-10",
             "rest": 90,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression"
           }
         ]
       }
     ]
-  }
+  },
+  "rotates": true,
+  "rotation_note": "Its three sessions take turns over your 2 days. Every one trains the whole body, so nothing is lost: each just comes round a little less often."
 }
 ```

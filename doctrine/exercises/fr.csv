@@ -1,0 +1,226 @@
+id,name_fr,cue_fr
+back_squat,Back squat,Serre le ventre fort puis descends entre tes hanches et pousse le sol
+front_squat,Front squat,Coudes hauts et poitrine fière tout le long de la descente
+goblet_squat,Goblet squat,Coudes à l'intérieur des genoux et descends entre tes talons
+bodyweight_squat,Squat au poids du corps,Bras devant et descends aussi bas que possible en gardant les talons au sol
+sit_to_stand,Assis-debout,Le nez au-dessus des orteils puis lève-toi sans t'aider des mains
+box_squat,Box squat,"Assieds-toi en arrière vers la box, touche-la à peine puis remonte"
+leg_press,Presse à cuisses,Garde le bas du dos collé au dossier et descends jusqu'à ce qu'il commence à se décoller
+hack_squat,Hack squat,Pieds bas sur la plateforme et laisse les genoux avancer
+smith_squat,Squat à la Smith machine,Pieds un peu devant la barre et descends tout droit
+split_squat,Squat bulgare sans banc,Descends le genou arrière tout droit et garde le talon avant au sol
+heel_elevated_goblet_squat,Goblet squat talons surélevés,Talons sur un disque et laisse les genoux passer bien devant les orteils
+assisted_squat,Squat assisté,Tiens un cadre de porte et aide-toi des bras juste ce qu'il faut
+pistol_squat,Pistol squat,Tends les bras devant et descends lentement sur une jambe
+shrimp_squat,Shrimp squat,Tiens le pied arrière et descends le genou au sol sous contrôle
+wall_sit,Chaise contre le mur,Dos plaqué au mur et cuisses parallèles au sol
+band_squat,Squat à l'élastique,"Debout sur l'élastique, poignées aux épaules, descends en restant droit"
+landmine_squat,Squat landmine,Serre le bout de la barre contre ta poitrine et descends vers elle
+deadlift,Soulevé de terre,Barre au-dessus du milieu du pied · tends la barre puis pousse le sol
+trap_bar_deadlift,Soulevé de terre à la trap bar,Tiens-toi droit au centre et pousse le sol
+romanian_deadlift,Soulevé de terre roumain,Pousse les hanches en arrière et garde la barre contre les jambes jusqu'à sentir l'arrière des cuisses tirer
+db_romanian_deadlift,Soulevé de terre roumain aux haltères,Genoux souples et hanches en arrière · les haltères glissent le long des cuisses
+kb_deadlift,Soulevé de terre au kettlebell,Kettlebell entre les pieds · hanches en arrière et relève-toi bien droit
+single_leg_rdl,Soulevé de terre roumain sur une jambe,Hanches face au sol et pousse le talon arrière vers le mur · ajoute un haltère plus tard
+good_morning,Good morning,"Barre sur le dos et pousse les hanches en arrière, dos bien plat"
+hip_thrust,Hip thrust,Menton rentré et côtes basses · serre les fessiers jusqu'à hanches bien tendues
+glute_bridge,Pont fessier,Talons proches et monte les hanches jusqu'à ce que ton corps soit droit
+single_leg_glute_bridge,Pont fessier sur une jambe,Garde les hanches à niveau en poussant sur un talon
+kb_swing,Kettlebell swing,Envoie-le en arrière entre les jambes et claque les hanches · les bras ne sont que des cordes
+back_extension,Extension lombaire,Hanches sur le coussin et remonte jusqu'à ce que ton corps soit droit · pas plus haut
+cable_pull_through,Pull through à la poulie,"Dos à la machine, pousse les hanches en arrière puis serre en avançant"
+band_good_morning,Good morning à l'élastique,"Élastique sous les pieds et sur la nuque · hanches en arrière, dos bien plat"
+hip_hinge_drill,Exercice de flexion de hanche au bâton,Tiens un bâton le long du dos et pousse les hanches en arrière sans qu'il quitte ta tête
+seated_trunk_extension,Extension du buste assis à l'élastique,Élastique fixé devant · assieds-toi droit puis penche-toi lentement en arrière depuis les hanches
+bulgarian_split_squat,Squat bulgare,Pied arrière sur le banc et descends le genou arrière tout droit
+walking_lunge,Fentes marchées,Grand pas et pose doucement le genou arrière vers le sol · reste droit
+reverse_lunge,Fentes arrière,Recule d'un pas et descends le genou · pousse sur le talon avant
+db_reverse_lunge,Fentes arrière aux haltères,Haltères le long du corps · recule d'un pas et reste droit
+step_up,Montée sur banc,Tout le pied sur la box et monte sans pousser avec la jambe arrière
+lateral_lunge,Fente latérale,"Grand pas de côté et assieds-toi sur une hanche, l'autre jambe reste tendue"
+sandbag_lunge,Fentes avec sandbag,Sac sur l'épaule et change de côté toutes les quelques reps
+bench_press,Développé couché,Omoplates serrées · touche le bas de la poitrine et repousse au-dessus des épaules
+incline_bench_press,Développé incliné,Banc à environ 30 degrés et touche juste sous la clavicule
+close_grip_bench,Développé couché prise serrée,Mains écartées à la largeur des épaules et coudes collés au corps
+db_bench_press,Développé couché aux haltères,"Descends les haltères au niveau de la poitrine, coudes à 45 degrés"
+incline_db_press,Développé incliné aux haltères,Banc légèrement incliné et pousse vers le haut en rapprochant un peu
+db_floor_press,Développé au sol aux haltères,Descends jusqu'à ce que le haut des bras touche le sol puis pousse
+push_up,Pompes,Corps bien droit et poitrine jusqu'au sol
+incline_push_up,Pompes inclinées,Mains sur un banc ou une table et corps droit de la tête aux talons
+wall_push_up,Pompes contre le mur,Mains au mur à hauteur de poitrine et amène ton nez au mur
+knee_push_up,Pompes sur les genoux,Corps droit des genoux à la tête et descends la poitrine en premier
+decline_push_up,Pompes déclinées,Pieds sur une chaise et ne laisse pas les hanches tomber
+archer_push_up,Pompes archer,Mains larges et bascule sur un bras pendant que l'autre reste tendu
+pseudo_planche_push_up,Pompes pseudo planche,Mains au niveau des hanches et penche-toi en avant au-delà avant de descendre
+ring_push_up,Pompes aux anneaux,Garde les anneaux près des côtes et tourne-les vers l'extérieur en haut
+chest_press_machine,Presse pectoraux à la machine,Poignées au milieu de la poitrine et pousse sans enrouler les épaules
+band_chest_press,Développé poitrine à l'élastique,Élastique fixé derrière toi · pousse et serre à la fin
+seated_band_chest_press,Développé poitrine assis à l'élastique,Élastique autour du dossier · pousse devant et serre à la fin
+dip,Dips,Penche-toi un peu en avant et descends jusqu'à ce que l'épaule passe juste sous le coude
+negative_dip,Dips négatifs,Saute en haut et prends cinq secondes pour descendre
+support_hold,Maintien en appui,Bras tendus et épaules loin des oreilles
+cable_fly,Écarté à la poulie,"Coudes souples, ouvre grand jusqu'à sentir l'étirement puis serre comme pour enlacer un arbre"
+overhead_press,Développé militaire,Serre les fessiers et pousse la barre au-dessus de ta tête
+push_press,Push press,Petite flexion des genoux puis envoie la barre en haut avec les jambes
+db_shoulder_press,Développé épaules aux haltères,"Pousse vers le haut en rapprochant un peu, côtes basses"
+seated_db_press,Développé épaules assis aux haltères,"Assieds-toi droit, dos appuyé, et pousse vers le haut en rapprochant un peu"
+arnold_press,Développé Arnold,Paumes vers toi au départ et tourne-les vers l'extérieur en poussant
+landmine_press,Développé landmine,Pousse le bout de la barre vers le haut et l'avant et laisse l'omoplate bouger
+kb_press,Développé au kettlebell,"Kettlebell posé sur l'avant-bras contre la poitrine et pousse, poignet droit"
+pike_push_up,Pompes en pike,Hanches hautes et descends la tête devant tes mains
+wall_handstand_hold,Équilibre sur les mains contre le mur,Poitrine face au mur et pousse le sol
+handstand_push_up_wall,Pompes en équilibre contre le mur,La tête se pose en triangle devant tes mains puis repousse
+band_overhead_press,Développé épaules à l'élastique,"Debout sur l'élastique, pousse vers le haut sans te pencher en arrière"
+seated_band_overhead_press,Développé épaules assis à l'élastique,"Élastique sous la chaise et pousse vers le haut, côtes basses"
+barbell_row,Rowing barre,Buste à environ 45 degrés et tire la barre vers le ventre
+pendlay_row,Rowing Pendlay,Dos parallèle au sol et repars de la barre posée au sol à chaque rep
+db_row,Rowing haltère,Main sur le banc et tire l'haltère vers la hanche
+chest_supported_row,Rowing buste appuyé,Poitrine sur le banc incliné et serre les omoplates
+t_bar_row,Rowing T-bar,Poitrine haute et tire les disques vers le milieu de la poitrine
+seated_cable_row,Tirage horizontal à la poulie,Assieds-toi droit et tire vers le ventre sans te pencher en arrière
+machine_row,Rowing à la machine,Poitrine sur le coussin et tire avec les coudes
+inverted_row,Tirage inversé,Corps droit et tire ta poitrine jusqu'à la barre
+incline_inverted_row,Tirage inversé incliné,Pieds devant et corps bien redressé · tire ta poitrine vers le haut
+ring_row,Rowing aux anneaux,Avance les pieds pour corser et tire les anneaux vers tes côtes
+band_row,Rowing à l'élastique,Élastique fixé à hauteur de poitrine et tire les coudes au-delà des côtes
+seated_band_row,Rowing assis à l'élastique,"Assieds-toi droit, tire les coudes en arrière et serre"
+kb_row,Rowing au kettlebell,Pieds décalés et tire le kettlebell vers la hanche
+archer_row,Rowing archer,Tire vers une main pendant que l'autre bras reste tendu
+face_pull,Face pull,Tire la corde vers ton front et tourne les pouces vers l'arrière
+door_frame_row,Tirage au cadre de porte,"Agrippe le cadre, penche-toi en arrière puis tire ta poitrine vers lui"
+pull_up,Tractions,"Pars bras tendus, suspendu, et tire ta poitrine jusqu'à la barre"
+chin_up,Tractions supination,Paumes vers toi et tire ton menton au-dessus de la barre
+lat_pulldown,Tirage vertical,Tire la barre vers le haut de la poitrine en menant avec les coudes
+assisted_pull_up,Tractions assistées à l'élastique,Genou dans l'élastique et tire ta poitrine jusqu'à la barre
+negative_pull_up,Tractions négatives,Saute en haut et prends cinq secondes pour descendre
+scap_pull,Tractions scapulaires,"Bras tendus, descends les épaules loin des oreilles"
+dead_hang,Suspension à la barre,"Reste suspendu, détendu, et respire · monte jusqu'à une minute"
+band_lat_pulldown,Tirage vertical à l'élastique,Élastique fixé en hauteur et tire les coudes vers les côtes
+seated_band_lat_pulldown,Tirage vertical assis à l'élastique,Élastique fixé au-dessus de toi · tire les coudes vers les côtés
+single_arm_cable_pulldown,Tirage vertical à un bras à la poulie,Tire la poignée vers ta hanche et sens ton flanc s'étirer en haut
+straight_arm_pulldown,Pull-over à la poulie bras tendus,Bras longs et ramène la barre jusqu'aux cuisses
+farmer_carry,Marche du fermier,Tiens-toi droit avec des charges lourdes et marche à petits pas rapides
+suitcase_carry,Marche valise,Une charge dans une main et ne te penche pas vers elle
+front_rack_carry,Marche charges sur la poitrine,Charges hautes sur la poitrine et garde le ventre serré en respirant
+overhead_carry,Marche charge au-dessus de la tête,Bras tendu près de l'oreille et côtes basses en marchant
+sandbag_carry,Marche avec sandbag,Serre le sac haut contre ta poitrine et marche droit
+plank,Gainage,Serre les fessiers et côtes basses · ligne droite de la tête aux talons
+dead_bug,Dead bug,Bas du dos plaqué au sol pendant que tu descends le bras et la jambe opposés
+ab_wheel,Roue abdominale,Déroule seulement tant que le bas du dos reste plat
+hollow_hold,Hollow hold,"Bas du dos au sol, bras et jambes allongés"
+bird_dog,Bird dog,Allonge le bras et la jambe opposés sans que les hanches bougent
+long_lever_plank,Gainage bras avancés,Coudes devant tes yeux et serre tout
+body_saw,Gainage scie,Pieds sur une serviette et balance d'avant en arrière depuis les coudes
+pallof_press,Pallof press,Pousse la poignée devant toi et ne te laisse pas tourner
+band_pallof_press,Pallof press à l'élastique,Élastique à hauteur de poitrine · pousse et tiens deux respirations
+side_plank,Gainage latéral,Coude sous l'épaule et monte les hanches bien haut
+seated_band_rotation,Rotation assise à l'élastique,"Bras longs et tourne depuis les côtes, pas avec les bras"
+hanging_knee_raise,Relevé de genoux suspendu,Sans balancer · enroule les hanches vers le haut en montant les genoux
+cable_crunch,Crunch à la poulie,"À genoux, enroule les côtes vers les hanches · les hanches ne bougent pas"
+reverse_crunch,Crunch inversé,Décolle les hanches du sol en les enroulant et redescends lentement
+sit_up,Sit-up,Bras au-dessus de la tête et touche tes orteils en haut
+seated_band_crunch,Crunch assis à l'élastique,Élastique fixé en hauteur derrière toi · enroule les côtes vers les hanches
+db_curl,Curl biceps aux haltères,Coudes collés au corps et descends lentement
+incline_db_curl,Curl incliné aux haltères,Bras pendants derrière toi et monte sans avancer les coudes
+hammer_curl,Curl marteau,Pouces vers le haut et monte sans balancer
+band_curl,Curl à l'élastique,Debout sur l'élastique et serre en haut
+cable_curl,Curl à la poulie,Recule de la machine et garde les coudes immobiles
+ez_bar_curl,Curl barre EZ,Prends la barre sur la partie coudée et monte sans te balancer
+seated_db_curl,Curl assis aux haltères,"Assieds-toi droit et monte un bras à la fois, coude immobile"
+overhead_db_triceps_extension,Extension triceps à l'haltère au-dessus de la tête,Coudes vers le haut et descends l'haltère bien derrière ta tête
+cable_overhead_extension,Extension triceps à la poulie au-dessus de la tête,Dos à la machine et tends les bras loin devant ta tête
+rope_pushdown,Extension triceps à la corde,Coudes le long du corps et écarte la corde en bas
+band_pushdown,Extension triceps à l'élastique,Élastique fixé en hauteur et pousse vers le bas jusqu'à bras tendus
+skull_crusher,Barre au front,Descends la barre derrière ta tête et garde les coudes serrés
+seated_overhead_triceps_extension,Extension triceps assis au-dessus de la tête,"Assieds-toi droit et descends la charge derrière ta tête, coudes vers le haut"
+lateral_raise,Élévations latérales,Monte en menant avec les coudes et arrête-toi à hauteur d'épaules
+cable_lateral_raise,Élévations latérales à la poulie,Câble derrière toi et monte sur le côté lentement
+band_lateral_raise,Élévations latérales à l'élastique,Debout sur l'élastique et monte à hauteur d'épaules
+seated_lateral_raise,Élévations latérales assis,"Assieds-toi droit et monte avec les coudes, pas avec les mains"
+rear_delt_fly,Oiseau aux haltères,"Penche-toi en avant depuis les hanches et écarte les haltères, coudes souples"
+band_pull_apart,Écarté à l'élastique,Bras tendus et tire l'élastique jusqu'à ta poitrine
+reverse_pec_deck,Oiseau à la machine,Poitrine contre le coussin et ramène les poignées loin en arrière
+calf_raise,Mollets debout,Au bord d'une marche · bien étirer en bas et marquer une pause en haut
+single_leg_calf_raise,Mollets sur une jambe,Tiens-toi au mur et descends lentement sur un pied
+seated_calf_raise,Mollets assis,Charge sur les genoux et monte les talons le plus haut possible
+seated_leg_curl,Leg curl assis,Penche-toi en avant sur le coussin et plie les jambes jusqu'au bout
+lying_leg_curl,Leg curl allongé,Hanches plaquées et ramène les talons vers tes fesses
+nordic_curl,Nordic curl,"Pieds bloqués et descends le plus lentement possible, hanches tendues"
+slider_leg_curl,Leg curl au sol avec serviette,"Hanches en l'air, pieds sur une serviette, et ramène les talons vers toi"
+leg_extension,Leg extension,Genoux alignés avec l'axe de la machine et serre en haut
+spanish_squat,Squat espagnol,"Élastique derrière les genoux et assieds-toi en arrière, tibias bien droits"
+seated_knee_extension,Extension du genou assis,"Assieds-toi droit, tends une jambe puis tiens deux secondes"
+hip_abduction_machine,Machine à abducteurs,Assieds-toi droit et écarte les coussins lentement
+banded_lateral_walk,Marche latérale à l'élastique,"Élastique au-dessus des genoux, fais de grands pas de côté en restant bas"
+cable_kickback,Kickback fessier à la poulie,Envoie le talon en arrière et serre sans creuser le dos
+power_clean,Power clean,Pousse avec les jambes puis saute et passe vite sous la barre
+hang_power_clean,Hang power clean,"Barre au-dessus du genou · saute, hausse les épaules puis coudes rapides"
+clean,Épaulé,Patient au décollage puis finis la poussée et reçois la barre en squat complet
+clean_and_jerk,Épaulé-jeté,Relève-toi complètement de l'épaulé et reprends ton souffle avant le jeté
+power_snatch,Power snatch,Barre proche et envoie-la au-dessus de la tête quand tes pieds touchent le sol
+hang_power_snatch,Hang power snatch,Barre aux hanches · saute et passe sous la barre en poussant vers le haut
+snatch,Arraché,Barre proche tout du long et descends vite en squat bras tendus au-dessus de la tête
+push_jerk,Push jerk,Flexion droite et poussée puis passe sous la barre
+split_jerk,Jeté fendu,"Pousse tout droit puis fends vite, tibia avant bien droit"
+clean_pull,Tirage d'épaulé,Même départ que l'épaulé et finis grand avec un haussement d'épaules
+snatch_pull,Tirage d'arraché,"Prise large, la barre frôle tes cuisses jusqu'à ce que tu sois grand sur la pointe des pieds"
+overhead_squat,Squat bras tendus au-dessus de la tête,Pousse dans la barre et garde-la au-dessus du milieu du pied en descendant
+muscle_snatch,Muscle snatch,Barre légère · coudes hauts et retourne-la sans replier les genoux
+pvc_snatch_drill,Technique d'arraché au bâton,Bâton en prise large · répète les positions lentement et garde-le près de toi
+kb_snatch,Arraché au kettlebell,Balance-le puis passe la main au-dessus pour que le kettlebell ne claque pas
+db_snatch,Arraché à l'haltère,Haltère entre les pieds puis une seule traction rapide jusqu'au bras tendu au-dessus de la tête
+db_hang_clean,Épaulé aux haltères depuis les genoux,Haltères aux genoux · saute et reçois-les sur tes épaules
+box_jump,Saut sur box,"Atterris en douceur, sans bruit, et redescends en marchant à chaque rep"
+broad_jump,Saut en longueur sans élan,Balance les bras et tiens la réception en quart de squat
+squat_jump,Squat sauté,Quart de squat puis saute haut et atterris en douceur
+pogo_hop,Sauts pogo,Chevilles raides et rebondis vite sur l'avant des pieds
+step_down_box,Descente de box,"Descends et atterris en douceur sur les deux pieds, genoux pliés"
+med_ball_slam,Slam au médecine-ball,Grandis-toi et écrase le ballon au sol de toutes tes forces
+med_ball_chest_pass,Passe poitrine au médecine-ball,Avance d'un pas et lance-le fort contre le mur
+wall_ball,Wall ball,Squat complet puis envoie le ballon sur la cible en un seul geste
+seated_med_ball_chest_pass,Passe poitrine assis au médecine-ball,Assieds-toi droit et pousse le ballon vite vers un partenaire ou un mur
+run,Course,"Petits pas rapides et légers, pose le pied sous tes hanches"
+easy_run,Footing,Assez lent pour parler en phrases complètes
+interval_run,Fractionné,À fond sur l'effort et marche ou trottine le reste
+run_walk,Course-marche,Cours une minute et marche une · marche avant d'être fatigué
+walk,Marche rapide,Marche assez vite pour respirer plus fort mais pouvoir encore parler
+incline_walk,Marche inclinée sur tapis,Pente forte et lâche les barres
+row_erg,Rameur,Jambes puis buste puis bras · l'inverse au retour
+bike_erg,Vélo,Selle à hauteur de hanche et pédale de façon fluide et régulière
+ski_erg,SkiErg,Tire avec le dos et plie-toi aux hanches
+jump_rope,Corde à sauter,Petits sauts sur l'avant des pieds et ce sont les poignets qui font tourner
+arm_ergometer,Vélo à bras,Assieds-toi droit et garde un rythme régulier avec les deux bras
+sled_push,Poussée de traîneau,"Bras longs et bas, pousse avec des petits pas puissants"
+sled_pull,Tirage de traîneau,Assieds-toi en arrière et tire main après main
+burpee,Burpee,Poitrine au sol puis saute en tapant dans les mains au-dessus de la tête
+burpee_broad_jump,Burpee saut en longueur,Burpee puis saute en avant et atterris en douceur
+thruster,Thruster,Front squat et enchaîne directement le développé en un seul geste
+db_thruster,Thruster aux haltères,Haltères sur les épaules et laisse le squat les propulser vers le haut
+kb_clean_and_press,Épaulé-développé au kettlebell,Monte-le sur ta poitrine et pousse · le kettlebell roule autour du poignet
+devil_press,Devil press,Burpee sur les haltères puis balance-les au-dessus de la tête en un seul geste
+seated_march,Marche assise,Assieds-toi droit et monte les genoux en balançant les bras
+seated_shadow_boxing,Shadow boxing assis,Assieds-toi droit et envoie des coups rapides sans verrouiller les coudes
+wheelchair_push,Propulsion en fauteuil roulant,Longues poussées fluides depuis le haut de la main courante
+single_leg_stand,Équilibre sur une jambe,"Près d'un mur, tiens-toi sur un pied, genou souple"
+tandem_stance,Position pieds alignés,Un pied devant l'autre et fixe un point du regard
+heel_to_toe_walk,Marche talon-pointe,Le talon touche les orteils à chaque pas · marche le long d'un mur
+clock_reach,Équilibre horloge,"Sur une jambe, va toucher avec l'autre pied les heures d'une horloge"
+step_over,Enjambement,Monte bien le genou et enjambe lentement un petit objet
+floor_get_up,Se relever du sol,Descends au sol et relève-toi en t'aidant le moins possible des mains
+turkish_get_up,Turkish get up,Les yeux sur le kettlebell et le bras tendu tout du long
+bear_crawl,Marche de l'ours,Genoux à deux centimètres du sol et avance main et pied opposés
+monkey_walk,Marche du singe,"Accroupis-toi bas et déplace-toi de côté, les mains puis les pieds"
+frogger,Sauts de grenouille,Mains au sol puis saute avec les pieds à l'extérieur des mains
+crab_walk,Marche du crabe,Hanches en l'air et marche sur les mains et les pieds
+cat_cow,Chat-vache,Arrondis puis creuse le dos lentement au rythme de ta respiration
+worlds_greatest_stretch,World's greatest stretch,Fente profonde puis coude près du pied avant et tourne le bras vers le plafond
+hip_90_90,90 90 des hanches,Assieds-toi droit et bascule les genoux d'un côté à l'autre lentement
+thoracic_rotation,Rotation du haut du dos,"Allongé sur le côté, ouvre le bras du dessus en gardant les genoux au sol"
+ankle_rocks,Mobilité de cheville,"Un genou au sol, avance l'autre genou au-delà des orteils, talon au sol"
+band_shoulder_dislocate,Passage d'épaules à l'élastique,"Prise large et passe l'élastique par-dessus et derrière, bras tendus"
+couch_stretch,Étirement du canapé,Genou arrière contre le mur et serre la fesse de ce côté
+seated_thoracic_rotation,Rotation du haut du dos assis,Bras croisés et tourne les côtes de chaque côté lentement
+chest_to_bar_pull_up,Tractions poitrine à la barre,Tire jusqu'à ce que ta poitrine touche la barre · coudes vers le bas et l'arrière
+negative_muscle_up,Muscle-up négatif,Saute en appui en haut · redescends lentement sous la barre en 5 s
+muscle_up,Muscle-up,Tirage haut et explosif · passe la poitrine au-dessus de la barre · pousse jusqu'à l'appui
+straight_bar_dip,Dips à la barre droite,Penche-toi au-dessus de la barre · descends la poitrine vers elle · repousse bras tendus

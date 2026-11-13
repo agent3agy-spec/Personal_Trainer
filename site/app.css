@@ -51,7 +51,7 @@ html,body{margin:0;padding:0}
 body{background:var(--bg);color:var(--fg);font:16px/1.5 var(--font-ui);letter-spacing:-.005em;-webkit-font-smoothing:antialiased;
   overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 button,input,textarea,select{font:inherit;color:inherit}
-.shell{max-width:560px;margin:0 auto;padding:0 16px calc(32px + env(safe-area-inset-bottom));min-height:100vh;display:flex;flex-direction:column}
+.shell{max-width:640px;margin:0 auto;padding:0 16px calc(32px + env(safe-area-inset-bottom));min-height:100vh;display:flex;flex-direction:column}
 
 .ic{width:24px;height:24px;flex:none;display:inline-block;vertical-align:middle}
 .ic.lg{width:28px;height:28px}
@@ -70,10 +70,19 @@ button,input,textarea,select{font:inherit;color:inherit}
 .dots i.on{background:var(--accent);width:24px}
 .dots i.done{background:var(--faint)}
 
-.screen{display:flex;flex-direction:column;gap:16px;padding:8px 0 24px;animation:in .35s var(--ease)}
+.screen{display:flex;flex-direction:column;gap:22px;padding:24px 0 32px;animation:in .35s var(--ease)}
+#app{flex:1;display:flex;flex-direction:column}
+.screen{flex:1}
+.screen{justify-content:center}
+.screen.q > .title,.screen.q > .coach{text-align:center;align-self:center;max-width:520px}
+.screen.q > .coach{border-left:0;padding-left:0;justify-content:center}
+.screen.q > .back{align-self:flex-start}
+.words{width:100%;max-width:520px;margin:10px auto 0;display:grid;gap:8px}
+.words textarea{min-height:56px}
+.words .btn{min-height:44px}
 @keyframes in{from{transform:translateY(6px)}to{transform:none}}
 @media (prefers-reduced-motion:reduce){.screen{animation:none}.dots i{transition:none}}
-.title{font-family:var(--font-title);font-weight:700;font-size:29px;line-height:1.12;margin:4px 0 0;letter-spacing:-.025em}
+.title{font-family:var(--font-title);font-weight:700;font-size:clamp(29px,4.2vw,36px);line-height:1.12;margin:4px 0 0;letter-spacing:-.025em}
 .title em{font-style:normal;color:var(--accent-ink)}
 .lead{font-size:17px;margin:0}
 .muted{color:var(--muted);margin:0}
@@ -83,15 +92,26 @@ button,input,textarea,select{font:inherit;color:inherit}
 .kicker .ic{width:18px;height:18px}
 .num{font-family:var(--font-data);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 
-.coach{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
-  padding:14px 16px;box-shadow:var(--shadow)}
+.coach{display:flex;gap:12px;align-items:flex-start;background:none;border:0;border-left:3px solid var(--accent-soft);border-radius:0;
+  padding:4px 0 4px 12px;box-shadow:none;color:var(--muted)}
 .coach .mark{width:36px;height:36px;margin-top:-4px}
 .coach p{margin:0}
 
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:520px;margin:26px auto 0;padding-top:24px;border-top:1px solid var(--line2)}
+.tiles + .tiles{border-top:0;padding-top:0;margin-top:10px}
 .tiles.one{grid-template-columns:1fr}
-.tile{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 14px;text-align:left;border-radius:var(--r);
-  background:var(--surface);border:1.5px solid var(--line);box-shadow:var(--shadow);cursor:pointer}
+.tile{display:flex;align-items:center;gap:14px;min-height:72px;padding:16px 18px;text-align:left;border-radius:var(--r);
+  background:var(--surface);border:1.5px solid color-mix(in srgb,var(--accent-ink) 35%,transparent);box-shadow:var(--shadow);cursor:pointer;
+  transition:transform .15s var(--ease),border-color .15s var(--ease)}
+.tile:hover{border-color:var(--accent-ink);transform:translateY(-1px)}
+.tile:not(:has(.tick)):not(:has(.badge))::after{content:'';margin-left:auto;flex:none;width:9px;height:9px;
+  border-right:2px solid var(--accent-ink);border-top:2px solid var(--accent-ink);transform:rotate(45deg);margin-right:4px}
+.card:not(.pick){box-shadow:none;background:var(--surface2);border-color:transparent}
+.howto{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.howto li{display:flex;gap:12px;align-items:flex-start}
+.howto .n{flex:none;width:28px;height:28px;border-radius:var(--pill);display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-ink);font-size:13px}
+.howto b{display:block;font-weight:600}
+.howto small{display:block;color:var(--muted);font-size:13.5px}
 .tile .ic{color:var(--accent-ink)}
 .tile b{display:block;font-weight:600;font-size:16px;line-height:1.25;letter-spacing:-.01em}
 .tile small{display:block;color:var(--muted);font-size:13.5px;line-height:1.35;margin-top:2px}
@@ -165,6 +185,10 @@ a.inline{color:var(--accent-ink);font-weight:600;text-decoration:underline;text-
 .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:var(--pill);overflow:hidden;flex:none}
 .seg button{min-height:48px;padding:0 14px;border:0;background:transparent;cursor:pointer;font-weight:500}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg)}
+.seg.wrap{display:flex;flex-wrap:wrap;border-radius:14px;flex:initial}
+.seg.wrap button{flex:1 1 auto;min-width:72px}
+.card.idea{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.card.idea p{margin:0}
 textarea{width:100%;min-height:96px;border-radius:var(--rs);border:1.5px solid var(--line);background:var(--surface);padding:12px;resize:vertical}
 
 .stat{display:flex;align-items:baseline;gap:8px}
@@ -245,3 +269,61 @@ ul.why{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;fon
 details.how{border-top:1px solid var(--line2);padding-top:10px}
 details.how summary{cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:600;min-height:44px;color:var(--accent-ink)}
 details.how p{margin:6px 0 0}
+
+/* the everyday dashboard (13 nov): one big button for today, then small cards; tappable ones keep the outline and the arrow */
+.go{display:flex;align-items:center;gap:16px;width:100%;min-height:104px;padding:20px 22px;border:0;border-radius:var(--r);
+  background:var(--accent);color:var(--accent-fg);text-align:left;cursor:pointer;box-shadow:var(--shadow)}
+.go .ic{color:var(--accent-fg)}
+.go .ic.lg{width:36px;height:36px}
+.go > span{flex:1;min-width:0}
+.go b{display:block;font-family:var(--font-title);font-size:23px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.go small{display:block;font-size:14px;opacity:.85;margin-top:4px}
+.go::after{content:'';flex:none;width:11px;height:11px;border-right:2.5px solid currentColor;border-top:2.5px solid currentColor;transform:rotate(45deg);margin-right:4px}
+.go:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+.tile.dash{align-items:center}
+.tile.dash > span{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.tile.dash .kicker{margin-bottom:2px}
+.tile.dash .bar{display:block;margin:8px 0 2px}
+.tile.dash .bar span{display:block}
+.dashinfo{display:flex;flex-direction:column;gap:4px}
+.dashinfo p{margin:0}
+.dashinfo .best{font-weight:700;color:var(--accent-ink);white-space:nowrap}
+.ask{display:flex;flex-direction:column;gap:10px}
+.ask p{margin:0}
+.ask textarea{min-height:56px;background:var(--surface)}
+.ask .btn{min-height:48px}
+.askout{display:flex;flex-direction:column;gap:10px}
+.askout .actions{padding:0;background:none}
+.btn,.go{touch-action:manipulation}
+.go{transition:transform .55s var(--spring)}
+.go:active{transform:scale(.975);transition:transform .09s var(--ease)}
+@media (prefers-reduced-motion:reduce){.go,.go:active{transition:none;transform:none}}
+
+/* what I know about you: rows of plain answers in a flat card, each with an outlined Edit and its arrow */
+.know{display:flex;flex-direction:column;padding:4px 16px}
+.krow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line2)}
+.krow:last-child{border-bottom:0}
+.krow.col{flex-direction:column;align-items:stretch;gap:8px}
+.krow .kt{min-width:0;display:flex;flex-direction:column;gap:2px}
+.kl{display:block;font-size:13px;color:var(--muted)}
+.kv{display:block;font-weight:600;font-size:15.5px;line-height:1.35;overflow-wrap:anywhere}
+.kv.muted{font-weight:500}
+.krow .list .row{align-items:center;padding:8px 0}
+.krow .list .row > span{min-width:0;display:flex;flex-direction:column;gap:2px}
+.edit{flex:none;min-height:44px;padding:0 12px 0 16px;border-radius:var(--pill);background:var(--surface);cursor:pointer;
+  border:1.5px solid color-mix(in srgb,var(--accent-ink) 35%,transparent);color:var(--accent-ink);font-weight:600;font-size:14px;
+  display:inline-flex;align-items:center;gap:8px;transition:transform .55s var(--spring),border-color .2s var(--ease)}
+.edit::after{content:'';width:7px;height:7px;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg)}
+.edit.quiet{border-color:var(--line);color:var(--muted)}
+.edit.quiet::after{display:none}
+.edit:hover{border-color:var(--accent-ink)}
+.edit:active{transform:scale(.955);transition:transform .09s var(--ease)}
+.edit:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px}
+.know textarea{min-height:56px;background:var(--surface)}
+.know .btn{min-height:48px}
+.flash{display:flex;align-items:center;gap:8px;margin:0;color:var(--good);font-weight:600}
+.flash .ic{width:20px;height:20px}
+.editnote{display:flex;align-items:center;gap:6px;text-align:left}
+.screen.q > .editnote{justify-content:center}
+.editnote .ic{width:18px;height:18px}
+.kline{display:block}

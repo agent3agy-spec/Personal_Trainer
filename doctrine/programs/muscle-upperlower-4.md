@@ -2,9 +2,9 @@
 
 **What it is.** Four sessions, two upper and two lower, done in order: Upper A, Lower A, Upper B, Lower B. Every muscle twice a week, with more room per session than full body, so more sets fit without a two hour day.
 
-**Who it is for.** Intermediate, or a late novice who has run out of room in a full-body week (the Fundamentals Upper/Lower slot in the research grid). 3 or 4 days, 50 to 75 minutes. Dumbbells and a bench are the minimum, barbell and machines are used when they are there.
+**Who it is for.** Intermediate, or a late novice who has run out of room in a full-body week (the Fundamentals Upper/Lower slot in the research grid). 4 days, 50 to 75 minutes. Dumbbells and a bench are the minimum, barbell and machines are used when they are there.
 
-**The week.** UA, LA, UB, LB. On 4 days that is one lap a week. On 3 days the four keep rotating, so a muscle gets about 1.5 hits a week.
+**The week.** UA, LA, UB, LB. One lap a week on 4 days. On 3 days the trainer uses a full body plan instead: four sessions are never squeezed into three days, because each muscle would drop to about 1.5 hits a week.
 
 | session | main block | second lift | accessories |
 |:-|:-|:-|:-|
@@ -58,7 +58,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
     "advanced"
   ],
   "days": [
-    3,
+    4,
     4
   ],
   "sweet_days": [
@@ -107,12 +107,6 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
     ]
   },
   "layouts": {
-    "3": [
-      "UA",
-      "LA",
-      "UB",
-      "LB"
-    ],
     "4": [
       "UA",
       "LA",
@@ -129,7 +123,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -144,7 +138,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             },
@@ -160,13 +154,13 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -181,7 +175,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             },
             {
@@ -196,13 +190,13 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -217,7 +211,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -231,7 +225,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -245,7 +239,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -260,7 +254,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -276,14 +270,14 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 150,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -297,14 +291,14 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 150,
-              "effort": "1 to 3 left in the tank, every rep clean, flat back, deep stretch",
+              "effort": "1 to 3 reps spare, every rep clean, flat back, deep stretch",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -318,7 +312,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -332,7 +326,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -346,7 +340,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure, pause in the stretch",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, pause in the stretch",
               "rule": "double_progression"
             }
           ]
@@ -358,7 +352,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -372,7 +366,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             },
             {
@@ -387,13 +381,13 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -408,13 +402,13 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -428,7 +422,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure, deep stretch at the bottom",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, deep stretch at the bottom",
               "rule": "double_progression"
             },
             {
@@ -442,7 +436,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -456,7 +450,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -470,7 +464,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -483,7 +477,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -497,7 +491,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -513,14 +507,14 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -535,13 +529,13 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -556,7 +550,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "10-15",
               "rest": 90,
-              "effort": "0 to 2 left in the tank, last set close to failure, each leg",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, each leg",
               "rule": "double_progression"
             },
             {
@@ -571,7 +565,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -584,7 +578,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -593,13 +587,13 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
     }
   },
   "express": {
-    "title": "Express · Squat · Bench · Row",
+    "title": "Short version · Squat · Bench · Row",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -615,7 +609,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
             "sets": 2,
             "reps": "6-10",
             "rest": 120,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression",
             "score": true
           },
@@ -630,13 +624,13 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
             "sets": 2,
             "reps": "6-10",
             "rest": 120,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression"
           }
         ]
       },
       {
-        "name": "Second lift",
+        "name": "Second exercise",
         "kind": "secondary",
         "format": "straight",
         "slots": [
@@ -652,7 +646,7 @@ Lengthened choices again: Romanian deadlift, seated leg curl, overhead triceps e
             "sets": 2,
             "reps": "6-10",
             "rest": 90,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression"
           }
         ]

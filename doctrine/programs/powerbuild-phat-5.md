@@ -2,9 +2,9 @@
 
 **What it is.** Power Hypertrophy Adaptive Training: two power days early in the week, three hypertrophy days after. Each hypertrophy day opens with light, fast speed work on the matching power lift, then goes for size with sets of 8 to 20.
 
-**Who it is for.** Intermediate to advanced lifters who want strength and size and have 4 or 5 days, 60 to 90 minutes each. A barbell, a rack, a bench, plates and dumbbells; cable and machine moves have fallbacks.
+**Who it is for.** Intermediate to advanced lifters who want strength and size and have 5 days, 60 to 90 minutes each. A barbell, a rack, a bench, plates and dumbbells; cable and machine moves have fallbacks.
 
-**The week.** Upper power, lower power, rest, back and shoulders, lower hypertrophy, chest and arms. On 4 days a week the five sessions just keep rotating.
+**The week.** Upper power, lower power, rest, back and shoulders, lower hypertrophy, chest and arms. On 4 days the trainer picks a 4 day plan instead: five sessions are never squeezed into four days.
 
 | session | main block | then |
 |:-|:-|:-|
@@ -52,7 +52,7 @@
     "advanced"
   ],
   "days": [
-    4,
+    5,
     5
   ],
   "sweet_days": [
@@ -89,13 +89,6 @@
   },
   "meso": null,
   "layouts": {
-    "4": [
-      "UpperPower",
-      "LowerPower",
-      "BackShoulders",
-      "LowerHyp",
-      "ChestArms"
-    ],
     "5": [
       "UpperPower",
       "LowerPower",
@@ -107,11 +100,11 @@
   "modules": [],
   "sessions": {
     "UpperPower": {
-      "title": "Upper power · Bench · Row",
+      "title": "Upper body, heavy · Bench · Row",
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -125,7 +118,7 @@
               "sets": 3,
               "reps": "3-5",
               "rest": 180,
-              "effort": "heavy, 1 or 2 left, every rep clean",
+              "effort": "heavy, 1 or 2 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             },
@@ -140,13 +133,13 @@
               "sets": 3,
               "reps": "3-5",
               "rest": 180,
-              "effort": "heavy, 1 or 2 left, every rep clean",
+              "effort": "heavy, 1 or 2 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -161,7 +154,7 @@
               "sets": 2,
               "reps": "6-10",
               "rest": 120,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -175,13 +168,13 @@
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -195,7 +188,7 @@
               "sets": 3,
               "reps": "6-10",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -208,7 +201,7 @@
               "sets": 3,
               "reps": "6-10",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -216,13 +209,13 @@
       ]
     },
     "LowerPower": {
-      "title": "Lower power · Squat",
+      "title": "Legs, heavy · Squat",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -235,14 +228,14 @@
               "sets": 3,
               "reps": "3-5",
               "rest": 210,
-              "effort": "heavy, 1 or 2 left, every rep clean",
+              "effort": "heavy, 1 or 2 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -257,7 +250,7 @@
               "sets": 2,
               "reps": "6-10",
               "rest": 150,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -270,13 +263,13 @@
               "sets": 3,
               "reps": "5-8",
               "rest": 150,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -291,7 +284,7 @@
               "sets": 2,
               "reps": "6-10",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -304,7 +297,7 @@
               "sets": 3,
               "reps": "6-10",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -312,11 +305,11 @@
       ]
     },
     "BackShoulders": {
-      "title": "Back and shoulders hypertrophy",
+      "title": "Back and shoulders, for muscle",
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -330,7 +323,7 @@
               "sets": 6,
               "reps": "3",
               "rest": 90,
-              "effort": "speed work: about 65 to 70% of your power day row, every rep as fast as you can",
+              "effort": "light and fast: about two thirds of your heavy day row, every rep as fast as you can",
               "rule": "fixed"
             },
             {
@@ -344,14 +337,14 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 120,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -366,13 +359,13 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -386,7 +379,7 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 75,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -399,7 +392,7 @@
               "sets": 3,
               "reps": "12-20",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -413,7 +406,7 @@
               "sets": 3,
               "reps": "12-20",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -421,13 +414,13 @@
       ]
     },
     "LowerHyp": {
-      "title": "Lower hypertrophy",
+      "title": "Legs, for muscle",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -440,7 +433,7 @@
               "sets": 6,
               "reps": "3",
               "rest": 90,
-              "effort": "speed work: about 65 to 70% of your power day squat, every rep as fast as you can",
+              "effort": "light and fast: about two thirds of your heavy day squat, every rep as fast as you can",
               "rule": "fixed"
             },
             {
@@ -454,14 +447,14 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 120,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -475,13 +468,13 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 120,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -495,7 +488,7 @@
               "sets": 3,
               "reps": "15-20",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -509,7 +502,7 @@
               "sets": 3,
               "reps": "12-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -522,7 +515,7 @@
               "sets": 3,
               "reps": "12-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -530,11 +523,11 @@
       ]
     },
     "ChestArms": {
-      "title": "Chest and arms hypertrophy",
+      "title": "Chest and arms, for muscle",
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -547,7 +540,7 @@
               "sets": 6,
               "reps": "3",
               "rest": 90,
-              "effort": "speed work: about 65 to 70% of your power day bench, every rep as fast as you can",
+              "effort": "light and fast: about two thirds of your heavy day bench, every rep as fast as you can",
               "rule": "fixed"
             },
             {
@@ -560,14 +553,14 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 120,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -582,7 +575,7 @@
               "sets": 2,
               "reps": "12-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -595,7 +588,7 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -608,7 +601,7 @@
               "sets": 2,
               "reps": "12-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -621,7 +614,7 @@
               "sets": 3,
               "reps": "8-12",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -634,7 +627,7 @@
               "sets": 2,
               "reps": "12-15",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -643,13 +636,13 @@
     }
   },
   "express": {
-    "title": "Express · Squat · Bench",
+    "title": "Short version · Squat · Bench",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -662,7 +655,7 @@
             "sets": 3,
             "reps": "3-5",
             "rest": 180,
-            "effort": "heavy, 1 or 2 left, every rep clean",
+            "effort": "heavy, 1 or 2 reps spare, every rep clean",
             "rule": "double_progression",
             "score": true
           },
@@ -676,7 +669,7 @@
             "sets": 3,
             "reps": "3-5",
             "rest": 180,
-            "effort": "heavy, 1 or 2 left, every rep clean",
+            "effort": "heavy, 1 or 2 reps spare, every rep clean",
             "rule": "double_progression"
           }
         ]

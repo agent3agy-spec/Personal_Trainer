@@ -30,12 +30,12 @@ LABELS = {
            "effort": "Effort", "rest": "Rest", "total": "Total", "min": "min", "log": "After the session, write down",
            "low": "If your energy drops", "first": "First time: find your weight", "done": "Done",
            "footer": "General guidance, not medical advice. Stop if anything feels wrong: sharp pain, chest pain, dizziness.",
-           "rest_none": "none", "block": "Block", "week": "week", "demo": "how to"},
+           "rest_none": "none", "block": "Block", "week": "week", "week_of": "week %s of %s", "demo": "how to"},
     "fr": {"score": "Le score à battre", "why": "Pourquoi cette séance", "sets": "Séries x reps", "load": "Charge",
            "effort": "Effort", "rest": "Repos", "total": "Total", "min": "min", "log": "Après la séance, note",
            "low": "Si l'énergie baisse", "first": "Première fois : trouve ta charge", "done": "Fait",
            "footer": "Conseils généraux, pas un avis médical. Arrête si quelque chose ne va pas : douleur vive, douleur thoracique, vertige.",
-           "rest_none": "aucun", "block": "Bloc", "week": "semaine", "demo": "démo"},
+           "rest_none": "aucun", "block": "Bloc", "week": "semaine", "week_of": "semaine %s sur %s", "demo": "démo"},
     "es": {"score": "La marca a batir", "why": "Por qué esta sesión", "sets": "Series x reps", "load": "Carga",
            "effort": "Esfuerzo", "rest": "Descanso", "total": "Total", "min": "min", "log": "Después de la sesión, anota",
            "low": "Si te falta energía", "first": "Primera vez: encuentra tu peso", "done": "Hecho",
@@ -245,9 +245,12 @@ def form(s):
                  "rows": [{"name": L["cool_walk"], "cue": "", "target": L["cool_walk_reps"], "kind": "check", "star": 0}]}]
     for sec_ in warm:
         sec_["title"] = L["warmup"] if str(sec_["title"]).lower() in ("warm-up", "warm up") else sec_["title"]
-    meta = " · ".join(x for x in [s.get("program_name"),
-                                  ("%s %s · %s %s" % (L["block"], s.get("block"), L["week"], s.get("week"))) if s.get("block") else "",
-                                  s.get("level_text")] if x)
+    week = ""
+    if s.get("week") and s.get("weeks"):              # "week 2 of 6": never a block number, never a method name
+        week = L.get("week_of", L["week"] + " %s / %s") % (min(int(s["week"]), int(s["weeks"])), s["weeks"])
+    elif s.get("week"):
+        week = "%s %s" % (L["week"], s["week"])
+    meta = " · ".join(x for x in [s.get("program_name"), week, s.get("level_text")] if x)
     return {"L": L, "title": s.get("title", ""), "date": s.get("date", ""), "meta": meta, "minutes": round(total / 60),
             "beat": s.get("score_to_beat", ""), "why": s.get("why", ""), "firsts": firsts, "unit": unit,
             "sections": warm + work + cool, "low": s.get("low_energy", ""), "log": s.get("log") or [],

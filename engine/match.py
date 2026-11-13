@@ -49,9 +49,9 @@ def style_pref(prof):
 DOMAIN = {"run": "running", "hyrox": "mixed", "hybrid": "mixed", "functional": "mixed"}
 PLAIN = {"strength": "Strength first: heavy main lifts, then muscle work",
          "powerbuild": "Strength and size: heavy days and muscle days",
-         "muscle": "Muscle building: plenty of sets close to failure",
+         "muscle": "Muscle building: plenty of sets that end near your limit",
          "weightlifting": "The Olympic lifts: technique first, then strength",
-         "functional": "Mixed fitness: a strength part, then fast conditioning",
+         "functional": "Mixed fitness: a strength part, then a short fast workout",
          "hyrox": "Race training: running plus the HYROX stations",
          "hybrid": "Strength and running in the same week",
          "run": "Running, mostly easy, building up week by week",
@@ -75,17 +75,29 @@ def _age_num(band):
     return {"under_18": 17, "18_39": 30, "40_59": 50, "60_74": 67, "75_plus": 80}.get(band, 30)
 
 
-def filters(prog, prof, bank, select):
-    """The list of reasons this program is out. Empty list: it passes."""
+def filters(prog, prof, bank, select, cost=None):
+    """The list of reasons this program is out. Empty list: it passes. The days that count are the days the
+    composer gives this program's family (compose.lead_days): a 60/40 blend on 4 days leaves the lead 2 or 3.
+    A main slot that only a limit empties costs score (`cost`), it does not rule the program out, unless it
+    empties more than half the main slots of a session: a limit removes moves, never the goal (03_MATRIX.md)."""
+    import compose
     out = []
     flags = set((prof.get("screen") or {}).get("flags", []))
     exp = domain_experience(prof, prog["family"])
+    days = compose.lead_days(prof, prog["family"])
     if any(r.get("program") == prog["id"] and r.get("reason") != "days" for r in prof.get("rejected", [])):
         out.append("not for me: you turned it down")
     if exp not in prog["experience"]:
         out.append("experience: it is built for %s" % " or ".join(prog["experience"]))
-    if prof.get("days", 3) < prog["days"][0]:
+    if days < prog["days"][0]:
         out.append("days: it needs at least %d a week" % prog["days"][0])
+    else:
+        n = min(days, prog["days"][1])
+        lay = prog["layouts"].get(str(n))
+        if lay is None:
+            out.append("days: it has no %d day week" % n)
+        elif len(lay) > n and not prog.get("rotates"):
+            out.append("days: its %d sessions need %d days, never squeezed into %d" % (len(lay), len(lay), n))
     if prof.get("minutes", 45) < prog.get("express_minutes", prog["minutes"][0]):
         out.append("minutes: its shortest version takes %d" % prog.get("express_minutes", prog["minutes"][0]))
     tags = set(core.place_tags(prof))
@@ -112,17 +124,26 @@ def filters(prog, prof, bank, select):
     if not out:                                      # can its main blocks actually be filled for this person, limits included?
         import build as _b
         avoid = _b.avoid_regions(prof, {})
-        prof = dict(prof, _care=_b.care_regions(prof, {}) - avoid)
+        lim = dict(prof, _care=_b.care_regions(prof, {}) - avoid, _trig=_b.trigger_limits(prof))
+        free = dict(prof, limits=[], _care=set(), _trig=[])
+        soft = 0
         for sid, sess in prog["sessions"].items():
-            for b in sess["blocks"]:
-                if b["kind"] != "main":
-                    continue
-                for slot in b["slots"]:
-                    if slot.get("kind") == "piece":
-                        continue
-                    if select(slot, prof, list(tags), avoid, bank) is None:
-                        out.append("can't fill '%s' in session %s with your equipment or limits" % (slot["key"], sid))
+            mains = [sl for b in sess["blocks"] if b["kind"] == "main" for sl in b["slots"] if sl.get("kind") != "piece"]
+            gone = []
+            for slot in mains:
+                if select(slot, lim, list(tags), avoid, bank) is None:
+                    if select(slot, free, list(tags), set(), bank) is None:
+                        out.append("can't fill '%s' in session %s with your equipment" % (slot["key"], sid))
                         break
+                    gone.append(slot)
+            if out:
+                break
+            if gone and 2 * len(gone) > len(mains):
+                out.append("can't fill '%s' in session %s with your limits" % (gone[0]["key"], sid))
+                break
+            soft += len(gone)
+        if cost is not None and not out:
+            cost[prog["id"]] = soft
     return out
 
 
@@ -181,18 +202,20 @@ def score(prog, prof, programs_by_id=None):
             s -= 2
         if r.get("reason") == "not_enjoy" and prog["family"] == other["family"]:
             s -= 3
-    if prof.get("days") in prog.get("sweet_days", []):
+    import compose
+    days = compose.lead_days(prof, prog["family"])
+    if days in prog.get("sweet_days", []):
         s += 1
-    if prof.get("days", 3) - prog["days"][1] >= 2:
+    if days - prog["days"][1] >= 2:
         s -= 2                                       # it would leave two or more of their days empty
     return s
 
 
 def match(prof, bank, select, programs=None):
     programs = programs or core.all_programs()
-    passed, failed = [], {}
+    passed, failed, cost = [], {}, {}
     for p in programs:
-        why = filters(p, prof, bank, select)
+        why = filters(p, prof, bank, select, cost)
         if why:
             failed[p["id"]] = why
         else:
@@ -200,8 +223,10 @@ def match(prof, bank, select, programs=None):
     novice = prof.get("experience") in ("none", "novice")
     by_id = {p["id"]: p for p in programs}
 
+    total = lambda p: score(p, prof, by_id) - cost.get(p["id"], 0)
+
     def key(p):
-        return (-score(p, prof, by_id), -p["goals"].get(prof.get("goal"), 0), p.get("simplicity", 2) if novice else 0,
+        return (-total(p), -p["goals"].get(prof.get("goal"), 0), p.get("simplicity", 2) if novice else 0,
                 -EVIDENCE.get(p.get("evidence", "C"), 0), p.get("express_minutes", 30), p["id"])
     ranked = sorted(passed, key=key)
     style_note = None
@@ -218,7 +243,7 @@ def match(prof, bank, select, programs=None):
                   ("%s is not built for %s" % (STYLE_WORDS[st], GOAL_WORDS.get(prof.get("goal"), prof.get("goal"))))
             style_note = "You prefer %s, but %s, so the trainer picked what serves your goal better." % (STYLE_WORDS[st], why)
     gap = goal_gap(prof, failed, programs)
-    top = [{"id": p["id"], "name": p["name"], "score": score(p, prof, by_id), "family": p["family"],
+    top = [{"id": p["id"], "name": p["name"], "score": total(p), "family": p["family"],
             "split": SPLIT_OF.get(p["id"]), "evidence": p.get("evidence"), "draws_from": p.get("draws_from", []),
             "goal_fit": p["goals"].get(prof.get("goal"), 0), "why": reason(p, prof, gap), "plain": plain(p, prof)}
            for p in ranked[:3]]
@@ -231,9 +256,12 @@ def match(prof, bank, select, programs=None):
     note = core.OUTCOME_GAP.get(prof.get("outcome_detail")) or core.OUTCOME_GAP.get(prof.get("outcome"))
     if note:
         res["outcome_note"] = note
+    pn = core.OUTCOME_PLAN.get(prof.get("outcome_detail")) or core.OUTCOME_PLAN.get(prof.get("outcome"))
+    if pn:
+        res["plan_note"] = pn
     if prof.get("mode") == "improve":
-        res["improve_note"] = ("For now this is the plan closest to the week you already run. Coaching inside your own "
-                               "routine, keeping your split and your exercises, comes in a later update.")
+        res["improve_note"] = ("Your classes stay yours as they are: the trainer cannot write a class. This is the plan closest "
+                               "to the rest of your week.")
     if prof.get("start_volume") == "low":
         res["dose_note"] = ("Short sleep or high stress: the first weeks start at the low end of the sets, and the effort "
                             "stays a rep further from failure.")
@@ -282,15 +310,17 @@ def goal_gap(prof, failed, programs):
 
 def reason(prog, prof, gap=None):
     """One short human line: why this program is on the list. The coach translates it, never recomputes it."""
+    import compose
     g1, g2 = prof.get("goal"), prof.get("goal2")
     fit = prog["goals"].get(g1, 0)
     bits = [FIT_WORDS[fit] % GOAL_WORDS.get(g1, g1)]
     if g2 and prog["goals"].get(g2, 0) >= SERVES:
         bits[0] += ", and " + GOAL_WORDS.get(g2, g2)
-    days = prof.get("days", 3)
-    if days in prog.get("sweet_days", []):
+    week, al = compose.describe(prof, prog)
+    days = al["lead"]
+    if days in prog.get("sweet_days", []) and not al["components"]:
         bits.append("%d days a week is its sweet spot" % days)
-    elif days > prog["days"][1]:
+    elif days > prog["days"][1] and not al["components"]:
         bits.append("uses %d of your %d days" % (prog["days"][1], days))
     liked = set(ENJOY_OF.get(prog["family"], [])) & enjoys(prof)
     if liked:
@@ -300,13 +330,10 @@ def reason(prog, prof, gap=None):
         bits.append("the same shape as your week")
     blend = prof.get("outcomes") or []
     if len(blend) > 1:
-        words = [GOAL_WORDS.get(core.OUTCOMES[o["id"]][o["detail"]][0], o["id"]) for o in blend]
-        line = "your blend: %s %d%% leads the plan" % (words[0], round(100 * blend[0]["share"]))
-        if g2:
-            line += ", %s %d%% comes as an add-on" % (GOAL_WORDS.get(g2, g2), round(100 * blend[1]["share"]))
-        if len(blend) > 2:
-            line += ", %s %d%% is kept for the mixed plan coming next" % (words[2], round(100 * blend[2]["share"]))
-        bits.append(line)
+        words = ["%s %d%%" % (GOAL_WORDS.get(core.OUTCOMES[o["id"]][o["detail"]][0], o["id"]), round(100 * o["share"])) for o in blend]
+        bits.append("your blend: %s, so your week is %s" % (", ".join(words), week))
+    elif al["components"] or al["finishers"]:
+        bits.append("your week: %s" % week)
     bits.append("evidence %s" % prog.get("evidence", "C"))
     if fit < SERVES and gap:
         bits[0] += " (nothing built for it fits you yet)"
@@ -315,9 +342,14 @@ def reason(prog, prof, gap=None):
 
 def plain(prog, prof):
     """The plan in plain words, for the person: never a method name (Step 4). The page and the coach translate it."""
-    days = min(prof.get("days", 3), prog["days"][1])
+    import compose
+    week, al = compose.describe(prof, prog)
+    days = min(al["lead"], prog["days"][1]) + sum(al["components"].values())
     mins = max(prog.get("express_minutes", 30), min(prof.get("minutes", 45), prog["minutes"][1]))
     shape = SHAPE.get(SPLIT_OF.get(prog["id"]))
+    if al["components"] or al["finishers"]:
+        return {"headline": PLAIN.get(prog["family"], prog["name"]),
+                "week": "%d days a week, about %d minutes: %s" % (days, mins, week)}
     return {"headline": PLAIN.get(prog["family"], prog["name"]),
             "week": "%d days a week, about %d minutes%s" % (days, mins, (", " + shape) if shape else "")}
 

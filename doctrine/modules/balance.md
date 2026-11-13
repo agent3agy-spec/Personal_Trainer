@@ -7,11 +7,11 @@ Three balance moves, about 6 minutes, next to something solid you can grab. **Ma
 ```json
 {
   "id": "balance",
-  "name": "Balance finisher",
+  "name": "Balance, to finish",
   "when": "finisher",
   "minutes": 6,
   "session": {
-    "title": "Balance finisher",
+    "title": "Balance, to finish",
     "tags": [],
     "blocks": [
       {

@@ -108,7 +108,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "superset",
           "rest_after_round": 90,
@@ -126,7 +126,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
               "sets": 2,
               "reps": "8-12",
               "rest": 60,
-              "effort": "2 or 3 left, smooth reps",
+              "effort": "2 or 3 reps spare, smooth reps",
               "rule": "double_progression",
               "score": true
             },
@@ -143,7 +143,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
               "sets": 2,
               "reps": "8-12",
               "rest": 60,
-              "effort": "2 or 3 left, squeeze the shoulder blades",
+              "effort": "2 or 3 reps spare, squeeze the shoulder blades",
               "rule": "double_progression"
             }
           ]
@@ -166,7 +166,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
               "sets": 2,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 or 3 left",
+              "effort": "2 or 3 reps spare",
               "rule": "double_progression"
             },
             {
@@ -181,13 +181,13 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
               "sets": 2,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 or 3 left, flat back",
+              "effort": "2 or 3 reps spare, flat back",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Trunk",
+          "name": "Core",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -240,7 +240,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "superset",
           "rest_after_round": 90,
@@ -257,7 +257,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
               "sets": 2,
               "reps": "8-12",
               "rest": 60,
-              "effort": "2 or 3 left, ribs down",
+              "effort": "2 or 3 reps spare, ribs down",
               "rule": "double_progression",
               "score": true
             },
@@ -273,7 +273,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
               "sets": 2,
               "reps": "8-12",
               "rest": 60,
-              "effort": "2 or 3 left, elbows to the ribs",
+              "effort": "2 or 3 reps spare, elbows to the ribs",
               "rule": "double_progression"
             }
           ]
@@ -295,7 +295,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
               "sets": 2,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 or 3 left, each leg, hold something for balance if you need",
+              "effort": "2 or 3 reps spare, each leg, hold something for balance if you need",
               "rule": "double_progression"
             },
             {
@@ -310,13 +310,13 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
               "sets": 2,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 or 3 left, pause at the top",
+              "effort": "2 or 3 reps spare, pause at the top",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Trunk",
+          "name": "Core",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -366,11 +366,11 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
     }
   },
   "express": {
-    "title": "Express · Press · Row · Squat · Walk",
+    "title": "Short version · Press · Row · Squat · Walk",
     "tags": [],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "superset",
         "rest_after_round": 60,
@@ -388,7 +388,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
             "sets": 2,
             "reps": "8-12",
             "rest": 45,
-            "effort": "2 or 3 left",
+            "effort": "2 or 3 reps spare",
             "rule": "double_progression",
             "score": true
           },
@@ -405,7 +405,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
             "sets": 2,
             "reps": "8-12",
             "rest": 45,
-            "effort": "2 or 3 left",
+            "effort": "2 or 3 reps spare",
             "rule": "double_progression"
           }
         ]
@@ -428,7 +428,7 @@ The walks in the sessions are the start. The 150 minutes a week is reached with 
             "sets": 2,
             "reps": "8-12",
             "rest": 60,
-            "effort": "2 or 3 left",
+            "effort": "2 or 3 reps spare",
             "rule": "double_progression"
           }
         ]

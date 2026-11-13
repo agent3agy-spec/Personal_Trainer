@@ -14,6 +14,7 @@ Every decision is checked by a fresh subagent that gets the files and the facts,
 | interview | rounds 1 to 3, `plan.py profile` | `checks.py` validates every field |
 | match | `plan.py match`, offers the top three | the score is code, tested |
 | choose | `plan.py choose` | **school-auditor**: the profile says what they said, safety flags applied, the explanation honest |
+| adopt (improve path) | `plan.py adopt`, then `plan.py improve accept <id>` or `decline <id>` | **school-auditor**: the routine on the sheet is the routine they described, every exercise, set and rep traceable to their words or to a yes |
 
 ## Every session
 
@@ -25,6 +26,7 @@ Every decision is checked by a fresh subagent that gets the files and the facts,
 | sheet | `plan.py render` | **athletes-eye** (full mode): the person can do it without a question |
 | log | `plan.py log` | `checks.py` before every commit |
 | block end or early deload | | **cycle-auditor** |
+| the coach's turn (`status` → `coach.next_turn`) | the starting numbers (`plan.py tests`), the weekly check-in (`plan.py checkin`), the block review (`plan.py blockreview`), each one turn, never before a session they want now | the rules are code, tested (`tests/test_engine.py` CoachHabits) |
 | any change to doctrine or engine | maintainers | **collision-auditor**, `checks.py template`, `tests/` |
 
 ## Full or light

@@ -140,7 +140,7 @@
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -155,7 +155,7 @@
               "sets": 3,
               "reps": "4-6",
               "rest": 180,
-              "effort": "1 or 2 left, every rep clean",
+              "effort": "1 or 2 reps spare, every rep clean",
               "rule": "double_progression",
               "inc": 5,
               "score": true
@@ -163,7 +163,7 @@
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -177,13 +177,13 @@
               "sets": 3,
               "reps": "6-8",
               "rest": 120,
-              "effort": "2 left, flat back, feel the hamstrings",
+              "effort": "2 reps spare, flat back, feel the hamstrings",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -197,7 +197,7 @@
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "2 left, full stretch at the bottom",
+              "effort": "2 reps spare, full stretch at the bottom",
               "rule": "double_progression"
             }
           ]
@@ -209,7 +209,7 @@
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -223,7 +223,7 @@
               "sets": 3,
               "reps": "4-6",
               "rest": 180,
-              "effort": "1 or 2 left",
+              "effort": "1 or 2 reps spare",
               "rule": "double_progression",
               "inc": 2.5,
               "score": true
@@ -231,7 +231,7 @@
           ]
         },
         {
-          "name": "Second lifts",
+          "name": "Second exercises",
           "kind": "secondary",
           "format": "superset",
           "rest_after_round": 90,
@@ -247,7 +247,7 @@
               "sets": 3,
               "reps": "6-10",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             },
             {
@@ -262,7 +262,7 @@
               "sets": 3,
               "reps": "5-8",
               "rest": 60,
-              "effort": "2 left",
+              "effort": "2 reps spare",
               "rule": "double_progression"
             }
           ]
@@ -276,7 +276,7 @@
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -290,7 +290,7 @@
               "sets": 3,
               "reps": "5",
               "rest": 180,
-              "effort": "1 or 2 left, flat back",
+              "effort": "1 or 2 reps spare, flat back",
               "rule": "linear_session",
               "inc": 5,
               "inc_after_100": 2.5,
@@ -299,7 +299,7 @@
           ]
         },
         {
-          "name": "Second lifts",
+          "name": "Second exercises",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -313,7 +313,7 @@
               "sets": 3,
               "reps": "5-8",
               "rest": 120,
-              "effort": "2 left, ribs down",
+              "effort": "2 reps spare, ribs down",
               "rule": "double_progression"
             },
             {
@@ -327,7 +327,7 @@
               "sets": 2,
               "reps": "8-12",
               "rest": 90,
-              "effort": "2 left, each leg",
+              "effort": "2 reps spare, each leg",
               "rule": "double_progression"
             }
           ]
@@ -372,7 +372,7 @@
       ],
       "blocks": [
         {
-          "name": "Quality",
+          "name": "Faster run",
           "kind": "main",
           "format": "intervals",
           "minutes": 45,
@@ -384,7 +384,7 @@
               "minutes": 45,
               "rule": "benchmark",
               "score": true,
-              "effort": "10 to 15 min easy first and 10 min easy after. Threshold about 10% of your week, intervals at most 8%",
+              "effort": "10 to 15 min easy first and 10 min easy after. Keep the fast running a small part of your week",
               "pieces": [
                 [
                   {
@@ -393,7 +393,7 @@
                       "run",
                       "interval_run"
                     ],
-                    "reps": "20 min tempo, comfortably hard"
+                    "reps": "20 min steady, comfortably hard"
                   }
                 ],
                 [
@@ -413,7 +413,7 @@
                       "interval_run",
                       "run"
                     ],
-                    "reps": "4 x 1.6 km at threshold, 1 min jog between"
+                    "reps": "4 x 1.6 km at a hard pace you could hold for an hour, 1 min jog between"
                   }
                 ],
                 [
@@ -423,7 +423,7 @@
                       "run",
                       "easy_run"
                     ],
-                    "reps": "30 min easy plus 6 x 20 s strides, walk back"
+                    "reps": "30 min easy plus 6 x 20 s short fast bursts, walk back"
                   }
                 ]
               ]
@@ -464,13 +464,13 @@
     }
   },
   "express": {
-    "title": "Express · Squat · Bench",
+    "title": "Short version · Squat · Bench",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -485,7 +485,7 @@
             "sets": 2,
             "reps": "4-6",
             "rest": 150,
-            "effort": "1 or 2 left",
+            "effort": "1 or 2 reps spare",
             "rule": "double_progression",
             "inc": 5,
             "score": true
@@ -500,7 +500,7 @@
             "sets": 2,
             "reps": "4-6",
             "rest": 150,
-            "effort": "1 or 2 left",
+            "effort": "1 or 2 reps spare",
             "rule": "double_progression",
             "inc": 2.5
           }

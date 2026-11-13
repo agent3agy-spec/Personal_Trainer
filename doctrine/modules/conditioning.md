@@ -7,11 +7,11 @@
 ```json
 {
   "id": "conditioning",
-  "name": "Conditioning finisher",
+  "name": "Cardio burst, to finish",
   "when": "finisher",
   "minutes": 8,
   "session": {
-    "title": "Conditioning finisher",
+    "title": "Cardio burst, to finish",
     "tags": [
       "hard_cardio"
     ],
@@ -75,7 +75,7 @@
                     "burpee",
                     "jump_rope"
                   ],
-                  "reps": "8 min: 6 every minute on the minute"
+                  "reps": "8 min: 6 at the start of every minute"
                 },
                 {
                   "pattern": "squat",

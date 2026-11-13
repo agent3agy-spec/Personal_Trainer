@@ -2,11 +2,11 @@
 
 **What it is.** The classic gym week: chest day, back day, leg day, shoulder day, arm day. Each muscle once a week, with a lot of sets on its day.
 
-**Who it is for.** Intermediate or advanced, the goal is muscle, and you simply like training this way. **It is served only when you ask for it.** It is never offered for strength or powerlifting. 4 or 5 days, 50 to 75 minutes, dumbbells and a bench minimum.
+**Who it is for.** Intermediate or advanced, the goal is muscle, and you simply like training this way. **It is served only when you ask for it.** It is never offered for strength or powerlifting. 5 days, 50 to 75 minutes, dumbbells and a bench minimum.
 
 **Why it is legal for muscle, and only for muscle.** Once weekly volume is equal, how often you hit a muscle barely changes how much it grows (Pelland meta-regression, and a volume-equated 2019 analysis) [checked Pelland direction, believe 2019]. Strength is the opposite: it clearly rises with frequency [checked, Pelland]. So once a week is a fair choice for size if you like it, and a bad one for a stronger lift. The cost is per session: past about 10 sets on one muscle in one session the extra sets return less [believe], which is why the days here stop around 10.
 
-**The week.** Chest, Back, Legs, Shoulders, Arms. On 5 days it is one lap a week; on 4 it keeps rotating.
+**The week.** Chest, Back, Legs, Shoulders, Arms. One lap a week on 5 days. On 4 days the trainer picks a 4 day plan instead: five sessions are never squeezed into four days.
 
 | session | main block | then |
 |:-|:-|:-|
@@ -58,7 +58,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
     "advanced"
   ],
   "days": [
-    4,
+    5,
     5
   ],
   "sweet_days": [
@@ -107,13 +107,6 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
     ]
   },
   "layouts": {
-    "4": [
-      "Chest",
-      "Back",
-      "Legs",
-      "Shoulders",
-      "Arms"
-    ],
     "5": [
       "Chest",
       "Back",
@@ -131,7 +124,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -146,14 +139,14 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 4,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -167,14 +160,14 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": false
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -188,7 +181,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure, deep stretch at the bottom",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, deep stretch at the bottom",
               "rule": "double_progression"
             },
             {
@@ -202,7 +195,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 2,
               "reps": "8-12",
               "rest": 90,
-              "effort": "0 to 2 left in the tank, last set close to failure, lean forward",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, lean forward",
               "rule": "double_progression"
             }
           ]
@@ -214,7 +207,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -230,14 +223,14 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 4,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -253,7 +246,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             },
             {
@@ -267,13 +260,13 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "8-12",
               "rest": 90,
-              "effort": "1 to 3 left in the tank, every rep clean, each arm",
+              "effort": "1 to 3 reps spare, every rep clean, each arm",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -288,7 +281,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -303,7 +296,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -319,14 +312,14 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 4,
               "reps": "6-10",
               "rest": 150,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -340,14 +333,14 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "6-10",
               "rest": 150,
-              "effort": "1 to 3 left in the tank, every rep clean, flat back, deep stretch",
+              "effort": "1 to 3 reps spare, every rep clean, flat back, deep stretch",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -361,7 +354,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -375,7 +368,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -389,7 +382,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure, pause in the stretch",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, pause in the stretch",
               "rule": "double_progression"
             }
           ]
@@ -401,7 +394,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -416,14 +409,14 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 4,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -438,7 +431,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 4,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -452,7 +445,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -466,7 +459,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -479,7 +472,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -491,7 +484,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -505,14 +498,14 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -527,7 +520,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -541,7 +534,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -554,7 +547,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -568,7 +561,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -577,11 +570,11 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
     }
   },
   "express": {
-    "title": "Express · the day's first two lifts",
+    "title": "Short version · the day's first two lifts",
     "tags": [],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -596,13 +589,13 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
             "sets": 3,
             "reps": "6-10",
             "rest": 120,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression"
           }
         ]
       },
       {
-        "name": "Second lift",
+        "name": "Second exercise",
         "kind": "secondary",
         "format": "straight",
         "slots": [
@@ -618,7 +611,7 @@ Weekly direct sets land at about 10 to 16 per major muscle, more for arms becaus
             "sets": 3,
             "reps": "6-10",
             "rest": 90,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression"
           }
         ]

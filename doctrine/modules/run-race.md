@@ -7,7 +7,7 @@ For a 5 km to half marathon goal next to a strength program: up to three runs on
 ```json
 {
   "id": "run-race",
-  "name": "Run race",
+  "name": "Running for a race",
   "when": "extra_day",
   "minutes": 50,
   "sessions": {
@@ -78,7 +78,7 @@ For a 5 km to half marathon goal next to a strength program: up to three runs on
       ],
       "blocks": [
         {
-          "name": "Quality",
+          "name": "Faster run",
           "kind": "main",
           "format": "intervals",
           "minutes": 45,
@@ -90,7 +90,7 @@ For a 5 km to half marathon goal next to a strength program: up to three runs on
               "minutes": 45,
               "rule": "benchmark",
               "score": true,
-              "effort": "10 to 15 min easy first and 10 min easy after. Threshold about 10% of your week, intervals at most 8%",
+              "effort": "10 to 15 min easy first and 10 min easy after. Keep the fast running a small part of your week",
               "pieces": [
                 [
                   {
@@ -99,7 +99,7 @@ For a 5 km to half marathon goal next to a strength program: up to three runs on
                       "run",
                       "easy_run"
                     ],
-                    "reps": "25 min easy plus 6 x 20 s strides, walk back"
+                    "reps": "25 min easy plus 6 x 20 s short fast bursts, walk back"
                   }
                 ],
                 [
@@ -109,7 +109,7 @@ For a 5 km to half marathon goal next to a strength program: up to three runs on
                       "run",
                       "interval_run"
                     ],
-                    "reps": "20 min tempo, comfortably hard"
+                    "reps": "20 min steady, comfortably hard"
                   }
                 ],
                 [
@@ -129,7 +129,7 @@ For a 5 km to half marathon goal next to a strength program: up to three runs on
                       "interval_run",
                       "run"
                     ],
-                    "reps": "3 x 10 min at threshold, 2 min jog between"
+                    "reps": "3 x 10 min at a hard pace you could hold for an hour, 2 min jog between"
                   }
                 ]
               ]

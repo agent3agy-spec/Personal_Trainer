@@ -91,7 +91,8 @@ def apply(session, report, prof, st, bank):
             ctx = load_ctx(row, prof) if row else {"round": lambda x: x, "next_load": lambda x: None, "fmt": str, "lower": False}
             ctx["lower"] = row["pattern"] in ("squat", "hinge", "lunge") if row else False
             _, upd = rule_fns(sl["rule"])
-            upd(sl["slot"], target, r, ctx)
+            if not (session.get("taper") and target.get("load") is not None):
+                upd(sl["slot"], target, r, ctx)      # a taper keeps the weights: nothing moves until after the event
             if sl["rule"] == "benchmark":
                 target["outings"] = target.get("outings", 0) + 1
             if target.get("load") and row and row["load_type"] not in ("bodyweight", "band"):
@@ -112,7 +113,7 @@ def apply(session, report, prof, st, bank):
                     g = GROUPS.get(m)
                     if g:
                         hard[g] = hard.get(g, 0) + 0.5 * n
-            done.append({"key": key, "ex": sl["ex"], "rule": sl["rule"], "result": r, "prescribed": pres,
+            done.append({"key": key, "ex": sl["ex"], "rule": sl["rule"], "kind": sl["kind"], "result": r, "prescribed": pres,
                          "after": {k: v for k, v in target.items() if k in ("load", "tm", "wave", "stage", "e1rm", "target", "best", "minutes", "week", "note")}})
     return done, hard
 
@@ -129,7 +130,7 @@ def score_text(session, done, units="kg"):
                         return str(r["score"])
                     if r.get("load") and r.get("reps"):
                         if d.get("rule") == "rpe_top_set":
-                            return "top set %s x %s" % (core.fmt_load(r["load"], units), r["reps"][0])
+                            return "heaviest set %s x %s" % (core.fmt_load(r["load"], units), r["reps"][0])
                         return "%s x %s" % (core.fmt_load(r["load"], units), "/".join(str(x) for x in r["reps"]))
                     if r.get("reps"):
                         return "/".join(str(x) for x in r["reps"]) + " reps"
@@ -153,10 +154,14 @@ def advance(st, plan, prog, session, date, counted=True):
         st["week_sessions"] = st.get("week_sessions", 0) + 1
         st["sessions_done"] = st.get("sessions_done", 0) + 1
         st["last_session"] = date
+        if st.get("reentry"):
+            st["reentry"] -= 1                          # one of the easy sessions after a break is done
     events = []
     ws = st.get("week_start") or date
     if st["week_sessions"] >= plan["days"] or (datetime.date.fromisoformat(date) - datetime.date.fromisoformat(ws)).days >= 9:
         events.append("week_closed")
+        st.pop("next_week", None)                       # what last week's check-in set has run its week
+        st.setdefault("flags", {})["checkin_due"] = True
         st["week"] = st.get("week", 1) + 1
         st["week_sessions"] = 0
         st["week_start"] = date
@@ -168,9 +173,68 @@ def advance(st, plan, prog, session, date, counted=True):
         total = prog.get("block_weeks", 4) + (1 if prog.get("deload") else 0)
         if st["week"] > total:
             events.append("block_closed")
+            st["flags"]["review_due"] = True
+            st.pop("block_adjust", None)
             st["block"] = st.get("block", 1) + 1
             st["week"] = 1
     return events
+
+
+# · personal bests (doctrine/07_CYCLE.md): read from the log, never stored twice
+
+def _best_lines(log):
+    """Per exercise, from the main and second lifts: the best estimated max, and the most reps at each weight."""
+    est, reps_at = {}, {}
+    for l in log:
+        if l.get("unreported"):
+            continue
+        for d in l.get("done") or []:
+            if d.get("kind") not in ("main", "secondary", None) or d.get("skipped"):
+                continue
+            r = d.get("result") or {}
+            reps = [int(x) for x in (r.get("reps") or []) if x]
+            if not reps:
+                continue
+            top = max(reps)
+            if r.get("load"):
+                e = progress.epley(float(r["load"]), top)
+                if e > est.get(d["ex"], {}).get("e1rm", 0) + 1e-6:
+                    est[d["ex"]] = {"e1rm": e, "load": float(r["load"]), "reps": top, "date": l.get("date")}
+            k = (d["ex"], float(r.get("load") or 0))
+            reps_at[k] = max(reps_at.get(k, 0), top)
+    return est, reps_at
+
+
+def records(log, bank, units="kg", n=6):
+    """The best lifts so far, strongest first, in the person's unit."""
+    est, _ = _best_lines(log)
+    out = [{"ex": ex, "name": bank.get(ex, {}).get("name", ex.replace("_", " ")), "load": v["load"], "reps": v["reps"],
+            "date": v["date"], "text": "%s x %d" % (core.fmt_load(v["load"], units), v["reps"])}
+           for ex, v in est.items()]
+    return sorted(out, key=lambda r: -est[r["ex"]]["e1rm"])[:n]
+
+
+def new_records(before, line, bank, units="kg"):
+    """What this session beat: a heavier best (estimated from weight and reps) or more reps at a weight done before.
+    A first time on a lift is a starting point, not a record."""
+    est, reps_at = _best_lines(before)
+    out = []
+    for d in line.get("done") or []:
+        if d.get("kind") not in ("main", "secondary", None) or d.get("skipped"):
+            continue
+        r = d.get("result") or {}
+        reps = [int(x) for x in (r.get("reps") or []) if x]
+        if not reps or d["ex"] in {o["ex"] for o in out}:
+            continue
+        top, load = max(reps), float(r.get("load") or 0)
+        name = bank.get(d["ex"], {}).get("name", d["ex"].replace("_", " "))
+        if load and d["ex"] in est and progress.epley(load, top) > est[d["ex"]]["e1rm"] + 1e-6:
+            out.append({"ex": d["ex"], "name": name, "kind": "best", "load": load, "reps": top,
+                        "text": "%s: %s x %d, your best yet" % (name, core.fmt_load(load, units), top)})
+        elif (d["ex"], load) in reps_at and top > reps_at[(d["ex"], load)]:
+            out.append({"ex": d["ex"], "name": name, "kind": "reps", "load": load or None, "reps": top,
+                        "text": "%s: %d reps%s, more than ever before" % (name, top, (" at " + core.fmt_load(load, units)) if load else "")})
+    return out
 
 
 def deload_triggers(log, st):

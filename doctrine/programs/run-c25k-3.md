@@ -111,7 +111,7 @@ Week 1 is [seen] in the NHS plan's own text (run 1 min, walk 90 s, about 20 min 
   ],
   "sessions": {
     "A": {
-      "title": "Couch to 5K run",
+      "title": "Run and walk",
       "tags": [],
       "blocks": [
         {
@@ -186,7 +186,7 @@ Week 1 is [seen] in the NHS plan's own text (run 1 min, walk 90 s, about 20 min 
     }
   },
   "express": {
-    "title": "Express · Couch to 5K run, short walks",
+    "title": "Short version · run and walk, short walks",
     "tags": [],
     "blocks": [
       {

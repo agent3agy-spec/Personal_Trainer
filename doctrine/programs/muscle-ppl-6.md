@@ -2,9 +2,9 @@
 
 **What it is.** Push, pull, legs, then again with different lifts: six sessions done in order. Each muscle twice a week, and each session short enough to stay sharp because it only has to train a third of the body.
 
-**Who it is for.** Intermediate or advanced, size is the goal, and you can show up 5 or 6 days a week for 50 to 75 minutes. Dumbbells and a bench are the minimum; barbell, cables and machines are used first when they are there.
+**Who it is for.** Intermediate or advanced, size is the goal, and you can show up 6 days a week for 50 to 75 minutes. Dumbbells and a bench are the minimum; barbell, cables and machines are used first when they are there.
 
-**The week.** PushA, PullA, LegsA, PushB, PullB, LegsB. On 6 days that is one lap a week. On 5 days it keeps rotating, so the lap takes a little over a week.
+**The week.** PushA, PullA, LegsA, PushB, PullB, LegsB. One lap a week on 6 days. On 5 days the trainer picks a 5 day plan instead: six sessions are never squeezed into five days.
 
 | session | main block | second lift | accessories |
 |:-|:-|:-|:-|
@@ -57,7 +57,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
     "advanced"
   ],
   "days": [
-    5,
+    6,
     6
   ],
   "sweet_days": [
@@ -104,14 +104,6 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
     ]
   },
   "layouts": {
-    "5": [
-      "PushA",
-      "PullA",
-      "LegsA",
-      "PushB",
-      "PullB",
-      "LegsB"
-    ],
     "6": [
       "PushA",
       "PullA",
@@ -130,7 +122,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -145,14 +137,14 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -167,13 +159,13 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -187,7 +179,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure, deep stretch at the bottom",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, deep stretch at the bottom",
               "rule": "double_progression"
             },
             {
@@ -201,7 +193,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -215,7 +207,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -227,7 +219,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -243,14 +235,14 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -266,13 +258,13 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -287,7 +279,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -301,7 +293,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -315,7 +307,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -330,7 +322,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -346,14 +338,14 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 150,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -367,14 +359,14 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 150,
-              "effort": "1 to 3 left in the tank, every rep clean, flat back, deep stretch",
+              "effort": "1 to 3 reps spare, every rep clean, flat back, deep stretch",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -388,7 +380,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -402,7 +394,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -416,7 +408,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure, pause in the stretch",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, pause in the stretch",
               "rule": "double_progression"
             }
           ]
@@ -428,7 +420,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -442,14 +434,14 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -464,7 +456,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             },
             {
@@ -478,13 +470,13 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 2,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean, lean forward",
+              "effort": "1 to 3 reps spare, every rep clean, lean forward",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -499,7 +491,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -513,7 +505,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -525,7 +517,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
       "tags": [],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -540,14 +532,14 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -563,13 +555,13 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -584,7 +576,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -598,7 +590,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 2,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -611,7 +603,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -625,7 +617,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
       ],
       "blocks": [
         {
-          "name": "Main block",
+          "name": "The main lifts",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -641,14 +633,14 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression",
               "score": true
             }
           ]
         },
         {
-          "name": "Second lift",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -663,13 +655,13 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "6-10",
               "rest": 120,
-              "effort": "1 to 3 left in the tank, every rep clean",
+              "effort": "1 to 3 reps spare, every rep clean",
               "rule": "double_progression"
             }
           ]
         },
         {
-          "name": "Accessory",
+          "name": "Extra work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -684,7 +676,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 90,
-              "effort": "0 to 2 left in the tank, last set close to failure, each leg",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have, each leg",
               "rule": "double_progression"
             },
             {
@@ -699,7 +691,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 75,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             },
             {
@@ -712,7 +704,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
               "sets": 3,
               "reps": "10-15",
               "rest": 60,
-              "effort": "0 to 2 left in the tank, last set close to failure",
+              "effort": "0 to 2 reps spare, last set: stop when one more clean rep is all you have",
               "rule": "double_progression"
             }
           ]
@@ -721,11 +713,11 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
     }
   },
   "express": {
-    "title": "Express · the day's two big lifts",
+    "title": "Short version · the day's two big lifts",
     "tags": [],
     "blocks": [
       {
-        "name": "Main block",
+        "name": "The main lifts",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -740,7 +732,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
             "sets": 2,
             "reps": "6-10",
             "rest": 120,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression"
           },
           {
@@ -755,13 +747,13 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
             "sets": 2,
             "reps": "6-10",
             "rest": 120,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression"
           }
         ]
       },
       {
-        "name": "Second lift",
+        "name": "Second exercise",
         "kind": "secondary",
         "format": "straight",
         "slots": [
@@ -777,7 +769,7 @@ Over a 6 day lap each major muscle gets about 10 to 16 weekly hard sets counted 
             "sets": 2,
             "reps": "6-10",
             "rest": 120,
-            "effort": "1 to 3 left in the tank, every rep clean",
+            "effort": "1 to 3 reps spare, every rep clean",
             "rule": "double_progression",
             "score": true
           }

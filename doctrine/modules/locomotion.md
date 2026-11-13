@@ -7,11 +7,11 @@ GMB-style crawls: bear (shoulders, overhead strength), monkey (lateral control),
 ```json
 {
   "id": "locomotion",
-  "name": "Locomotion",
+  "name": "Crawls",
   "when": "finisher",
   "minutes": 10,
   "session": {
-    "title": "Locomotion",
+    "title": "Crawls",
     "tags": [],
     "blocks": [
       {

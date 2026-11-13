@@ -6,11 +6,13 @@ _This file owns: the questions asked at onboarding and on `/train goals`, and th
 
 **The person says who they are; the trainer decides the training.** They say what they want, what they have done, what they enjoy, their week and their body. They never pick a method, a school or a program: those are the trainer's library (`03_MATRIX.md`, `schools/INDEX.md`). A coach does not ask "do you want to train like X"; he says "this is what you'll do", and why.
 
-**One exception, gated by experience.** Someone experienced (any activity at 6 months to 2 years or more, or anyone on the improve path) may name a training style they prefer, on one optional screen whose first and default tile is "Let the trainer decide". A beginner, or someone coming back whose level steps down to beginner, never sees it: they get the frictionless path.
+**One exception, gated by experience.** Someone experienced (any activity at 6 months to 2 years or more) may name a training style they prefer, on one optional screen whose first and default tile is "Let the trainer decide". A beginner, or someone coming back whose level steps down to beginner, never sees it: they get the frictionless path. The improve path does not ask it: they already have their style, and the trainer keeps it.
+
+**The second exception: the improve path.** Someone who already trains keeps their own routine. They say their split, their days, their exercises and their sets and reps; the trainer runs its rules on that routine and changes nothing in it without a yes (`06_BUILD.md`, Their own routine).
 
 **Shape.** The screen, the fork, the outcome, where you are now, your week, you. One question a screen on the page; at most four questions a turn in chat. Every question has a "you decide" default where it makes sense, and the coach says which default it took. Units and paper are guessed and confirmed at the first weight entered. Age is never asked (`00_MISSION.md`).
 
-**Taps to the plan, measured on the page:** 14 from Start for a beginner on the new path, 17 on the improve path (`window.__planTaps`).
+**Taps to the plan, measured on the page:** 14 from Start for a beginner on the new path, about 17 to their routine on the improve path with every sets and reps row left on "Not sure" (`window.__planTaps`; the sets and reps screen replaced the style screen, phase F).
 
 ## Round 0 · the screen
 
@@ -22,7 +24,7 @@ See `01_SAFETY.md`, unchanged. The twelve health items only. Writes `screen` and
 |:-|:-|:-|
 | Do you already train? | **Build me a new plan** · Improve what I already do | `mode`: `new` · `improve` |
 
-The improve path captures the routine they run (Round 2b). The engine mode that coaches inside that routine comes in a later phase; until then the improve path goes on to the normal match, `match` prefers programs whose week has the same shape and day count (`03_MATRIX.md` Step 2), and both the page and the coach say plainly: "for now this is the plan closest to the week you already run; coaching inside your own routine, keeping your split and your exercises, comes in a later update."
+The improve path captures the routine they run (Round 2b), then `plan.py adopt` turns it into `me/PROGRAM.md`: their split, their days in their order, their exercises, their sets and reps. There is no match and no library plan on this path. The page shows "Your routine" (their sessions in plain words, as they gave them) and the coach's proposals as cards, each with **Yes, do it** and **Keep mine** (`06_BUILD.md`, Their own routine). **One exception:** a week of classes only gives the trainer nothing it can write or score, so `adopt` answers `fallback` and the path goes on to the match, which prefers programs whose week has the same shape (`03_MATRIX.md` Step 2) and says: "Your classes stay yours as they are: the trainer cannot write a class. This is the plan closest to the rest of your week."
 
 ## Round 1 · the outcome, then one follow-up
 
@@ -38,14 +40,14 @@ The improve path captures the routine they run (Round 2b). The engine mode that 
 | be athletic · `athletic` | **fit for anything** `crossfit` | functional | `functional-gpp-3to5` |
 | | strong and able to run far `hybrid` | functional · run | `hybrid-strength-endurance-4to6` (outcome bonus, `03_MATRIX.md` Step 2) |
 | an event · `event` | **a 5K or 10K** `run_5k_10k` · a half marathon `run_half` | run | `run-c25k-3`, `run-base-3to5` |
-| | a marathon `run_marathon` | run | **not served:** routed to `run-base-3to5` with the line in `core.OUTCOME_GAP` |
+| | a marathon `run_marathon` | run | `run-base-3to5` composed with a protected long run up to about 3 hours and a strength day (`06_BUILD.md`, The composer); `core.OUTCOME_PLAN` says how |
 | | HYROX `hyrox` | hyrox | `hyrox-prep-4` |
 | | a lifting meet `meet` | powerlifting | strength programs |
-| keep it going · `keep_going` | lifting `lifting` · fitness and cardio `fitness` · **a bit of everything** `mix` | muscle · strength, functional · health, health · muscle | **not served as such** (no program is built around monthly challenges): the closest steady plan, with the line in `core.OUTCOME_GAP`; the sheet's number to beat is the challenge |
+| keep it going · `keep_going` | lifting `lifting` · fitness and cardio `fitness` · **a bit of everything** `mix` | muscle · strength, functional · health, health · muscle | the steady plan for the follow-up, composed with conditioning where it asks for it, and a new challenge every block printed on every sheet (`compose.CHALLENGES`, `core.OUTCOME_PLAN`) |
 
 **The event branch** asks one more screen: the date (a date picker, or "No date yet") → `event`: `{"name", "date"}`.
 
-**The blend, when two or three outcomes are picked:** one screen, "How much of your week for each?", a three-step choice per outcome (a little · some · most), "you decide" giving the main one most. Stored as `outcomes`: `[{"id": "look", "detail": "size", "share": 0.6}, {"id": "event", "detail": "run_5k_10k", "share": 0.4}]`, one to three different outcomes, shares above 0 adding up to 1. The engine sorts by share (the first tap wins a tie): the largest becomes `outcome` and `goal`, the next one's goal becomes `goal2`. **For now** `match` picks the program that best serves the main outcome, `choose` attaches the add-on module for `goal2` as it always has, and the plan's why line says how the blend was honoured ("your blend: building muscle 60% leads the plan, running 40% comes as an add-on"; a third outcome "is kept for the mixed plan coming next"). A session composer that mixes components by these shares is the next engine phase; this file only guarantees the shares are stored and validated.
+**The blend, when two or three outcomes are picked:** one screen, "How much of your week for each?", a three-step choice per outcome (a little · some · most), "you decide" giving the main one most. Stored as `outcomes`: `[{"id": "look", "detail": "size", "share": 0.6}, {"id": "event", "detail": "run_5k_10k", "share": 0.4}]`, one to three different outcomes, shares above 0 adding up to 1. The engine sorts by share (the first tap wins a tie): the largest becomes `outcome` and `goal`, the next one's goal becomes `goal2`. The composer builds the week from these shares (`06_BUILD.md`, The composer): each outcome becomes components (lifting, running, HYROX, mixed conditioning, conditioning), each gets days in proportion to its share, the lead program is matched for the days it gets, and a share too small for a whole day becomes a goal finisher the clock protects. The why line says it: "your blend: building muscle 60%, running 40%, so your week is 2 lifting days and 2 running days".
 
 ## Round 2a · where you are now (new path)
 
@@ -71,12 +73,13 @@ Low effort: templates and ticks, typing only if they want.
 | question | answers | field |
 |:-|:-|:-|
 | What does your week look like? | Push, pull, legs · Upper and lower · Full body · One body part a day · Strength days plus cardio days · A running plan · Classes · A mix I made up | `current_routine.split`: `ppl` · `upper_lower` · `full_body` · `body_part` · `strength_cardio` · `run_plan` · `classes` · `custom` |
-| How many days a week? | 2 to 6 | `current_routine.days` and `days`; `day_labels` follow the split (Push, Pull, Legs, Push...) |
-| Your main exercises, per lifting day | the usual ones for that day pre-ticked from the bank, untick or tick more, or type your own | `current_routine.exercises`: `{"Upper": [{"id": "bench_press"}, {"own": "cable fly"}]}`; a typed name is matched to the bank by id or name, an unmatched one is kept as theirs |
+| How many days a week? | 2 to 6 | `current_routine.days` and `days`; `day_labels` follow the split (Push, Pull, Legs, Push...), in their order; `day_kinds` carries the page's key for each (`push`, `easy`, `class`...) so a run day or a class day is known in any language |
+| Your main exercises, per lifting day | the usual ones for that day pre-ticked from the bank, untick or tick more, or type your own | `current_routine.exercises`: `{"Upper": [{"id": "bench_press", "sets": 4, "reps": "6-8"}, {"name": "cable thing"}]}`; a typed name is matched to the bank (`improve.match_name`: an exact id or name, gym words and a few French ones, then a close name at 0.85 or better); an unmatched one is kept by name as theirs, never dropped |
+| Sets and reps, per exercise (one screen) | 3 x 5 · 4 x 6-8 · 3 x 8-12 · 3 x 12-15 · **Not sure** | `sets`, `reps` on each exercise; "Not sure" takes a usual number (compounds 3 x 6-10, other moves 3 x 10-15, the first lift of a strength goal 4 x 4-6), shown as "my guess" |
 | How long have you run it? | under a month · 1 to 3 months · 3 to 12 months · over a year | `current_routine.age`; it sets `experience_by` for the routine's activity when not given (`none`, `novice`, `novice`, `intermediate`) |
-| What's stuck? · What must stay? (optional, one screen) | a lift won't go up, not growing, always tired or sore, bored, I skip sessions, something hurts, it's fine · the split, the exercises, the days, the pump, short sessions, everything | `current_routine.stalls`, `current_routine.keep` (the later coaching mode may not change what is in `keep` without a yes) |
+| What's stuck? · Which lift won't go up? · What must stay? (optional, one screen) | a lift won't go up, not growing, always tired or sore, bored, I skip sessions, something hurts, it's fine · up to two of their exercises · the split, the exercises, the days, the pump, short sessions, everything | `current_routine.stalls`, `current_routine.stuck` (bank ids; picking one adds `lift_stuck`), `current_routine.keep` (`locks` in their routine: a proposal that touches one says so) |
 
-Then the style screen (always offered on this path, "Let the trainer decide" first). What they enjoy is read from the routine (`enjoys` defaults from the split), so the enjoy screen is skipped.
+Then the minutes, the place and you. No style screen and no enjoy screen on this path: their routine is their style, and what they enjoy is read from it (`enjoys` defaults from the split).
 
 ## Round 3 · the week
 
@@ -100,7 +103,7 @@ One screen, every part optional, Continue always works.
 | What you're good at | strong for my size · good engine · flexible · good technique · I show up | `strengths` |
 | What holds you back (up to two) | time · motivation · energy or sleep · stress · pain or stiffness · not knowing what to do · getting bored | `barriers` |
 | A part to bring up (up to two) | glutes · arms · back · chest · legs · shoulders · core | `priority` |
-| Anything that hurts, or hurt before? | a region, then its status: **hurts now** · only on some moves · old, cleared · old, never checked; then what sets it off: bending forward · reaching overhead · jumping or running · kneeling or deep squats · gripping · twisting | `limits`: `[{"region", "status", "triggers", "note"}]`. `exclude` is derived: `now` and `unchecked` true (left out), `mild` and `cleared` false (trained with care: no impact, nothing advanced on it, `01_SAFETY.md`). A `jumping or running` trigger writes `no_impact: true`. The triggers are stored for the session builder's next phase, which narrows a limit to the moves that set it off instead of the whole region |
+| Anything that hurts, or hurt before? | a region, then its status: **hurts now** · only on some moves · old, cleared · old, never checked; then what sets it off: bending forward · reaching overhead · jumping or running · kneeling or deep squats · gripping · twisting | `limits`: `[{"region", "status", "triggers", "note"}]`. `exclude` is derived: `now` and `unchecked` true (left out), `mild` and `cleared` false (trained with care: no impact, nothing advanced on it, `01_SAFETY.md`). A `jumping or running` trigger writes `no_impact: true`. The session builder uses the triggers: a limit swaps the moves that set it off for the nearest move that leaves it alone, and never bans the region (`01_SAFETY.md`); a status given without a trigger takes the region's usual one (`build.DEFAULT_TRIGGERS`) and the sheet asks them to say what sets theirs off |
 | Sleep most nights | under 6 h · 6 to 7 h · 7 h or more | `sleep` |
 | Stress lately | low · medium · high | `stress` |
 | Numbers you know | squat, bench press, deadlift, overhead press: a weight and the reps | `numbers`: `{"back_squat": {"kg": 60, "reps": 5}}` |

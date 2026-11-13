@@ -2,9 +2,9 @@
 
 **What it is.** Cody Lefever's linear progression built on tiers. Each day has one heavy main lift (T1), one lighter secondary compound (T2) and one high rep accessory (T3). When you fail, the lift does not drop: it changes its set and rep scheme first, and only resets after the last stage.
 
-**Who it is for.** A late novice to early intermediate who wants strength and size together. 3 or 4 days a week, 60 to 75 minutes, a barbell, a rack, a bench, plates, and either a pulldown or a bar for chin-ups.
+**Who it is for.** A late novice to early intermediate who wants strength and size together. 4 days a week, 60 to 75 minutes, a barbell, a rack, a bench, plates, and either a pulldown or a bar for chin-ups.
 
-**The week.** Four sessions done in order. On 3 days a week the same rotation keeps going.
+**The week.** Four sessions done in order. On 3 days the trainer picks a 3 day plan instead: four sessions are never squeezed into three days.
 
 | session | T1 (heavy) | T2 (lighter) | T3 (pump) |
 |:-|:-|:-|:-|
@@ -58,7 +58,7 @@
     "intermediate"
   ],
   "days": [
-    3,
+    4,
     4
   ],
   "sweet_days": [
@@ -91,12 +91,6 @@
   "deload": null,
   "meso": null,
   "layouts": {
-    "3": [
-      "A1",
-      "B1",
-      "A2",
-      "B2"
-    ],
     "4": [
       "A1",
       "B1",
@@ -107,13 +101,13 @@
   "modules": [],
   "sessions": {
     "A1": {
-      "title": "T1 squat · T2 bench",
+      "title": "Heavy squat · lighter bench",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "T1",
+          "name": "Heavy lift",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -126,7 +120,7 @@
               "sets": 5,
               "reps": "3+",
               "rest": 210,
-              "effort": "T1: heavy, last set as many clean reps as you have",
+              "effort": "heavy, last set as many clean reps as you can",
               "rule": "tier_stages",
               "tier": "T1",
               "inc": 5,
@@ -135,7 +129,7 @@
           ]
         },
         {
-          "name": "T2",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -148,7 +142,7 @@
               "sets": 3,
               "reps": "10",
               "rest": 150,
-              "effort": "T2: lighter, 2 or 3 left on the first sets",
+              "effort": "lighter, 2 or 3 reps spare on the first sets",
               "rule": "tier_stages",
               "tier": "T2",
               "inc": 2.5
@@ -156,7 +150,7 @@
           ]
         },
         {
-          "name": "T3",
+          "name": "Muscle work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -172,7 +166,7 @@
               "sets": 3,
               "reps": "15-25",
               "rest": 75,
-              "effort": "T3: last set as many as clean; at 25 the weight goes up",
+              "effort": "last set as many clean reps as you can; at 25 the weight goes up",
               "rule": "double_progression"
             }
           ]
@@ -180,13 +174,13 @@
       ]
     },
     "B1": {
-      "title": "T1 press · T2 deadlift",
+      "title": "Heavy press · lighter deadlift",
       "tags": [
         "hinge_heavy"
       ],
       "blocks": [
         {
-          "name": "T1",
+          "name": "Heavy lift",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -199,7 +193,7 @@
               "sets": 5,
               "reps": "3+",
               "rest": 210,
-              "effort": "T1: heavy, last set as many clean reps as you have",
+              "effort": "heavy, last set as many clean reps as you can",
               "rule": "tier_stages",
               "tier": "T1",
               "inc": 2.5,
@@ -208,7 +202,7 @@
           ]
         },
         {
-          "name": "T2",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -222,7 +216,7 @@
               "sets": 3,
               "reps": "10",
               "rest": 150,
-              "effort": "T2: lighter, 2 or 3 left on the first sets",
+              "effort": "lighter, 2 or 3 reps spare on the first sets",
               "rule": "tier_stages",
               "tier": "T2",
               "inc": 5
@@ -230,7 +224,7 @@
           ]
         },
         {
-          "name": "T3",
+          "name": "Muscle work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -245,7 +239,7 @@
               "sets": 3,
               "reps": "15-25",
               "rest": 75,
-              "effort": "T3: last set as many as clean; at 25 the weight goes up",
+              "effort": "last set as many clean reps as you can; at 25 the weight goes up",
               "rule": "double_progression"
             }
           ]
@@ -253,13 +247,13 @@
       ]
     },
     "A2": {
-      "title": "T1 bench · T2 squat",
+      "title": "Heavy bench · lighter squat",
       "tags": [
         "heavy_legs"
       ],
       "blocks": [
         {
-          "name": "T1",
+          "name": "Heavy lift",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -272,7 +266,7 @@
               "sets": 5,
               "reps": "3+",
               "rest": 210,
-              "effort": "T1: heavy, last set as many clean reps as you have",
+              "effort": "heavy, last set as many clean reps as you can",
               "rule": "tier_stages",
               "tier": "T1",
               "inc": 2.5,
@@ -281,7 +275,7 @@
           ]
         },
         {
-          "name": "T2",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -294,7 +288,7 @@
               "sets": 3,
               "reps": "10",
               "rest": 150,
-              "effort": "T2: lighter, 2 or 3 left on the first sets",
+              "effort": "lighter, 2 or 3 reps spare on the first sets",
               "rule": "tier_stages",
               "tier": "T2",
               "inc": 5
@@ -302,7 +296,7 @@
           ]
         },
         {
-          "name": "T3",
+          "name": "Muscle work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -318,7 +312,7 @@
               "sets": 3,
               "reps": "15-25",
               "rest": 75,
-              "effort": "T3: last set as many as clean; at 25 the weight goes up",
+              "effort": "last set as many clean reps as you can; at 25 the weight goes up",
               "rule": "double_progression"
             }
           ]
@@ -326,13 +320,13 @@
       ]
     },
     "B2": {
-      "title": "T1 deadlift · T2 press",
+      "title": "Heavy deadlift · lighter press",
       "tags": [
         "hinge_heavy"
       ],
       "blocks": [
         {
-          "name": "T1",
+          "name": "Heavy lift",
           "kind": "main",
           "format": "straight",
           "slots": [
@@ -346,7 +340,7 @@
               "sets": 5,
               "reps": "3+",
               "rest": 210,
-              "effort": "T1: heavy, last set as many clean reps as you have",
+              "effort": "heavy, last set as many clean reps as you can",
               "rule": "tier_stages",
               "tier": "T1",
               "inc": 5,
@@ -355,7 +349,7 @@
           ]
         },
         {
-          "name": "T2",
+          "name": "Second exercise",
           "kind": "secondary",
           "format": "straight",
           "slots": [
@@ -368,7 +362,7 @@
               "sets": 3,
               "reps": "10",
               "rest": 150,
-              "effort": "T2: lighter, 2 or 3 left on the first sets",
+              "effort": "lighter, 2 or 3 reps spare on the first sets",
               "rule": "tier_stages",
               "tier": "T2",
               "inc": 2.5
@@ -376,7 +370,7 @@
           ]
         },
         {
-          "name": "T3",
+          "name": "Muscle work",
           "kind": "accessory",
           "format": "straight",
           "slots": [
@@ -391,7 +385,7 @@
               "sets": 3,
               "reps": "15-25",
               "rest": 75,
-              "effort": "T3: last set as many as clean; at 25 the weight goes up",
+              "effort": "last set as many clean reps as you can; at 25 the weight goes up",
               "rule": "double_progression"
             }
           ]
@@ -400,13 +394,13 @@
     }
   },
   "express": {
-    "title": "Express · T1 squat · T2 bench",
+    "title": "Short version · Heavy squat · lighter bench",
     "tags": [
       "heavy_legs"
     ],
     "blocks": [
       {
-        "name": "T1",
+        "name": "Heavy lift",
         "kind": "main",
         "format": "straight",
         "slots": [
@@ -419,7 +413,7 @@
             "sets": 5,
             "reps": "3+",
             "rest": 210,
-            "effort": "T1: heavy, last set as many clean reps as you have",
+            "effort": "heavy, last set as many clean reps as you can",
             "rule": "tier_stages",
             "tier": "T1",
             "inc": 5,
@@ -428,7 +422,7 @@
         ]
       },
       {
-        "name": "T2",
+        "name": "Second exercise",
         "kind": "secondary",
         "format": "straight",
         "slots": [
@@ -441,7 +435,7 @@
             "sets": 3,
             "reps": "10",
             "rest": 150,
-            "effort": "T2: lighter, 2 or 3 left on the first sets",
+            "effort": "lighter, 2 or 3 reps spare on the first sets",
             "rule": "tier_stages",
             "tier": "T2",
             "inc": 2.5
